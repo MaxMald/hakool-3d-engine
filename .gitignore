@@ -1,3 +1,27 @@
+# User-specific files
+
+*.rsuser
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+
+# User-specific files (MonoDevelop/Xamarin Studio)
+
+*.userprefs
+
+# Mono auto generated files
+
+mono_crash.*
+
+# Visual Studio 2015/2017 cache/options directory
+.vs/
+
+# Auto-generated content
+/bin/
+/intermediate/
+/lib/
+
 # Prerequisites
 *.d
 

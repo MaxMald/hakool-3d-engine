@@ -14,23 +14,37 @@
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
     <Filter Include="Header Files\config">
-      <UniqueIdentifier>{7eae67b5-1dc5-4264-894c-7a09f2cee895}</UniqueIdentifier>
+      <UniqueIdentifier>{996ed7bd-6419-4262-b4b6-8aa5b9f0da53}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="src\hakool.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="..\include\Hakool\hakool.h">
+    <ClInclude Include="..\include\Hakool\Utils\hkVector2.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\include\Hakool\Core\hkConfigCore.h">
+    <ClInclude Include="..\include\Hakool\Utils\hkConfigPlatform.h">
       <Filter>Header Files\config</Filter>
     </ClInclude>
-    <ClInclude Include="..\include\Hakool\Core\hkCorePrerequisites.h">
+    <ClInclude Include="..\include\Hakool\Utils\hkConfigTypes.h">
+      <Filter>Header Files\config</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\Hakool\Utils\hkConfigUtilities.h">
+      <Filter>Header Files\config</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\Hakool\Utils\hkMath.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="..\include\Hakool\Utils\hkUtilsPrerequisites.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\include\Hakool\Utils\hkVector2.inl">
+      <Filter>Header Files</Filter>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="src\hkMath.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>
