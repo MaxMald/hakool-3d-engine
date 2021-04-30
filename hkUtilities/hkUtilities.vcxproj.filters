@@ -16,6 +16,9 @@
     <Filter Include="Header Files\config">
       <UniqueIdentifier>{996ed7bd-6419-4262-b4b6-8aa5b9f0da53}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\smartPointers">
+      <UniqueIdentifier>{9cf5217d-847d-4401-879b-ae0244187c72}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\include\Hakool\Utils\hkVector2.h">
@@ -36,14 +39,29 @@
     <ClInclude Include="..\include\Hakool\Utils\hkUtilsPrerequisites.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="..\include\Hakool\Utils\hkSharedPointer.h">
+      <Filter>Header Files\smartPointers</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\Hakool\Utils\hkLogger.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\Hakool\Utils\hkModule.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="..\include\Hakool\Utils\hkVector2.inl">
       <Filter>Header Files</Filter>
     </None>
+    <None Include="..\include\Hakool\Utils\hkSharedPointer.inl">
+      <Filter>Header Files\smartPointers</Filter>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\hkMath.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\hkLogger.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

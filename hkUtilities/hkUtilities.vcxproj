@@ -22,14 +22,19 @@
     <ClInclude Include="..\include\Hakool\Utils\hkConfigPlatform.h" />
     <ClInclude Include="..\include\Hakool\Utils\hkConfigTypes.h" />
     <ClInclude Include="..\include\Hakool\Utils\hkConfigUtilities.h" />
+    <ClInclude Include="..\include\Hakool\Utils\hkLogger.h" />
     <ClInclude Include="..\include\Hakool\Utils\hkMath.h" />
+    <ClInclude Include="..\include\Hakool\Utils\hkModule.h" />
+    <ClInclude Include="..\include\Hakool\Utils\hkSharedPointer.h" />
     <ClInclude Include="..\include\Hakool\Utils\hkUtilsPrerequisites.h" />
     <ClInclude Include="..\include\Hakool\Utils\hkVector2.h" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="..\include\Hakool\Utils\hkSharedPointer.inl" />
     <None Include="..\include\Hakool\Utils\hkVector2.inl" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="src\hkLogger.cpp" />
     <ClCompile Include="src\hkMath.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">

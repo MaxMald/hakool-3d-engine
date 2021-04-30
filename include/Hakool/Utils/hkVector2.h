@@ -1,5 +1,7 @@
 #pragma once
 
+#include <Hakool\Utils\hkUtilsPrerequisites.h>
+
 namespace hk
 {
   /**
@@ -10,7 +12,7 @@ namespace hk
   * like: +, -, /, *; also comparison operations like == and !=.
   */
   template <typename T>
-  class Vector2
+  class HK_UTILITY_EXPORT Vector2
   {
   public:
 
