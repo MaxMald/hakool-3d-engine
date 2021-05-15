@@ -16,6 +16,12 @@
     <Filter Include="Header Files\config">
       <UniqueIdentifier>{7eae67b5-1dc5-4264-894c-7a09f2cee895}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\graphics">
+      <UniqueIdentifier>{5fa89246-ef39-47b1-95dd-97decb561c55}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\system">
+      <UniqueIdentifier>{e2707290-7aa3-4acc-a08e-5899841ad2da}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\hakool.cpp">
@@ -31,6 +37,18 @@
     </ClInclude>
     <ClInclude Include="..\include\Hakool\Core\hkCorePrerequisites.h">
       <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\Hakool\Core\Graphics\hkIGraphics.h">
+      <Filter>Header Files\graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\Hakool\Core\hkEngineComponent.h">
+      <Filter>Header Files\system</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\Hakool\Core\hkConfigEngine.h">
+      <Filter>Header Files\system</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\Hakool\Core\hkCoreCommons.h">
+      <Filter>Header Files\system</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

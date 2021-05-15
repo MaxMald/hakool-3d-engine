@@ -8,12 +8,14 @@ namespace hk
   inline Vector2<T>::Vector2() :
   x(0), y(0)
   {
+    return;
   }
 
   template<typename T>
   inline Vector2<T>::Vector2(T _x, T _y) :
   x(_x), y(_y)
   {
+    return;
   }
 
   template<typename T>
@@ -22,99 +24,166 @@ namespace hk
   x(static_cast<T>(_vector.x)),
   y(static_cast<T>(_vector.y))
   {
+    return;
+  }
+
+  template<typename T>
+  inline Vector2<T>::~Vector2()
+  {
+    return;
+  }
+
+  template<typename T>
+  inline T&
+  Vector2<T>::operator[](const uint32& _index)
+  {
+    // TODO: Assert
+    return (&this->x)[_index];
+  }
+
+  template<typename T>
+  inline Vector2<T>&
+  Vector2<T>::operator=(const Vector2<T>& _v2)
+  {
+    this->x = _v2.x;
+    this->y = _v2.y;
+    return *this;
   }
 
   template<typename T>
   inline Vector2<T> 
-  operator+(const Vector2<T>& _addendL, const Vector2<T> _addendR)
+  operator+(const Vector2<T>& _a, const Vector2<T> _b)
   {
-    return Vector2<T>(_addendL.x + _addendR.x, _addendL.y + _addendR.y);
+    return Vector2<T>(_a.x + _b.x, _a.y + _b.y);
   }
 
   template<typename T>
   inline Vector2<T> 
-  operator-(const Vector2<T>& _subtrahend)
+  operator-(const Vector2<T>& _v2)
   {
-    return Vector2<T>(-_subtrahend.x, -_subtrahend,y);
+    return Vector2<T>(-_v2.x, -_v2,y);
   }
 
   template <typename T>
   inline Vector2<T> 
-  operator-(const Vector2<T>& _minuend, const Vector2<T>& _subtrahend)
+  operator-(const Vector2<T>& _a, const Vector2<T>& _b)
   {
-    return Vector2<T>(_minuend.x - _subtrahend.x, _minuend.y - _subtrahend.y);
+    return Vector2<T>(_a.x - _b.x, _a.y - _b.y);
+  }
+
+  template <typename T>
+  Vector2<T>
+  operator*(const Vector2<T>& _a, const Vector2<T>& _b)
+  {
+    return Vector2<T>(_a.x * _b.x, _a.y * _b.y);
+  }
+
+  template<typename T>
+  inline Vector2<T>
+  operator*(const Vector2<T>& _v2, T _s)
+  {
+    return Vector2<T>(_v2.x * _s, _v2.y * _s);
+  }
+
+  template<typename T>
+  inline Vector2<T>
+  operator*(const T _s, Vector2<T>& _v2)
+  {
+    return Vector2<T>(_v2.x * _s, _v2.y * _s);
+  }
+
+  template <typename T>
+  Vector2<T>
+  operator/ (const Vector2<T>& _a, const Vector2<T>& _b)
+  {
+    return Vector2<T>(_a.x / _b.x, _a.y / _b.y);
+  }
+
+  template<typename T>
+  inline Vector2<T>
+  operator/ (const Vector2<T>& _v2, T _divisor)
+  {
+    return Vector2<T>(_v2.x / _divisor, _v2.y / _divisor);
+  }
+
+  template <typename T>
+  T&
+  operator| (const Vector2<T>& _a, const Vector2<T>& _b)
+  {
+    return _a.x * _b.x + _a.y * _b.y;
   }
     
   template<typename T>
   inline Vector2<T>& 
-  operator+=(Vector2<T>& _addendL, const Vector2<T>& _addendR)
+  operator+=(Vector2<T>& _a, const Vector2<T>& _b)
   {
-    _addendL.x += _addendR.x;
-    _addendR.y += _addendR.y;
+    _a.x += _b.x;
+    _a.y += _b.y;
     
-    return _addendL;
+    return _a;
   }
     
   template<typename T>
   inline Vector2<T>& 
-  operator-=(Vector2<T>& _minuend, const Vector2<T>& _subtrahend)
+  operator-=(Vector2<T>& _a, const Vector2<T>& _b)
   {
-    _minuend.x -= _subtrahend.x;
-    _minuend.y -= _subtrahend.y;
+    _a.x -= _b.x;
+    _a.y -= _b.y;
 
-    return _minuend;
+    return _a;
   }
 
-  template<typename T>
-  inline Vector2<T> 
-  operator*(const Vector2<T>& _factorL, T _factorR)
+  template <typename T>
+  Vector2<T>&
+  operator*= (Vector2<T>& _a, Vector2<T>& _b)
   {
-    return Vector2<T>(_factorL.x * _factorR, _factorL.y * _factorR);
-  }
+    _a.x *= _b.x;
+    _a.y *= _b.y;
 
-  template<typename T>
-  inline Vector2<T> 
-  operator*(const T _factorL, Vector2<T>& _factorR)
-  {
-    return Vector2<T>(_factorR.x * _factorL, _factorR.y * _factorL);
+    return _a;
   }
 
   template<typename T>
   inline Vector2<T>& 
-  operator*=(Vector2<T>& _factorL, T _factorR)
+  operator*=(Vector2<T>& _v2, T _s)
   {
-    _factorL.x *= _factorR;
-    _factorL.y *= _factorR;
-    return _factorL;
+    _v2.x *= _s;
+    _v2.y *= _s;
+
+    return _v2;
   }
 
-  template<typename T>
-  inline Vector2<T> 
-  operator/(const Vector2<T>& _dividend, T _divisor)
+  template <typename T>
+  Vector2<T>&
+  operator/= (Vector2<T>& _a, Vector2<T>& _b)
   {
-    return Vector2<T>(_dividend.x / _divisor, _dividend.y / _divisor);
+    _a.x /= _b.x;
+    _a.y /= _b.y;
+
+    return _a;
   }
 
   template<typename T>
   inline Vector2<T>& 
-  operator/=(Vector2<T>& _dividend, T _divisor)
+  operator/=(Vector2<T>& _v2, T _divisor)
   {
-    _dividend.x /= _divisor;
-    _dividend.y /= _divisor;
-    return _dividend;
+    _v2.x /= _divisor;
+    _v2.y /= _divisor;
+
+    return _v2;
   }
 
   template<typename T>
   inline bool 
-  operator==(const Vector2<T>& _left, const Vector2<T>& _right)
+  operator==(const Vector2<T>& _a, const Vector2<T>& _b)
   {
-    return (_left.x == _right.x && _left.y == _right.y);
+    return (_a.x == _b.x && _a.y == _b.y);
   }
 
   template<typename T>
   inline bool 
-  operator!=(const Vector2<T>& _left, const Vector2<T>& _right)
+  operator!=(const Vector2<T>& _a, const Vector2<T>& _b)
   {
-    return (_left.x != _right.x || _left.y != _right.y);
+    return (_a.x != _b.x || _a.y != _b.y);
   }
 }

@@ -4,6 +4,8 @@
 
 namespace hk
 {
+  class Logger;
+
   /**
   * Hakool Engine.
   */
@@ -27,22 +29,56 @@ namespace hk
     /**
     * Get the Hakool engine instance.
     * 
-    * @returns {Hakool} Hakool engine.
+    * @returns Hakool engine.
     */
-    static Hakool*
+    static Hakool*&
     GetEngine();
+
+    /**
+    * Reference to the logger.
+    */
+    static Logger& log;
 
   private:
 
     /**
     * Private constructor.
     */
-    Hakool();
+    Hakool() = default;
 
     /**
     * Private destructor.
     */
-    ~Hakool();
+    ~Hakool() = default;
+
+    /**
+    * Disable copy constructor.
+    */
+    Hakool(Hakool&&) = delete;
+
+    /**
+    * Disable assignment operator
+    */
+    Hakool&
+    operator=(Hakool&&) = delete;
+
+    /**
+    * Disable assignment operator.
+    */
+    Hakool&
+    operator=(const Hakool&&) = delete;
+
+    /**
+    * 
+    */
+    void
+    _onPrepare();
+
+    /**
+    * 
+    */
+    void
+    _onShutdown();
 
     /**
     * Safely destroys the Hakool engine.
@@ -51,10 +87,15 @@ namespace hk
     _destroy();
 
     /**
-    * Pointer to the engine instance.
+    * Get the Hakool singleton.
     */
-    static Hakool* _ENGINE_INSTANCE;
+    static Hakool*&
+    _Singleton();
 
+    /**
+    * Indicates if Hakool singleton has been started.
+    */
+    static bool&
+    _IsReady();
   };
-
-};
+}

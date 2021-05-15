@@ -48,6 +48,18 @@
     <ClInclude Include="..\include\Hakool\Utils\hkModule.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="..\include\Hakool\Utils\hkLoggerConsole.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\Hakool\Utils\hkMatrix3.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\Hakool\Utils\hkVector3.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\Hakool\Utils\hkVector4.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="..\include\Hakool\Utils\hkVector2.inl">
@@ -56,12 +68,24 @@
     <None Include="..\include\Hakool\Utils\hkSharedPointer.inl">
       <Filter>Header Files\smartPointers</Filter>
     </None>
+    <None Include="..\include\Hakool\Utils\hkVector3.inl">
+      <Filter>Header Files</Filter>
+    </None>
+    <None Include="..\include\Hakool\Utils\hkVector4.inl">
+      <Filter>Header Files</Filter>
+    </None>
+    <None Include="..\include\Hakool\Utils\hkModule.inl">
+      <Filter>Header Files</Filter>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\hkMath.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="src\hkLogger.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\hkLoggerConsole.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

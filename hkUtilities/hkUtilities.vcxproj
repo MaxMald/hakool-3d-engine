@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup Label="ProjectConfigurations">
     <ProjectConfiguration Include="Debug|Win32">
@@ -23,18 +23,26 @@
     <ClInclude Include="..\include\Hakool\Utils\hkConfigTypes.h" />
     <ClInclude Include="..\include\Hakool\Utils\hkConfigUtilities.h" />
     <ClInclude Include="..\include\Hakool\Utils\hkLogger.h" />
+    <ClInclude Include="..\include\Hakool\Utils\hkLoggerConsole.h" />
     <ClInclude Include="..\include\Hakool\Utils\hkMath.h" />
+    <ClInclude Include="..\include\Hakool\Utils\hkMatrix3.h" />
     <ClInclude Include="..\include\Hakool\Utils\hkModule.h" />
     <ClInclude Include="..\include\Hakool\Utils\hkSharedPointer.h" />
     <ClInclude Include="..\include\Hakool\Utils\hkUtilsPrerequisites.h" />
     <ClInclude Include="..\include\Hakool\Utils\hkVector2.h" />
+    <ClInclude Include="..\include\Hakool\Utils\hkVector3.h" />
+    <ClInclude Include="..\include\Hakool\Utils\hkVector4.h" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="..\include\Hakool\Utils\hkModule.inl" />
     <None Include="..\include\Hakool\Utils\hkSharedPointer.inl" />
     <None Include="..\include\Hakool\Utils\hkVector2.inl" />
+    <None Include="..\include\Hakool\Utils\hkVector3.inl" />
+    <None Include="..\include\Hakool\Utils\hkVector4.inl" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\hkLogger.cpp" />
+    <ClCompile Include="src\hkLoggerConsole.cpp" />
     <ClCompile Include="src\hkMath.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">

@@ -19,9 +19,21 @@ namespace hk
   void 
   Logger::Prepare()
   {
-    if(!Logger::_IsReady())
+    if (!Logger::_IsReady())
     {
       Logger::_Singleton() = new Logger();
+      Logger::_Singleton()->_onPrepare();
+      Logger::_IsReady() = true;
+    }
+    return;
+  }
+
+  void 
+  Logger::Prepare(Logger* _pLogger)
+  {
+    if (!Logger::_IsReady())
+    {
+      Logger::_Singleton() = _pLogger;
       Logger::_Singleton()->_onPrepare();
       Logger::_IsReady() = true;
     }
@@ -51,31 +63,49 @@ namespace hk
   void 
   Logger::log(String _msg)
   {
+    return;
   }
 
   void 
   Logger::log(String _msg, String _filename)
   {
+    return;
   }
 
   void 
   Logger::warning(String _msg)
   {
+    return;
   }
 
   void 
   Logger::warning(String _msg, String _filename)
   {
+    return;
   }
 
   void 
   Logger::error(String _msg)
   {
+    return;
   }
 
   void 
   Logger::error(String _msg, String _filename)
   {
+    return;
+  }
+
+  void
+  Logger::_onPrepare()
+  {
+    return;
+  }
+
+  void
+  Logger::_onShutdown()
+  {
+    return;
   }
 
   Logger*& 
@@ -90,17 +120,5 @@ namespace hk
   {
     static bool _IS_READY = false;
     return _IS_READY;
-  }
-
-  void 
-  Logger::_onPrepare()
-  {
-    return;
-  }
-
-  void 
-  Logger::_onShutdown()
-  {
-    return;
   }  
 }

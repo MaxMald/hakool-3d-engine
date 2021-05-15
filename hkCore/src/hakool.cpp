@@ -1,50 +1,75 @@
 #include <Hakool\hakool.h>
+#include <Hakool\Utils\hkLoggerConsole.h>
 
 namespace hk
 {
-  Hakool* Hakool::_ENGINE_INSTANCE = nullptr;
-
   void 
   Hakool::Start()
   {
-    if (Hakool::_ENGINE_INSTANCE == nullptr)
+    if (!Hakool::_IsReady())
     {
-      Hakool::_ENGINE_INSTANCE = new Hakool();
+      Hakool::_Singleton() = new Hakool();
+      Hakool::_Singleton()->_onPrepare();
+      Hakool::_IsReady() = true;
     }
-
     return;
   }
   
   void 
   Hakool::Shutdown()
   {
-    if (Hakool::_ENGINE_INSTANCE != nullptr)
+    if (Hakool::_IsReady())
     {
-      Hakool::_ENGINE_INSTANCE->_destroy();
-      Hakool::_ENGINE_INSTANCE = nullptr;
-    }
+      Hakool::_Singleton()->_onShutdown();
 
+      delete(Hakool::_Singleton());
+      Hakool::_Singleton() = nullptr;
+      Hakool::_IsReady() = false;
+    }
     return;
   }
 
-  Hakool*
+  Hakool*&
   Hakool::GetEngine()
   {
-    return Hakool::_ENGINE_INSTANCE;
+    return Hakool::_Singleton();
   }
 
-  Hakool::Hakool()
-  { }
-
-  Hakool::~Hakool()
+  void 
+  Hakool::_onPrepare()
   {
+    if (!Logger::IsReady())
+    {
+      Logger::Prepare(new LoggerConsole());
+    }    
     return;
   }
 
   void 
+  Hakool::_onShutdown()
+  {
+    Logger::Shutdown();
+    return;
+  }
+
+  void
   Hakool::_destroy()
   {
     // TODO
     return;
+  }
+
+  Hakool*& 
+  Hakool::_Singleton()
+  {
+    static Hakool* _pSINGLETON = nullptr;
+    return _pSINGLETON;
+  }
+
+  bool& 
+  Hakool::_IsReady()
+  {
+    static bool _IS_READY = false;
+    return _IS_READY;
   }
 };

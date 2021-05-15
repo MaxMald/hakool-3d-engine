@@ -174,8 +174,12 @@
     <ClCompile Include="src\hakool.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\include\Hakool\Core\Graphics\hkIGraphics.h" />
     <ClInclude Include="..\include\Hakool\Core\hkConfigCore.h" />
+    <ClInclude Include="..\include\Hakool\Core\hkConfigEngine.h" />
+    <ClInclude Include="..\include\Hakool\Core\hkCoreCommons.h" />
     <ClInclude Include="..\include\Hakool\Core\hkCorePrerequisites.h" />
+    <ClInclude Include="..\include\Hakool\Core\hkEngineComponent.h" />
     <ClInclude Include="..\include\Hakool\hakool.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

@@ -10,24 +10,49 @@ namespace hk
   public:
 
     /**
-    * Get the reference of this module.
+    * Get the instance-reference of this module.
+    * 
+    * @returns The instance-reference of this module.
     */
     static T&
     GetReference();
 
     /**
-    * Prepare this module.
+    * Create and prepare this module.
     */
     template<class... Args>
     static void
     Prepare(Args&& ...args);
 
     /**
-    * Prepare this module.
+    * Create and prepare this module.
     */
-    template<class S, class... A>
+    template<class SubType, class... Args>
     static void
-    Prepare(Args&& ...args);
+    Prepare(Args&& ...args)
+    {
+      static_assert
+      (
+        std::is_base_of<T, SubType>::value,
+        "Type isn't derived from type the Module is initialized with."
+      );
+
+      if (IsReady())
+      {
+        throw "Module has been created before.";
+      }
+
+      _singleton() = new SubType(std::forward<Args>(args)...);
+      isReady() = true;
+
+      static_cast<Module*>(_singleton())->onPrepare();
+    }
+
+    /**
+    * Prepare this module using an existing instance of 
+    */
+    static void
+    Prepare(T* _pClass);
 
     /**
     * Safely shutdown this module.
@@ -36,16 +61,12 @@ namespace hk
     Shutdown();
 
     /**
-    * Indicates if the module have been created and is ready to be called.
+    * Indicates if the module have been prepared and is ready to be called.
+    * 
+    * @return True if the module has been prepared, otherwise returns false.
     */
-    static bool&
+    static bool
     IsReady();
-
-    /**
-    * Set this module pointer.
-    */
-    static void
-    _Set(void* _module);
 
   protected:
 
@@ -62,11 +83,35 @@ namespace hk
     Module&
     operator=(const Module&&) = delete;
 
+    /**
+    * Called when the module is being prepared.
+    */
     virtual void
-    onPrepare();
+    _onPrepare();
 
+    /**
+    * Called when the module is being shutdown.
+    */
     virtual void
-    onShutdown();
-  };
+    _onShutdown();
+
+    /**
+    * Get the module's instance.
+    * 
+    * @retrun The module instance. 
+    */
+    static T*&
+    _Singleton();
+
+    /**
+    * Get the "isReady" boolean instance.
+    * 
+    * @return "isReady" boolean instance.
+    */
+    static bool&
+    _IsReady();
+  };  
+
+#include <Hakool\Utils\hkModule.inl>
 }
 
