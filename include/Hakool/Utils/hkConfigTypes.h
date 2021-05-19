@@ -117,11 +117,11 @@ namespace hk
 	typedef std::ofstream OutFileStream;
 	typedef std::stringstream StringStream;
 
-	template < typename T, typename A = std::allocator < T > >
-	using Vector = std::vector < T, A >;
+	template <typename T, typename A = std::allocator < T > >
+	using Vector = std::vector<T,A>;
 
 	template<class K, class T, class P = std::less<K>, class _Alloc = std::allocator<std::pair<const K, T>>>
-	using Map = std::map <K, T, P, _Alloc>;
+	using Map = std::map<K, T, P, _Alloc>;
 
 	template<class K, class T, class H = std::hash<K>, class _KeyEqual = std::equal_to<K>, class _Alloc = std::allocator<std::pair<K, T>>>
 	using UnorderedMap = std::unordered_map<K, T, H, _KeyEqual, _Alloc>;

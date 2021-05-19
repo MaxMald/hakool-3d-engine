@@ -28,6 +28,7 @@
     <ClInclude Include="..\include\Hakool\Utils\hkMatrix3.h" />
     <ClInclude Include="..\include\Hakool\Utils\hkModule.h" />
     <ClInclude Include="..\include\Hakool\Utils\hkSharedPointer.h" />
+    <ClInclude Include="..\include\Hakool\Utils\hkUtilsOperations.h" />
     <ClInclude Include="..\include\Hakool\Utils\hkUtilsPrerequisites.h" />
     <ClInclude Include="..\include\Hakool\Utils\hkVector2.h" />
     <ClInclude Include="..\include\Hakool\Utils\hkVector3.h" />
@@ -36,14 +37,12 @@
   <ItemGroup>
     <None Include="..\include\Hakool\Utils\hkModule.inl" />
     <None Include="..\include\Hakool\Utils\hkSharedPointer.inl" />
-    <None Include="..\include\Hakool\Utils\hkVector2.inl" />
-    <None Include="..\include\Hakool\Utils\hkVector3.inl" />
-    <None Include="..\include\Hakool\Utils\hkVector4.inl" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\hkLogger.cpp" />
     <ClCompile Include="src\hkLoggerConsole.cpp" />
     <ClCompile Include="src\hkMath.cpp" />
+    <ClCompile Include="src\hkMatrix3.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>

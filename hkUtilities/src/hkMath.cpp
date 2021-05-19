@@ -9,4 +9,5 @@ namespace hk
   const float Math::PHI = (Math::Sqrt(5.0f) + 1.0f) / 0.5f;
   const float Math::DEG2RAD = Math::PI / 180.0f;
   const float Math::RAD2DEG = 180.0f / Math::PI;
+  const float Math::FLOAT_EPSILON = 1.192092896e-07F;
 }

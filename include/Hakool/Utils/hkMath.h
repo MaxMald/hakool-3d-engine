@@ -46,6 +46,11 @@ namespace hk
 		static const float RAD2DEG;
 
 		/**
+		* Minimum positive number such that 1.0 + FLOAT_EPSILON != 1.0;
+		*/
+		static const float FLOAT_EPSILON;
+
+		/**
 		* Calculates product of all positive integers less than or equal to the 
 		* given positive integer.
 		* 
@@ -941,6 +946,30 @@ namespace hk
 		Round(const long double _value)
 		{
 			return std::roundl(_value);
+		}
+
+		/**
+		* Returns the greater of the given values.
+		* 
+		* @return Returns the greater of the given values.
+		*/
+		template<typename T>
+		static const T&
+		Max(const T& _a, const T& _b)
+		{
+			return std::max(_a, _b);
+		}
+
+		/**
+		* Returns the smaller of the given values.
+		*
+		* @return Returns the smaller of the given values.
+		*/
+		template<typename T>
+		static const T&
+		Min(const T& _a, const T& _b)
+		{
+			return std::min(_a, _b);
 		}
 
 		/**

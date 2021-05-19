@@ -10,6 +10,12 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "hkCore", "hkCore\hkCore.vcx
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "hkUtilities", "hkUtilities\hkUtilities.vcxproj", "{1F371B19-A620-4893-A67C-7EAA5B33C7D3}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "zzTestApp", "zzTestApp\zzTestApp.vcxproj", "{EB6CBAC4-A7CD-4F1F-B624-E81251D8733F}"
+	ProjectSection(ProjectDependencies) = postProject
+		{1F371B19-A620-4893-A67C-7EAA5B33C7D3} = {1F371B19-A620-4893-A67C-7EAA5B33C7D3}
+		{0CDFADB7-9DBC-45C1-988D-61CA58BD0841} = {0CDFADB7-9DBC-45C1-988D-61CA58BD0841}
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -34,6 +40,14 @@ Global
 		{1F371B19-A620-4893-A67C-7EAA5B33C7D3}.Release|x64.Build.0 = Release|x64
 		{1F371B19-A620-4893-A67C-7EAA5B33C7D3}.Release|x86.ActiveCfg = Release|Win32
 		{1F371B19-A620-4893-A67C-7EAA5B33C7D3}.Release|x86.Build.0 = Release|Win32
+		{EB6CBAC4-A7CD-4F1F-B624-E81251D8733F}.Debug|x64.ActiveCfg = Debug|x64
+		{EB6CBAC4-A7CD-4F1F-B624-E81251D8733F}.Debug|x64.Build.0 = Debug|x64
+		{EB6CBAC4-A7CD-4F1F-B624-E81251D8733F}.Debug|x86.ActiveCfg = Debug|Win32
+		{EB6CBAC4-A7CD-4F1F-B624-E81251D8733F}.Debug|x86.Build.0 = Debug|Win32
+		{EB6CBAC4-A7CD-4F1F-B624-E81251D8733F}.Release|x64.ActiveCfg = Release|x64
+		{EB6CBAC4-A7CD-4F1F-B624-E81251D8733F}.Release|x64.Build.0 = Release|x64
+		{EB6CBAC4-A7CD-4F1F-B624-E81251D8733F}.Release|x86.ActiveCfg = Release|Win32
+		{EB6CBAC4-A7CD-4F1F-B624-E81251D8733F}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
