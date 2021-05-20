@@ -5,13 +5,6 @@ using std::swap;
 
 namespace hk
 {
-  const Matrix3 IDENTITY = Matrix3
-  (
-    1.0f, 0.0f, 0.0f,
-    0.0f, 1.0f, 0.0f,
-    0.0f, 0.0f, 1.0f
-  );
-
   Matrix3::Matrix3()
   {
     this->m00 = 0.0f; this->m01 = 0.0f; this->m02 = 0.0f;
@@ -44,9 +37,15 @@ namespace hk
     return;
   }
 
-  Matrix3::~Matrix3()
+  Matrix3 
+  Matrix3::GetIdentity()
   {
-    return;
+    return Matrix3
+    (
+      1.0f, 0.0f, 0.0f,
+      0.0f, 1.0f, 0.0f,
+      0.0f, 0.0f, 1.0f
+    );
   }
 
   Matrix3 

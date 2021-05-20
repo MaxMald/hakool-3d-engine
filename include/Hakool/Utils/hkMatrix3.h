@@ -14,7 +14,6 @@ namespace hk
   class HK_UTILITY_EXPORT Matrix3
   {
   public:
-
     Matrix3();
 
     Matrix3(const Matrix3& _mat3);
@@ -26,7 +25,15 @@ namespace hk
       const float& _m20, const float& _m21, const float& _m22
     );
 
-    ~Matrix3();
+    ~Matrix3() = default;
+
+    /**
+    * Get a new Matrix representing an identity matrix.
+    * 
+    * @returns Identity matrix.
+    */
+    static Matrix3
+    GetIdentity();
 
     /**
     * Calculates the sum between two matrices and returns the resulted matrix.
@@ -184,18 +191,16 @@ namespace hk
     union
     {
       float m[3][3];
-
-      float m00, m01, m02,
-            m10, m11, m12,
-            m20, m21, m22;
+      
+      struct 
+      {
+        float m00, m01, m02,
+              m10, m11, m12,
+              m20, m21, m22;
+      };
 
       Vector3f mRow[3];
     };
-
-    /**
-    * Identity matrix.
-    */
-    static const Matrix3 IDENTITY;
   };
 
   template<typename U>
