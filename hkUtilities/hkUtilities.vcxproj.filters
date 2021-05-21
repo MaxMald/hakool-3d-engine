@@ -63,6 +63,9 @@
     <ClInclude Include="..\include\Hakool\Utils\hkUtilsOperations.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="..\include\Hakool\Utils\hkMatrix4.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="..\include\Hakool\Utils\hkSharedPointer.inl">
@@ -83,6 +86,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="src\hkMatrix3.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\hkMatrix4.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
