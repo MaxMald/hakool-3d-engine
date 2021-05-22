@@ -1,6 +1,7 @@
 #pragma once
 
 #include <Hakool\Utils\hkUtilsPrerequisites.h>
+#include <Hakool\Utils\hkMath.h>
 
 namespace hk
 {
@@ -26,6 +27,48 @@ namespace hk
 
     Vector3<T>&
     operator= (const Vector3<T>& _v3);
+
+    /**
+    * Get the normalized vector (a unit length vector).
+    * 
+    * @return Normalized vector.
+    */
+    Vector3
+    getNormalize() const;
+    
+    /**
+    * Get the length of this vector.
+    * 
+    * @return The length of this vector. 
+    */
+    T
+    magnitude() const;
+
+    /**
+    * Get the length of this vector squared.
+    * 
+    * @return The length of this vector squared.
+    */
+    T
+    magnitudeSqr() const;
+
+    /**
+    * Makes this vector a unit length vector in the same direction.
+    * 
+    * @return Self.
+    */
+    Vector3&
+    normalize();
+
+    /**
+    * Set the vector length of this vector.
+    * 
+    * @param _mag Desire vector length.
+    * 
+    * @return Self.
+    */
+    Vector3&
+    setMagnitude(const T& _mag);
 
     /**
     * The x component of this vector.
@@ -331,6 +374,84 @@ namespace hk
     this->x = _v3.x;
     this->y = _v3.y;
     this->z = _v3.z;
+    return *this;
+  }
+
+  template<typename T>
+  inline Vector3<T> 
+  Vector3<T>::getNormalize() const
+  {
+    T m = static_cast<T>(1.0f) / this->magnitude();
+    return Vector3(this->x * m, this->y * m, this->z * m);
+  }
+
+  template<>
+  inline Vector3<float>
+  Vector3<float>::getNormalize() const
+  {
+    float m = 1.0f / this->magnitude();
+    return Vector3(this->x * m, this->y * m, this->z * m);
+  }
+
+  template<typename T>
+  inline T 
+  Vector3<T>::magnitude() const
+  {
+    return Math::Sqrt(this->x * this->x + this->y * this->y + this->z * this->z);
+  }
+
+  template<typename T>
+  inline T 
+  Vector3<T>::magnitudeSqr() const
+  {
+    return this->x * this->x + this->y * this->y + this->z * this->z;
+  }
+
+  template<typename T>
+  inline Vector3<T>& 
+  Vector3<T>::normalize()
+  {
+    T m = static_cast<T>(1.0f) / this->magnitude();
+    this->x *= m;
+    this->y *= m;
+    this->z *= m;
+
+    return *this;
+  }
+
+  template<>
+  inline Vector3<float>&
+  Vector3<float>::normalize()
+  {
+    float m = 1.0f / this->magnitude();
+    this->x *= m;
+    this->y *= m;
+    this->z *= m;
+
+    return *this;
+  }
+
+  template<typename T>
+  inline Vector3<T>& 
+  Vector3<T>::setMagnitude(const T& _mag)
+  {
+    T m = _mag / this->magnitude();
+    this->x *= m;
+    this->y *= m;
+    this->z *= m;
+
+    return *this;
+  }
+
+  template<>
+  inline Vector3<float>&
+  Vector3<float>::setMagnitude(const float& _mag)
+  {
+    float m = _mag / this->magnitude();
+    this->x *= m;
+    this->y *= m;
+    this->z *= m;
+
     return *this;
   }
 

@@ -432,7 +432,7 @@ namespace hk
     const Vector3f& _up
   )
   {
-    // TODO
+
     return *this;
   }
 

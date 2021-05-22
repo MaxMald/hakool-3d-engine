@@ -1,6 +1,7 @@
 #pragma once
 
 #include <Hakool\Utils\hkUtilsPrerequisites.h>
+#include <Hakool\Utils\hkMath.h>
 
 namespace hk
 {
@@ -25,7 +26,49 @@ namespace hk
     operator[] (const uint32& _index);
 
     Vector2<T>&
-    operator= (const Vector2<T>& _v2);   
+    operator= (const Vector2<T>& _v2);
+
+    /**
+    * Get the normalized vector (a unit length vector).
+    *
+    * @return Normalized vector.
+    */
+    Vector2
+    getNormalize() const;
+
+    /**
+    * Get the length of this vector.
+    *
+    * @return The length of this vector.
+    */
+    T
+    magnitude() const;
+
+    /**
+    * Get the length of this vector squared.
+    *
+    * @return The length of this vector squared.
+    */
+    T
+    magnitudeSqr() const;
+
+    /**
+    * Makes this vector a unit length vector in the same direction.
+    *
+    * @return Self.
+    */
+    Vector2&
+    normalize();
+
+    /**
+    * Set the vector length of this vector.
+    *
+    * @param _mag Desire vector length.
+    *
+    * @return Self.
+    */
+    Vector2&
+    setMagnitude(const T& _mag);
 
     /**
     * The x component of this vector.
@@ -298,6 +341,82 @@ namespace hk
   {
     this->x = _v2.x;
     this->y = _v2.y;
+    return *this;
+  }
+
+  template<typename T>
+  inline Vector2<T> 
+  Vector2<T>::getNormalize() const
+  {
+    T m = static_cast<T>(1.0f) / this->magnitude();
+
+    return Vector2(this->x * m, this->y * m);
+  }
+
+  template<>
+  inline Vector2<float>
+  Vector2<float>::getNormalize() const
+  {
+    float m = 1.0f / this->magnitude();
+
+    return Vector2(this->x * m, this->y * m);
+  }
+
+  template<typename T>
+  inline T 
+  Vector2<T>::magnitude() const
+  {
+    return Math::Sqrt(this->x * this->x + this->y * this->y);
+  }
+
+  template<typename T>
+  inline T 
+  Vector2<T>::magnitudeSqr() const
+  {
+    return this->x * this->x + this->y * this->y;
+  }
+
+  template<typename T>
+  inline Vector2<T>& 
+  Vector2<T>::normalize()
+  {
+    T m = static_cast<T>(1.0f) / this->magnitude();
+    this->x *= m;
+    this->y *= m;
+
+    return *this;
+  }
+
+  template<>
+  inline Vector2<float>&
+  Vector2<float>::normalize()
+  {
+    float m = 1.0f / this->magnitude();
+    this->x *= m;
+    this->y *= m;
+
+    return *this;
+  }
+
+  template<typename T>
+  inline Vector2<T>& 
+  Vector2<T>::setMagnitude(const T& _mag)
+  {
+    T m = _mag / this->magnitude();
+    this->x *= m;
+    this->y *= m;
+
+    return *this;
+  }
+
+  template<>
+  inline Vector2<float>&
+  Vector2<float>::setMagnitude(const float& _mag)
+  {
+    float m = _mag / this->magnitude();
+    this->x *= m;
+    this->y *= m;
+
     return *this;
   }
 
