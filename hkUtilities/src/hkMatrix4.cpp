@@ -53,6 +53,84 @@ namespace hk
     );
   }
 
+  Matrix4 
+  Matrix4::GetTranslation(const float& _x, const float& _y, const float& _z)
+  {
+    return Matrix4
+    (
+      1.0f, 0.0f, 0.0f, _x,
+      0.0f, 1.0f, 0.0f, _y,
+      0.0f, 0.0f, 1.0f, _z,
+      0.0f, 0.0f, 0.0f, 1.0f
+    );
+  }
+
+  Matrix4 
+  Matrix4::GetScale(const float& _x, const float& _y, const float& _z)
+  {
+    return Matrix4
+    (
+      _x, 0.0f, 0.0f, 0.0f,
+      0.0f, _y, 0.0f, 0.0f,
+      0.0f, 0.0f, _z, 0.0f,
+      0.0f, 0.0f, 0.0f, 1.0f
+    );
+  }
+
+  Matrix4 
+    Matrix4::GetLookAt
+  (
+    const Vector3f& _from,
+    const Vector3f& _to, 
+    const Vector3f& _up
+  )
+  {
+    // TODO
+    return Matrix4();
+  }
+
+  Matrix4 
+  Matrix4::GetRotationX(const float& _theta)
+  {
+    float c = Math::Cos(_theta);
+    float s = Math::Sin(_theta);
+    return Matrix4
+    (
+      1.0f, 0.0f, 0.0f, 0.0f,
+      0.0f,    c,   -s, 0.0f,
+      0.0f,    s,    c, 0.0f,
+      0.0f, 0.0f, 0.0f, 1.0f
+    );
+  }
+
+  Matrix4 
+  Matrix4::GetRotationY(const float& _theta)
+  {
+    float c = Math::Cos(_theta);
+    float s = Math::Sin(_theta);
+    return Matrix4
+    (
+         c, 0.0f,   s, 0.0f,
+      0.0f, 1.0f, 0.0, 0.0f,
+        -s, 0.0f,   c, 0.0f,
+      0.0f, 0.0f, 0.0f, 1.0f
+    );
+  }
+
+  Matrix4 
+  Matrix4::GetRotationZ(const float& _theta)
+  {
+    float c = Math::Cos(_theta);
+    float s = Math::Sin(_theta);
+    return Matrix4
+    (
+         c,   -s, 0.0f, 0.0f,
+         s,    c, 0.0f, 0.0f,
+      0.0f, 0.0f, 1.0f, 0.0f,
+      0.0f, 0.0f, 0.0f, 1.0f
+    );
+  }
+
   Matrix4
   Matrix4::operator+(const Matrix4& _mat4) const
   {
@@ -320,6 +398,82 @@ namespace hk
     this->m31 = minors.m31 * factor;
     this->m32 = minors.m32 * factor;
     this->m33 = minors.m33 * factor;
+
+    return *this;
+  }
+
+  Matrix4& 
+  Matrix4::setTransalation(const float& _x, const float& _y, const float& _z)
+  {
+    this->m00 = 1.0f; this->m01 = 0.0f; this->m02 = 0.0f; this->m03 = _x;
+    this->m10 = 0.0f; this->m11 = 1.0f; this->m12 = 0.0f; this->m13 = _y;
+    this->m20 = 0.0f; this->m21 = 0.0f; this->m22 = 1.0f; this->m23 = _z;
+    this->m30 = 0.0f; this->m31 = 0.0f; this->m32 = 0.0f; this->m33 = 1.0f;
+
+    return *this;
+  }
+
+  Matrix4& 
+  Matrix4::setScale(const float& _x, const float& _y, const float& _z)
+  {
+    this->m00 = _x; this->m01 = 0.0f; this->m02 = 0.0f; this->m03 = 0.0f;
+    this->m10 = 0.0f; this->m11 = _y; this->m12 = 0.0f; this->m13 = 0.0f;
+    this->m20 = 0.0f; this->m21 = 0.0f; this->m22 = _z; this->m23 = 0.0f;
+    this->m30 = 0.0f; this->m31 = 0.0f; this->m32 = 0.0f; this->m33 = 1.0f;
+
+    return *this;
+  }
+
+  Matrix4& 
+  Matrix4::setLookAt
+  (
+    const Vector3f& _from, 
+    const Vector3f& _to, 
+    const Vector3f& _up
+  )
+  {
+    // TODO
+    return *this;
+  }
+
+  Matrix4&
+  Matrix4::setRotationX(const float& _theta)
+  {
+    float c = Math::Cos(_theta);
+    float s = Math::Sin(_theta);
+
+    this->m00 = 1.0f; this->m01 = 0.0f; this->m02 = 0.0f; this->m03 = 0.0f;
+    this->m10 = 0.0f; this->m11 =    c; this->m12 =   -s; this->m13 = 0.0f;
+    this->m20 = 0.0f; this->m21 =    s; this->m22 =    c; this->m23 = 0.0f;
+    this->m30 = 0.0f; this->m31 = 0.0f; this->m32 = 0.0f; this->m33 = 1.0f;
+
+    return *this;
+  }
+
+  Matrix4& 
+  Matrix4::setRotationY(const float& _theta)
+  {
+    float c = Math::Cos(_theta);
+    float s = Math::Sin(_theta);
+
+    this->m00 =    c; this->m01 = 0.0f; this->m02 =    s; this->m03 = 0.0f;
+    this->m10 = 0.0f; this->m11 = 1.0f; this->m12 = 0.0f; this->m13 = 0.0f;
+    this->m20 =   -s; this->m21 = 0.0f; this->m22 =    c; this->m23 = 0.0f;
+    this->m30 = 0.0f; this->m31 = 0.0f; this->m32 = 0.0f; this->m33 = 1.0f;
+
+    return *this;
+  }
+
+  Matrix4& 
+  Matrix4::setRotationZ(const float& _theta)
+  {
+    float c = Math::Cos(_theta);
+    float s = Math::Sin(_theta);
+
+    this->m00 =    c; this->m01 =   -s; this->m02 = 0.0f; this->m03 = 0.0f;
+    this->m10 =    s; this->m11 =    c; this->m12 = 0.0f; this->m13 = 0.0f;
+    this->m20 = 0.0f; this->m21 = 0.0f; this->m22 = 1.0f; this->m23 = 0.0f;
+    this->m30 = 0.0f; this->m31 = 0.0f; this->m32 = 0.0f; this->m33 = 1.0f;
 
     return *this;
   }

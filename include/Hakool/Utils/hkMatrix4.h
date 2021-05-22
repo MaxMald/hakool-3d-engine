@@ -1,6 +1,7 @@
 #pragma once
 
 #include <Hakool\Utils\hkUtilsPrerequisites.h>
+#include <Hakool\Utils\hkVector3.h>
 #include <Hakool\Utils\hkVector4.h>
 
 namespace hk
@@ -35,6 +36,84 @@ namespace hk
     */
     static Matrix4
     GetIdentity();
+
+    /**
+    * Get a new translation matrix.
+    * 
+    * @param _x The x component.
+    * @param _y The y component.
+    * @param _z The z component.
+    * 
+    * @return Translation Matrix.
+    */
+    static Matrix4
+    GetTranslation(const float& _x, const float& _y, const float& _z);
+
+    /**
+    * Get a new scale matrix.
+    * 
+    * @param _x The x component.
+    * @param _y The y component.
+    * @param _z The z component.
+    * 
+    * @return Scaling Matrix.
+    */
+    static Matrix4
+    GetScale(const float& _x, const float& _y, const float& _z);
+
+    /**
+    * Get a new rotate matrix.
+    *
+    * @param _x The x component.
+    * @param _y The y component.
+    * @param _z The z component.
+    *
+    * @return Rotate Matrix.
+    */
+    //static Matrix4
+    //GetRotate(const float& _x, const float& _y, const float& _z);
+
+    /**
+    * Get a new LookAt Matrix.
+    * 
+    * @param _from Position of the eye.
+    * @param _to Position of the center.
+    * @param _up Up Vector.
+    * 
+    * @return LookAt Matrix.
+    */
+    static Matrix4
+    GetLookAt(const Vector3f& _from, const Vector3f& _to, const Vector3f& _up);
+
+    /**
+    * Get the rotational matrix around the x axis.
+    * 
+    * @param _theta Angle in radians.
+    * 
+    * @return Rotation matrix around the x axis.
+    */
+    static Matrix4
+    GetRotationX(const float& _theta);
+
+    /**
+    * Get the rotational matrix around the y axis.
+    *
+    * @param _theta Angle in radians.
+    *
+    * @return Rotation matrix around the y axis.
+    */
+    static Matrix4
+    GetRotationY(const float& _theta);
+
+    /**
+    * Get the rotational matrix around the z axis.
+    *
+    * @param _theta Angle in radians.
+    *
+    * @return Rotation matrix around the z axis.
+    */
+    static Matrix4
+    GetRotationZ(const float& _theta);
 
     /**
     * Calculates the sum between two matrices and returns the resulted matrix.
@@ -173,13 +252,91 @@ namespace hk
     inverse();
 
     /**
+    * Set this matrix as a translation matrix.
+    *
+    * @param _x The x component.
+    * @param _y The y component.
+    * @param _z The z component.
+    *
+    * @return self.
+    */
+    Matrix4&
+    setTransalation(const float& _x, const float& _y, const float& _z);
+
+    /**
+    * Set this matrix as a scale matrix.
+    *
+    * @param _x The x component.
+    * @param _y The y component.
+    * @param _z The z component.
+    *
+    * @return self.
+    */
+    Matrix4&
+    setScale(const float& _x, const float& _y, const float& _z);
+
+    /**
+    * Get a new rotate matrix.
+    *
+    * @param _x The x component.
+    * @param _y The y component.
+    * @param _z The z component.
+    *
+    * @return Rotate Matrix.
+    */
+    //static Matrix4
+    //setRotate(const float& _x, const float& _y, const float& _z);
+
+    /**
+    * Set this matrix as a look at matrix.
+    *
+    * @param _from Camera's position.
+    * @param _to Target's position.
+    * @param _up Up Vector.
+    *
+    * @return self.
+    */
+    Matrix4&
+    setLookAt(const Vector3f& _from, const Vector3f& _to, const Vector3f& _up);
+
+    /**
+    * Set this matrix as a rotate matrix around the x axis.
+    *
+    * @param _theta Angle in radians.
+    *
+    * @return self.
+    */
+    Matrix4&
+    setRotationX(const float& _theta);
+
+    /**
+    * Set this matrix as a rotate matrix around the y axis.
+    *
+    * @param _theta Angle in radians.
+    *
+    * @return self.
+    */
+    Matrix4&
+    setRotationY(const float& _theta);
+
+    /**
+    * Set this matrix as a rotate matrix around the z axis.
+    *
+    * @param _theta Angle in radians.
+    *
+    * @return self.
+    */
+    Matrix4&
+    setRotationZ(const float& _theta);
+
+    /**
     * Set this matrix as an identity matrix. This method modifies the matrix's
     * current values.
     *
     * @return self.
     */
     Matrix4&
-    identity();
+    identity();    
 
     /**
     * Get the determinant of this matrix.
