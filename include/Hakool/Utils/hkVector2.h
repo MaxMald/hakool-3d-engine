@@ -194,6 +194,18 @@ namespace hk
   operator| (const Vector2<T>& _a, const Vector2<T>& _b);
 
   /**
+  *  Calculate the projected vector from vector a onto vector _b
+  *
+  * @param _a Vector.
+  * @param _b Vector.
+  *
+  * @return Projected vector from vector a onto vector _b.
+  */
+  template <typename T>
+  Vector2<T>
+  operator^ (const Vector2<T>& _a, const Vector2<T>& _b);
+
+  /**
   * Component-wise addition between two vectors. The result is set in the left
   * vector.
   *
@@ -270,6 +282,19 @@ namespace hk
   template <typename T>
   Vector2<T>& 
   operator/= (Vector2<T>& _v2, T _divisor);
+
+  /**
+  * Calculate the projected vector from vector a onto vector _b. The result
+  * is set in the left vector.
+  *
+  * @param _a Vector.
+  * @param _b Vector.
+  *
+  * @return Projected vector from vector a onto vector _b.
+  */
+  template <typename T>
+  Vector2<T>&
+  operator^= (Vector2<T>& _a, const Vector2<T>& _b);
 
   /**
   * Compares strict equality between two vectors.
@@ -484,6 +509,18 @@ namespace hk
   }
 
   template<typename T>
+  Vector2<T> operator^(const Vector2<T>& _a, const Vector2<T>& _b)
+  {
+    const T factor = (_a.x * _b.x + _a.y * _b.y)
+                   / (_b.x * _b.x + _b.y * _b.y);
+    return Vector2<T>
+    (
+      _b.x * factor,
+      _b.y * factor
+    );
+  }
+
+  template<typename T>
   inline Vector2<T>&
   operator+=(Vector2<T>& _a, const Vector2<T>& _b)
   {
@@ -541,6 +578,18 @@ namespace hk
     _v2.y /= _divisor;
 
     return _v2;
+  }
+
+  template<typename T>
+  Vector2<T>& 
+  operator^=(Vector2<T>& _a, const Vector2<T>& _b)
+  {
+    const T factor = (_a.x * _b.x + _a.y * _b.y)
+                   / (_b.x * _b.x + _b.y * _b.y);
+    _a.x = _b.x * factor;
+    _a.y = _b.y * factor;
+
+    return _a;
   }
 
   template<typename T>

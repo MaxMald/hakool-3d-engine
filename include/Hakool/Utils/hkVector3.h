@@ -194,10 +194,10 @@ namespace hk
   */
   template <typename T>
   Vector3<T>
-  operator^ (const Vector3<T>& _a, const Vector3<T>& _b);
+  operator% (const Vector3<T>& _a, const Vector3<T>& _b);
 
   /**
-  * Dot production between two vectors.
+  * Dot product between two vectors.
   * 
   * This operation results in the sum of the products of the corresponding 
   * components of two vectors.
@@ -210,7 +210,19 @@ namespace hk
   */
   template <typename T>
   T
-  operator| (const Vector3<T>& _a, const Vector3<T>& _b);  
+  operator| (const Vector3<T>& _a, const Vector3<T>& _b); 
+
+  /**
+  *  Calculate the projected vector from vector a onto vector _b
+  * 
+  * @param _a Vector.
+  * @param _b Vector.
+  * 
+  * @return Projected vector from vector a onto vector _b.
+  */
+  template <typename T>
+  Vector3<T>
+  operator^ (const Vector3<T>& _a, const Vector3<T>& _b);
 
   /**
   * Component-wise addition between two vectors. The result is set in the left 
@@ -303,7 +315,20 @@ namespace hk
   */
   template <typename T>
   Vector3<T>&
-  operator^= (Vector3<T>& _a, const Vector3<T>& _b);  
+  operator%= (Vector3<T>& _a, const Vector3<T>& _b);
+
+  /**
+  * Calculate the projected vector from vector a onto vector _b. The result
+  * is set in the left vector.
+  *
+  * @param _a Vector.
+  * @param _b Vector.
+  *
+  * @return Projected vector from vector a onto vector _b.
+  */
+  template <typename T>
+  Vector3<T>&
+  operator^= (Vector3<T>& _a, const Vector3<T>& _b);
 
   /**
   * Compares strict equality between two vectors.
@@ -513,7 +538,7 @@ namespace hk
 
   template <typename T>
   inline Vector3<T>
-  operator^ (const Vector3<T>& _a, const Vector3<T>& _b)
+  operator% (const Vector3<T>& _a, const Vector3<T>& _b)
   {
     return Vector3<T>
     (
@@ -528,6 +553,20 @@ namespace hk
   operator| (const Vector3<T>& _a, const Vector3<T>& _b)
   {
     return (_a.x * _b.x + _a.y * _b.y + _a.z * _b.z);
+  }
+
+  template<typename T>
+  Vector3<T> 
+  operator^(const Vector3<T>& _a, const Vector3<T>& _b)
+  {
+    const T factor = (_a.x * _b.x + _a.y * _b.y + _a.z * _b.z)
+                   / (_b.x * _b.x + _b.y * _b.y + _b.z * _b.z);
+    return Vector3<T>
+    (
+      _b.x * factor,
+      _b.y * factor,
+      _b.z * factor
+    );
   }
 
   template <typename T>
@@ -596,9 +635,22 @@ namespace hk
     return _v3;
   }
 
+  template<typename T>
+  Vector3<T>& 
+  operator^=(Vector3<T>& _a, const Vector3<T>& _b)
+  {
+    const T factor = (_a.x * _b.x + _a.y * _b.y + _a.z * _b.z) 
+                   / ( _b.x * _b.x + _b.y * _b.y + _b.z * _b.z);
+    _a.x = _b.x * factor;
+    _a.y = _b.y * factor;
+    _a.z = _b.z * factor;
+
+    return _a;
+  }
+
   template <typename T>
   inline Vector3<T>&
-  operator^= (Vector3<T>& _a, const Vector3<T>& _b)
+  operator%= (Vector3<T>& _a, const Vector3<T>& _b)
   {
     T tx = _a.x;
     T ty = _a.y;
