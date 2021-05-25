@@ -56,8 +56,13 @@ printValue(const String& _label, float _v)
 int 
 main()
 {
+ 
+
   Vector4f vecA(3.0f, 10.0f, 2.0f, 4.0f);
   Vector4f vecB(1.0f, 5.0f, 17.0f, 8.0f);
+
+  Vector3f vec3A(5.0f, 2.0f, 3.0f);
+  printMatrix4("Rotation", Matrix4::GetRotation(0.5, vec3A.getNormalize()));
 
   //printMatrix4("Translation", Matrix4::GetTranslation(1.5f, 6.0f, 3.0f));
   //printMatrix4("Scale", Matrix4::GetScale(8.0f, 5.0f, 1.0f));
@@ -83,29 +88,23 @@ main()
   //printVector4("Div (self): ", vecA /= vecB);
   //printValue("Dot: ", vecA | vecB);
 
-  Vector3f v3A(2.0f, 9.0f, 4.0f);
-  Vector3f v3B(9.0f, 7.0f, 1.0f);
+  //Vector3f v3A(2.0f, 9.0f, 4.0f);
+  //Vector3f v3B(9.0f, 7.0f, 1.0f);
+  //printVector3("Vector A", v3A);
+  //printVector3("Vector B", v3B);
+ //printVector3("Proj", v3A ^ v3B);
+  //printVector3("Proj (self)", v3A ^= v3B);
+  //printVector3("Norm", v3A.normalize());
+  //printVector3("Norm", v3B.normalize());
 
-  printVector3("Vector A", v3A);
-  printVector3("Vector B", v3B);
-
-  printVector3("Proj", v3A ^ v3B);
-  printVector3("Proj (self)", v3A ^= v3B);
-
-  printVector3("Norm", v3A.normalize());
-  printVector3("Norm", v3B.normalize());
-
-  Vector2f v2A(2.0f, 9.0f);
-  Vector2f v2B(9.0f, 7.0f);
-
-  printVector2("Vector A", v2A);
-  printVector2("Vector B", v2B);
-
-  printVector2("Proj", v2A ^ v2B);
-  printVector2("Proj (self)", v2A ^= v2B);
-
-  printVector2("Norm", v2A.normalize());
-  printVector2("Norm", v2B.normalize());
+  //Vector2f v2A(2.0f, 9.0f);
+  //Vector2f v2B(9.0f, 7.0f);
+  //printVector2("Vector A", v2A);
+  //printVector2("Vector B", v2B);
+  //printVector2("Proj", v2A ^ v2B);
+  //printVector2("Proj (self)", v2A ^= v2B);
+  //printVector2("Norm", v2A.normalize());
+  //printVector2("Norm", v2B.normalize());
 
 
 

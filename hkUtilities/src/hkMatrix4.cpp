@@ -78,7 +78,57 @@ namespace hk
   }
 
   Matrix4 
-    Matrix4::GetLookAt
+  Matrix4::GetRotation
+  (
+    const float& _theta, 
+    const float& _x, 
+    const float& _y, 
+    const float& _z
+  )
+  {
+    const float c = Math::Cos(_theta);
+    const float s = Math::Sin(_theta);
+    const float d = 1.0f - c;
+    const float x = _x * d;
+    const float y = _y * d;
+    const float z = _z * d;
+    const float vxvy = x * _y;
+    const float vxvz = x * _z;
+    const float vyvz = y * _z;
+
+    return Matrix4
+    (
+      c + x * _x, vxvy - s * _z, vxvz + s * _y, 0.0f,
+      vxvy + s * _z, c + y * _y, vyvz - s * _x, 0.0f,
+      vxvz - s * _y, vyvz + s * _x, c + z * _z, 0.0f,
+      0.0f, 0.0f, 0.0f, 1.0f
+    );
+  }
+
+  Matrix4 
+  Matrix4::GetRotation(const float& _theta, const Vector3<float>& _v3)
+  {
+    const float c = Math::Cos(_theta);
+    const float s = Math::Sin(_theta);
+    const float d = 1.0f - c;
+    const float x = _v3.x * d;
+    const float y = _v3.y * d;
+    const float z = _v3.z * d;
+    const float vxvy = x * _v3.y;
+    const float vxvz = x * _v3.z;
+    const float vyvz = y * _v3.z;
+
+    return Matrix4
+    (
+      c + x * _v3.x, vxvy - s * _v3.z, vxvz + s * _v3.y, 0.0f,
+      vxvy + s * _v3.z, c + y * _v3.y, vyvz - s * _v3.x, 0.0f,
+      vxvz - s * _v3.y, vyvz + s * _v3.x, c + z * _v3.z, 0.0f,
+      0.0f, 0.0f, 0.0f, 1.0f
+    );
+  }
+
+  Matrix4 
+  Matrix4::GetLookAt
   (
     const Vector3f& _from,
     const Vector3f& _to, 
@@ -425,13 +475,67 @@ namespace hk
   }
 
   Matrix4& 
-  Matrix4::setLookAt
+    Matrix4::setLookAt
   (
     const Vector3f& _from, 
     const Vector3f& _to, 
     const Vector3f& _up
   )
   {
+
+    return *this;
+  }
+
+  Matrix4& 
+  Matrix4::setRotation
+  (
+    const float& _theta, 
+    const float& _x, 
+    const float& _y, 
+    const float& _z
+  )
+  {
+    const float c = Math::Cos(_theta);
+    const float s = Math::Sin(_theta);
+    const float d = 1.0f - c;
+    const float x = _x * d;
+    const float y = _y * d;
+    const float z = _z * d;
+    const float vxvy = x * _y;
+    const float vxvz = x * _z;
+    const float vyvz = y * _z;
+
+    this->m00 = c + x * _x; this->m01 = vxvy - s * _z; this->m02 = vxvz + s * _y; 
+    this->m03 = 0.0f;
+    this->m10 = vxvy + s * _z; this->m11 = c + y * _y; this->m12 = vyvz - s * _x; 
+    this->m13 = 0.0f;
+    this->m20 = vxvz - s * _y; this->m21 = vyvz + s * _x; this->m22 = c + z * _z; 
+    this->m23 = 0.0f;
+    this->m30 = 0.0f; this->m31 = 0.0f; this->m32 = 0.0f; this->m33 = 1.0f;
+
+    return *this;
+  }
+
+  Matrix4& 
+  Matrix4::setRotation(const float& _theta, const Vector3<float>& _v3)
+  {
+    const float c = Math::Cos(_theta);
+    const float s = Math::Sin(_theta);
+    const float d = 1.0f - c;
+    const float x = _v3.x * d;
+    const float y = _v3.y * d;
+    const float z = _v3.z * d;
+    const float vxvy = x * _v3.y;
+    const float vxvz = x * _v3.z;
+    const float vyvz = y * _v3.z;
+
+    this->m00 = c + x * _v3.x; this->m01 = vxvy - s * _v3.z; 
+    this->m02 = vxvz + s * _v3.y; this->m03 = 0.0f;
+    this->m10 = vxvy + s * _v3.z; this->m11 = c + y * _v3.y; 
+    this->m12 = vyvz - s * _v3.x; this->m13 = 0.0f;
+    this->m20 = vxvz - s * _v3.y; this->m21 = vyvz + s * _v3.x; 
+    this->m22 = c + z * _v3.z; this->m23 = 0.0f;
+    this->m30 = 0.0f; this->m31 = 0.0f; this->m32 = 0.0f; this->m33 = 1.0f;
 
     return *this;
   }

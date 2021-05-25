@@ -62,16 +62,36 @@ namespace hk
     GetScale(const float& _x, const float& _y, const float& _z);
 
     /**
-    * Get a new rotate matrix.
+    * Get a new rotation matrix about the given axis (normalized) and a given 
+    * angle.
     *
+    * @param _theta Angle in radians.
     * @param _x The x component.
     * @param _y The y component.
     * @param _z The z component.
     *
     * @return Rotate Matrix.
     */
-    //static Matrix4
-    //GetRotate(const float& _x, const float& _y, const float& _z);
+    static Matrix4
+    GetRotation
+    (
+      const float& _theta, 
+      const float& _x, 
+      const float& _y, 
+      const float& _z
+    );
+
+    /**
+    * Get a new rotation matrix about the given axis (normalized) and a given 
+    * angle.
+    *
+    * @param _theta Angle in radians.
+    * @param _v3 Normalized axis vector.
+    *
+    * @return Rotate Matrix.
+    */
+    static Matrix4
+    GetRotation(const float& _theta, const Vector3<float>& _v3);
 
     /**
     * Get a new LookAt Matrix.
@@ -300,11 +320,43 @@ namespace hk
     setLookAt(const Vector3f& _from, const Vector3f& _to, const Vector3f& _up);
 
     /**
+    * Set this matrix as a rotation matrix about the given axis (normalized) 
+    * and a given angle.
+    *
+    * @param _theta Angle in radians.
+    * @param _x The x component.
+    * @param _y The y component.
+    * @param _z The z component.
+    *
+    * @return Self.
+    */
+    Matrix4&
+    setRotation
+    (
+      const float& _theta,
+      const float& _x,
+      const float& _y,
+      const float& _z
+    );
+
+    /**
+    * Set this matrix as a rotation matrix about the given axis (normalized) 
+    * and a given angle.
+    *
+    * @param _theta Angle in radians.
+    * @param _v3 Axis vector (normalized).
+    *
+    * @return Self.
+    */
+    Matrix4&
+    setRotation(const float& _theta, const Vector3<float>& _v3);
+
+    /**
     * Set this matrix as a rotate matrix around the x axis.
     *
     * @param _theta Angle in radians.
     *
-    * @return self.
+    * @return Self.
     */
     Matrix4&
     setRotationX(const float& _theta);
@@ -314,7 +366,7 @@ namespace hk
     *
     * @param _theta Angle in radians.
     *
-    * @return self.
+    * @return Self.
     */
     Matrix4&
     setRotationY(const float& _theta);
@@ -324,7 +376,7 @@ namespace hk
     *
     * @param _theta Angle in radians.
     *
-    * @return self.
+    * @return Self.
     */
     Matrix4&
     setRotationZ(const float& _theta);
@@ -333,7 +385,7 @@ namespace hk
     * Set this matrix as an identity matrix. This method modifies the matrix's
     * current values.
     *
-    * @return self.
+    * @return Self.
     */
     Matrix4&
     identity();    
