@@ -60,17 +60,14 @@
     <ClInclude Include="..\include\Hakool\Utils\hkVector4.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\include\Hakool\Utils\hkUtilsOperations.h">
+    <ClInclude Include="..\include\Hakool\Utils\hkMatrix4.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\include\Hakool\Utils\hkMatrix4.h">
+    <ClInclude Include="..\include\Hakool\Utils\hkUtilsOperations.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <None Include="..\include\Hakool\Utils\hkSharedPointer.inl">
-      <Filter>Header Files\smartPointers</Filter>
-    </None>
     <None Include="..\include\Hakool\Utils\hkModule.inl">
       <Filter>Header Files</Filter>
     </None>

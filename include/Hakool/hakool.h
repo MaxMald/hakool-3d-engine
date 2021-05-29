@@ -5,6 +5,9 @@
 namespace hk
 {
   class Logger;
+  class GraphicComponent;
+
+  struct HakoolConfiguration;
 
   /**
   * Hakool Engine.
@@ -16,12 +19,15 @@ namespace hk
 
     /**
     * Starts the Hakool engine.
+    * 
+    * @param _config Configuration object that describes the properties of the
+    * Hakool engine.
     */
     static void
-    Start();
+    Start(HakoolConfiguration& _config);
 
     /**
-    * Shutdown the Hakool engine.
+    * Safely close and destroy the engine and all its systems.
     */
     static void
     Shutdown();
@@ -29,15 +35,10 @@ namespace hk
     /**
     * Get the Hakool engine instance.
     * 
-    * @returns Hakool engine.
+    * @return Hakool engine.
     */
     static Hakool*&
     GetEngine();
-
-    /**
-    * Reference to the logger.
-    */
-    static Logger& log;
 
   private:
 
@@ -69,13 +70,16 @@ namespace hk
     operator=(const Hakool&&) = delete;
 
     /**
+    * Prepare and initialize the engine with all its system.
     * 
+    * @param _config Configuration object that describes the properties of the
+    * engine when initialized.
     */
     void
-    _onPrepare();
+    _onPrepare(HakoolConfiguration& _config);
 
     /**
-    * 
+    * Safely close and destroy all the engine with all its systems.
     */
     void
     _onShutdown();
@@ -97,5 +101,15 @@ namespace hk
     */
     static bool&
     _IsReady();
+
+    /**
+    * Pointer to the graphic system.
+    */
+    GraphicComponent* _m_pGraphicComponent;
+
+    /**
+    * Pointer to the message logger.
+    */
+    Logger* _m_pLogger;
   };
 }

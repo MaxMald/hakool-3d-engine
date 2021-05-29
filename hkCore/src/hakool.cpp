@@ -1,15 +1,16 @@
 #include <Hakool\hakool.h>
 #include <Hakool\Utils\hkLoggerConsole.h>
+#include <Hakool\Core\hkCoreUtilities.h>
 
 namespace hk
 {
   void 
-  Hakool::Start()
+  Hakool::Start(HakoolConfiguration& _config)
   {
     if (!Hakool::_IsReady())
     {
       Hakool::_Singleton() = new Hakool();
-      Hakool::_Singleton()->_onPrepare();
+      Hakool::_Singleton()->_onPrepare(_config);
       Hakool::_IsReady() = true;
     }
     return;
@@ -34,9 +35,9 @@ namespace hk
   {
     return Hakool::_Singleton();
   }
-
+  
   void 
-  Hakool::_onPrepare()
+  Hakool::_onPrepare(HakoolConfiguration& _config)
   {
     if (!Logger::IsReady())
     {

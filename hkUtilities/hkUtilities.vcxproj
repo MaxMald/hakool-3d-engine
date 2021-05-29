@@ -37,7 +37,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="..\include\Hakool\Utils\hkModule.inl" />
-    <None Include="..\include\Hakool\Utils\hkSharedPointer.inl" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\hkLogger.cpp" />

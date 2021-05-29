@@ -27,6 +27,12 @@
     <ClCompile Include="src\hakool.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="src\hkEngineComponent.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\hkGraphicComponent.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\include\Hakool\hakool.h">
@@ -38,17 +44,14 @@
     <ClInclude Include="..\include\Hakool\Core\hkCorePrerequisites.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\include\Hakool\Core\Graphics\hkIGraphics.h">
-      <Filter>Header Files\graphics</Filter>
-    </ClInclude>
     <ClInclude Include="..\include\Hakool\Core\hkEngineComponent.h">
       <Filter>Header Files\system</Filter>
     </ClInclude>
-    <ClInclude Include="..\include\Hakool\Core\hkConfigEngine.h">
-      <Filter>Header Files\system</Filter>
+    <ClInclude Include="..\include\Hakool\Core\hkCoreUtilities.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\include\Hakool\Core\hkCoreCommons.h">
-      <Filter>Header Files\system</Filter>
+    <ClInclude Include="..\include\Hakool\Core\Graphics\hkGraphicComponent.h">
+      <Filter>Header Files\graphics</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
