@@ -19,6 +19,12 @@
     <Filter Include="Header Files\smartPointers">
       <UniqueIdentifier>{9cf5217d-847d-4401-879b-ae0244187c72}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\plug-in">
+      <UniqueIdentifier>{b0dc71d9-f89f-4ffe-b5cd-cb7ab59b2d60}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\plug-in">
+      <UniqueIdentifier>{606e42f0-2047-4c40-9633-e3d79a3eb44f}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\include\Hakool\Utils\hkVector2.h">
@@ -63,8 +69,20 @@
     <ClInclude Include="..\include\Hakool\Utils\hkMatrix4.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\include\Hakool\Utils\hkUtilsOperations.h">
+    <ClInclude Include="..\include\Hakool\Utils\hkUtilitiesUtilities.h">
       <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\Hakool\Utils\hkPlugin.h">
+      <Filter>Header Files\plug-in</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\Hakool\Utils\hkPluginData.h">
+      <Filter>Header Files\plug-in</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\Hakool\Utils\hkIPluginManager.h">
+      <Filter>Header Files\plug-in</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\Hakool\Utils\hkPluginManagerWin.h">
+      <Filter>Header Files\plug-in</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -87,6 +105,18 @@
     </ClCompile>
     <ClCompile Include="src\hkMatrix4.cpp">
       <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\hkPlugin.cpp">
+      <Filter>Source Files\plug-in</Filter>
+    </ClCompile>
+    <ClCompile Include="src\hkPluginData.cpp">
+      <Filter>Source Files\plug-in</Filter>
+    </ClCompile>
+    <ClCompile Include="src\hkPluginManager.cpp">
+      <Filter>Source Files\plug-in</Filter>
+    </ClCompile>
+    <ClCompile Include="src\hkPluginManagerWin.cpp">
+      <Filter>Source Files\plug-in</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

@@ -24,6 +24,6 @@ namespace hk
   PluginData::operator=(const PluginData& _plugIn)
   {
     this->data = _plugIn.data;
-    return;
+    return *this;
   }
 }

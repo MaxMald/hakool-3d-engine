@@ -13,27 +13,17 @@ namespace hk
     return;
   }
 
-  String 
-  Plugin::getKey()
+  void Plugin::init()
   {
-    return "";
+  }
+
+  void Plugin::destroy()
+  {
   }
 
   PluginData* 
   Plugin::getData()
   {
     return nullptr;
-  }
-
-  void 
-  Plugin::_onCreate()
-  {
-    return;
-  }
-
-  void 
-  Plugin::_onDestroy()
-  {
-    return;
   }
 }

@@ -50,7 +50,7 @@ namespace hk
                                         GetProcAddress(dllHandle, "createPlugin"));
     if (!constructorFunction)
     {
-      !FreeLibrary(dllHandle);
+      FreeLibrary(dllHandle);
       return eRESULT::kFail;
     }
 
@@ -58,7 +58,7 @@ namespace hk
     plugInPtr = constructorFunction();
     if (plugInPtr == nullptr)
     {
-      !FreeLibrary(dllHandle);
+      FreeLibrary(dllHandle);
       return eRESULT::kFail;
     }
 
@@ -89,15 +89,13 @@ namespace hk
 
     HINSTANCE dllHandle = this->_m_hLibraryMap[_key];
     fnDestroyPlugin destructionFunction = reinterpret_cast<fnDestroyPlugin>(
-                                            dllHandle,
-                                            "destroyPlugin"
-                                          );
+                                          GetProcAddress(dllHandle, "destroyPlugin"));
     if (!destructionFunction)
     {
       destructionFunction();
     }
 
-    !FreeLibrary(dllHandle);
+    FreeLibrary(dllHandle);
 
     this->_m_hLibraryMap.erase(_key);
     this->_m_hPlugInMap.erase(_key);
@@ -116,15 +114,13 @@ namespace hk
     for (auto iterator : this->_m_hLibraryMap)
     {
       fnDestroyPlugin destructionFunction = reinterpret_cast<fnDestroyPlugin>(
-                                            iterator.second,
-                                            "destroyPlugin"
-                                            );
+                                            GetProcAddress(iterator.second, "destroyPlugin"));
       if (!destructionFunction)
       {
         destructionFunction();
       }
 
-      !FreeLibrary(iterator.second);
+      FreeLibrary(iterator.second);
     }
 
     this->_m_hLibraryMap.clear();

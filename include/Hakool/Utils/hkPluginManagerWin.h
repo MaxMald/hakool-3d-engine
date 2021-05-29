@@ -3,6 +3,7 @@
 #include <Hakool\Utils\hkUtilsPrerequisites.h>
 #include <Hakool\Utils\hkIPluginManager.h>
 
+#include <Windows.h>
 #include <libloaderapi.h>
 
 namespace hk
