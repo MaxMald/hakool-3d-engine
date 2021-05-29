@@ -5,6 +5,15 @@
 
 namespace hk
 {
+
+  enum class HK_UTILITY_EXPORT eRESULT
+  {
+    kFail,
+    kSuccess,
+    kObjectAlreadyExists,
+    kObjectNotFound
+  };
+
   /**
   * Check if two float values are relatively equal.
   * 
