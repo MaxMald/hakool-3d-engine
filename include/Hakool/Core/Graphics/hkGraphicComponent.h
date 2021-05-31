@@ -24,7 +24,7 @@ namespace hk
     * Get the id that indicates the graphic API been used by this 
     * GraphicComponent.
     */
-    eGRAPHIC_INTERFACE
+    virtual eGRAPHIC_INTERFACE
     getGraphicInterfaceId();
 
   protected:

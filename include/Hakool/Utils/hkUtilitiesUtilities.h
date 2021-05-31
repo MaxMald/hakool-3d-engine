@@ -14,6 +14,12 @@ namespace hk
     kObjectNotFound
   };
 
+  enum class HK_UTILITY_EXPORT ePlatform
+  {
+    kUndefined,
+    kWindows
+  };
+
   /**
   * Check if two float values are relatively equal.
   * 

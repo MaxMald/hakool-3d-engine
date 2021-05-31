@@ -72,16 +72,19 @@
     <ClInclude Include="..\include\Hakool\Utils\hkUtilitiesUtilities.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\include\Hakool\Utils\hkPlugin.h">
-      <Filter>Header Files\plug-in</Filter>
-    </ClInclude>
     <ClInclude Include="..\include\Hakool\Utils\hkPluginData.h">
       <Filter>Header Files\plug-in</Filter>
     </ClInclude>
-    <ClInclude Include="..\include\Hakool\Utils\hkIPluginManager.h">
+    <ClInclude Include="..\include\Hakool\Utils\hkIPlugin.h">
       <Filter>Header Files\plug-in</Filter>
     </ClInclude>
-    <ClInclude Include="..\include\Hakool\Utils\hkPluginManagerWin.h">
+    <ClInclude Include="..\include\Hakool\Utils\hkPluginSlotWin.h">
+      <Filter>Header Files\plug-in</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\Hakool\Utils\hkIPluginSlot.h">
+      <Filter>Header Files\plug-in</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\Hakool\Utils\hkPluginManager.h">
       <Filter>Header Files\plug-in</Filter>
     </ClInclude>
   </ItemGroup>
@@ -106,16 +109,13 @@
     <ClCompile Include="src\hkMatrix4.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\hkPlugin.cpp">
-      <Filter>Source Files\plug-in</Filter>
-    </ClCompile>
     <ClCompile Include="src\hkPluginData.cpp">
       <Filter>Source Files\plug-in</Filter>
     </ClCompile>
     <ClCompile Include="src\hkPluginManager.cpp">
       <Filter>Source Files\plug-in</Filter>
     </ClCompile>
-    <ClCompile Include="src\hkPluginManagerWin.cpp">
+    <ClCompile Include="src\hkPluginSlotWin.cpp">
       <Filter>Source Files\plug-in</Filter>
     </ClCompile>
   </ItemGroup>

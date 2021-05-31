@@ -7,25 +7,25 @@ namespace hk
   class IPluginManager;
   struct PluginData;
 
-  class HK_UTILITY_EXPORT Plugin
+  class HK_UTILITY_EXPORT IPlugin
   {
   public:
 
-    Plugin();
+    IPlugin() = default;
 
-    virtual ~Plugin();
-
-    /**
-    * Initialize the plug-in.
-    */
-    virtual void
-    init();
+    virtual ~IPlugin() = default;
 
     /**
-    * Destroy the plug-in.
+    * Called when the plug-in is been connected.
     */
     virtual void
-    destroy();
+    onConnect() = 0;
+
+    /**
+    * Called when the plug-in is about to been closed.
+    */
+    virtual void
+    onClose() = 0;
 
     /**
     * Get the wrapped data of this plug-in.
@@ -33,6 +33,6 @@ namespace hk
     * @return Wrapped data.
     */
     virtual PluginData*
-    getData();
+    getData() = 0;
   };
 }

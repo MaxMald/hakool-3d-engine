@@ -7,6 +7,7 @@ namespace hk
   struct HK_UTILITY_EXPORT PluginData
   {
   public:
+
     PluginData();
 
     PluginData(void* _pData);
