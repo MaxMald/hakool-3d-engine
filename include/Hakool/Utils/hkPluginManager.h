@@ -32,13 +32,10 @@ namespace hk
     destroy();
 
     /**
-    * Attempts to connect to the specified plug-in. The plug-in instance will
-    * be hold in the given IPluginSlot pointer. 
-    *
-    * At that the moment when the IPluginSlot pointer is given to the 
-    * PluginManager, it will manage it corresponding destruction.
+    * Attempts to connect to the specified plug-in.
     * 
     * @param _key The plug-in key.
+    * @param _libraryName The library name of the plug-in.
     * @param _constructorFunctionName The name of the function that builds the
     * plug-in.
     * @param _destructorFunctionName The name of the function that destroys the
@@ -49,7 +46,8 @@ namespace hk
     eRESULT
     connectPlugin
     (
-      const String& _key, 
+      const String& _key,
+      const String& _libraryName,
       const String& _constructorFunctionName,
       const String& _destructorFunctionName
     );

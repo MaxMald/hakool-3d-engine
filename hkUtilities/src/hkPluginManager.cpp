@@ -34,6 +34,7 @@ namespace hk
   PluginManager::connectPlugin
   (
     const String& _key, 
+    const String& _libraryName,
     const String& _constructorFunctionName, 
     const String& _destructorFunctionName
   )
@@ -45,7 +46,8 @@ namespace hk
     IPluginSlot* pPluginSlot = this->createPluginSlot();
     eRESULT result = pPluginSlot->connect
     (
-      _key, 
+      _key,
+      _libraryName,
       _constructorFunctionName, 
       _destructorFunctionName
     );

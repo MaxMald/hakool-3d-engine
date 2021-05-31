@@ -4,9 +4,12 @@
 
 namespace hk
 {
-  class IPluginManager;
-  struct PluginData;
-
+  /**
+  * Provides connection from a PluginManager to a DLL services.
+  * 
+  * The IPlugin is in charge of initialize and provides access to the library
+  * services, also closes and free the memory when the plug-in is been closed.
+  */
   class HK_UTILITY_EXPORT IPlugin
   {
   public:
@@ -16,7 +19,7 @@ namespace hk
     virtual ~IPlugin() = default;
 
     /**
-    * Called when the plug-in is been connected.
+    * Called when the plug-in has just been connected.
     */
     virtual void
     onConnect() = 0;
@@ -32,7 +35,7 @@ namespace hk
     * 
     * @return Wrapped data.
     */
-    virtual PluginData*
+    virtual void*
     getData() = 0;
   };
 }

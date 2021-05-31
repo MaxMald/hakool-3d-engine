@@ -21,6 +21,9 @@
     <ClCompile Include="src\hkGraphicComponentOpenGL.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="src\hkGraphicsOpenGLPlugin.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\include\Hakool\GraphicsOpenGL\hkGraphicComponentOpenGL.h">

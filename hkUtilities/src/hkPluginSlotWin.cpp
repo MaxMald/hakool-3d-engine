@@ -1,5 +1,4 @@
 #include <Hakool\Utils\hkPluginSlotWin.h>
-
 #include <Hakool\Utils\hkIPlugin.h>
 
 namespace hk
@@ -30,7 +29,8 @@ namespace hk
   eRESULT
   PluginSlotWin::connect
   (
-    const String& _key, 
+    const String& _key,
+    const String& _libraryName,
     const String& _constructorFunctionName, 
     const String& _destructorFunctionName
   )
@@ -40,7 +40,7 @@ namespace hk
       return eRESULT::kFail;
     }
 
-    HINSTANCE pluginHandle = LoadLibraryEx(_key.c_str(),
+    HINSTANCE pluginHandle = LoadLibraryEx(_libraryName.c_str(),
                                            0,
                                            LOAD_WITH_ALTERED_SEARCH_PATH);
     if(pluginHandle == NULL)
@@ -65,6 +65,7 @@ namespace hk
     pluginPtr->onConnect();
 
     this->_m_key = _key;
+    this->_m_libraryName = _libraryName;
     this->_m_constructorFunctionName = _constructorFunctionName;
     this->_m_destructorFunctionName = _destructorFunctionName;
     this->_m_pluginHandler = pluginHandle;

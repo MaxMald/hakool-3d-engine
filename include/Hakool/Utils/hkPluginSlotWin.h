@@ -11,6 +11,14 @@ namespace hk
 {
   class IPlugin;
 
+  /**
+  * Provides a connection to a single IPlugin, that could come from an external 
+  * library on a windows platform.
+  *
+  * The plug-in slot manage the proper connection and disconnection of a single
+  * IPlugin, also provides hints if something go wrong with the plug-in
+  * connection.
+  */
   class HK_UTILITY_EXPORT PluginSlotWin: 
     public IPluginSlot
   {
@@ -22,26 +30,30 @@ namespace hk
     ~PluginSlotWin();
 
     /**
-    * Attempts to connect to the plug-in slot.
+    * Attempts to connect to the specified plug-in.
     *
     * @param _key The identifier of this plug-in.
+    * @param _libraryName The name of the library of the plug-in.
     * @param _constructorFunctionName The name of the function that builds the
     * plug-in.
     * @param _destructorFunctionName The name of the function that destroys the
     * plug-in.
-    * 
-    * @return 
+    *
+    * @return "kSuccess" if the connection was successful.
     */
     virtual eRESULT
     connect
     (
       const String& _key,
+      const String& _libraryName,
       const String& _constructorFunctionName,
       const String& _destructorFunctionName
     ) override;
 
     /**
-    * Get the identifier of this Plug-in.
+    * Get the identifier of this Plug-in slot.
+    *
+    * @return The identifier of this Plug-in slot.
     */
     virtual String
     getKey() override;
@@ -49,13 +61,13 @@ namespace hk
     /**
     * Get the pointer of the wrapped plug-in.
     *
-    * @return The wrapped plug-in's pointer.
+    * @return The pointer of the wrapped plug-in.
     */
     virtual IPlugin*
     getPluginPtr() override;
 
     /**
-    * Safely close this plug-in.
+    * Safely disconnect this plug-in.
     */
     virtual void
     close() override;
@@ -79,6 +91,12 @@ namespace hk
     */
     String
     _m_key;
+
+    /**
+    * The library name of the plug-in.
+    */
+    String
+    _m_libraryName;
 
     /**
     * The instance of the plug-in.

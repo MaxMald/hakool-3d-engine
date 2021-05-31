@@ -72,9 +72,6 @@
     <ClInclude Include="..\include\Hakool\Utils\hkUtilitiesUtilities.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\include\Hakool\Utils\hkPluginData.h">
-      <Filter>Header Files\plug-in</Filter>
-    </ClInclude>
     <ClInclude Include="..\include\Hakool\Utils\hkIPlugin.h">
       <Filter>Header Files\plug-in</Filter>
     </ClInclude>
@@ -108,9 +105,6 @@
     </ClCompile>
     <ClCompile Include="src\hkMatrix4.cpp">
       <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="src\hkPluginData.cpp">
-      <Filter>Source Files\plug-in</Filter>
     </ClCompile>
     <ClCompile Include="src\hkPluginManager.cpp">
       <Filter>Source Files\plug-in</Filter>

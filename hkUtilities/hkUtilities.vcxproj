@@ -30,7 +30,6 @@
     <ClInclude Include="..\include\Hakool\Utils\hkMatrix4.h" />
     <ClInclude Include="..\include\Hakool\Utils\hkModule.h" />
     <ClInclude Include="..\include\Hakool\Utils\hkIPlugin.h" />
-    <ClInclude Include="..\include\Hakool\Utils\hkPluginData.h" />
     <ClInclude Include="..\include\Hakool\Utils\hkPluginManager.h" />
     <ClInclude Include="..\include\Hakool\Utils\hkPluginSlotWin.h" />
     <ClInclude Include="..\include\Hakool\Utils\hkSharedPointer.h" />
@@ -49,7 +48,6 @@
     <ClCompile Include="src\hkMath.cpp" />
     <ClCompile Include="src\hkMatrix3.cpp" />
     <ClCompile Include="src\hkMatrix4.cpp" />
-    <ClCompile Include="src\hkPluginData.cpp" />
     <ClCompile Include="src\hkPluginManager.cpp" />
     <ClCompile Include="src\hkPluginSlotWin.cpp" />
   </ItemGroup>
