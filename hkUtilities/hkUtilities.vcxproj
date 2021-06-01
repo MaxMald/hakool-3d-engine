@@ -38,6 +38,7 @@
     <ClInclude Include="..\include\Hakool\Utils\hkVector2.h" />
     <ClInclude Include="..\include\Hakool\Utils\hkVector3.h" />
     <ClInclude Include="..\include\Hakool\Utils\hkVector4.h" />
+    <ClInclude Include="..\include\Hakool\Utils\hkWindow.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="..\include\Hakool\Utils\hkModule.inl" />
@@ -50,6 +51,7 @@
     <ClCompile Include="src\hkMatrix4.cpp" />
     <ClCompile Include="src\hkPluginManager.cpp" />
     <ClCompile Include="src\hkPluginSlotWin.cpp" />
+    <ClCompile Include="src\hkWindow.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>

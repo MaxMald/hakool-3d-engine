@@ -25,6 +25,12 @@
     <Filter Include="Source Files\plug-in">
       <UniqueIdentifier>{606e42f0-2047-4c40-9633-e3d79a3eb44f}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\window">
+      <UniqueIdentifier>{1467774b-dd96-46e7-a98c-d10e02d46960}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\window">
+      <UniqueIdentifier>{b5058f1c-c6a3-428d-9f21-75e253617ebb}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\include\Hakool\Utils\hkVector2.h">
@@ -84,6 +90,9 @@
     <ClInclude Include="..\include\Hakool\Utils\hkPluginManager.h">
       <Filter>Header Files\plug-in</Filter>
     </ClInclude>
+    <ClInclude Include="..\include\Hakool\Utils\hkWindow.h">
+      <Filter>Header Files\window</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="..\include\Hakool\Utils\hkModule.inl">
@@ -111,6 +120,9 @@
     </ClCompile>
     <ClCompile Include="src\hkPluginSlotWin.cpp">
       <Filter>Source Files\plug-in</Filter>
+    </ClCompile>
+    <ClCompile Include="src\hkWindow.cpp">
+      <Filter>Source Files\window</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
