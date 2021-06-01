@@ -20,6 +20,11 @@ namespace hk
     kWindows
   };
 
+  struct HK_UTILITY_EXPORT WindowConfiguration
+  {
+
+  };
+
   /**
   * Check if two float values are relatively equal.
   * 
