@@ -93,6 +93,15 @@
     <ClInclude Include="..\include\Hakool\Utils\hkWindow.h">
       <Filter>Header Files\window</Filter>
     </ClInclude>
+    <ClInclude Include="..\include\Hakool\Utils\hkWindowWin32.h">
+      <Filter>Header Files\window</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\Hakool\Utils\hkConfigWindow.h">
+      <Filter>Header Files\config</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\Hakool\Utils\hkWindowFactory.h">
+      <Filter>Header Files\window</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="..\include\Hakool\Utils\hkModule.inl">
@@ -122,6 +131,12 @@
       <Filter>Source Files\plug-in</Filter>
     </ClCompile>
     <ClCompile Include="src\hkWindow.cpp">
+      <Filter>Source Files\window</Filter>
+    </ClCompile>
+    <ClCompile Include="src\hkWindowWin32.cpp">
+      <Filter>Source Files\window</Filter>
+    </ClCompile>
+    <ClCompile Include="src\hkWindowFactory.cpp">
       <Filter>Source Files\window</Filter>
     </ClCompile>
   </ItemGroup>

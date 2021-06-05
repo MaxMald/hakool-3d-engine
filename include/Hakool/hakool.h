@@ -5,6 +5,7 @@
 namespace hk
 {
   class Logger;
+  class Window;
   class GraphicComponent;
 
   struct HakoolConfiguration;
@@ -13,10 +14,8 @@ namespace hk
   * Hakool Engine.
   */
   class HK_CORE_EXPORT Hakool
-  {    
-
+  {
   public:
-
     /**
     * Starts the Hakool engine.
     * 
@@ -105,11 +104,19 @@ namespace hk
     /**
     * Pointer to the graphic system.
     */
-    GraphicComponent* _m_pGraphicComponent;
+    GraphicComponent* 
+    _m_pGraphicComponent;
+
+    /**
+    * Pointer to the window.
+    */
+    Window*
+    _m_pWindow;
 
     /**
     * Pointer to the message logger.
     */
-    Logger* _m_pLogger;
+    Logger* 
+    _m_pLogger;
   };
 }

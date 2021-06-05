@@ -1,3 +1,6 @@
+#include <Hakool\Utils\hkWindowFactory.h>
+#include <Hakool\Utils\hkWindow.h>
+
 #include <Hakool\hakool.h>
 #include <Hakool\Utils\hkLoggerConsole.h>
 #include <Hakool\Core\hkCoreUtilities.h>
@@ -42,7 +45,16 @@ namespace hk
     if (!Logger::IsReady())
     {
       Logger::Prepare(new LoggerConsole());
-    }    
+    }
+
+    _m_pWindow = WindowFactory::GetWindow();
+    _m_pWindow->init
+    (
+      _config.windowConfiguration.width, 
+      _config.windowConfiguration.height, 
+      _config.windowConfiguration.title
+    );
+
     return;
   }
 

@@ -1,5 +1,6 @@
 #pragma once
 
+#include <Hakool\Utils\hkUtilitiesUtilities.h>
 #include <Hakool\Core\hkCorePrerequisites.h>
 
 namespace hk
@@ -12,8 +13,8 @@ namespace hk
   * Enumerates the different types of components (or modular systems) used by
   * the Hakool Engine.
   */
-  enum class HK_CORE_EXPORT eENGINE_COMPONENT
-    : uchar
+  enum class HK_CORE_EXPORT eENGINE_COMPONENT : 
+    uchar
   {
     kUndefined,
     kGraphics
@@ -23,8 +24,8 @@ namespace hk
   * Enumerates the different types of graphic APIs supported by the Hakool
   * Engine.
   */
-  enum class HK_CORE_EXPORT eGRAPHIC_INTERFACE
-    : uchar
+  enum class HK_CORE_EXPORT eGRAPHIC_INTERFACE : 
+    uchar
   {
     kUndefined,
     kOpenGL
@@ -53,16 +54,25 @@ namespace hk
     */
     eGRAPHIC_INTERFACE
     graphicInterface;
-
   };
 
   /**
-  * Configuration object used to describes the preferred properties of the 
+  * Configuration object used to describe the preferred properties of the 
   * Hakool Engine when initialized.
   */
   struct HK_CORE_EXPORT HakoolConfiguration
   {
   public:
+
+    /**
+    * Constructor.
+    */
+    HakoolConfiguration() :
+      graphicsConfiguration(),
+      windowConfiguration()
+    {
+      return;
+    }
 
     /**
     * Configuration object used to describe the preferred properties of the 
@@ -71,6 +81,12 @@ namespace hk
     GraphicsConfiguration
     graphicsConfiguration;
 
+    /**
+    * Configuration object used to describe the preferred properties of the
+    * Window when initialized.
+    */
+    WindowConfiguration
+    windowConfiguration;
   };  
 }
 

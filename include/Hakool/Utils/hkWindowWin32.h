@@ -1,27 +1,27 @@
 #pragma once
 
-#include <Hakool\Utils\hkUtilsPrerequisites.h>
-#include <Hakool\Utils\hkUtilitiesUtilities.h>
-#include <Hakool\Utils\hkVector2.h>
+#include <Hakool\Utils\hkWindow.h>
+#include <Hakool\Utils\hkConfigWindow.h>
 
 namespace hk
 {
   /**
-  * 
+  * TODO
   */
-  class HK_UTILITY_EXPORT Window
+  class HK_UTILITY_EXPORT WindowWin32 :
+    public Window
   {
   public:
 
     /**
-    * Constructor.
+    * 
     */
-    Window();
+    WindowWin32();
 
     /**
-    * Closes the window and frees all the resources attached to it.
+    * 
     */
-    virtual ~Window();
+    virtual ~WindowWin32();
 
     /**
     * Creates a new window with the size and title specified.
@@ -42,11 +42,11 @@ namespace hk
     * Close Window.
     */
     virtual void
-    close();   
+    close();
 
     /**
     * Set the size of the rendering region of the window (pixels).
-    * 
+    *
     * @param _width The width in pixels.
     * @param _heiht The height in pixels.
     */
@@ -64,62 +64,62 @@ namespace hk
 
     /**
     * Set the title of this window.
-    * 
+    *
     * @para _title Window's title.
     */
     virtual void
     setTitle(const String& _title);
 
     /**
-    * Destroy this window and release its resources.
+    * 
     */
     virtual void
-    destroy();
+    destroy() override;
 
     /**
-    * Get the size of the rendering region of the window (pixels).
-    *
-    * @return The size in pixels.
-    */
-    Vector2u
-    getSize();
-
-    /**
-    * Get the width of the rendering region of the window (pixels).
     * 
-    * @return The window's width in pixels.
     */
-    uint32
-    getWidth();
-
-    /**
-    * Get the height of the rendering region of the window (pixels).
-    *
-    * @return The window's height in pixels.
-    */
-    uint32
-    getHeight();
-
-    /**
-    * Get the name of the window.
-    * 
-    * @return Window's name.
-    */
-    String
-    getTitle();
+    static LRESULT CALLBACK
+    WindowProc(HWND _hwnd, UINT _uMsg, WPARAM _wParam, LPARAM _lParam);
 
   protected:
 
     /**
-    * The title of the Window.
+    * 
     */
-    String 
-    _m_title;
+    virtual void
+    _processEvents();
+
+  private:
 
     /**
-    * The size of the Window.
+    * 
     */
-    Vector2u 
-    _m_size;
+    void
+    _processEvent(UINT _uMsg, WPARAM _wParam, LPARAM _lParam);
+
+    /**
+    * 
+    */
+    void
+    _registerWindowClass();
+
+    /**
+    * The name that is used to register a window.
+    */
+    static String 
+    _WINDOW_NAME;
+
+    /**
+    * Handle of the new window.
+    */
+    HANDLER 
+    _m_winHandler;
+
+    /**
+    * Stores the callback event function of control.
+    */
+    LONG_PTR 
+    _m_callback;
   };
 }

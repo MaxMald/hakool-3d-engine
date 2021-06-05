@@ -22,6 +22,7 @@
     <ClInclude Include="..\include\Hakool\Utils\hkConfigPlatform.h" />
     <ClInclude Include="..\include\Hakool\Utils\hkConfigTypes.h" />
     <ClInclude Include="..\include\Hakool\Utils\hkConfigUtilities.h" />
+    <ClInclude Include="..\include\Hakool\Utils\hkConfigWindow.h" />
     <ClInclude Include="..\include\Hakool\Utils\hkIPluginSlot.h" />
     <ClInclude Include="..\include\Hakool\Utils\hkLogger.h" />
     <ClInclude Include="..\include\Hakool\Utils\hkLoggerConsole.h" />
@@ -39,6 +40,8 @@
     <ClInclude Include="..\include\Hakool\Utils\hkVector3.h" />
     <ClInclude Include="..\include\Hakool\Utils\hkVector4.h" />
     <ClInclude Include="..\include\Hakool\Utils\hkWindow.h" />
+    <ClInclude Include="..\include\Hakool\Utils\hkWindowFactory.h" />
+    <ClInclude Include="..\include\Hakool\Utils\hkWindowWin32.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="..\include\Hakool\Utils\hkModule.inl" />
@@ -52,6 +55,8 @@
     <ClCompile Include="src\hkPluginManager.cpp" />
     <ClCompile Include="src\hkPluginSlotWin.cpp" />
     <ClCompile Include="src\hkWindow.cpp" />
+    <ClCompile Include="src\hkWindowFactory.cpp" />
+    <ClCompile Include="src\hkWindowWin32.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>

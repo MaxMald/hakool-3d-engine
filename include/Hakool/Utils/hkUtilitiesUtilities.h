@@ -5,7 +5,9 @@
 
 namespace hk
 {
-
+  /**
+  * 
+  */
   enum class HK_UTILITY_EXPORT eRESULT
   {
     kFail,
@@ -14,15 +16,49 @@ namespace hk
     kObjectNotFound
   };
 
-  enum class HK_UTILITY_EXPORT ePlatform
+  /**
+  * 
+  */
+  enum class HK_UTILITY_EXPORT ePLATFORM
   {
     kUndefined,
     kWindows
   };
 
+  /**
+  * Configuration object that specifies the window's properties.
+  */
   struct HK_UTILITY_EXPORT WindowConfiguration
   {
+  public:
+    /**
+    * Constructor.
+    */
+    WindowConfiguration() : 
+      width(256),
+      height(256),
+      title("Hakool Window")
+    {
+      return;
+    }
 
+    /**
+    * Screen width in pixels.
+    */
+    uint32 
+    width;
+
+    /**
+    * Screen height in pixels.
+    */
+    uint32 
+    height;
+
+    /**
+    * The title of the window. 
+    */
+    String 
+    title;
   };
 
   /**
@@ -36,7 +72,9 @@ namespace hk
   HK_UTILITY_EXPORT bool
   RelativelyEqual(const float& _a, const float& _b);
 
-  
+  /**
+  * 
+  */
   inline bool 
   RelativelyEqual(const float& _a, const float& _b)
   {

@@ -16,7 +16,7 @@ namespace hk
     return;
   }
 
-  void 
+  eRESULT 
   Window::init
   (
     const uint32& _width, 
@@ -28,7 +28,7 @@ namespace hk
     this->_m_size.y = _height;
     this->_m_title = _title;
 
-    return;
+    return eRESULT::kSuccess;
   }
 
   void 
@@ -59,6 +59,12 @@ namespace hk
   {
     this->_m_title = _title;
 
+    return;
+  }
+
+  void 
+  Window::destroy()
+  {
     return;
   }
 
