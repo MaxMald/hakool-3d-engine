@@ -8,14 +8,15 @@
 namespace hk
 {
   void 
-  Hakool::Start(HakoolConfiguration& _config)
+  Hakool::Start()
   {
     if (!Hakool::_IsReady())
     {
       Hakool::_Singleton() = new Hakool();
-      Hakool::_Singleton()->_onPrepare(_config);
+      Hakool::_Singleton()->_onPrepare();
       Hakool::_IsReady() = true;
     }
+
     return;
   }
   
@@ -30,6 +31,7 @@ namespace hk
       Hakool::_Singleton() = nullptr;
       Hakool::_IsReady() = false;
     }
+
     return;
   }
 
@@ -38,10 +40,21 @@ namespace hk
   {
     return Hakool::_Singleton();
   }
-  
-  void 
-  Hakool::_onPrepare(HakoolConfiguration& _config)
+
+  Hakool::Hakool():
+    _m_initialized(false)
   {
+    return;
+  }
+
+  eRESULT
+  Hakool::init(HakoolConfiguration& _config)
+  {
+    if (_m_initialized)
+    {
+      return eRESULT::kFail;
+    }
+
     if (!Logger::IsReady())
     {
       Logger::Prepare(new LoggerConsole());
@@ -50,11 +63,35 @@ namespace hk
     _m_pWindow = WindowFactory::GetWindow();
     _m_pWindow->init
     (
-      _config.windowConfiguration.width, 
-      _config.windowConfiguration.height, 
+      _config.windowConfiguration.width,
+      _config.windowConfiguration.height,
       _config.windowConfiguration.title
     );
 
+    _m_initialized = !_m_initialized;
+
+    return eRESULT::kSuccess;
+  }
+
+  void
+  Hakool::run()
+  {
+    if (!_m_initialized)
+    {
+      return;
+    }
+
+    while (_m_pWindow->isOpen())
+    {
+      _m_pWindow->update();
+    }
+
+    return;
+  }
+  
+  void 
+  Hakool::_onPrepare()
+  {
     return;
   }
 

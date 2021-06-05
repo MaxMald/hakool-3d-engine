@@ -65,10 +65,17 @@ int
 main()
 { 
   HakoolConfiguration engineConfig;
-  engineConfig.windowConfiguration.width  = 256;
-  engineConfig.windowConfiguration.height = 256;
+  engineConfig.windowConfiguration.title = "Kalebio Window";
+  engineConfig.windowConfiguration.width  = 512;
+  engineConfig.windowConfiguration.height = 512;
 
-  Hakool::Start(engineConfig);
+  Hakool::Start();
+  
+  Hakool* pHakool = pHakool->GetEngine();
+  pHakool->init(engineConfig);
+  pHakool->run();
+
+  Hakool::Shutdown();
 
   return 0;
 }

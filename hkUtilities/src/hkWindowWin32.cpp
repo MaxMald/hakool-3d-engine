@@ -6,7 +6,8 @@ namespace hk
 
   WindowWin32::WindowWin32():
     _m_callback(NULL),
-    _m_winHandler(NULL)
+    _m_winHandler(NULL),
+    _m_toClose(false)
   {
     return;
   }
@@ -65,6 +66,21 @@ namespace hk
   void 
   WindowWin32::close()
   {
+    if (!_m_callback)
+    {
+      if (_m_winHandler)
+      {
+        DestroyWindow(_m_winHandler);
+        _m_winHandler = NULL;
+      }
+
+      UnregisterClassA(WindowWin32::_WINDOW_NAME.c_str(), GetModuleHandleW(NULL));
+    }
+    else
+    {
+      SetWindowLongPtrA(_m_winHandler, GWLP_WNDPROC, _m_callback);
+    }
+
     return;
   }
 
@@ -97,22 +113,32 @@ namespace hk
     return;
   }
 
+  bool 
+  WindowWin32::isOpen()
+  {
+    return _m_winHandler != NULL;
+  }
+
+  void 
+  WindowWin32::update()
+  {
+    if (_m_winHandler) 
+    {
+      this->_processEvents();
+    }
+
+    if (_m_toClose)
+    {
+      this->close();
+    }
+
+    return;
+  }
+
   void 
   WindowWin32::destroy()
   {
-    if (!_m_callback)
-    {
-      if (_m_winHandler)
-      {
-        DestroyWindow(_m_winHandler);
-      }        
-
-      UnregisterClassA(WindowWin32::_WINDOW_NAME.c_str(), GetModuleHandleW(NULL));        
-    }
-    else
-    {
-      SetWindowLongPtrW(_m_winHandler, GWLP_WNDPROC, _m_callback);
-    }
+    this->close();
 
     return;
   }
@@ -147,6 +173,11 @@ namespace hk
 
     if (_uMsg == WM_CLOSE)
     {
+      if (pWindow32)
+      {
+        pWindow32->_m_toClose = true;
+      }
+
       return 0;
     }
 
@@ -170,6 +201,7 @@ namespace hk
         DispatchMessageW(&message);
       }
     }
+
     return;
   }
 

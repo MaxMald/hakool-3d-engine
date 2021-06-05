@@ -62,6 +62,18 @@ namespace hk
     return;
   }
 
+  bool 
+  Window::isOpen()
+  {
+    return false;
+  }
+
+  void 
+  Window::update()
+  {
+    return;
+  }
+
   void 
   Window::destroy()
   {

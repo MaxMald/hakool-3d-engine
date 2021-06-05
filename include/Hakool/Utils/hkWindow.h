@@ -65,10 +65,24 @@ namespace hk
     /**
     * Set the title of this window.
     * 
-    * @para _title Window's title.
+    * @param _title Window's title.
     */
     virtual void
     setTitle(const String& _title);
+
+    /**
+    * Indicates if the window is open.
+    * 
+    * @return True if the window is open.
+    */
+    virtual bool
+    isOpen();
+
+    /**
+    * Dispatch messages.
+    */
+    virtual void
+    update();
 
     /**
     * Destroy this window and release its resources.

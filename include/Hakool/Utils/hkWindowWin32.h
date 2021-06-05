@@ -36,13 +36,13 @@ namespace hk
       const uint32& _width,
       const uint32& _height,
       const String& _title
-    );
+    ) override;
 
     /**
     * Close Window.
     */
     virtual void
-    close();
+    close() override;
 
     /**
     * Set the size of the rendering region of the window (pixels).
@@ -51,7 +51,7 @@ namespace hk
     * @param _heiht The height in pixels.
     */
     virtual void
-    setSize(const uint32& _width, const uint32& _height);
+    setSize(const uint32& _width, const uint32& _height) override;
 
     /**
     * Set the size of the rendering region of the window (pixels).
@@ -60,7 +60,7 @@ namespace hk
     * @param _heiht The height in pixels.
     */
     virtual void
-    setSize(const Vector2u& _v2);
+    setSize(const Vector2u& _v2) override;
 
     /**
     * Set the title of this window.
@@ -68,7 +68,21 @@ namespace hk
     * @para _title Window's title.
     */
     virtual void
-    setTitle(const String& _title);
+    setTitle(const String& _title) override;
+
+    /**
+    * Indicates if the window is open.
+    *
+    * @return True if the window is open.
+    */
+    virtual bool
+    isOpen() override;
+
+    /**
+    * Dispatch messages.
+    */
+    virtual void
+    update() override;
 
     /**
     * 
@@ -121,5 +135,11 @@ namespace hk
     */
     LONG_PTR 
     _m_callback;
+
+    /**
+    * Indicates if the window is going to be closed.
+    */
+    bool
+    _m_toClose;
   };
 }

@@ -1,5 +1,6 @@
 #pragma once
 
+#include <Hakool\Utils\hkUtilitiesUtilities.h>
 #include <Hakool\Core\hkCorePrerequisites.h>
 
 namespace hk
@@ -17,13 +18,10 @@ namespace hk
   {
   public:
     /**
-    * Starts the Hakool engine.
-    * 
-    * @param _config Configuration object that describes the properties of the
-    * Hakool engine.
+    * Starts the Hakool engine.    
     */
     static void
-    Start(HakoolConfiguration& _config);
+    Start();
 
     /**
     * Safely close and destroy the engine and all its systems.
@@ -39,12 +37,41 @@ namespace hk
     static Hakool*&
     GetEngine();
 
+    /**
+    * Initialize the engine.
+    * 
+    * @param _config Configuration object that describes the properties of the
+    * Hakool engine.
+    * 
+    * @return Operation result.
+    */
+    eRESULT
+    init(HakoolConfiguration& _config);
+
+    /**
+    * Run the game engine loop. 
+    */
+    void
+    run();
+
   private:
+
+    /**
+    * Get the Hakool singleton.
+    */
+    static Hakool*&
+    _Singleton();
+
+    /**
+    * Indicates if Hakool singleton has been started.
+    */
+    static bool&
+    _IsReady();
 
     /**
     * Private constructor.
     */
-    Hakool() = default;
+    Hakool();
 
     /**
     * Private destructor.
@@ -70,12 +97,9 @@ namespace hk
 
     /**
     * Prepare and initialize the engine with all its system.
-    * 
-    * @param _config Configuration object that describes the properties of the
-    * engine when initialized.
     */
     void
-    _onPrepare(HakoolConfiguration& _config);
+    _onPrepare();
 
     /**
     * Safely close and destroy all the engine with all its systems.
@@ -87,19 +111,7 @@ namespace hk
     * Safely destroys the Hakool engine.
     */
     void
-    _destroy();
-
-    /**
-    * Get the Hakool singleton.
-    */
-    static Hakool*&
-    _Singleton();
-
-    /**
-    * Indicates if Hakool singleton has been started.
-    */
-    static bool&
-    _IsReady();
+    _destroy();    
 
     /**
     * Pointer to the graphic system.
@@ -118,5 +130,11 @@ namespace hk
     */
     Logger* 
     _m_pLogger;
+
+    /**
+    * Indicates if the engine has been initialized.
+    */
+    bool
+    _m_initialized;
   };
 }
