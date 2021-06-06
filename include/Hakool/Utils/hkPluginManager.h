@@ -15,8 +15,14 @@ namespace hk
   {
   public:
 
+    /**
+    * Constructor.
+    */
     PluginManager();
 
+    /**
+    * Destructor.
+    */
     ~PluginManager();
 
     /**

@@ -1,5 +1,6 @@
 #include <Hakool\Utils\hkWindowFactory.h>
 #include <Hakool\Utils\hkWindow.h>
+#include <Hakool\Utils\hkIPlugin.h>
 
 #include <Hakool\hakool.h>
 #include <Hakool\Utils\hkLoggerConsole.h>
@@ -42,7 +43,10 @@ namespace hk
   }
 
   Hakool::Hakool():
-    _m_initialized(false)
+    _m_initialized(false),
+    _m_pGraphicComponent(nullptr),
+    _m_pLogger(nullptr),
+    _m_pWindow(nullptr)
   {
     return;
   }
@@ -60,8 +64,46 @@ namespace hk
       Logger::Prepare(new LoggerConsole());
     }
 
-    _m_pWindow = WindowFactory::GetWindow();
-    _m_pWindow->init(_config.windowConfiguration);
+    _m_pWindow = WindowFactory::GetWindow();    
+    eRESULT result = _m_pWindow->init(_config.windowConfiguration);
+    if (result != eRESULT::kSuccess)
+    {
+      Logger::GetReference().error("Couldn't initialize the window.");
+      return result;
+    }
+
+    if (_config.graphicsConfiguration.graphicInterface == eGRAPHIC_INTERFACE::kOpenGL)
+    {
+      result = _m_pluginManager.connectPlugin
+      (
+        "GraphicsDLL",
+        "hkGraphicsOpenGL" + String(HK_DYN_LIB_SUFIX),
+        "createGraphicComponentOpenGLPlugin",
+        "destroyGraphicComponentOpenGLPlugin"
+      );
+
+      if (result != eRESULT::kSuccess)
+      {
+        Logger::GetReference().error("Couldn't initialize the graphics.");
+        return result;
+      }
+
+      if (_m_pluginManager.hasPlugin("GraphicsDLL"))
+      {
+        IPlugin* plugin = _m_pluginManager.getPlugin("GraphicsDLL");
+        _m_pGraphicComponent = reinterpret_cast<GraphicComponent*>(plugin->getData());
+      }
+      else
+      {
+        Logger::GetReference().error("Couldn't find the graphics plug-in.");
+        return eRESULT::kFail;
+      }
+    }
+    else
+    {
+      Logger::GetReference().error("Graphic API not implemented yet.");
+      return eRESULT::kFail;
+    }
 
     _m_initialized = !_m_initialized;
 
@@ -92,15 +134,17 @@ namespace hk
 
   void 
   Hakool::_onShutdown()
-  {
-    Logger::Shutdown();
+  {    
     return;
   }
 
   void
   Hakool::_destroy()
   {
-    // TODO
+    Logger::Shutdown();
+
+
+
     return;
   }
 

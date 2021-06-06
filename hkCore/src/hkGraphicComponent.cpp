@@ -13,6 +13,22 @@ namespace hk
   {
   }
 
+  eRESULT 
+  GraphicComponent::init
+  (
+    Window* _pWindow, 
+    const GraphicsConfiguration& _graphicConfiguration
+  )
+  {
+      return eRESULT::kFail;
+  }
+
+  void 
+  GraphicComponent::destroy()
+  {
+    return;
+  }
+
   eGRAPHIC_INTERFACE 
   GraphicComponent::getGraphicInterfaceId()
   {

@@ -1,6 +1,7 @@
 #pragma once
 
 #include <Hakool\Utils\hkUtilitiesUtilities.h>
+#include <Hakool\Utils\hkPluginManager.h>
 #include <Hakool\Core\hkCorePrerequisites.h>
 
 namespace hk
@@ -130,6 +131,12 @@ namespace hk
     */
     Logger* 
     _m_pLogger;
+
+    /**
+    * Plug-in manager.
+    */
+    PluginManager
+    _m_pluginManager;
 
     /**
     * Indicates if the engine has been initialized.

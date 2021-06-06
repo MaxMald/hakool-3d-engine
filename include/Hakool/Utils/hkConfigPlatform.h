@@ -197,3 +197,9 @@
 # define _CRT_SECURE_NO_WARNINGS
 # pragma warning(disable : 4251)
 #endif
+
+#if HK_DEBUG_MODE
+#define  HK_DYN_LIB_SUFIX "_d.dll"
+#else
+#define  HK_DYN_LIB_SUFIX ".dll"
+#endif

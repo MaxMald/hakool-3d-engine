@@ -13,6 +13,7 @@
 using hk::Hakool;
 using hk::HakoolConfiguration;
 using hk::eGRAPHIC_INTERFACE;
+using hk::eRESULT;
 using hk::Color;
 
 using std::cout;
@@ -86,14 +87,18 @@ main()
   engineConfig.graphicsConfiguration.backgroundColor = Color::RED;
 
   /***************************************************************************/
-  /* START APPLICATION                                                       */
+  /* APPLICATION                                                             */
   /***************************************************************************/
 
-  Hakool::Start();
-  
-  Hakool* pHakool = pHakool->GetEngine();
-  pHakool->init(engineConfig);
-  pHakool->run();
+
+  Hakool::Start();  
+
+  Hakool* pHakool = pHakool->GetEngine();  
+
+  if (pHakool->init(engineConfig) == eRESULT::kSuccess)
+  {
+    pHakool->run();
+  }
 
   Hakool::Shutdown();
 

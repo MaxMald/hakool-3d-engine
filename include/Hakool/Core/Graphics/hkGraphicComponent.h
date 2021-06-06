@@ -5,6 +5,7 @@
 
 namespace hk
 {
+  class Window;
   class Hakool;
 
   /**
@@ -15,10 +16,28 @@ namespace hk
   {
   public:
 
+    /**
+    * Constructor.
+    */
     GraphicComponent();
 
+    /**
+    * Destructor.
+    */
     virtual
     ~GraphicComponent();
+
+    /**
+    * Initialize the graphic component.
+    */
+    virtual eRESULT
+    init(Window* _pWindow, const GraphicsConfiguration& _graphicConfiguration);
+
+    /**
+    * Shutdown the graphic component and release its resources.
+    */
+    virtual void
+    destroy();
 
     /**
     * Get the id that indicates the graphic API been used by this 
