@@ -24,6 +24,12 @@ namespace hk
   }
 
   void 
+  GraphicComponent::update()
+  {
+    return;
+  }
+
+  void 
   GraphicComponent::destroy()
   {
     return;

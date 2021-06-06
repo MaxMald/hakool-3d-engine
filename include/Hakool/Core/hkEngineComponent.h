@@ -15,8 +15,14 @@ namespace hk
   {
   public:
 
+    /**
+    * Constructor.
+    */
     EngineComponent(const eENGINE_COMPONENT& _id);
 
+    /**
+    * Destructor.
+    */
     virtual
     ~EngineComponent();
 

@@ -1,10 +1,11 @@
 #include <Hakool\Utils\hkWindowFactory.h>
 #include <Hakool\Utils\hkWindow.h>
 #include <Hakool\Utils\hkIPlugin.h>
+#include <Hakool\Utils\hkLoggerConsole.h>
 
 #include <Hakool\hakool.h>
-#include <Hakool\Utils\hkLoggerConsole.h>
 #include <Hakool\Core\hkCoreUtilities.h>
+#include <Hakool\Core\Graphics\hkGraphicComponent.h>
 
 namespace hk
 {
@@ -84,7 +85,7 @@ namespace hk
 
       if (result != eRESULT::kSuccess)
       {
-        Logger::GetReference().error("Couldn't initialize the graphics.");
+        Logger::GetReference().error("Couldn't connect to the graphics library.");
         return result;
       }
 
@@ -92,6 +93,13 @@ namespace hk
       {
         IPlugin* plugin = _m_pluginManager.getPlugin("GraphicsDLL");
         _m_pGraphicComponent = reinterpret_cast<GraphicComponent*>(plugin->getData());
+        
+        result = _m_pGraphicComponent->init(_m_pWindow, _config.graphicsConfiguration);
+        if (result != eRESULT::kSuccess)
+        {
+          Logger::GetReference().error("Couldn't initialize the graphics.");
+          return result;
+        }
       }
       else
       {
@@ -121,6 +129,7 @@ namespace hk
     while (_m_pWindow->isOpen())
     {
       _m_pWindow->update();
+      _m_pGraphicComponent->update();
     }
 
     return;

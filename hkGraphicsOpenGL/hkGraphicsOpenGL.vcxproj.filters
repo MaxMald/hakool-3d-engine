@@ -24,6 +24,9 @@
     <ClCompile Include="src\hkGraphicsOpenGLPlugin.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="src\hkContextOpenGL.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\include\Hakool\GraphicsOpenGL\hkGraphicComponentOpenGL.h">
@@ -36,6 +39,12 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="..\include\Hakool\GraphicsOpenGL\hkGraphicsOpenGLPlugin.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\Hakool\GraphicsOpenGL\gl_lite.h">
+      <Filter>Header Files\config</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\Hakool\GraphicsOpenGL\hkContextOpenGL.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

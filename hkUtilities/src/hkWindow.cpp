@@ -57,6 +57,12 @@ namespace hk
     return;
   }
 
+  HANDLER 
+  Window::getWindowHandler()
+  {
+      return HANDLER();
+  }
+
   bool 
   Window::isOpen()
   {

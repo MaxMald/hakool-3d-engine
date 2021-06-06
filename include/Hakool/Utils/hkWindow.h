@@ -2,6 +2,7 @@
 
 #include <Hakool\Utils\hkUtilsPrerequisites.h>
 #include <Hakool\Utils\hkUtilitiesUtilities.h>
+#include <Hakool\Utils\hkConfigWindow.h>
 #include <Hakool\Utils\hkVector2.h>
 
 namespace hk
@@ -64,6 +65,14 @@ namespace hk
     */
     virtual void
     setTitle(const String& _title);
+
+    /**
+    * Get the window system handler.
+    * 
+    * @return Handler.
+    */
+    virtual HANDLER
+    getWindowHandler();
 
     /**
     * Indicates if the window is open.

@@ -1,7 +1,6 @@
 #pragma once
 
 #include <Hakool\Utils\hkWindow.h>
-#include <Hakool\Utils\hkConfigWindow.h>
 
 namespace hk
 {
@@ -78,6 +77,14 @@ namespace hk
     */
     virtual void
     update() override;
+
+    /**
+    * Get the window system handler.
+    *
+    * @return Handler.
+    */
+    virtual HANDLER
+    getWindowHandler() override;
 
     /**
     * Closes the window if it exists and release its resources.

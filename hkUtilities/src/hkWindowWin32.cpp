@@ -125,7 +125,13 @@ namespace hk
     return;
   }
 
-  void 
+  HANDLER 
+  WindowWin32::getWindowHandler()
+  {
+      return _m_winHandler;
+  }
+
+  void
   WindowWin32::destroy()
   {
     this->close();

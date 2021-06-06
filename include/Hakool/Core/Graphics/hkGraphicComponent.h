@@ -29,9 +29,20 @@ namespace hk
 
     /**
     * Initialize the graphic component.
+    * 
+    * @param _pWindow Pointer to the application window.
+    * @param _graphicConfiguration Configuration object.
+    * 
+    * @return Operation result.
     */
     virtual eRESULT
     init(Window* _pWindow, const GraphicsConfiguration& _graphicConfiguration);
+
+    /**
+    * Called every frame.
+    */
+    virtual void
+    update();
 
     /**
     * Shutdown the graphic component and release its resources.

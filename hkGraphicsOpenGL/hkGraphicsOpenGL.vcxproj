@@ -106,7 +106,7 @@
       <SubSystem>NotSet</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalLibraryDirectories>$(SolutionDir)lib\$(Configuration)\$(PlatformTarget)\;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>hkUtilities_d.lib;hkCore_d.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>hkUtilities_d.lib;hkCore_d.lib;%(AdditionalDependencies);opengl32.lib</AdditionalDependencies>
       <ImportLibrary>$(SolutionDir)lib\$(Configuration)\$(PlatformTarget)\$(TargetName).lib</ImportLibrary>
     </Link>
   </ItemDefinitionGroup>
@@ -128,7 +128,7 @@
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalLibraryDirectories>$(SolutionDir)lib\$(Configuration)\$(PlatformTarget)\;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>hkUtilities.lib;hkCore.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>hkUtilities.lib;hkCore.lib;%(AdditionalDependencies);opengl32.lib</AdditionalDependencies>
       <ImportLibrary>$(SolutionDir)lib\$(Configuration)\$(PlatformTarget)\$(TargetName).lib</ImportLibrary>
     </Link>
   </ItemDefinitionGroup>
@@ -146,7 +146,7 @@
       <SubSystem>NotSet</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalLibraryDirectories>$(SolutionDir)lib\$(Configuration)\$(PlatformTarget)\;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>hkUtilities_d.lib;hkCore_d.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>hkUtilities_d.lib;hkCore_d.lib;%(AdditionalDependencies);opengl32.lib</AdditionalDependencies>
       <ImportLibrary>$(SolutionDir)lib\$(Configuration)\$(PlatformTarget)\$(TargetName).lib</ImportLibrary>
     </Link>
   </ItemDefinitionGroup>
@@ -168,16 +168,19 @@
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalLibraryDirectories>$(SolutionDir)lib\$(Configuration)\$(PlatformTarget)\;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>hkUtilities.lib;hkCore.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>hkUtilities.lib;hkCore.lib;%(AdditionalDependencies);opengl32.lib</AdditionalDependencies>
       <ImportLibrary>$(SolutionDir)lib\$(Configuration)\$(PlatformTarget)\$(TargetName).lib</ImportLibrary>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="src\hkContextOpenGL.cpp" />
     <ClCompile Include="src\hkGraphicComponentOpenGL.cpp" />
     <ClCompile Include="src\hkGraphicsOpenGLPlugin.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\include\Hakool\GraphicsOpenGL\hkConfigGraphicsOpenGL.h" />
+    <ClInclude Include="..\include\Hakool\GraphicsOpenGL\gl_lite.h" />
+    <ClInclude Include="..\include\Hakool\GraphicsOpenGL\hkContextOpenGL.h" />
     <ClInclude Include="..\include\Hakool\GraphicsOpenGL\hkGraphicComponentOpenGL.h" />
     <ClInclude Include="..\include\Hakool\GraphicsOpenGL\hkGraphicsOpenGLPlugin.h" />
     <ClInclude Include="..\include\Hakool\GraphicsOpenGL\hkGraphicsOpenGLPrerequisites.h" />

@@ -177,6 +177,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\include\Hakool\Core\Graphics\hkGraphicComponent.h" />
+    <ClInclude Include="..\include\Hakool\Core\Graphics\hkIContext.h" />
     <ClInclude Include="..\include\Hakool\Core\hkConfigCore.h" />
     <ClInclude Include="..\include\Hakool\Core\hkCorePrerequisites.h" />
     <ClInclude Include="..\include\Hakool\Core\hkCoreUtilities.h" />

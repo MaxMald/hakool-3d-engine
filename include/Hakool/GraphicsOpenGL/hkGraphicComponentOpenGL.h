@@ -1,20 +1,97 @@
 #pragma once
 
+#include <Hakool\Utils\hkColor.h>
+
 #include <Hakool\GraphicsOpenGL\hkGraphicsOpenGLPrerequisites.h>
 #include <Hakool\Core\Graphics\hkGraphicComponent.h>
 
 namespace hk
 {
+  class Window;
+  class ContextOpenGL;
+
+  /**
+  * OpenGL GraphicComponent implementation.
+  */
   class HK_GRAPHICS_OPENGL_EXPORT GraphicComponentOpenGL :
     public GraphicComponent
   {
   public:
 
+    /**
+    * Constructor.
+    */
     GraphicComponentOpenGL();
 
+    /**
+    * Destructor.
+    */
     ~GraphicComponentOpenGL();
 
+    /**
+    * Initialize the graphic component.
+    *
+    * @param _pWindow Pointer to the application window.
+    * @param _graphicConfiguration Configuration object.
+    *
+    * @return Operation result.
+    */
+    virtual eRESULT
+    init
+    (
+      Window* _pWindow, 
+      const GraphicsConfiguration& _graphicConfiguration
+    ) override;
+
+    /**
+    * Draws on screen.
+    */
+    virtual void
+    update() override;
+
+    /**
+    * Shutdown the graphic component and release its resources.
+    */
+    virtual void
+    destroy() override;
+
+    /**
+    * Get the id that indicates the graphic API been used by this
+    * GraphicComponent.
+    */
     virtual eGRAPHIC_INTERFACE
     getGraphicInterfaceId() override;
+
+    /**
+    * Pointer to the window.
+    */
+    Window*
+    _m_pWindow;
+
+    /**
+    * Pointer to the context of the OpenGL instance.
+    */
+    ContextOpenGL*
+    _m_pContextOpenGL;
+
+    /**
+    * Indicates if the graphic component is ready.
+    */
+    bool
+    _m_isReady;
+
+  private:
+
+    /**
+    * Draw on screen.
+    */
+    void
+    _draw();
+
+    /**
+    * Screen clear color.
+    */
+    Color
+    _m_clearColor;    
   };
 }
