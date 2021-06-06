@@ -93,6 +93,54 @@ namespace hk
     Color&
     set(const float& _r, const float& _g, const float& _b, const float& _a);
 
+    /**
+    * Red color.
+    */
+    static const Color
+    RED;
+
+    /**
+    * Black color.
+    */
+    static const Color
+    BLACK;
+
+    /**
+    * Green color.
+    */
+    static const Color
+    GREEN;
+
+    /**
+    * Blue color.
+    */
+    static const Color
+    BLUE;
+
+    /**
+    * White color.
+    */
+    static const Color
+    WHITE;
+
+    /**
+    * Cyan color.
+    */
+    static const Color
+    CYAN;
+
+    /**
+    * Magenta color.
+    */
+    static const Color
+    MAGENTA;
+
+    /**
+    * Yellow color.
+    */
+    static const Color
+    YELLOW;
+
     union 
     {      
       float m[4];

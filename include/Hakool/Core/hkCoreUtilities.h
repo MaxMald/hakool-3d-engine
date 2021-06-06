@@ -1,6 +1,8 @@
 #pragma once
 
 #include <Hakool\Utils\hkUtilitiesUtilities.h>
+#include <Hakool\Utils\hkColor.h>
+
 #include <Hakool\Core\hkCorePrerequisites.h>
 
 namespace hk
@@ -44,7 +46,8 @@ namespace hk
   public:
 
     GraphicsConfiguration() :
-      graphicInterface(eGRAPHIC_INTERFACE::kUndefined)
+      graphicInterface(eGRAPHIC_INTERFACE::kUndefined),
+      backgroundColor()
     {
       return;
     }
@@ -54,6 +57,13 @@ namespace hk
     */
     eGRAPHIC_INTERFACE
     graphicInterface;
+
+    /**
+    * Defines the background color of the screen. This is the color used when
+    * the canvas is been cleared from the previous drawing.
+    */
+    Color
+    backgroundColor;
   };
 
   /**

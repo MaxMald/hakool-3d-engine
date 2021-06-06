@@ -1,6 +1,8 @@
 #include <Hakool\hakool.h>
 #include <Hakool\Core\hkCoreUtilities.h>
 
+#include <Hakool\Utils\hkColor.h>
+
 #include <Hakool\Utils\hkMatrix3.h>
 #include <Hakool\Utils\hkMatrix4.h>
 
@@ -11,6 +13,7 @@
 using hk::Hakool;
 using hk::HakoolConfiguration;
 using hk::eGRAPHIC_INTERFACE;
+using hk::Color;
 
 using std::cout;
 using std::cin;
@@ -80,6 +83,7 @@ main()
   // Graphics Configuration.
 
   engineConfig.graphicsConfiguration.graphicInterface = eGRAPHIC_INTERFACE::kOpenGL;
+  engineConfig.graphicsConfiguration.backgroundColor = Color::RED;
 
   /***************************************************************************/
   /* START APPLICATION                                                       */
