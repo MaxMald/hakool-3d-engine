@@ -24,19 +24,14 @@ namespace hk
     virtual ~Window();
 
     /**
-    * Creates a new window with the size and title specified.
+    * Creates a new window with the specified configuration.
     *
-    * @param _width The width of the window.
-    * @param _height The height of the window.
-    * @param _title The title of the window.
+    * @param _config Window preferred properties.
+    * 
+    * @returns Operation result.
     */
     virtual eRESULT
-    init
-    (
-      const uint32& _width,
-      const uint32& _height,
-      const String& _title
-    );
+    init(const WindowConfiguration& _config);
 
     /**
     * Close Window.

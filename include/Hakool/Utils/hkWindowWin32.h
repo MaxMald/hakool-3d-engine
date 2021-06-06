@@ -6,7 +6,7 @@
 namespace hk
 {
   /**
-  * TODO
+  * Windows 32 implementation for the window.
   */
   class HK_UTILITY_EXPORT WindowWin32 :
     public Window
@@ -14,29 +14,24 @@ namespace hk
   public:
 
     /**
-    * 
+    * Constructor.
     */
     WindowWin32();
 
     /**
-    * 
+    * Closes the window if it is open and release its resources.
     */
     virtual ~WindowWin32();
 
     /**
     * Creates a new window with the size and title specified.
     *
-    * @param _width The width of the window.
-    * @param _height The height of the window.
-    * @param _title The title of the window.
+    * @param _config Window preferred properties.
+    *
+    * @returns Operation result.
     */
     virtual eRESULT
-    init
-    (
-      const uint32& _width,
-      const uint32& _height,
-      const String& _title
-    ) override;
+    init(const WindowConfiguration& _config) override;
 
     /**
     * Close Window.
@@ -85,7 +80,7 @@ namespace hk
     update() override;
 
     /**
-    * 
+    * Closes the window if it exists and release its resources.
     */
     virtual void
     destroy() override;
@@ -99,7 +94,7 @@ namespace hk
   protected:
 
     /**
-    * 
+    * Process each window events.
     */
     virtual void
     _processEvents();
@@ -107,13 +102,13 @@ namespace hk
   private:
 
     /**
-    * 
+    * Process a given event from the window.
     */
     void
     _processEvent(UINT _uMsg, WPARAM _wParam, LPARAM _lParam);
 
     /**
-    * 
+    * Register a window.
     */
     void
     _registerWindowClass();

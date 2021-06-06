@@ -102,6 +102,9 @@
     <ClInclude Include="..\include\Hakool\Utils\hkWindowFactory.h">
       <Filter>Header Files\window</Filter>
     </ClInclude>
+    <ClInclude Include="..\include\Hakool\Utils\hkColor.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="..\include\Hakool\Utils\hkModule.inl">
@@ -138,6 +141,9 @@
     </ClCompile>
     <ClCompile Include="src\hkWindowFactory.cpp">
       <Filter>Source Files\window</Filter>
+    </ClCompile>
+    <ClCompile Include="src\hkColor.cpp">
+      <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

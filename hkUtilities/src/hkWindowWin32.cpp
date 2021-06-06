@@ -19,24 +19,19 @@ namespace hk
   }
 
   eRESULT 
-  WindowWin32::init
-  (
-    const uint32& _width, 
-    const uint32& _height, 
-    const String& _title
-  )
+  WindowWin32::init(const WindowConfiguration& _config)
   {
     _registerWindowClass();
 
     _m_winHandler = CreateWindowA
     (
       WindowWin32::_WINDOW_NAME.c_str(),
-      _title.c_str(),
+      _config.title.c_str(),
       WS_OVERLAPPEDWINDOW,
       CW_USEDEFAULT,
       CW_USEDEFAULT,
-      static_cast<int32>(_width),
-      static_cast<int32>(_height),
+      static_cast<int32>(_config.width),
+      static_cast<int32>(_config.height),
       NULL,
       NULL,
       GetModuleHandle(NULL),
@@ -48,17 +43,12 @@ namespace hk
       return eRESULT::kFail;
     }
 
-    int32 result = ShowWindow(this->_m_winHandler, SW_SHOWNORMAL);
+    ShowWindow(this->_m_winHandler, SW_SHOWNORMAL);
+    UpdateWindow(this->_m_winHandler);
 
-    result = UpdateWindow(this->_m_winHandler);
-    if (result == 0)
-    {
-      return eRESULT::kFail;
-    }
-
-    this->_m_size.x = _width;
-    this->_m_size.y = _height;
-    this->_m_title = _title;
+    this->_m_size.x = _config.width;
+    this->_m_size.y = _config.height;
+    this->_m_title  = _config.title;
 
     return eRESULT::kSuccess;
   }
@@ -224,7 +214,8 @@ namespace hk
         break;
 
       case WM_CLOSE:
-        // TODO.
+        this->close();
+
         break;
 
       case WM_SIZE:

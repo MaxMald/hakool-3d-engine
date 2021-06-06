@@ -17,16 +17,11 @@ namespace hk
   }
 
   eRESULT 
-  Window::init
-  (
-    const uint32& _width, 
-    const uint32& _height, 
-    const String& _title
-  )
+  Window::init(const WindowConfiguration& _config)
   {
-    this->_m_size.x = _width;
-    this->_m_size.y = _height;
-    this->_m_title = _title;
+    this->_m_size.x = _config.width;
+    this->_m_size.y = _config.height;
+    this->_m_title  = _config.title;
 
     return eRESULT::kSuccess;
   }

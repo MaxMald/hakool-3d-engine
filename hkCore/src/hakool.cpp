@@ -61,12 +61,7 @@ namespace hk
     }
 
     _m_pWindow = WindowFactory::GetWindow();
-    _m_pWindow->init
-    (
-      _config.windowConfiguration.width,
-      _config.windowConfiguration.height,
-      _config.windowConfiguration.title
-    );
+    _m_pWindow->init(_config.windowConfiguration);
 
     _m_initialized = !_m_initialized;
 

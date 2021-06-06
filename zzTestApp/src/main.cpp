@@ -10,6 +10,7 @@
 
 using hk::Hakool;
 using hk::HakoolConfiguration;
+using hk::eGRAPHIC_INTERFACE;
 
 using std::cout;
 using std::cin;
@@ -64,10 +65,25 @@ printValue(const String& _label, float _v)
 int 
 main()
 { 
+  /***************************************************************************/
+  /* ENGINE CONFIGURATION                                                    */
+  /***************************************************************************/
+
   HakoolConfiguration engineConfig;
+  
+  // Window Configuration
+
   engineConfig.windowConfiguration.title = "Kalebio Window";
-  engineConfig.windowConfiguration.width  = 512;
-  engineConfig.windowConfiguration.height = 512;
+  engineConfig.windowConfiguration.width  = 1280;
+  engineConfig.windowConfiguration.height = 720;
+
+  // Graphics Configuration.
+
+  engineConfig.graphicsConfiguration.graphicInterface = eGRAPHIC_INTERFACE::kOpenGL;
+
+  /***************************************************************************/
+  /* START APPLICATION                                                       */
+  /***************************************************************************/
 
   Hakool::Start();
   
