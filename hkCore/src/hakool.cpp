@@ -18,8 +18,45 @@ namespace hk
       Hakool::_Singleton()->_onPrepare();
       Hakool::_IsReady() = true;
     }
+    else
+    {
+      Logger::Error
+      (
+        "You cannot start a Hakool application if another one has been created."
+      );
+    }
 
     return;
+  }
+
+  eRESULT 
+  Hakool::Init(HakoolConfiguration& _config)
+  {
+    if (!Hakool::_IsReady())
+    {
+      Logger::Error
+      (
+        "Hakool module has not been started. Did you forget to call 'Start'?"
+      );
+      return eRESULT::kFail;
+    }
+
+    return Hakool::_Singleton()->_init(_config);
+  }
+
+  void 
+  Hakool::Run()
+  {
+    if (!Hakool::_IsReady())
+    {
+      Logger::Error
+      (
+        "Hakool module has not been started. Did you forget to call 'Start'?"
+      );
+      return;
+    }
+
+    return Hakool::_Singleton()->_run();
   }
   
   void 
@@ -44,7 +81,8 @@ namespace hk
   }
 
   Hakool::Hakool():
-    _m_initialized(false),
+    _m_isInitialized(false),
+    _m_isRunning(false),
     _m_pGraphicComponent(nullptr),
     _m_pLogger(nullptr),
     _m_pWindow(nullptr)
@@ -53,25 +91,31 @@ namespace hk
   }
 
   eRESULT
-  Hakool::init(HakoolConfiguration& _config)
+  Hakool::_init(HakoolConfiguration& _config)
   {
-    if (_m_initialized)
+    if (_m_isInitialized)
     {
+      Logger::Error("Hakool is already initialized");
       return eRESULT::kFail;
     }
 
-    if (!Logger::IsReady())
-    {
-      Logger::Prepare(new LoggerConsole());
-    }
+    // Logger
+
+    Logger::Prepare(new LoggerConsole());
+
+    // Application's window
 
     _m_pWindow = WindowFactory::GetWindow();    
     eRESULT result = _m_pWindow->init(_config.windowConfiguration);
     if (result != eRESULT::kSuccess)
     {
-      Logger::GetReference().error("Couldn't initialize the window.");
+      Logger::Error("Couldn't initialize the window.");
+      _clean();
+
       return result;
     }
+
+    // GraphicComponent
 
     if (_config.graphicsConfiguration.graphicInterface == eGRAPHIC_INTERFACE::kOpenGL)
     {
@@ -86,6 +130,8 @@ namespace hk
       if (result != eRESULT::kSuccess)
       {
         Logger::GetReference().error("Couldn't connect to the graphics library.");
+        _clean();
+
         return result;
       }
 
@@ -98,39 +144,65 @@ namespace hk
         if (result != eRESULT::kSuccess)
         {
           Logger::GetReference().error("Couldn't initialize the graphics.");
+          _clean();
+
           return result;
         }
       }
       else
       {
         Logger::GetReference().error("Couldn't find the graphics plug-in.");
+        _clean();
+
         return eRESULT::kFail;
       }
     }
     else
     {
       Logger::GetReference().error("Graphic API not implemented yet.");
+      _clean();
+
       return eRESULT::kFail;
     }
 
-    _m_initialized = !_m_initialized;
+    _m_isInitialized = !_m_isInitialized;
 
     return eRESULT::kSuccess;
   }
 
   void
-  Hakool::run()
+  Hakool::_run()
   {
-    if (!_m_initialized)
+    if (!_m_isInitialized)
     {
+      Logger::Error("Hakool has not been initialized yet.");
       return;
     }
 
+    if (_m_isRunning)
+    {
+      Logger::Error("Hakool is already running.");
+      return;
+    }
+
+    _m_isRunning = !_m_isRunning;
+
     while (_m_pWindow->isOpen())
     {
+      // Update stage
+      
       _m_pWindow->update();
       _m_pGraphicComponent->update();
+
+      // Post-update stage
+
+      _m_pWindow->postUpdate();
     }
+
+    _clean();
+
+    _m_isInitialized = !_m_isInitialized;
+    _m_isRunning = !_m_isRunning;
 
     return;
   }
@@ -143,16 +215,28 @@ namespace hk
 
   void 
   Hakool::_onShutdown()
-  {    
+  {
+    _clean();
+    Logger::Shutdown();
+
     return;
   }
 
-  void
-  Hakool::_destroy()
+  void Hakool::_clean()
   {
-    Logger::Shutdown();
+    if (_m_pGraphicComponent != nullptr)
+    {
+      _m_pGraphicComponent->destroy();
+      _m_pGraphicComponent = nullptr;
+    }
 
+    if (_m_pWindow != nullptr)
+    {
+      _m_pWindow->destroy();
+      _m_pWindow = nullptr;
+    }
 
+    _m_pluginManager.closeAll();
 
     return;
   }

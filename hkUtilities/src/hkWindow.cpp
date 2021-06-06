@@ -11,8 +11,7 @@ namespace hk
 
   Window::~Window()
   {
-    this->close();
-
+    this->destroy();
     return;
   }
 
@@ -24,12 +23,6 @@ namespace hk
     this->_m_title  = _config.title;
 
     return eRESULT::kSuccess;
-  }
-
-  void 
-  Window::close()
-  {
-    return;
   }
 
   void 
@@ -71,6 +64,12 @@ namespace hk
 
   void 
   Window::update()
+  {
+    return;
+  }
+
+  void 
+  Window::postUpdate()
   {
     return;
   }

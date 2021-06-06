@@ -8,7 +8,7 @@
 namespace hk
 {
   /**
-  * 
+  * Provides a common interface for all specific-platform window instances.
   */
   class HK_UTILITY_EXPORT Window
   {
@@ -25,7 +25,7 @@ namespace hk
     virtual ~Window();
 
     /**
-    * Creates a new window with the specified configuration.
+    * Creates a new window using the specified configuration.
     *
     * @param _config Window preferred properties.
     * 
@@ -33,12 +33,6 @@ namespace hk
     */
     virtual eRESULT
     init(const WindowConfiguration& _config);
-
-    /**
-    * Close Window.
-    */
-    virtual void
-    close();   
 
     /**
     * Set the size of the rendering region of the window (pixels).
@@ -83,10 +77,16 @@ namespace hk
     isOpen();
 
     /**
-    * Dispatch messages.
+    * Called every frame.
     */
     virtual void
     update();
+
+    /**
+    * Called every frame after the update stage.
+    */
+    virtual void
+    postUpdate();
 
     /**
     * Destroy this window and release its resources.

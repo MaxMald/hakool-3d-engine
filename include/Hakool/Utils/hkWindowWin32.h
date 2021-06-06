@@ -5,7 +5,7 @@
 namespace hk
 {
   /**
-  * Windows 32 implementation for the window.
+  * Windows 32 implementation for the window class.
   */
   class HK_UTILITY_EXPORT WindowWin32 :
     public Window
@@ -31,12 +31,6 @@ namespace hk
     */
     virtual eRESULT
     init(const WindowConfiguration& _config) override;
-
-    /**
-    * Close Window.
-    */
-    virtual void
-    close() override;
 
     /**
     * Set the size of the rendering region of the window (pixels).
@@ -77,6 +71,12 @@ namespace hk
     */
     virtual void
     update() override;
+
+    /**
+    * Called every frame after the update stage.
+    */
+    virtual void
+    postUpdate() override;
 
     /**
     * Get the window system handler.

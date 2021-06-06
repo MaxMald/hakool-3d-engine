@@ -19,10 +19,22 @@ namespace hk
   {
   public:
     /**
-    * Starts the Hakool engine.    
+    * Prepares the Hakool engine.    
     */
     static void
     Start();
+
+    /**
+    * Initialize the Hakool engine with the desire configuration.
+    */
+    static eRESULT
+    Init(HakoolConfiguration& _config);
+
+    /**
+    * Run the application. This will start the game loop.
+    */
+    static void
+    Run();
 
     /**
     * Safely close and destroy the engine and all its systems.
@@ -37,23 +49,6 @@ namespace hk
     */
     static Hakool*&
     GetEngine();
-
-    /**
-    * Initialize the engine.
-    * 
-    * @param _config Configuration object that describes the properties of the
-    * Hakool engine.
-    * 
-    * @return Operation result.
-    */
-    eRESULT
-    init(HakoolConfiguration& _config);
-
-    /**
-    * Run the game engine loop. 
-    */
-    void
-    run();
 
   private:
 
@@ -97,6 +92,23 @@ namespace hk
     operator=(const Hakool&&) = delete;
 
     /**
+    * Initialize the engine.
+    *
+    * @param _config Configuration object that describes the properties of the
+    * Hakool engine.
+    *
+    * @return Operation result.
+    */
+    eRESULT
+    _init(HakoolConfiguration& _config);
+
+    /**
+    * Run the game engine loop.
+    */
+    void
+    _run();
+
+    /**
     * Prepare and initialize the engine with all its system.
     */
     void
@@ -109,10 +121,10 @@ namespace hk
     _onShutdown();
 
     /**
-    * Safely destroys the Hakool engine.
+    * Safely free any resources and references.
     */
     void
-    _destroy();    
+    _clean();
 
     /**
     * Pointer to the graphic system.
@@ -142,6 +154,12 @@ namespace hk
     * Indicates if the engine has been initialized.
     */
     bool
-    _m_initialized;
+    _m_isInitialized;
+
+    /**
+    * Indicates if the engine is running.
+    */
+    bool
+    _m_isRunning;
   };
 }

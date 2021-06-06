@@ -90,14 +90,11 @@ main()
   /* APPLICATION                                                             */
   /***************************************************************************/
 
+  Hakool::Start();
 
-  Hakool::Start();  
-
-  Hakool* pHakool = pHakool->GetEngine();  
-
-  if (pHakool->init(engineConfig) == eRESULT::kSuccess)
+  if (Hakool::Init(engineConfig) == eRESULT::kSuccess)
   {
-    pHakool->run();
+    Hakool::Run();
   }
 
   Hakool::Shutdown();
