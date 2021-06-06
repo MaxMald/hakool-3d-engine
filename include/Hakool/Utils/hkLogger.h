@@ -14,18 +14,16 @@ namespace hk
   {
   public:
 
-    Logger() = default;
-
-    virtual
-    ~Logger() = default;
+    /**
+    * Constructor.
+    */
+    Logger();
 
     /**
-    * Get the logger instance pointer.
-    * 
-    * @returns The logger instance pointer.
+    * Destructor.
     */
-    static Logger*
-    Get();
+    virtual
+    ~Logger();
 
     /**
     * Get the logger instance reference.
@@ -50,6 +48,57 @@ namespace hk
     Prepare(Logger* _pLogger);
 
     /**
+    * Log a message.
+    *
+    * @param _msg Message.
+    */
+    static void
+    Log(const String& _msg);
+
+    /**
+    * Log a message.
+    *
+    * @param _msg Message.
+    * @param _filename The name of the file where the log is called.
+    */
+    static void
+    Log(const String& _msg, const String& _filename);
+
+    /**
+    * Logs a warning message.
+    *
+    * @param _msg Warning message.
+    */
+    static void
+    Warning(const String& _msg);
+
+    /**
+    * Log a warning message.
+    *
+    * @param _msg Warning message.
+    * @param _filename The name of the file where the log is called.
+    */
+    static void
+    Warning(const String& _msg, const String& _filename);
+    
+    /**
+    * Log an error message.
+    *
+    * @param _msg Error message.
+    */
+    static void
+    Error(const String& _msg);
+
+    /**
+    * Log an error message.
+    *
+    * @param _msg Error message.
+    * @param _filename The name of the file where the log is called.
+    */
+    static void
+    Error(const String& _msg, const String& _filename);
+
+    /**
     * Shutdown the logger module.
     */
     static void
@@ -70,7 +119,7 @@ namespace hk
     * @param _msg Message.
     */
     virtual void
-    log(String _msg);
+    log(const String& _msg);
 
     /**
     * Log a message.
@@ -79,7 +128,7 @@ namespace hk
     * @param _filename The name of the file where the log is called.
     */
     virtual void
-    log(String _msg, String _filename);
+    log(const String& _msg, const String& _filename);
 
     /**
     * Logs a warning message.
@@ -87,7 +136,7 @@ namespace hk
     * @param _msg Warning message.
     */
     virtual void
-    warning(String _msg);
+    warning(const String& _msg);
 
     /**
     * Log a warning message.
@@ -96,7 +145,7 @@ namespace hk
     * @param _filename The name of the file where the log is called.
     */
     virtual void
-    warning(String _msg, String _filename);
+    warning(const String& _msg, const String& _filename);
 
     /**
     * Log an error message.
@@ -104,7 +153,7 @@ namespace hk
     * @param _msg Error message.
     */
     virtual void
-    error(String _msg);
+    error(const String& _msg);
 
     /**
     * Log an error message.
@@ -113,7 +162,7 @@ namespace hk
     * @param _filename The name of the file where the log is called.
     */
     virtual void
-    error(String _msg, String _filename);
+    error(const String& _msg, const String& _filename);
 
   protected:
 
@@ -127,9 +176,9 @@ namespace hk
     * Called when the logger is being shutdown.
     */
     virtual void
-    _onShutdown();    
+    _onShutdown();
 
-    Logger(Logger&&) = delete;
+    Logger(Logger&&) = default;
 
     Logger&
     operator=(Logger&&) = delete;
@@ -153,6 +202,12 @@ namespace hk
     * @returns The "isReady" boolean reference.
     */
     static bool&
-    _IsReady();           
+    _IsReady();
+
+    /**
+    * Null logger.
+    */
+    static Logger
+    _NULL;
   };
 }

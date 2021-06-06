@@ -27,37 +27,37 @@ namespace hk
     * Logs a new message.
     */
     void
-    log(String _msg) override;
+    log(const String& _msg) override;
 
     /**
     * Logs a new message.
     */
     void
-    log(String _msg, String _filename) override;
+    log(const String& _msg, const String& _filename) override;
 
     /**
     * Logs a warning message.
     */
     void
-    warning(String _msg) override;
+    warning(const String& _msg) override;
 
     /**
     * Logs a warning message.
     */
     void
-    warning(String _msg, String _filename) override;
+    warning(const String& _msg, const String& _filename) override;
 
     /**
     * Logs an error message.
     */
     void
-    error(String _msg) override;
+    error(const String& _msg) override;
 
     /**
     * Logs an error message.
     */
     void
-    error(String _msg, String _filename) override;
+    error(const String& _msg, const String& _filename) override;
 
   protected:
 

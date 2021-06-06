@@ -4,15 +4,26 @@
 
 namespace hk
 {
-  Logger* 
-  Logger::Get()
+  Logger Logger::_NULL = Logger();
+
+  Logger::Logger()
   {
-    return Logger::_Singleton();
+    return;
+  }
+
+  Logger::~Logger()
+  {
+    return;
   }
 
   Logger&
   Logger::GetReference()
   {
+    if (!Logger::IsReady())
+    {
+      return Logger::_NULL;
+    }
+
     return *Logger::_Singleton();
   }
 
@@ -25,6 +36,7 @@ namespace hk
       Logger::_Singleton()->_onPrepare();
       Logger::_IsReady() = true;
     }
+
     return;
   }
 
@@ -37,10 +49,77 @@ namespace hk
       Logger::_Singleton()->_onPrepare();
       Logger::_IsReady() = true;
     }
+
     return;
   }
 
   void 
+  Logger::Log(const String& _msg)
+  {
+    if (Logger::IsReady()) 
+    {
+      Logger::_Singleton()->log(_msg);
+    }
+
+    return;
+  }
+
+  void 
+  Logger::Log(const String& _msg, const String& _filename)
+  {
+    if (Logger::IsReady()) 
+    {
+      Logger::_Singleton()->log(_msg, _filename);
+    }
+
+    return;
+  }
+
+  void 
+  Logger::Warning(const String& _msg)
+  {
+    if (Logger::IsReady()) 
+    {
+      Logger::_Singleton()->warning(_msg);
+    }
+
+    return;
+  }
+
+  void 
+  Logger::Warning(const String& _msg, const String& _filename)
+  {
+    if (Logger::IsReady()) 
+    {
+      Logger::_Singleton()->warning(_msg, _filename);
+    }
+
+    return;
+  }
+
+  void 
+  Logger::Error(const String& _msg)
+  {
+    if (Logger::IsReady()) 
+    {
+      Logger::_Singleton()->error(_msg);
+    }
+
+    return;
+  }
+
+  void 
+  Logger::Error(const String& _msg, const String& _filename)
+  {
+    if (Logger::IsReady()) 
+    {
+      Logger::_Singleton()->error(_msg, _filename);
+    }
+
+    return;
+  }
+
+  void
   Logger::Shutdown()
   {
     if (Logger::_IsReady())
@@ -61,50 +140,58 @@ namespace hk
   }
 
   void 
-  Logger::log(String _msg)
+  Logger::log(const String& _msg)
   {
+    // Intentionally blank.
     return;
   }
 
   void 
-  Logger::log(String _msg, String _filename)
+  Logger::log(const String& _msg, const String& _filename)
   {
+    // Intentionally blank.
     return;
   }
 
   void 
-  Logger::warning(String _msg)
+  Logger::warning(const String& _msg)
   {
+    // Intentionally blank.
     return;
   }
 
   void 
-  Logger::warning(String _msg, String _filename)
+  Logger::warning(const String& _msg, const String& _filename)
   {
+    // Intentionally blank.
     return;
   }
 
   void 
-  Logger::error(String _msg)
+  Logger::error(const String& _msg)
   {
+    // Intentionally blank.
     return;
   }
 
   void 
-  Logger::error(String _msg, String _filename)
+  Logger::error(const String& _msg, const String& _filename)
   {
+    // Intentionally blank.
     return;
   }
 
   void
   Logger::_onPrepare()
   {
+    // Intentionally blank.
     return;
   }
 
   void
   Logger::_onShutdown()
   {
+    // Intentionally blank.
     return;
   }
 
