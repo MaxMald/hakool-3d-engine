@@ -45,7 +45,7 @@ namespace hk
   }
 
   void 
-  Hakool::Run()
+  Hakool::Run(const String& _sceneKey)
   {
     if (!Hakool::_IsReady())
     {
@@ -56,10 +56,25 @@ namespace hk
       return;
     }
 
-    return Hakool::_Singleton()->_run();
+    return Hakool::_Singleton()->_run(_sceneKey);
   }
   
-  void 
+  eRESULT 
+  Hakool::AddScene(const String& _key, Scene* _pScene)
+  {
+    if (!Hakool::_IsReady())
+    {
+      Logger::Error
+      (
+        "Hakool module has not been started. Did you forget to call 'Start'?"
+      );
+      return eRESULT::kFail;
+    }
+
+    return Hakool::_Singleton()->_addScene(_key, _pScene);
+  }
+
+  void
   Hakool::Shutdown()
   {
     if (Hakool::_IsReady())
@@ -85,7 +100,8 @@ namespace hk
     _m_isRunning(false),
     _m_pGraphicComponent(nullptr),
     _m_pLogger(nullptr),
-    _m_pWindow(nullptr)
+    _m_pWindow(nullptr),
+    _m_sceneManager()
   {
     return;
   }
@@ -171,7 +187,7 @@ namespace hk
   }
 
   void
-  Hakool::_run()
+  Hakool::_run(const String& _sceneKey)
   {
     if (!_m_isInitialized)
     {
@@ -187,11 +203,15 @@ namespace hk
 
     _m_isRunning = !_m_isRunning;
 
+    _m_sceneManager.init(this);
+    _m_sceneManager.setActive(_sceneKey);
+
     while (_m_pWindow->isOpen())
     {
       // Update stage
       
       _m_pWindow->update();
+      _m_sceneManager.update();
       _m_pGraphicComponent->update();
 
       // Post-update stage
@@ -217,6 +237,8 @@ namespace hk
   Hakool::_onShutdown()
   {
     _clean();
+
+    _m_sceneManager.destroy();
     Logger::Shutdown();
 
     return;
@@ -224,6 +246,8 @@ namespace hk
 
   void Hakool::_clean()
   {
+    _m_sceneManager.clear();
+
     if (_m_pGraphicComponent != nullptr)
     {
       _m_pGraphicComponent->destroy();
@@ -239,6 +263,12 @@ namespace hk
     _m_pluginManager.closeAll();
 
     return;
+  }
+
+  eRESULT 
+  Hakool::_addScene(const String& _key, Scene* _pScene)
+  {
+    return this->_m_sceneManager.add(_key, _pScene);
   }
 
   Hakool*& 

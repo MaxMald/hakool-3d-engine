@@ -10,6 +10,8 @@
 #include <Hakool\Utils\hkVector3.h>
 #include <Hakool\Utils\hkVector2.h>
 
+#include "scnCube.h"
+
 using hk::Hakool;
 using hk::HakoolConfiguration;
 using hk::eGRAPHIC_INTERFACE;
@@ -84,7 +86,7 @@ main()
   // Graphics Configuration.
 
   engineConfig.graphicsConfiguration.graphicInterface = eGRAPHIC_INTERFACE::kOpenGL;
-  engineConfig.graphicsConfiguration.backgroundColor = Color::GREEN;
+  engineConfig.graphicsConfiguration.backgroundColor = Color::RED;
 
   /***************************************************************************/
   /* APPLICATION                                                             */
@@ -92,9 +94,11 @@ main()
 
   Hakool::Start();
 
+  Hakool::AddScene("cube", new SceneCube());
+
   if (Hakool::Init(engineConfig) == eRESULT::kSuccess)
   {
-    Hakool::Run();
+    Hakool::Run("cube");
   }
 
   Hakool::Shutdown();

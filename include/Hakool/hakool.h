@@ -2,13 +2,17 @@
 
 #include <Hakool\Utils\hkUtilitiesUtilities.h>
 #include <Hakool\Utils\hkPluginManager.h>
+
 #include <Hakool\Core\hkCorePrerequisites.h>
+#include <Hakool\Core\hkSceneManager.h>
 
 namespace hk
 {
   class Logger;
   class Window;
   class GraphicComponent;
+  class SceneManager;
+  class Scene;
 
   struct HakoolConfiguration;
 
@@ -32,9 +36,26 @@ namespace hk
 
     /**
     * Run the application. This will start the game loop.
+    * 
+    * @param _key The key of the entry scene.
     */
     static void
-    Run();
+    Run(const String& _sceneKey);
+
+    /**
+    * Add a new scene to the application.
+
+    * Returns 'ObjectAlreadyExits' if another scene has the same key; take into
+    * account that the pointer will be deleted.
+    *
+    * @param _key The scene identifier.
+    * @param _pScene The pointer to the scene.
+    *
+    * @returns 'Success' if the scene was added without problems. Returns
+    * 'ObjectAlreadyExists' if there is another scene with the same key.
+    */
+    static eRESULT
+    AddScene(const String& _key, Scene* _pScene);
 
     /**
     * Safely close and destroy the engine and all its systems.
@@ -104,9 +125,11 @@ namespace hk
 
     /**
     * Run the game engine loop.
+    * 
+    * @param _sceneKey The key of the entry scene.
     */
     void
-    _run();
+    _run(const String& _sceneKey);
 
     /**
     * Prepare and initialize the engine with all its system.
@@ -125,6 +148,21 @@ namespace hk
     */
     void
     _clean();
+
+    /**
+    * Add a new scene to the scene manager.
+
+    * Returns 'ObjectAlreadyExits' if another scene has the same key; take into
+    * account that the pointer will be deleted.
+    *
+    * @param _key The scene identifier.
+    * @param _pScene The pointer to the scene.
+    *
+    * @returns 'Success' if the scene was added without problems. Returns
+    * 'ObjectAlreadyExists' if there is another scene with the same key.
+    */
+    eRESULT
+    _addScene(const String & _key, Scene* _pScene);
 
     /**
     * Pointer to the graphic system.
@@ -149,6 +187,12 @@ namespace hk
     */
     PluginManager
     _m_pluginManager;
+
+    /**
+    * Reference to the scene manager.
+    */
+    SceneManager
+    _m_sceneManager;
 
     /**
     * Indicates if the engine has been initialized.
