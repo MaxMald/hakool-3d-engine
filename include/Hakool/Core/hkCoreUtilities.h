@@ -12,6 +12,19 @@ namespace hk
   /***************************************************************************/
 
   /**
+  * Enumerates the different types of shader used  by the Hakool Engine.
+  */
+  enum class HK_CORE_EXPORT eSHADER_TYPE :
+    uchar
+  {
+    kUndefined,
+    kFragment,
+    kVertex,
+    kGeometry,
+    kTesselation
+  };
+
+  /**
   * Enumerates the different types of components (or modular systems) used by
   * the Hakool Engine.
   */
