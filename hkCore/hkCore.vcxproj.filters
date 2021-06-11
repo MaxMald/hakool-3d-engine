@@ -22,6 +22,12 @@
     <Filter Include="Header Files\system">
       <UniqueIdentifier>{e2707290-7aa3-4acc-a08e-5899841ad2da}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\resource">
+      <UniqueIdentifier>{3556dd57-82cc-4022-b9e7-63e902cc3b8d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\resource">
+      <UniqueIdentifier>{91203892-56a6-4281-a838-daf85a798a2d}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\hakool.cpp">
@@ -38,6 +44,12 @@
     </ClCompile>
     <ClCompile Include="src\hkSceneManager.cpp">
       <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\hkResource.cpp">
+      <Filter>Source Files\resource</Filter>
+    </ClCompile>
+    <ClCompile Include="src\hkResourceManager.cpp">
+      <Filter>Source Files\resource</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -67,6 +79,21 @@
     </ClInclude>
     <ClInclude Include="..\include\Hakool\Core\hkSceneManager.h">
       <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\Hakool\Core\Graphics\hkShader.h">
+      <Filter>Header Files\graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\Hakool\Core\Graphics\hkIProgram.h">
+      <Filter>Header Files\graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\Hakool\Core\hkResource.h">
+      <Filter>Header Files\resource</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\Hakool\Core\hkResourceGroup.h">
+      <Filter>Header Files\resource</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\Hakool\Core\hkResourceManager.h">
+      <Filter>Header Files\resource</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

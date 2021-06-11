@@ -132,6 +132,9 @@ namespace hk
 	template<class T, class A = std::deque<T>>
 	using Stack = std::stack<T, A>;
 
+	template<class B, class D>
+	using IsBaseOf = std::is_base_of<B, D>;
+
 	template<class C>
 	using TimePoint = std::chrono::time_point<C>;
 
