@@ -86,7 +86,7 @@ main()
   // Graphics Configuration.
 
   engineConfig.graphicsConfiguration.graphicInterface = eGRAPHIC_INTERFACE::kOpenGL;
-  engineConfig.graphicsConfiguration.backgroundColor = Color::RED;
+  engineConfig.graphicsConfiguration.backgroundColor = Color::BLACK;
 
   /***************************************************************************/
   /* APPLICATION                                                             */

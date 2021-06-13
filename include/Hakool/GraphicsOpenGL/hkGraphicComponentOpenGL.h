@@ -126,6 +126,11 @@ namespace hk
     _m_clearColor;
 
     /**
+    * Array of vertex array objects.
+    */
+    uint32 _m_aVAO[1];
+
+    /**
     * Pointer to the program.
     */
     ProgramOpenGL*

@@ -108,6 +108,8 @@ typedef ptrdiff_t GLsizeiptr;
     GLE(void,      DeleteShader,            GLuint shader) \
     GLE(void,      GetProgramiv,            GLuint shader, GLenum pname, GLint *params) \
     GLE(void,      DeleteProgram,           GLuint program) \
+    GLE(void,      GenVertexArrays,         GLsizei n, GLuint* arrays) \
+    GLE(void,      BindVertexArray,         GLuint array) \
     /* end */
 
 #define GLE(ret, name, ...) typedef ret GLDECL name##proc(__VA_ARGS__); extern name##proc * gl##name;

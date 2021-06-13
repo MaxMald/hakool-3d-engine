@@ -170,6 +170,11 @@ namespace hk
       return eRESULT::kFail;
     }
 
+    // Create vertex array objects.
+
+    glGenVertexArrays(1, _m_aVAO);
+    glBindVertexArray(_m_aVAO[0]);
+
     // Component is ready.
 
     _m_isReady = !_m_isReady;
@@ -235,8 +240,13 @@ namespace hk
       _m_clearColor.b, 
       _m_clearColor.a
     );
-
     glClear(GL_COLOR_BUFFER_BIT);
+
+    uint32 programId = *(reinterpret_cast<uint32*>(_m_pProgramOpenGL->getProgramPtr()));
+    glUseProgram(static_cast<GLuint>(programId));
+
+    glPointSize(5.0f);
+    glDrawArrays(GL_POINTS, 0, 1);
 
     return;
   }
