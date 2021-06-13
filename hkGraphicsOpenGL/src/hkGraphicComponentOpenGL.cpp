@@ -84,8 +84,13 @@ namespace hk
 
     const char* pVertexSource =
       "#version 430 \n"
+      "out vec3 forFragColor;\n"
       "void main(void) \n"
-      "{ gl_Position = vec4(0.0, 0.0, 0.0, 1.0); }";
+      "{ \n"
+      "  if(gl_VertexID == 0){ gl_Position = vec4(-1.0, -1.0, 0.0, 1.0); forFragColor = vec3(1.0, 0.0, 0.0);}\n"
+      "  else if(gl_VertexID == 1){ gl_Position = vec4(1.0, -1.0, 0.0, 1.0); forFragColor = vec3(0.0, 1.0, 0.0);}\n"
+      "  else{ gl_Position = vec4(0.0, 1.0, 0.0, 1.0); forFragColor = vec3(0.0, 0.0, 1.0);}\n;"
+      "}";
 
     eRESULT result(eRESULT::kFail);
     ShaderOpenGL vertexShader;
@@ -121,9 +126,10 @@ namespace hk
 
     const char* pFragmentSource =
       "#version 430 \n"
+      "in vec3 forFragColor;\n"
       "out vec4 color; \n"
       "void main() \n"
-      "{ color = vec4(0.0, 0.0, 1.0, 1.0); }";    
+      "{ color = vec4(forFragColor, 1.0); }";    
 
     ShaderOpenGL fragShader;
     result = fragShader.create(pFragmentSource, eSHADER_TYPE::kFragment);
@@ -245,8 +251,7 @@ namespace hk
     uint32 programId = *(reinterpret_cast<uint32*>(_m_pProgramOpenGL->getProgramPtr()));
     glUseProgram(static_cast<GLuint>(programId));
 
-    glPointSize(5.0f);
-    glDrawArrays(GL_POINTS, 0, 1);
+    glDrawArrays(GL_TRIANGLES, 0, 3);
 
     return;
   }
