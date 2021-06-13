@@ -29,7 +29,25 @@ namespace hk
     return;
   }
 
-  void 
+  IShader* 
+  GraphicComponent::getVShader()
+  {
+      return nullptr;
+  }
+
+  IShader* 
+  GraphicComponent::getFShader()
+  {
+      return nullptr;
+  }
+
+  IProgram* 
+  GraphicComponent::getProgram()
+  {
+      return nullptr;
+  }
+
+  void
   GraphicComponent::destroy()
   {
     return;

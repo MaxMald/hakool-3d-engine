@@ -7,6 +7,8 @@ namespace hk
 {
   class Window;
   class Hakool;
+  class IShader;
+  class IProgram;
 
   /**
   * Provides a common interface for graphics component.
@@ -43,6 +45,30 @@ namespace hk
     */
     virtual void
     update();
+
+    /**
+    * Get a pointer to a new vertex shader.
+    * 
+    * @return Vertex shader.
+    */
+    virtual IShader*
+    getVShader();
+
+    /**
+    * Get a pointer to a new fragment shader.
+    * 
+    * @return Fragment shader.
+    */
+    virtual IShader*
+    getFShader();
+
+    /**
+    * Get a pointer to a new program.
+    * 
+    * @return Program.
+    */
+    virtual IProgram*
+    getProgram();
 
     /**
     * Shutdown the graphic component and release its resources.

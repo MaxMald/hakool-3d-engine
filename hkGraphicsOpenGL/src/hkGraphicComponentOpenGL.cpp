@@ -90,7 +90,25 @@ namespace hk
     return;
   }
 
-  void 
+  IShader* 
+  GraphicComponentOpenGL::getVShader()
+  {
+      return nullptr;
+  }
+
+  IShader* 
+  GraphicComponentOpenGL::getFShader()
+  {
+      return nullptr;
+  }
+
+  IProgram* 
+  GraphicComponentOpenGL::getProgram()
+  {
+      return nullptr;
+  }
+
+  void
   GraphicComponentOpenGL::destroy()
   {
     if (!_m_isReady)

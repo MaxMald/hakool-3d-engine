@@ -5,6 +5,7 @@
 
 #include <Hakool\Core\hkCorePrerequisites.h>
 #include <Hakool\Core\hkSceneManager.h>
+#include <Hakool\Core\hkResourceManager.h>
 
 namespace hk
 {
@@ -70,6 +71,14 @@ namespace hk
     */
     static Hakool*&
     GetEngine();
+
+    /**
+    * Get the reference to the resource manager.
+    * 
+    * @return Resource manager.
+    */
+    ResourceManager&
+    getResource();
 
   private:
 
@@ -193,6 +202,12 @@ namespace hk
     */
     SceneManager
     _m_sceneManager;
+
+    /**
+    * Resource manager.
+    */
+    ResourceManager
+    _m_resourceManager;
 
     /**
     * Indicates if the engine has been initialized.

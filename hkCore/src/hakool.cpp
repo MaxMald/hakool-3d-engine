@@ -95,13 +95,20 @@ namespace hk
     return Hakool::_Singleton();
   }
 
+  ResourceManager& 
+  Hakool::getResource()
+  {
+    return this->_m_resourceManager;
+  }
+
   Hakool::Hakool():
     _m_isInitialized(false),
     _m_isRunning(false),
     _m_pGraphicComponent(nullptr),
     _m_pLogger(nullptr),
     _m_pWindow(nullptr),
-    _m_sceneManager()
+    _m_sceneManager(),
+    _m_resourceManager()
   {
     return;
   }
@@ -180,6 +187,10 @@ namespace hk
 
       return eRESULT::kFail;
     }
+
+    // - Resource Manager
+
+    this->_m_resourceManager;
 
     _m_isInitialized = !_m_isInitialized;
 

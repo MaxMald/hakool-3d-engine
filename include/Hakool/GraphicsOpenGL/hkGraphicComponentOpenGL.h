@@ -50,6 +50,30 @@ namespace hk
     update() override;
 
     /**
+    * Get a pointer to a new vertex shader.
+    *
+    * @return Vertex shader.
+    */
+    virtual IShader*
+    getVShader() override;
+
+    /**
+    * Get a pointer to a new fragment shader.
+    *
+    * @return Fragment shader.
+    */
+    virtual IShader*
+    getFShader() override;
+
+    /**
+    * Get a pointer to a new program.
+    *
+    * @return Program.
+    */
+    virtual IProgram*
+    getProgram() override;
+
+    /**
     * Shutdown the graphic component and release its resources.
     */
     virtual void

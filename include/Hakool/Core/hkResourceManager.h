@@ -27,10 +27,24 @@ namespace hk
     ~ResourceManager();
 
     /**
+    * Initialize the resource manager.
+    * 
+    * @return Operation result.
+    */
+    eRESULT
+    init();
+
+    /**
     * Get shader.
     */
     ResourceGroup<Shader>&
     getShaders();
+
+    /**
+    * Safely destroys the resource manager.
+    */
+    void
+    destroy();
 
   private:
 

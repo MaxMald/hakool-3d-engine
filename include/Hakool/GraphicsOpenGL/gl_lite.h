@@ -54,6 +54,9 @@
 #define GL_STREAM_DRAW                    0x88E0
 #define GL_TEXTURE0                       0x84C0
 #define GL_VERTEX_SHADER                  0x8B31
+#define GL_INFO_LOG_LENGTH                0x8B84
+#define GL_LINK_STATUS                    0x8B82
+
 
 typedef char GLchar;
 typedef ptrdiff_t GLintptr;
@@ -102,6 +105,9 @@ typedef ptrdiff_t GLsizeiptr;
     GLE(void,      UniformMatrix4fv,        GLint location, GLsizei count, GLboolean transpose, const GLfloat *value) \
     GLE(void,      UseProgram,              GLuint program) \
     GLE(void,      VertexAttribPointer,     GLuint index, GLint size, GLenum type, GLboolean normalized, GLsizei stride, const GLvoid * pointer) \
+    GLE(void,      DeleteShader,            GLuint shader) \
+    GLE(void,      GetProgramiv,            GLuint shader, GLenum pname, GLint *params) \
+    GLE(void,      DeleteProgram,           GLuint program) \
     /* end */
 
 #define GLE(ret, name, ...) typedef ret GLDECL name##proc(__VA_ARGS__); extern name##proc * gl##name;

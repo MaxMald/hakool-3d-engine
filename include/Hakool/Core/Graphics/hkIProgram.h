@@ -7,8 +7,8 @@
 
 namespace hk
 {
-  class IGraphicComponent;
-  class IShader;
+  class ResourceManager;
+  class GraphicComponent;
 
   /**
   * Provides a common interface for extended programs.
@@ -20,39 +20,45 @@ namespace hk
     /**
     * Initialize the program.
     * 
-    * @param _graphicComponent Reference to the graphic component.
+    * @param _pGraphicComponent Pointer to the graphic component.
     * 
     * @return Operation result.
     */
     virtual eRESULT
-    init(IGraphicComponent _graphicComponent) = 0;
+    init(GraphicComponent* _pGraphicComponent) = 0;
 
     /**
     * Create the program with the given shader.
     * 
+    * @param _fragment The key of the fragment shader.
+    * @param _vertex The key of the vertex shader.
+    * @param _pResourceManager The pointer to the resource manager.
+    * 
     * @return Operation result.
     */
     virtual eRESULT
-    build() = 0;
+    create
+    (
+      const String& _fragment,
+      const String& _vertex,
+      ResourceManager* _pResourceManager
+    ) = 0;
 
     /**
-    * Add a new shader to this program. 
-    * 
-    * @param _type The type of this shader.
-    * @param _shader pointer to the shader.
-    * 
-    * @result Operation result.
+    * Get the pointer to the wrapped API's shader.
+    *
+    * @return The pointer to the wrapped API's shader.
     */
-    virtual eRESULT
-    addShader(eSHADER_TYPE _type, IShader* _pShader) = 0;
+    virtual void*
+    getProgramPtr() = 0;
 
     /**
-    * Check if this program has an specific type of shader.
+    * Check if the program is ready to be used.
     * 
-    * @param _type THe type of the shader.
+    * @return True if the program is ready, otherwise returns false.
     */
     virtual bool
-    hasShader(eSHADER_TYPE _type) = 0;
+    isReady() = 0;
 
     /**
     * Safely destroys this program.
@@ -71,6 +77,5 @@ namespace hk
     * Destructor.
     */
     virtual ~IProgram() = default;
-
   };
 }

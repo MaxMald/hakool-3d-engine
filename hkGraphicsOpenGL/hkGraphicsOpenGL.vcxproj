@@ -176,6 +176,8 @@
     <ClCompile Include="src\hkContextOpenGL.cpp" />
     <ClCompile Include="src\hkGraphicComponentOpenGL.cpp" />
     <ClCompile Include="src\hkGraphicsOpenGLPlugin.cpp" />
+    <ClCompile Include="src\hkProgramOpenGL.cpp" />
+    <ClCompile Include="src\hkShaderOpenGL.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\include\Hakool\GraphicsOpenGL\hkConfigGraphicsOpenGL.h" />
@@ -184,6 +186,8 @@
     <ClInclude Include="..\include\Hakool\GraphicsOpenGL\hkGraphicComponentOpenGL.h" />
     <ClInclude Include="..\include\Hakool\GraphicsOpenGL\hkGraphicsOpenGLPlugin.h" />
     <ClInclude Include="..\include\Hakool\GraphicsOpenGL\hkGraphicsOpenGLPrerequisites.h" />
+    <ClInclude Include="..\include\Hakool\GraphicsOpenGL\hkProgramOpenGL.h" />
+    <ClInclude Include="..\include\Hakool\GraphicsOpenGL\hkShaderOpenGL.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
