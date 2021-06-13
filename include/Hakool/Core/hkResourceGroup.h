@@ -106,9 +106,7 @@ namespace hk
 
   template<class C>
   inline eRESULT ResourceGroup<C>::add(const String& _key, C* _pAsset)
-  {
-    static_assert(IsBaseOf<Resource, C>::value, "Class must derive from Resource");
-    
+  {    
     Resource* pResource = reinterpret_cast<Resource*>(_pAsset);
 
     if (pResource == nullptr)
@@ -168,9 +166,9 @@ namespace hk
 
   template<class C>
   inline eRESULT 
-    ResourceGroup<C>::removeAndDestroy(const String& _key)
+  ResourceGroup<C>::removeAndDestroy(const String& _key)
   {
-    Resource* pResource = get(_key);
+    Resource* pResource = reinterpret_cast<Resource*>(get(_key));
 
     _m_hResources.erase(_key);
 

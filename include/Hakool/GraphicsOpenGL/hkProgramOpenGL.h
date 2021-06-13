@@ -76,7 +76,7 @@ namespace hk
   private:
 
     /**
-    * Indicates if the progam is ready to be used.
+    * Indicates if the program is ready to be used.
     */
     bool
     _m_isReady;

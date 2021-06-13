@@ -12,6 +12,7 @@ namespace hk
       _m_isReady(false),
       _m_programId(0)
     {
+      // Intentionally blank.
       return;
     }
 
@@ -122,7 +123,7 @@ namespace hk
         return eRESULT::kFail;
       }
 
-      _m_programId = programID;
+      _m_programId = static_cast<uint32>(programID);
       _m_isReady = !_m_isReady;
 
       return eRESULT::kSuccess;

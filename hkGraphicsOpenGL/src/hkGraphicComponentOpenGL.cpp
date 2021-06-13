@@ -1,8 +1,13 @@
 #include <Hakool\Utils\hkLogger.h>
 #include <Hakool\Utils\hkWindow.h>
 
+#include <Hakool\hakool.h>
+#include <Hakool\Core\hkResourceManager.h>
+
 #include <Hakool\GraphicsOpenGL\hkGraphicComponentOpenGL.h>
 #include <Hakool\GraphicsOpenGL\hkContextOpenGL.h>
+#include <Hakool\GraphicsOpenGL\hkShaderOpenGL.h>
+#include <Hakool\GraphicsOpenGL\hkProgramOpenGL.h>
 
 #define GL_LITE_IMPLEMENTATION
 #include <Hakool\GraphicsOpenGL\gl_lite.h>
@@ -24,10 +29,10 @@ namespace hk
     return;
   }
 
-  eRESULT 
+  eRESULT
   GraphicComponentOpenGL::init
   (
-    Window* _pWindow, 
+    Window* _pWindow,
     const GraphicsConfiguration& _graphicConfiguration
   )
   {
@@ -75,6 +80,98 @@ namespace hk
     _m_pContextOpenGL = new ContextOpenGL(contextOpenGL);
     _m_clearColor = _graphicConfiguration.backgroundColor;
 
+    // Create default vertex shader
+
+    const char* pVertexSource =
+      "#version 430 \n"
+      "void main(void) \n"
+      "{ gl_Position = vec4(0.0, 0.0, 0.0, 1.0); }";
+
+    eRESULT result(eRESULT::kFail);
+    ShaderOpenGL vertexShader;
+    result = vertexShader.create(pVertexSource, eSHADER_TYPE::kVertex);
+
+    if (result != eRESULT::kSuccess)
+    {
+      Logger::Error("| GraphicComponentOpenGL | Cannot initialize the component.");
+      _clean();
+
+      return eRESULT::kFail;
+    }
+
+    // Add vertex shader to the resource manager.
+
+    ResourceManager& resourceManager = _m_hakool->getResource();
+    ResourceGroup<Shader>& shaders = resourceManager.getShaders();
+    result = shaders.add
+    (
+      "__vertex_default", 
+      reinterpret_cast<Shader*>(&vertexShader)
+    );
+
+    if (result != eRESULT::kSuccess)
+    {
+      Logger::Error("| GraphicComponentOpenGL | Cannot initialize the component.");
+      _clean();
+
+      return eRESULT::kFail;
+    }
+
+    // Create default fragment shader
+
+    const char* pFragmentSource =
+      "#version 430 \n"
+      "out vec4 color; \n"
+      "void main() \n"
+      "{ color = vec4(0.0, 0.0, 1.0, 1.0); }";    
+
+    ShaderOpenGL fragShader;
+    result = fragShader.create(pFragmentSource, eSHADER_TYPE::kFragment);
+
+    if (result != eRESULT::kSuccess)
+    {
+      Logger::Error("| GraphicComponentOpenGL | Cannot initialize the component.");
+
+      _clean();
+      return eRESULT::kFail;
+    }
+
+    // Add fragment shader to the resource manager.
+
+    result = shaders.add
+    (
+      "__fragment_default", 
+      reinterpret_cast<Shader*>(&fragShader)
+    );
+
+    if (result != eRESULT::kSuccess)
+    {
+      Logger::Error("| GraphicComponentOpenGL | Cannot initialize the component.");
+      _clean();
+
+      return eRESULT::kFail;
+    }
+
+    // Create default program.
+
+    _m_pProgramOpenGL = new ProgramOpenGL();
+    result = _m_pProgramOpenGL->create
+    (
+      "__fragment_default",
+      "__vertex_default",
+      &resourceManager
+    );
+
+    if (result != eRESULT::kSuccess)
+    {
+      Logger::Error("| GraphicComponentOpenGL | Cannot initialize the component.");
+
+      _clean();
+      return eRESULT::kFail;
+    }
+
+    // Component is ready.
+
     _m_isReady = !_m_isReady;
 
     return eRESULT::kSuccess;
@@ -93,19 +190,19 @@ namespace hk
   IShader* 
   GraphicComponentOpenGL::getVShader()
   {
-      return nullptr;
+      return new ShaderOpenGL();
   }
 
   IShader* 
   GraphicComponentOpenGL::getFShader()
   {
-      return nullptr;
+      return new ShaderOpenGL();
   }
 
   IProgram* 
   GraphicComponentOpenGL::getProgram()
   {
-      return nullptr;
+      return new ProgramOpenGL();
   }
 
   void
@@ -116,13 +213,7 @@ namespace hk
       return;
     }
 
-    HDC windowDeviceContext = GetDC(_m_pWindow->getWindowHandler());
-
-    wglMakeCurrent(windowDeviceContext, NULL);
-    wglDeleteContext(reinterpret_cast<HGLRC>(_m_pContextOpenGL->get()));
-    
-    delete _m_pContextOpenGL;
-
+    _clean();
     _m_isReady = !_m_isReady;
     
     return;
@@ -148,5 +239,42 @@ namespace hk
     glClear(GL_COLOR_BUFFER_BIT);
 
     return;
+  }
+
+  void 
+  GraphicComponentOpenGL::_clean()
+  {
+    // Destroy default program
+
+    if (_m_pProgramOpenGL != nullptr)
+    {
+      _m_pProgramOpenGL->destroy();
+      delete _m_pProgramOpenGL;
+      _m_pProgramOpenGL = nullptr;
+    }
+
+    // Destroy default shader objects
+
+    ResourceManager & resourceManager = _m_hakool->getResource();
+    ResourceGroup<Shader>& shaders = resourceManager.getShaders();
+    
+    if (shaders.has("__fragment_default"))
+    {
+      shaders.removeAndDestroy("__fragment_default");
+    }
+
+    if (shaders.has("__vertex_default"))
+    {
+      shaders.removeAndDestroy("__vertex_default");
+    }
+
+    // Detach context
+
+    HDC windowDeviceContext = GetDC(_m_pWindow->getWindowHandler());
+
+    wglMakeCurrent(windowDeviceContext, NULL);
+    wglDeleteContext(reinterpret_cast<HGLRC>(_m_pContextOpenGL->get()));
+
+    delete _m_pContextOpenGL;
   }
 }

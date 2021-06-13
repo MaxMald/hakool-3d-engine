@@ -34,6 +34,14 @@ namespace hk
     eENGINE_COMPONENT
     getId();
 
+    /**
+    * Set the game engine reference of this component.
+    *
+    * @param _hakool Game engine reference.
+    */
+    void
+    setHakool(Hakool& _hakool);
+
   protected:
 
     /**
@@ -56,7 +64,7 @@ namespace hk
     * @param _delta delta time in seconds.
     */
     virtual void
-    _onUpdate(const float& _delta);
+    _onUpdate(const float& _delta);    
 
     /**
     * Instance of the game engine.
@@ -71,22 +79,6 @@ namespace hk
     _m_componentId;
 
   private:
-
-    /**
-    * Initializes this component.
-    * 
-    * @param _config Engine configuration object.
-    */
-    void
-    _init(HakoolConfiguration& _config);
-
-    /**
-    * Set the game engine reference of this component.
-    * 
-    * @param _hakool Game engine reference.
-    */
-    void
-    _setHakool(Hakool& _hakool);
 
     friend class Hakool;
   };

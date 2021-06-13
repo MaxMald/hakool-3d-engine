@@ -162,6 +162,7 @@ namespace hk
       {
         IPlugin* plugin = _m_pluginManager.getPlugin("GraphicsDLL");
         _m_pGraphicComponent = reinterpret_cast<GraphicComponent*>(plugin->getData());
+        _m_pGraphicComponent->setHakool(*this);
         
         result = _m_pGraphicComponent->init(_m_pWindow, _config.graphicsConfiguration);
         if (result != eRESULT::kSuccess)
@@ -187,10 +188,6 @@ namespace hk
 
       return eRESULT::kFail;
     }
-
-    // - Resource Manager
-
-    this->_m_resourceManager;
 
     _m_isInitialized = !_m_isInitialized;
 
@@ -249,6 +246,8 @@ namespace hk
   {
     _clean();
 
+    _m_resourceManager.destroy();
+    _m_pluginManager.destroy();
     _m_sceneManager.destroy();
     Logger::Shutdown();
 
@@ -264,6 +263,8 @@ namespace hk
       _m_pGraphicComponent->destroy();
       _m_pGraphicComponent = nullptr;
     }
+
+    _m_resourceManager.clear();
 
     if (_m_pWindow != nullptr)
     {

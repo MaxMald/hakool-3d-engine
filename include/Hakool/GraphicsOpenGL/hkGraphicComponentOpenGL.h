@@ -9,6 +9,7 @@ namespace hk
 {
   class Window;
   class ContextOpenGL;
+  class ProgramOpenGL;
 
   /**
   * OpenGL GraphicComponent implementation.
@@ -113,9 +114,21 @@ namespace hk
     _draw();
 
     /**
+    * TODO
+    */
+    void
+    _clean();
+
+    /**
     * Screen clear color.
     */
     Color
-    _m_clearColor;    
+    _m_clearColor;
+
+    /**
+    * Pointer to the program.
+    */
+    ProgramOpenGL*
+    _m_pProgramOpenGL;
   };
 }

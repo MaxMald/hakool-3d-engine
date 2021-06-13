@@ -41,6 +41,12 @@ namespace hk
     getShaders();
 
     /**
+    * Clear from all resources.
+    */
+    void
+    clear();
+
+    /**
     * Safely destroys the resource manager.
     */
     void

@@ -19,6 +19,13 @@ namespace hk
     return this->_m_componentId;
   }
 
+  void 
+  EngineComponent::setHakool(Hakool& _hakool)
+  {
+    _m_hakool = &_hakool;
+    return;
+  }
+
   void
   EngineComponent::_onEngineInit(HakoolConfiguration& _configEngine)
   { 
@@ -34,20 +41,6 @@ namespace hk
   void 
   EngineComponent::_onUpdate(const float& _delta)
   {
-    return;
-  }
-
-  void 
-  EngineComponent::_init(HakoolConfiguration& _configEngine)
-  {
-    this->_onEngineInit(_configEngine);
-    return;
-  }
-
-  void
-  EngineComponent::_setHakool(Hakool& _hakool)
-  {
-    this->_m_hakool = &_hakool;
     return;
   }
 }
