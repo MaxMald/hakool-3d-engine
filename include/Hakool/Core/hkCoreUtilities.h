@@ -46,6 +46,16 @@ namespace hk
     kOpenGL
   };
 
+  /**
+  * Enumerates the different types of component that a game object can has.
+  */
+  enum class HK_CORE_EXPORT eCOMPONENT :
+    uchar
+  {
+    kUndefined,
+    kModel
+  };
+
   /***************************************************************************/
   /* Configuration Objects                                                   */
   /***************************************************************************/

@@ -80,6 +80,12 @@ namespace hk
     ResourceManager&
     getResource();
 
+    /**
+    * Get the reference to the scene manager.
+    */
+    SceneManager&
+    getScene();
+
   private:
 
     /**

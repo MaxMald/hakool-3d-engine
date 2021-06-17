@@ -172,7 +172,9 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="src\hakool.cpp" />
+    <ClCompile Include="src\hkComponent.cpp" />
     <ClCompile Include="src\hkEngineComponent.cpp" />
+    <ClCompile Include="src\hkGameObject.cpp" />
     <ClCompile Include="src\hkGraphicComponent.cpp" />
     <ClCompile Include="src\hkResource.cpp" />
     <ClCompile Include="src\hkResourceManager.cpp" />
@@ -184,10 +186,13 @@
     <ClInclude Include="..\include\Hakool\Core\Graphics\hkIContext.h" />
     <ClInclude Include="..\include\Hakool\Core\Graphics\hkIProgram.h" />
     <ClInclude Include="..\include\Hakool\Core\Graphics\hkShader.h" />
+    <ClInclude Include="..\include\Hakool\Core\hkComponent.h" />
     <ClInclude Include="..\include\Hakool\Core\hkConfigCore.h" />
     <ClInclude Include="..\include\Hakool\Core\hkCorePrerequisites.h" />
     <ClInclude Include="..\include\Hakool\Core\hkCoreUtilities.h" />
     <ClInclude Include="..\include\Hakool\Core\hkEngineComponent.h" />
+    <ClInclude Include="..\include\Hakool\Core\hkGameObject.h" />
+    <ClInclude Include="..\include\Hakool\Core\hkNode.h" />
     <ClInclude Include="..\include\Hakool\Core\hkResource.h" />
     <ClInclude Include="..\include\Hakool\Core\hkResourceGroup.h" />
     <ClInclude Include="..\include\Hakool\Core\hkResourceManager.h" />

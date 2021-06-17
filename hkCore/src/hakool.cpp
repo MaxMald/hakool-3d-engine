@@ -101,6 +101,12 @@ namespace hk
     return this->_m_resourceManager;
   }
 
+  SceneManager& 
+  Hakool::getScene()
+  {
+    return this->_m_sceneManager;
+  }
+
   Hakool::Hakool():
     _m_isInitialized(false),
     _m_isRunning(false),

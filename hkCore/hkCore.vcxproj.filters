@@ -28,6 +28,18 @@
     <Filter Include="Source Files\resource">
       <UniqueIdentifier>{91203892-56a6-4281-a838-daf85a798a2d}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\scene">
+      <UniqueIdentifier>{fcb2ec24-5962-4454-a71a-ae6b26c0ee7e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\components">
+      <UniqueIdentifier>{0bf174a8-e3a4-423e-a970-9bda7ae38f8c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\components">
+      <UniqueIdentifier>{99ee508d-0ded-49fc-abe1-b7ba0e91c795}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\scene">
+      <UniqueIdentifier>{b8ba696c-355f-49f7-93c9-185813fe89f1}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\hakool.cpp">
@@ -50,6 +62,12 @@
     </ClCompile>
     <ClCompile Include="src\hkResourceManager.cpp">
       <Filter>Source Files\resource</Filter>
+    </ClCompile>
+    <ClCompile Include="src\hkComponent.cpp">
+      <Filter>Source Files\components</Filter>
+    </ClCompile>
+    <ClCompile Include="src\hkGameObject.cpp">
+      <Filter>Source Files\scene</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -74,12 +92,6 @@
     <ClInclude Include="..\include\Hakool\Core\Graphics\hkIContext.h">
       <Filter>Header Files\graphics</Filter>
     </ClInclude>
-    <ClInclude Include="..\include\Hakool\Core\hkScene.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="..\include\Hakool\Core\hkSceneManager.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="..\include\Hakool\Core\Graphics\hkShader.h">
       <Filter>Header Files\graphics</Filter>
     </ClInclude>
@@ -94,6 +106,21 @@
     </ClInclude>
     <ClInclude Include="..\include\Hakool\Core\hkResourceManager.h">
       <Filter>Header Files\resource</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\Hakool\Core\hkScene.h">
+      <Filter>Header Files\scene</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\Hakool\Core\hkSceneManager.h">
+      <Filter>Header Files\scene</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\Hakool\Core\hkGameObject.h">
+      <Filter>Header Files\scene</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\Hakool\Core\hkComponent.h">
+      <Filter>Header Files\components</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\Hakool\Core\hkNode.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
