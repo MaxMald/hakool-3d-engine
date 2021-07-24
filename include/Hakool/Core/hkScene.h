@@ -52,48 +52,32 @@ namespace hk
     destroy();
 
     /**
-    * Creates and adds a new GameObject to this scene's root.
+    * Get the root's node of the scene.
     * 
-    * The scene root behaves like a GameObject, in fact it is a GameObject, so
-    * every child should have a unique name or won't be added to the scene.
-    * 
-    * @param _name The name of the GameObject.
-    * 
-    * @return GameOject.
+    * @return The GameObject that represent the root of this scene.
     */
     GameObject&
-    createGameObject(const String& _name);
-
+    getRoot();
+    
     /**
-    * Add a new game object to the scene's root. 
-    *
-    * The scene root behaves like a GameObject, in fact it is a GameObject, so
-    * every child should have a unique name or won't be added to the scene.
-    *
-    * @param _pGameObject The pointer to the new game object.
-    */
-    void
-    addGameObject(GameObject* _pGameObject);
-
-    /**
-    * Check if the scene's root has a GameObject.
+    * Check if the GameObject exists in the given path.
     * 
-    * @param _name The name of the GameObject.
+    * @param _path The GameObject's path, relative to the Scene's root.
     * 
-    * @return True if the GameObject exists, otherwise returns false.
+    * @return True if the GameObject exists.
     */
     bool
-    hasGameObject(const String& _name);
+    hasGameObject(const String& _path);
 
     /**
-    * Get a GameObject from the scene's root.
+    * Get the GameObject from the given path.
     * 
-    * @param _name The name of the GameObject.
+    * @param _path The GameObject's path, relative to the Scene's root.
     * 
-    * @return GameObject.
+    * @return Reference to the GameObject.
     */
     GameObject&
-    getGameObject(const String& _name);
+    getGameObject(const String& _path);
 
     /**
     * Get the scene manager.
@@ -114,10 +98,6 @@ namespace hk
     * Destructor.
     */
     virtual ~Scene();
-
-    // TODO REMOVE GAME OBJECT METHOD
-
-    // TODO DESTROY GAME OBJECT METHOD
 
   private:
 
@@ -156,18 +136,6 @@ namespace hk
     */
     GameObject
     _m_root;
-
-    /**
-    * List of gameObjects.
-    */
-    Map<String, GameObject*>
-    _m_hGameObjects;
-
-    /**
-    * List of gameObjects that are flagged to be destroyed.
-    */
-    Vector<GameObject*>
-    _m_lTrashCan;
 
     friend SceneManager;
   };

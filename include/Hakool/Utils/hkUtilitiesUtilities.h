@@ -6,7 +6,7 @@
 namespace hk
 {
   /**
-  * 
+  *
   */
   enum class HK_UTILITY_EXPORT eRESULT
   {
@@ -17,7 +17,7 @@ namespace hk
   };
 
   /**
-  * 
+  *
   */
   enum class HK_UTILITY_EXPORT ePLATFORM
   {
@@ -34,7 +34,7 @@ namespace hk
     /**
     * Constructor.
     */
-    WindowConfiguration() : 
+    WindowConfiguration() :
       width(256),
       height(256),
       title("Hakool Window")
@@ -45,40 +45,61 @@ namespace hk
     /**
     * Screen width in pixels.
     */
-    uint32 
-    width;
+    uint32
+      width;
 
     /**
     * Screen height in pixels.
     */
-    uint32 
-    height;
+    uint32
+      height;
 
     /**
-    * The title of the window. 
+    * The title of the window.
     */
-    String 
-    title;
+    String
+      title;
   };
 
   /**
   * Check if two float values are relatively equal.
-  * 
+  *
   * @param _a Number.
   * @param _b Number.
-  * 
+  *
   * @return True if both numbers are relatively equal.
   */
   HK_UTILITY_EXPORT bool
-  RelativelyEqual(const float& _a, const float& _b);
+    RelativelyEqual(const float& _a, const float& _b);
 
   /**
-  * 
+  *
   */
-  inline bool 
+  inline bool
   RelativelyEqual(const float& _a, const float& _b)
   {
     float diff = Math::Abs(_a - _b);
     return diff <= Math::FLOAT_EPSILON * Math::Max(Math::Abs(_a), Math::Abs(_b));
+  }
+
+  /**
+  * 
+  */
+  inline Queue<String>
+  Split(const String& _string, const String& _delimiter)
+  {
+    Queue<String> pieces;
+
+    hkSize start = 0;
+    hkSize end = _string.find(_delimiter);
+
+    while (end != String::npos)
+    {
+      pieces.push(_string.substr(start, end - start));
+      start = end + _delimiter.length();
+      end = _string.find(_delimiter, start);
+    }
+
+    return pieces;
   }
 }

@@ -19,6 +19,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\include\Hakool\Utils\guid.hpp" />
     <ClInclude Include="..\include\Hakool\Utils\hkColor.h" />
     <ClInclude Include="..\include\Hakool\Utils\hkConfigPlatform.h" />
     <ClInclude Include="..\include\Hakool\Utils\hkConfigTypes.h" />
@@ -48,6 +49,7 @@
     <None Include="..\include\Hakool\Utils\hkModule.inl" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="src\guid.cpp" />
     <ClCompile Include="src\hkColor.cpp" />
     <ClCompile Include="src\hkLogger.cpp" />
     <ClCompile Include="src\hkLoggerConsole.cpp" />

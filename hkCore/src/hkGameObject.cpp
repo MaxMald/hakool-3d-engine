@@ -1,3 +1,5 @@
+#include <Hakool\Utils\guid.hpp>
+
 #include <Hakool\Core\hkGameObject.h>
 
 namespace hk
@@ -7,7 +9,8 @@ namespace hk
     _m_hComponents(),
     _m_toDestroy(false),
     _m_isInitialized(false),
-    _m_pScene(nullptr)
+    _m_pScene(nullptr),
+    _m_uuid(xg::newGuid())
   {
     // Intentionally blank
     return;
@@ -18,7 +21,8 @@ namespace hk
     _m_toDestroy(false),
     _m_isInitialized(false),
     _m_hComponents(),
-    _m_pScene(nullptr)
+    _m_pScene(nullptr),
+    _m_uuid(xg::newGuid())
   {
     // Intentionally blank
     return;
@@ -29,7 +33,8 @@ namespace hk
     _m_toDestroy(false),
     _m_isInitialized(false),
     _m_hComponents(),
-    _m_pScene(nullptr)
+    _m_pScene(nullptr),
+    _m_uuid(xg::newGuid())
   {
     // Intentionally blank
     return;
@@ -41,7 +46,13 @@ namespace hk
     return;
   }
 
-  void 
+  bool 
+  GameObject::operator==(const GameObject& _gameObject)
+  {
+    return _m_uuid == _gameObject._m_uuid;
+  }
+
+  void
   GameObject::init()
   {
     if (!_m_isInitialized)
@@ -138,9 +149,32 @@ namespace hk
     return *_m_pScene;
   }
 
+  GameObject& 
+  GameObject::getGameObjectByPath(String _path)
+  {
+    Queue<String> levels = Split(_path, "/");
+    GameObject* pCurrent = this;
+
+    while (levels.size() > 0)
+    {
+      String level = levels.front();
+      levels.pop();
+
+      pCurrent = &(pCurrent->getChild(level));
+      if (IsNull(*pCurrent))
+      {
+        Logger::Error("| GameObject : " + getName() + " | Child not found. Path: " + _path);
+        return *pCurrent;
+      }
+    }
+
+    return *pCurrent;
+  }
+
   void
   GameObject::destroy()
   {
+    // Destroy components.
     Component* pComponent = nullptr;
     for (auto iterator : _m_hComponents)
     {
@@ -148,8 +182,42 @@ namespace hk
       pComponent->destroy();
       delete pComponent;
     }
-
     _m_hComponents.clear();
+  
+    // Destroy children.
+    for (auto child : _m_hChildren)
+    {
+      child.second->destroy();
+    }
+
+    return;
+  }
+
+  void 
+  GameObject::onAdded(GameObject& _parent)
+  {
+    if (_parent._m_pScene != nullptr)
+    {
+      _m_pScene = _parent._m_pScene;      
+    }
+
+    for (auto child : _m_hChildren)
+    {
+      child.second->onAdded(*this);
+    }
+
+    return;
+  }
+
+  void 
+  GameObject::onRemoved(GameObject& _parent)
+  {
+    _m_pScene = nullptr;
+    
+    for (auto child : _m_hChildren)
+    {
+      child.second->onRemoved(*this);
+    }
 
     return;
   }

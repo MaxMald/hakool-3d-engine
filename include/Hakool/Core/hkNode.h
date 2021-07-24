@@ -15,6 +15,18 @@ namespace hk
   public:
 
     /**
+    * Get reference to the Null object.
+    */
+    static T&
+    GetNull();
+
+    /**
+    * Check if the given GameObject is the Null object.
+    */
+    static bool
+    IsNull(const T& _gameObject);
+
+    /**
     * Constructor.
     */
     Node();
@@ -131,6 +143,18 @@ namespace hk
   protected:
 
     /**
+    * Called when this node is added to a node.
+    */
+    virtual void
+    onAdded(T& _parent);
+
+    /**
+    * Called when this node is removed from its parent.
+    */
+    virtual void
+    onRemoved(T& _parent);
+
+    /**
     * List of children.
     */
     Map<String, T*>
@@ -156,6 +180,12 @@ namespace hk
     operator=(const Node&&) = delete;
 
     /**
+    * Get the Null Object.
+    */
+    static T*&
+    _Null();
+
+    /**
     * Pointer to the parent of this node.
     */
     T*
@@ -167,6 +197,20 @@ namespace hk
     String
     _m_name;
   };
+
+  template<typename T>
+  inline T& 
+  Node<T>::GetNull()
+  {
+    return *_Null();
+  }
+
+  template<typename T>
+  inline bool 
+  Node<T>::IsNull(const T& _gameObject)
+  {
+    return *_Null() == _gameObject;
+  }
 
   template<typename T>
   inline Node<T>::Node() :
@@ -265,6 +309,7 @@ namespace hk
     );
 
     pChildNode->_m_pParent = reinterpret_cast<T*>(this);
+    pChildNode->onAdded(reinterpret_cast<T&>(*this));
 
     return eRESULT::kSuccess;
   }
@@ -275,7 +320,8 @@ namespace hk
   {
     if (!hasChild(_name))
     {
-      throw "| Node | Node: " + _m_name + " doesn't has a child : " + _name + ".";
+      Logger::Error("| Node | Node: " + _m_name + " doesn't has a child : " + _name + ".");
+      return *_Null();
     }
 
     return *(_m_hChildren.find(_name)->second);    
@@ -312,7 +358,8 @@ namespace hk
   {
     if (_m_pParent == nullptr)
     {
-      throw "Node: " + _m_name + " doesn't has a parent.";
+      Logger::Error("Node: " + _m_name + " doesn't has a parent.");
+      return *_Null();
     }
 
     return *_m_pParent;
@@ -333,10 +380,36 @@ namespace hk
       return;
     }
 
+    T* pParent = _m_pParent;
     Node* pParentNode = reinterpret_cast<Node*>(_m_pParent);
     pParentNode->removeChild(_m_name);
     _m_pParent = nullptr;
 
+    onRemoved(*pParent);
+
     return;
+  }
+  template<typename T>
+  inline void 
+  Node<T>::onAdded(T& _parent)
+  {
+      // Intentionally blank
+      return;
+  }
+
+  template<typename T>
+  inline void 
+  Node<T>::onRemoved(T& _parent)
+  {
+      // Intentionally blank
+      return;
+  }
+
+  template<typename T>
+  inline T*& 
+  Node<T>::_Null()
+  {
+    static T* _NULL = new T();
+    return _NULL;
   }
 }

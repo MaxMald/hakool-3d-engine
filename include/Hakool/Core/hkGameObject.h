@@ -41,6 +41,16 @@ namespace hk
     ~GameObject();
 
     /**
+    * Comparison between two GameObjects.
+    * 
+    * @param _gameObject GameObject.
+    * 
+    * @return True if both GameObjects have the same uuid value.
+    */
+    bool
+    operator==(const GameObject& _gameObject);
+
+    /**
     * Called by the scene manager when the scene is been created.
     */
     void
@@ -112,10 +122,34 @@ namespace hk
     getScene();
 
     /**
+    * Get a GameObject by a relative path.
+    * 
+    * @param _path Relative path.
+    * 
+    * @return GameObject.
+    */
+    GameObject&
+    getGameObjectByPath(String _path);
+
+    /**
     * Safely destroys this game object.
     */
     void
     destroy();
+
+  protected:
+        
+    /**
+    * Called when this node is added to a node.
+    */
+    virtual void
+    onAdded(GameObject& _parent) override;
+
+    /**
+    * Called when this node is removed from its parent.
+    */
+    virtual void
+    onRemoved(GameObject& _parent) override;
 
   private:
 
@@ -142,6 +176,12 @@ namespace hk
     */
     bool
     _m_isInitialized;
+
+    /**
+    * Unique identifier of this gameObject.
+    */
+    String
+    _m_uuid;
 
     friend Scene;
   };

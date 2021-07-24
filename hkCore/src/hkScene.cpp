@@ -39,51 +39,25 @@ namespace hk
   }
 
   GameObject& 
-  Scene::createGameObject(const String& _name)
+  Scene::getRoot()
   {
-    if (_m_root.hasChild(_name))
-    {
-      throw "Scene's root already has a child with name: " + _name;
-    }
-
-    GameObject* pNewGameObject = new GameObject(_name, _m_root);
-    pNewGameObject->_m_pScene = this;
-
-    // TODO ADD GAME OBJECT TO LIST
-
-    return *pNewGameObject;
+    return _m_root;
   }
 
-  void 
-  Scene::addGameObject(GameObject* _pGameObject)
+  bool 
+  Scene::hasGameObject(const String& _path)
   {
-    if (_m_root.hasChild(_pGameObject->getName()))
-    {
-      throw "Scene's root already has a child with name: " + _pGameObject->getName();
-    }
-
-    // TODO REMOVE GAME OBJECT FROM CURRENT SCENE.
-
-    _pGameObject->_m_pScene = this;
-
-    // TODO ADD GAME OBJECT TO LIST.
-
-    return;
-  }
-
-  bool
-  Scene::hasGameObject(const String& _name)
-  {
-    return _m_root.hasChild(_name);
+      
+      return false;
   }
 
   GameObject& 
-  Scene::getGameObject(const String& _name)
+  Scene::getGameObject(const String& _path)
   {
-    return _m_root.getChild(_name);
+    return _m_root.getGameObjectByPath(_path);
   }
 
-  SceneManager& 
+  SceneManager&
   Scene::getSceneManager()
   {
     if (_m_pSceneManager == nullptr)
@@ -96,9 +70,7 @@ namespace hk
 
   Scene::Scene() :
     _m_pSceneManager(nullptr),
-    _m_hGameObjects(),
-    _m_root(),
-    _m_lTrashCan()
+    _m_root()
   {
     // Intentionally blank
     return;

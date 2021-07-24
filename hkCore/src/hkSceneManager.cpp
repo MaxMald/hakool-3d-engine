@@ -124,7 +124,7 @@ namespace hk
       Map<String, Scene*>::value_type(_key, _pScene)
     );
 
-    _pScene->_m_pHakool = _m_pHakool;
+    //_pScene->_m_pHakool = _m_pHakool;
 
     return eRESULT::kSuccess;
   }
