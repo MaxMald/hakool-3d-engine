@@ -23,11 +23,6 @@ namespace hk
     /**
     * Empty game object.
     */
-    GameObject();
-
-    /**
-    * Empty game object.
-    */
     GameObject(const String& _name);
 
     /**

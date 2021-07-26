@@ -235,7 +235,7 @@ Guid newGuid()
 
 // obviously this is the windows version
 #if HK_PLATFORM == HK_PLATFORM_WIN32
-Guid newGuid()
+Guid HK_UTILITY_EXPORT newGuid()
 {
 	GUID newId;
 	CoCreateGuid(&newId);

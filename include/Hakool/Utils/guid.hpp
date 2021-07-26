@@ -20,7 +20,7 @@ THE SOFTWARE.
 
 #pragma once
 
-#include <Hakool\Utils\hkConfigPlatform.h>
+#include <Hakool\Utils\hkUtilsPrerequisites.h>
 
 #include <functional>
 #include <iostream>
@@ -38,7 +38,7 @@ BEGIN_XG_NAMESPACE
 // 16 byte value that can be passed around by value. It also supports
 // conversion to string (via the stream operator <<) and conversion from a
 // string via constructor.
-class Guid
+class HK_UTILITY_EXPORT Guid
 {
 public:
 	explicit Guid(const std::array<unsigned char, 16>& bytes);
@@ -71,7 +71,7 @@ private:
 	friend bool operator<(const Guid& lhs, const Guid& rhs);
 };
 
-Guid newGuid();
+Guid HK_UTILITY_EXPORT newGuid();
 
 namespace details
 {

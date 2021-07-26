@@ -4,18 +4,6 @@
 
 namespace hk
 {
-  GameObject::GameObject() :
-    Node<GameObject>(),
-    _m_hComponents(),
-    _m_toDestroy(false),
-    _m_isInitialized(false),
-    _m_pScene(nullptr),
-    _m_uuid(xg::newGuid())
-  {
-    // Intentionally blank
-    return;
-  }
-
   GameObject::GameObject(const String& _name) :
     Node<GameObject>(_name),
     _m_toDestroy(false),
@@ -184,11 +172,25 @@ namespace hk
     }
     _m_hComponents.clear();
   
+    // Remove from its parent.
+    removeFromParent();
+
     // Destroy children.
-    for (auto child : _m_hChildren)
+    if (_m_hChildren.size() > 0)
     {
-      child.second->destroy();
-    }
+      // Hold children in a temporary list.
+      Vector<GameObject*> childrenList;
+      for (auto child : _m_hChildren)
+      {
+        childrenList.push_back(child.second);
+      }
+
+      // Destroy children.
+      for (GameObject* pChild : childrenList)
+      {
+        pChild->destroy();
+      }
+    }   
 
     return;
   }

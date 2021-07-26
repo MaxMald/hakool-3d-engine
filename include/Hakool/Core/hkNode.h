@@ -409,7 +409,7 @@ namespace hk
   inline T*& 
   Node<T>::_Null()
   {
-    static T* _NULL = new T();
+    static T* _NULL = new T("__NULL");
     return _NULL;
   }
 }

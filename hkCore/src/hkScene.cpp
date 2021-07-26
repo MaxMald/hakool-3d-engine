@@ -70,7 +70,7 @@ namespace hk
 
   Scene::Scene() :
     _m_pSceneManager(nullptr),
-    _m_root()
+    _m_root("__root")
   {
     // Intentionally blank
     return;
