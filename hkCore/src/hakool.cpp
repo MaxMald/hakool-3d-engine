@@ -158,7 +158,7 @@ namespace hk
 
       if (result != eRESULT::kSuccess)
       {
-        Logger::GetReference().error("Couldn't connect to the graphics library.");
+        Logger::Error("Couldn't connect to the graphics library.");
         _clean();
 
         return result;
@@ -173,7 +173,7 @@ namespace hk
         result = _m_pGraphicComponent->init(_m_pWindow, _config.graphicsConfiguration);
         if (result != eRESULT::kSuccess)
         {
-          Logger::GetReference().error("Couldn't initialize the graphics.");
+          Logger::Error("Couldn't initialize the graphics.");
           _clean();
 
           return result;
@@ -181,7 +181,7 @@ namespace hk
       }
       else
       {
-        Logger::GetReference().error("Couldn't find the graphics plug-in.");
+        Logger::Error("Couldn't find the graphics plug-in.");
         _clean();
 
         return eRESULT::kFail;
@@ -189,7 +189,7 @@ namespace hk
     }
     else
     {
-      Logger::GetReference().error("Graphic API not implemented yet.");
+      Logger::Error("Graphic API not implemented yet.");
       _clean();
 
       return eRESULT::kFail;

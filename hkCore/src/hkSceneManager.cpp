@@ -64,11 +64,11 @@ namespace hk
       {
         if (_m_pActiveScene != nullptr)
         {
-          _m_pActiveScene->exit();
+          _m_pActiveScene->_exit();
         }
 
         _m_pActiveScene = _m_pNextScene;
-        _m_pActiveScene->enter();
+        _m_pActiveScene->_enter();
       }
 
       _m_transitionRequested = !_m_transitionRequested;
@@ -78,7 +78,7 @@ namespace hk
 
     if (_m_pActiveScene != nullptr)
     {
-      _m_pActiveScene->update();
+      _m_pActiveScene->_update();
     }
 
     _m_isUpdating = !_m_isUpdating;
