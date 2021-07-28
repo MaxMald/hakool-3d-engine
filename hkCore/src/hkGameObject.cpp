@@ -104,7 +104,7 @@ namespace hk
   }
 
   bool 
-  GameObject::hasComponent(const eCOMPONENT& _id)
+  GameObject::hasComponent(const eCOMPONENT& _id) const
   {
     return _m_hComponents.find(_id) != _m_hComponents.end();
   }
@@ -126,7 +126,7 @@ namespace hk
   }
 
   bool 
-  GameObject::onScene()
+  GameObject::onScene() const
   {
     return _m_pScene != nullptr;
   }
@@ -157,6 +157,12 @@ namespace hk
     }
 
     return *pCurrent;
+  }
+
+  String 
+  GameObject::getUUID() const
+  {
+    return String(_m_uuid);
   }
 
   void
@@ -190,36 +196,10 @@ namespace hk
       {
         pChild->destroy();
       }
+
+      // Clear children list.
+      _m_hChildren.clear();
     }   
-
-    return;
-  }
-
-  void 
-  GameObject::onAdded(GameObject& _parent)
-  {
-    if (_parent._m_pScene != nullptr)
-    {
-      _m_pScene = _parent._m_pScene;      
-    }
-
-    for (auto child : _m_hChildren)
-    {
-      child.second->onAdded(*this);
-    }
-
-    return;
-  }
-
-  void 
-  GameObject::onRemoved(GameObject& _parent)
-  {
-    _m_pScene = nullptr;
-    
-    for (auto child : _m_hChildren)
-    {
-      child.second->onRemoved(*this);
-    }
 
     return;
   }

@@ -79,7 +79,7 @@ namespace hk
     * @return True if the component exists, otherwise returns false.
     */
     bool
-    hasComponent(const eCOMPONENT& _id);
+    hasComponent(const eCOMPONENT& _id) const;
 
     /**
     * Get a component.
@@ -106,7 +106,7 @@ namespace hk
     * @return True if the GameObject belongs to a scene, otherwise returns false.
     */
     bool
-    onScene();
+    onScene() const;
 
     /**
     * Get the scene this GameObject belongs to.
@@ -127,24 +127,20 @@ namespace hk
     getGameObjectByPath(String _path);
 
     /**
+    * Get GameObject's UUID.
+    * 
+    * @return GameObject's UUID.
+    */
+    String
+    getUUID() const;
+
+    /**
     * Safely destroys this game object.
     */
     void
     destroy();
 
   protected:
-        
-    /**
-    * Called when this node is added to a node.
-    */
-    virtual void
-    onAdded(GameObject& _parent) override;
-
-    /**
-    * Called when this node is removed from its parent.
-    */
-    virtual void
-    onRemoved(GameObject& _parent) override;
 
   private:
 

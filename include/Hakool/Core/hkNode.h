@@ -143,18 +143,6 @@ namespace hk
   protected:
 
     /**
-    * Called when this node is added to a node.
-    */
-    virtual void
-    onAdded(T& _parent);
-
-    /**
-    * Called when this node is removed from its parent.
-    */
-    virtual void
-    onRemoved(T& _parent);
-
-    /**
     * List of children.
     */
     Map<String, T*>
@@ -309,7 +297,6 @@ namespace hk
     );
 
     pChildNode->_m_pParent = reinterpret_cast<T*>(this);
-    pChildNode->onAdded(reinterpret_cast<T&>(*this));
 
     return eRESULT::kSuccess;
   }
@@ -385,24 +372,7 @@ namespace hk
     pParentNode->removeChild(_m_name);
     _m_pParent = nullptr;
 
-    onRemoved(*pParent);
-
     return;
-  }
-  template<typename T>
-  inline void 
-  Node<T>::onAdded(T& _parent)
-  {
-      // Intentionally blank
-      return;
-  }
-
-  template<typename T>
-  inline void 
-  Node<T>::onRemoved(T& _parent)
-  {
-      // Intentionally blank
-      return;
   }
 
   template<typename T>

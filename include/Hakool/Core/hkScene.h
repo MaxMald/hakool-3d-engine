@@ -60,6 +60,28 @@ namespace hk
     getRoot();
     
     /**
+    * Create a new GameObject and add it to the scene's root.
+    * 
+    * @param _name GameObject's name.
+    * 
+    * @return GameObject.
+    */
+    GameObject&
+    createGameObject(String _name);
+
+    /**
+    * Create a new GameObject and add it as a child of another GameObject in the scene.
+    * Returns the null object if the parent's is not found.
+    *
+    * @param _name GameObject's name.
+    * @param _parentPath The parent's path.
+    *
+    * @return GameObject.
+    */
+    GameObject&
+    createGameObject(String _name, String _parentPath);
+    
+    /**
     * Check if the GameObject exists in the given path.
     * 
     * @param _path The GameObject's path, relative to the Scene's root.
@@ -86,6 +108,50 @@ namespace hk
     */
     SceneManager&
     getSceneManager();
+
+    /**
+    * Register GameObject in this scene.
+    * 
+    * @param _gameObject GameObject.
+    */
+    void
+    registerGameObject(GameObject& _gameObject);
+
+    /**
+    * Unregister GameObject from this scene.
+    * 
+    * @param _uuid GameObject's uuid.
+    */
+    void
+    unregisterGameObject(const String& _uuid);
+
+    /**
+    * Unregister GameObject from this scene.
+    * 
+    * @param _gameObject GameObject.
+    */
+    void
+    unregisterGameObject(GameObject& _gameObject);
+
+    /**
+    * Check if this scene has a registered GameObject.
+    * 
+    * @param _uuid GameObject's uuid.
+    * 
+    * @return True if the GameObject is registered in this scene.
+    */
+    bool
+    hasRegisteredGameObject(const String& _uuid) const;
+
+    /**
+    * Check if the given GameObject is regitered in this scene.
+    * 
+    * @param _gameObject GameObject.
+    * 
+    * @return True if the GameObject is registerd in this scene.
+    */
+    bool
+    hasRegisteredGameObject(const GameObject& _gameObject) const;
 
   protected:    
 
@@ -126,6 +192,12 @@ namespace hk
     _exit();
 
     /**
+    * Destroy the scene and all its resources.
+    */
+    void
+    _destroy();
+
+    /**
     * Pointer to the scene manager.
     */
     SceneManager*
@@ -136,6 +208,11 @@ namespace hk
     */
     GameObject
     _m_root;
+
+    /**
+    * Map of registered GameObjects in this scene.
+    */
+    Map<String, GameObject*> _m_hGameObjects;
 
     friend SceneManager;
   };

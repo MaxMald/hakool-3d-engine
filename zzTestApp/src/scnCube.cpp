@@ -20,11 +20,13 @@ SceneCube::~SceneCube()
 void
 SceneCube::start()
 {
-  GameObject a("A");
-  GameObject b("B", a);
-  GameObject c("C");
+  GameObject& a = createGameObject("A");
+  GameObject& b = createGameObject("B");
+  GameObject* pC = new GameObject("C");
 
-  a.addChild(c);
+  registerGameObject(*pC);
+
+  a.addChild(*pC);
 
   GameObject& parent = b.getParent();
   GameObject& child = a.getChild("C");
