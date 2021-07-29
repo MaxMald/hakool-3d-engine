@@ -24,6 +24,13 @@ namespace hk
     kTesselation
   };
 
+  enum class HK_CORE_EXPORT eCAMERA_VIEW :
+    uchar
+  {
+    kPerspective,
+    kOrtographic
+  };
+
   /**
   * Enumerates the different types of components (or modular systems) used by
   * the Hakool Engine.
