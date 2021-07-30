@@ -40,6 +40,9 @@
     <Filter Include="Source Files\scene">
       <UniqueIdentifier>{b8ba696c-355f-49f7-93c9-185813fe89f1}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\graphics">
+      <UniqueIdentifier>{51824572-2a08-4777-ac16-b27e5c2a3e28}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\hakool.cpp">
@@ -68,6 +71,9 @@
     </ClCompile>
     <ClCompile Include="src\hkGameObject.cpp">
       <Filter>Source Files\scene</Filter>
+    </ClCompile>
+    <ClCompile Include="src\hkCamera.cpp">
+      <Filter>Source Files\graphics</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -121,6 +127,9 @@
     </ClInclude>
     <ClInclude Include="..\include\Hakool\Core\hkNode.h">
       <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\Hakool\Core\Graphics\hkCamera.h">
+      <Filter>Header Files\graphics</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

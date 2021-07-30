@@ -172,6 +172,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="src\hakool.cpp" />
+    <ClCompile Include="src\hkCamera.cpp" />
     <ClCompile Include="src\hkComponent.cpp" />
     <ClCompile Include="src\hkEngineComponent.cpp" />
     <ClCompile Include="src\hkGameObject.cpp" />
@@ -182,6 +183,7 @@
     <ClCompile Include="src\hkSceneManager.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\include\Hakool\Core\Graphics\hkCamera.h" />
     <ClInclude Include="..\include\Hakool\Core\Graphics\hkGraphicComponent.h" />
     <ClInclude Include="..\include\Hakool\Core\Graphics\hkIContext.h" />
     <ClInclude Include="..\include\Hakool\Core\Graphics\hkIProgram.h" />

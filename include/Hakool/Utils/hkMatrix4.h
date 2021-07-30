@@ -106,6 +106,48 @@ namespace hk
     GetLookAt(const Vector3f& _from, const Vector3f& _to, const Vector3f& _up);
 
     /**
+    * Get a perspective matrix.
+    * 
+    * @param _fov Field of view.
+    * @param _ratio Aspect ratio.
+    * @param _n Near.
+    * @param _f Far.
+    * 
+    * @return Perspective matrix.
+    */
+    static Matrix4
+    GetPerspective
+    (
+      const float& _fov, 
+      const float& _ratio, 
+      const float& _n, 
+      const float& _f
+    );
+
+    /**
+    * Get an Orthographic matrix.
+    * 
+    * @param _left Left.
+    * @param _top Top.
+    * @param _right Right.
+    * @param _bottom Bottom.
+    * @param _near Near.
+    * @param _far Far.
+    * 
+    * @return Orthographic matrix.
+    */
+    static Matrix4
+    GetOrthographic
+    (
+      const float& _left,
+      const float& _top,
+      const float& _right,
+      const float& _bottom,
+      const float& _near,
+      const float& _far
+    );
+
+    /**
     * Get the rotational matrix around the x axis.
     * 
     * @param _theta Angle in radians.
@@ -318,6 +360,48 @@ namespace hk
     */
     Matrix4&
     setLookAt(const Vector3f& _from, const Vector3f& _to, const Vector3f& _up);
+
+    /**
+    * Set this matrix as a perspective matrix.
+    *
+    * @param _fov Field of view.
+    * @param _ratio Aspect ratio.
+    * @param _n Near.
+    * @param _f Far.
+    *
+    * @return self.
+    */
+    Matrix4&
+    setPerspective
+    (
+      const float& _fov,
+      const float& _ratio,
+      const float& _n,
+      const float& _f
+    );
+
+    /**
+    * Set this matrix as an orthographic matrix.
+    *
+    * @param _left Left.
+    * @param _top Top.
+    * @param _right Right.
+    * @param _bottom Bottom.
+    * @param _near Near.
+    * @param _far Far.
+    *
+    * @return self.
+    */
+    Matrix4&
+    setOrthographic
+    (
+      const float& _left,
+      const float& _top,
+      const float& _right,
+      const float& _bottom,
+      const float& _near,
+      const float& _far
+    );
 
     /**
     * Set this matrix as a rotation matrix about the given axis (normalized) 

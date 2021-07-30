@@ -132,14 +132,68 @@ namespace hk
   (
     const Vector3f& _from,
     const Vector3f& _to, 
-    const Vector3f& _up
+    const Vector3f& _Y
   )
-  {
-    // TODO
-    return Matrix4();
+  {    
+    Vector3f forward = (_from - _to).normalize();
+    Vector3f right = (_from - _Y).normalize();
+    Vector3f up = (right - forward).normalize();
+
+    return Matrix4
+    (
+      right.x, right.y, right.z, -(right | _from),
+      up.x, up.y, up.z, -(up | _from),
+      -forward.x, -forward.y, -forward.z, -(-forward | _from),
+      0.0f, 0.0f, 0.0f, 1.0f
+    );
   }
 
   Matrix4 
+  Matrix4::GetPerspective
+  (
+    const float& _fov, 
+    const float& _ratio, 
+    const float& _n, 
+    const float& _f
+  )
+  {
+    float nminusf = 1.0f /(_n - _f);
+    float q = 1.0f / Math::Tan(_fov * 0.5);
+
+    return Matrix4
+    ( 
+      q/_ratio,   0.0f,   0.0f,   0.0f,
+      0.0f,  q,   0.0f,   0.0f,
+      0.0f,  0.0f, (_n+_f)*nminusf, 2*(_n*_f)*nminusf,
+      0.0f,  0.0f, -1.0f, 0.0f
+    );
+  }
+
+  Matrix4 
+  Matrix4::GetOrthographic
+  (
+    const float& _left, 
+    const float& _top, 
+    const float& _right, 
+    const float& _bottom, 
+    const float& _near, 
+    const float& _far
+  )
+  {
+    float rminusl = 1.0f / _right - _left;
+    float tminusb = 1.0f / _top - _bottom;
+    float fminusn = 1.0f / _far - _near;
+
+    return Matrix4
+    (
+      2 * rminusl, 0.0f, 0.0f, -(_right + _left) * rminusl,
+      0.0f, 2 * tminusb, 0.0f, -(_top + _bottom) * tminusb,
+      0.0f, 0.0f, -2*(fminusn), -(_far+_near) * fminusn,
+      0.0f, 0.0f, 0.0f, 1.0f
+    );
+  }
+
+  Matrix4
   Matrix4::GetRotationX(const float& _theta)
   {
     float c = Math::Cos(_theta);
@@ -475,18 +529,69 @@ namespace hk
   }
 
   Matrix4& 
-    Matrix4::setLookAt
+  Matrix4::setLookAt
   (
     const Vector3f& _from, 
     const Vector3f& _to, 
-    const Vector3f& _up
+    const Vector3f& _Y
   )
   {
+    Vector3f forward = (_from - _to).normalize();
+    Vector3f right = (_from - _Y).normalize();
+    Vector3f up = (right - forward).normalize();
+
+    m00 = right.x; m01 = right.y, m02 = right.z, m03 = -(right | _from);
+    m10 = up.x; m11 = up.y; m12 = up.z; m13 = -(up | _from);
+    m20 = -forward.x; m21 = -forward.y; m22 = -forward.z; m23 = -(-forward | _from);
+    m30 = 0.0f; m31 = 0.0f; m32 = 0.0f; m33 = 1.0f;
 
     return *this;
   }
 
   Matrix4& 
+  Matrix4::setPerspective
+  (
+    const float& _fov, 
+    const float& _ratio, 
+    const float& _n, 
+    const float& _f
+  )
+  {
+    float nminusf = 1.0f / (_n - _f);
+    float q = 1.0f / Math::Tan(_fov * 0.5);
+
+    m00 = q / _ratio; m01 = 0.0f, m02 = 0.0f, m03 = 0.0f;
+    m10 = 0.0f; m11 = q; m12 = 0.0f; m13 = 0.0f;
+    m20 = 0.0f; m21 = 0.0f; m22 = (_n + _f) * nminusf; m23 = 2 * (_n * _f) * nminusf;
+    m30 = 0.0f; m31 = 0.0f; m32 = -1.0f; m33 = 0.0f;
+
+    return *this;
+  }
+
+  Matrix4& 
+  Matrix4::setOrthographic
+  (
+    const float& _left, 
+    const float& _top, 
+    const float& _right, 
+    const float& _bottom, 
+    const float& _near, 
+    const float& _far
+  )
+  {
+    float rminusl = 1.0f / _right - _left;
+    float tminusb = 1.0f / _top - _bottom;
+    float fminusn = 1.0f / _far - _near;
+
+    m00 = 2 * rminusl; m01 = 0.0f, m02 = 0.0f, m03 = -(_right + _left) * rminusl;
+    m10 = 0.0f; m11 = 2 * tminusb; m12 = 0.0f; m13 = -(_top + _bottom) * tminusb;
+    m20 = 0.0f; m21 = 0.0f; m22 = -2 * (fminusn); m23 = -(_far + _near) * fminusn;
+    m30 = 0.0f; m31 = 0.0f; m32 = 0.0f; m33 = 1.0f;
+
+    return *this;
+  }
+
+  Matrix4&
   Matrix4::setRotation
   (
     const float& _theta, 

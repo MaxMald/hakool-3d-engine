@@ -28,7 +28,7 @@ namespace hk
     uchar
   {
     kPerspective,
-    kOrtographic
+    kOrthographic
   };
 
   /**
