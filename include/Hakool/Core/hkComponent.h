@@ -20,6 +20,11 @@ namespace hk
     Component();
 
     /**
+    * TODO.
+    */
+    Component(const eCOMPONENT& _m_id);
+
+    /**
     * Destructor.
     */
     virtual ~Component();
@@ -61,6 +66,12 @@ namespace hk
     */
     GameObject*
     _m_pGameObject;
+
+    /**
+    * Component identifier.
+    */
+    eCOMPONENT
+    _m_id;
 
     friend GameObject;
   };

@@ -45,7 +45,7 @@ namespace hk
 
     /**
     * Add a new scene to the application.
-
+    *
     * Returns 'ObjectAlreadyExits' if another scene has the same key; take into
     * account that the pointer will be deleted.
     *

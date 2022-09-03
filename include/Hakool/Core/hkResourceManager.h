@@ -8,6 +8,7 @@
 namespace hk
 {
   class Shader;
+  class Mesh;
 
   /**
   * TODO
@@ -41,6 +42,12 @@ namespace hk
     getShaders();
 
     /**
+    * Get Meshes.
+    */
+    ResourceGroup<Mesh>&
+    getMeshes();
+
+    /**
     * Clear from all resources.
     */
     void
@@ -59,5 +66,11 @@ namespace hk
     */
     ResourceGroup<Shader>
     _m_shaders;
+
+    /**
+    * Group of meshes.
+    */
+    ResourceGroup<Mesh>
+    _m_meshes;
   };
 }

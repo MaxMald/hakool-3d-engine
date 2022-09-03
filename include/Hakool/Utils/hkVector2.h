@@ -13,13 +13,30 @@ namespace hk
   {
   public:
 
+    /**
+     * Creates a 2D Vector with default values.
+     */
     Vector2();
 
+    /**
+     * Creates a 2D Vector.
+     * 
+     * @param _x X value.
+     * @param _y Y value.
+     */
     Vector2(const T& _x, const T& _y);
 
+    /**
+     * Creates a copy of a 2D Vector.
+     * 
+     * @param _vector 2D Vector.
+     */
     template <typename U>
     explicit Vector2(const Vector2<U>& _vector);
 
+    /**
+     * Destructor.
+     */
     ~Vector2();
 
     T&
@@ -79,7 +96,6 @@ namespace hk
     * The y component of this vector.
     */
     T y;
-
   };  
 
   /**
@@ -284,7 +300,7 @@ namespace hk
   operator/= (Vector2<T>& _v2, T _divisor);
 
   /**
-  * Calculate the projected vector from vector a onto vector _b. The result
+  * Calculate the projected vector from vector _a onto vector _b. The result
   * is set in the left vector.
   *
   * @param _a Vector.
@@ -606,11 +622,18 @@ namespace hk
     return (_a.x != _b.x || _a.y != _b.y);
   }
 
-  /***************************************************************************/
-  /*                                                                         */
-  /***************************************************************************/
-
+  /**
+   * A representation of a vector in 2-dimensional space with integers.
+   */
   typedef Vector2<int32> Vector2i;
+
+  /**
+   * A representation of a vector in 2-dimensional space with unsigned integers.
+   */
   typedef Vector2<uint32> Vector2u;
+
+  /**
+   * A representation of a vector in 2-dimensional space with floats.
+   */
   typedef Vector2<float> Vector2f;
 }

@@ -116,7 +116,7 @@ namespace hk
       return;
     }
 
-    // Dettach GameObject from current scene.
+    // Detach GameObject from current scene.
     if (_gameObject._m_pScene != nullptr)
     {
       _gameObject._m_pScene->unregisterGameObject(_gameObject);
@@ -138,7 +138,7 @@ namespace hk
       return;
     }
 
-    // Dettach GameObject from this scene.
+    // Detach GameObject from this scene.
     GameObject* pGameObject = _m_hGameObjects.find(_uuid)->second;
     pGameObject->_m_pScene = nullptr;
 

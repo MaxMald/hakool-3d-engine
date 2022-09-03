@@ -4,10 +4,12 @@
 #include <Hakool\Utils\hkLogger.h>
 
 #include <Hakool\Core\hkGameObject.h>
+#include <Hakool\Core\hkModelComponent.h>
 
 using hk::Logger;
 using hk::eRESULT;
 using hk::GameObject;
+using hk::ModelComponent;
 
 SceneCube::SceneCube()
 {
@@ -20,28 +22,13 @@ SceneCube::~SceneCube()
 void
 SceneCube::start()
 {
-  GameObject& a = createGameObject("A");
-  GameObject& b = createGameObject("B");
-  GameObject* pC = new GameObject("C");
-
-  registerGameObject(*pC);
-
-  a.addChild(*pC);
-
-  GameObject& parent = b.getParent();
-  GameObject& child = a.getChild("C");
-
-  a.removeChild(b.getName());
+  GameObject& cube = createGameObject("A");
   
-  if (a.hasParent()) {
-    Logger::Log("A has a parent");
-  }
+  // Create Model.
+  ModelComponent* pModel = new ModelComponent();
+  cube.addComponent(pModel);
 
-  if (b.hasParent()) {
-    Logger::Log("B has a parent");
-  }
-
-  b.addChild(a);
+  cube.init();
 
   return;
 }

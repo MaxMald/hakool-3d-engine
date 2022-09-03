@@ -59,5 +59,8 @@
     <ClInclude Include="..\include\Hakool\GraphicsOpenGL\hkShaderOpenGL.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="..\include\Hakool\GraphicsOpenGL\hkMeshOpenGL.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

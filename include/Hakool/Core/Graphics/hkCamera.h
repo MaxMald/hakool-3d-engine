@@ -8,14 +8,14 @@
 namespace hk
 {
   /**
-  * TODO
+  * Class to render objects in Hakool. It can be rotated, positioned and zoomed.
   */
   class HK_CORE_EXPORT Camera
   {
   public:
 
     /**
-    * Create a camera with its default values.
+    * Create a camera with default values.
     */
     Camera();
 

@@ -2,8 +2,17 @@
 
 namespace hk
 {
-  Component::Component()
-    : _m_pGameObject(nullptr)
+  Component::Component() : 
+    _m_pGameObject(nullptr),
+    _m_id(eCOMPONENT::kUndefined)
+  {
+    // Intentionally blank
+    return;
+  }
+
+  Component::Component(const eCOMPONENT& _m_id) :
+    _m_pGameObject(nullptr),
+    _m_id(_m_id)
   {
     // Intentionally blank
     return;
@@ -46,6 +55,6 @@ namespace hk
   eCOMPONENT 
   Component::getID()
   {
-    return eCOMPONENT::kUndefined;
+    return _m_id;
   }
 }

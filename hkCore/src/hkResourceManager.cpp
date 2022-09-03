@@ -27,10 +27,17 @@ namespace hk
     return _m_shaders;
   }
 
+  ResourceGroup<Mesh>& 
+  ResourceManager::getMeshes()
+  {
+    return _m_meshes;
+  }
+
   void 
   ResourceManager::clear()
   {
     _m_shaders.clear();
+    _m_meshes.clear();
 
     return;
   }
@@ -38,7 +45,7 @@ namespace hk
   void 
   ResourceManager::destroy()
   {
-    _m_shaders.clear();
+    clear();
 
     return;
   }
