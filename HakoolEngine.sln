@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 16
-VisualStudioVersion = 16.0.31019.35
+# Visual Studio Version 17
+VisualStudioVersion = 17.2.32630.192
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "hkCore", "hkCore\hkCore.vcxproj", "{0CDFADB7-9DBC-45C1-988D-61CA58BD0841}"
 	ProjectSection(ProjectDependencies) = postProject
@@ -12,15 +12,21 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "hkUtilities", "hkUtilities\
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "zzTestApp", "zzTestApp\zzTestApp.vcxproj", "{EB6CBAC4-A7CD-4F1F-B624-E81251D8733F}"
 	ProjectSection(ProjectDependencies) = postProject
+		{0CDFADB7-9DBC-45C1-988D-61CA58BD0841} = {0CDFADB7-9DBC-45C1-988D-61CA58BD0841}
 		{1F371B19-A620-4893-A67C-7EAA5B33C7D3} = {1F371B19-A620-4893-A67C-7EAA5B33C7D3}
 		{D20F331F-E667-4806-A327-A1CA269E8278} = {D20F331F-E667-4806-A327-A1CA269E8278}
-		{0CDFADB7-9DBC-45C1-988D-61CA58BD0841} = {0CDFADB7-9DBC-45C1-988D-61CA58BD0841}
 	EndProjectSection
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "hkGraphicsOpenGL", "hkGraphicsOpenGL\hkGraphicsOpenGL.vcxproj", "{D20F331F-E667-4806-A327-A1CA269E8278}"
 	ProjectSection(ProjectDependencies) = postProject
-		{1F371B19-A620-4893-A67C-7EAA5B33C7D3} = {1F371B19-A620-4893-A67C-7EAA5B33C7D3}
 		{0CDFADB7-9DBC-45C1-988D-61CA58BD0841} = {0CDFADB7-9DBC-45C1-988D-61CA58BD0841}
+		{1F371B19-A620-4893-A67C-7EAA5B33C7D3} = {1F371B19-A620-4893-A67C-7EAA5B33C7D3}
+	EndProjectSection
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "hkEditor", "hkEditor\hkEditor.vcxproj", "{3B6A52A4-B520-47F1-A38A-52ABD0028703}"
+	ProjectSection(ProjectDependencies) = postProject
+		{0CDFADB7-9DBC-45C1-988D-61CA58BD0841} = {0CDFADB7-9DBC-45C1-988D-61CA58BD0841}
+		{D20F331F-E667-4806-A327-A1CA269E8278} = {D20F331F-E667-4806-A327-A1CA269E8278}
 	EndProjectSection
 EndProject
 Global
@@ -63,6 +69,14 @@ Global
 		{D20F331F-E667-4806-A327-A1CA269E8278}.Release|x64.Build.0 = Release|x64
 		{D20F331F-E667-4806-A327-A1CA269E8278}.Release|x86.ActiveCfg = Release|Win32
 		{D20F331F-E667-4806-A327-A1CA269E8278}.Release|x86.Build.0 = Release|Win32
+		{3B6A52A4-B520-47F1-A38A-52ABD0028703}.Debug|x64.ActiveCfg = Debug|x64
+		{3B6A52A4-B520-47F1-A38A-52ABD0028703}.Debug|x64.Build.0 = Debug|x64
+		{3B6A52A4-B520-47F1-A38A-52ABD0028703}.Debug|x86.ActiveCfg = Debug|x64
+		{3B6A52A4-B520-47F1-A38A-52ABD0028703}.Debug|x86.Build.0 = Debug|x64
+		{3B6A52A4-B520-47F1-A38A-52ABD0028703}.Release|x64.ActiveCfg = Release|x64
+		{3B6A52A4-B520-47F1-A38A-52ABD0028703}.Release|x64.Build.0 = Release|x64
+		{3B6A52A4-B520-47F1-A38A-52ABD0028703}.Release|x86.ActiveCfg = Release|x64
+		{3B6A52A4-B520-47F1-A38A-52ABD0028703}.Release|x86.Build.0 = Release|x64
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
