@@ -12,7 +12,7 @@ int main(int argc, char *argv[])
     editorApp.setApplicationVersion("0.0.0");
     
     Editor editor;
-
+    editor.init();
     editor.show();
     return editorApp.exec();
 }

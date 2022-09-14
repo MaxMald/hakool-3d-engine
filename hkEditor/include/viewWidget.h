@@ -17,6 +17,9 @@ public:
 
   virtual ~ViewWidget();
 
+  virtual void
+  paintEvent(QPaintEvent* event) override;
+
 private:
 
   Hakool& m_hakool;
