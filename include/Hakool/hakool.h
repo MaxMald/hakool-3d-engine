@@ -2,7 +2,6 @@
 
 #include <Hakool\Utils\hkUtilitiesUtilities.h>
 #include <Hakool\Utils\hkPluginManager.h>
-
 #include <Hakool\Core\hkCorePrerequisites.h>
 #include <Hakool\Core\hkSceneManager.h>
 #include <Hakool\Core\hkResourceManager.h>
@@ -30,35 +29,6 @@ namespace hk
     Start();
 
     /**
-    * Initialize the Hakool engine with the desire configuration.
-    */
-    static eRESULT
-    Init(HakoolConfiguration& _config);
-
-    /**
-    * Run the application. This will start the game loop.
-    * 
-    * @param _key The key of the entry scene.
-    */
-    static void
-    Run(const String& _sceneKey);
-
-    /**
-    * Add a new scene to the application.
-    *
-    * Returns 'ObjectAlreadyExits' if another scene has the same key; take into
-    * account that the pointer will be deleted.
-    *
-    * @param _key The scene identifier.
-    * @param _pScene The pointer to the scene.
-    *
-    * @returns 'Success' if the scene was added without problems. Returns
-    * 'ObjectAlreadyExists' if there is another scene with the same key.
-    */
-    static eRESULT
-    AddScene(const String& _key, Scene* _pScene);
-
-    /**
     * Safely close and destroy the engine and all its systems.
     */
     static void
@@ -73,18 +43,54 @@ namespace hk
     GetEngine();
 
     /**
+    * Initialize the engine.
+    *
+    * @param _config Configuration object that describes the properties of the
+    * Hakool engine.
+    * @param _pLogger Logger.
+    *
+    * @return Operation result.
+    */
+    eRESULT
+    init(HakoolConfiguration& _config, Logger* _pLogger);
+
+    /**
+     * @brief TODO
+     */
+    eRESULT
+    update();
+
+    /**
+     * @brief TODO
+     */
+    eRESULT
+    postUpdate();
+
+    /**
+     * @brief TODO
+     */
+    eRESULT
+    draw();
+
+    /**
+    * Safely free any resources and references.
+    */
+    void
+    clean();
+
+    /**
     * Get the reference to the resource manager.
     * 
     * @return Resource manager.
     */
     ResourceManager&
-    getResource();
+    getResourceManager();
 
     /**
     * Get the reference to the scene manager.
     */
     SceneManager&
-    getScene();
+    getSceneManager();
 
   private:
 
@@ -125,26 +131,7 @@ namespace hk
     * Disable assignment operator.
     */
     Hakool&
-    operator=(const Hakool&&) = delete;
-
-    /**
-    * Initialize the engine.
-    *
-    * @param _config Configuration object that describes the properties of the
-    * Hakool engine.
-    *
-    * @return Operation result.
-    */
-    eRESULT
-    _init(HakoolConfiguration& _config);
-
-    /**
-    * Run the game engine loop.
-    * 
-    * @param _sceneKey The key of the entry scene.
-    */
-    void
-    _run(const String& _sceneKey);
+    operator=(const Hakool&&) = delete;   
 
     /**
     * Prepare and initialize the engine with all its system.
@@ -157,27 +144,6 @@ namespace hk
     */
     void
     _onShutdown();
-
-    /**
-    * Safely free any resources and references.
-    */
-    void
-    _clean();
-
-    /**
-    * Add a new scene to the scene manager.
-
-    * Returns 'ObjectAlreadyExits' if another scene has the same key; take into
-    * account that the pointer will be deleted.
-    *
-    * @param _key The scene identifier.
-    * @param _pScene The pointer to the scene.
-    *
-    * @returns 'Success' if the scene was added without problems. Returns
-    * 'ObjectAlreadyExists' if there is another scene with the same key.
-    */
-    eRESULT
-    _addScene(const String & _key, Scene* _pScene);
 
     /**
     * Pointer to the graphic system.

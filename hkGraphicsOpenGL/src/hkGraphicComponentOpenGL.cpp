@@ -106,7 +106,7 @@ namespace hk
 
     // Add vertex shader to the resource manager.
 
-    ResourceManager& resourceManager = _m_hakool->getResource();
+    ResourceManager& resourceManager = _m_hakool->getResourceManager();
     ResourceGroup<Shader>& shaders = resourceManager.getShaders();
     result = shaders.add
     (
@@ -192,9 +192,7 @@ namespace hk
   GraphicComponentOpenGL::update()
   {
     _draw();
-
     SwapBuffers(GetDC(_m_pWindow->getWindowHandler()));
-
     return;
   }
 
@@ -270,7 +268,7 @@ namespace hk
 
     // Destroy default shader objects
 
-    ResourceManager & resourceManager = _m_hakool->getResource();
+    ResourceManager & resourceManager = _m_hakool->getResourceManager();
     ResourceGroup<Shader>& shaders = resourceManager.getShaders();
     
     if (shaders.has("__fragment_default"))

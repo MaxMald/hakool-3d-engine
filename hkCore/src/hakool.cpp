@@ -2,7 +2,6 @@
 #include <Hakool\Utils\hkWindow.h>
 #include <Hakool\Utils\hkIPlugin.h>
 #include <Hakool\Utils\hkLoggerConsole.h>
-
 #include <Hakool\hakool.h>
 #include <Hakool\Core\hkCoreUtilities.h>
 #include <Hakool\Core\Graphics\hkGraphicComponent.h>
@@ -29,51 +28,6 @@ namespace hk
     return;
   }
 
-  eRESULT 
-  Hakool::Init(HakoolConfiguration& _config)
-  {
-    if (!Hakool::_IsReady())
-    {
-      Logger::Error
-      (
-        "Hakool module has not been started. Did you forget to call 'Start'?"
-      );
-      return eRESULT::kFail;
-    }
-
-    return Hakool::_Singleton()->_init(_config);
-  }
-
-  void 
-  Hakool::Run(const String& _sceneKey)
-  {
-    if (!Hakool::_IsReady())
-    {
-      Logger::Error
-      (
-        "Hakool module has not been started. Did you forget to call 'Start'?"
-      );
-      return;
-    }
-
-    return Hakool::_Singleton()->_run(_sceneKey);
-  }
-  
-  eRESULT 
-  Hakool::AddScene(const String& _key, Scene* _pScene)
-  {
-    if (!Hakool::_IsReady())
-    {
-      Logger::Error
-      (
-        "Hakool module has not been started. Did you forget to call 'Start'?"
-      );
-      return eRESULT::kFail;
-    }
-
-    return Hakool::_Singleton()->_addScene(_key, _pScene);
-  }
-
   void
   Hakool::Shutdown()
   {
@@ -95,32 +49,10 @@ namespace hk
     return Hakool::_Singleton();
   }
 
-  ResourceManager& 
-  Hakool::getResource()
-  {
-    return this->_m_resourceManager;
-  }
-
-  SceneManager& 
-  Hakool::getScene()
-  {
-    return this->_m_sceneManager;
-  }
-
-  Hakool::Hakool():
-    _m_isInitialized(false),
-    _m_isRunning(false),
-    _m_pGraphicComponent(nullptr),
-    _m_pLogger(nullptr),
-    _m_pWindow(nullptr),
-    _m_sceneManager(),
-    _m_resourceManager()
-  {
-    return;
-  }
-
   eRESULT
-  Hakool::_init(HakoolConfiguration& _config)
+    Hakool::init(
+      HakoolConfiguration& _config,
+      Logger* _pLogger)
   {
     if (_m_isInitialized)
     {
@@ -128,24 +60,27 @@ namespace hk
       return eRESULT::kFail;
     }
 
-    // Logger
+    Logger::Prepare(_pLogger);
 
-    Logger::Prepare(new LoggerConsole());
-
-    // Application's window
-
-    _m_pWindow = WindowFactory::GetWindow();    
-    eRESULT result = _m_pWindow->init(_config.windowConfiguration);
-    if (result != eRESULT::kSuccess)
+    eRESULT result;
+    if (_config.windowConfiguration.pWindow != nullptr)
     {
-      Logger::Error("Couldn't initialize the window.");
-      _clean();
+      _m_pWindow = _config.windowConfiguration.pWindow;
+    }
+    else
+    {
+      _m_pWindow = WindowFactory::GetWindow();
+      result = _m_pWindow->init(_config.windowConfiguration);
+      if (result != eRESULT::kSuccess)
+      {
+        Logger::Error("Couldn't initialize the window.");
+        clean();
 
-      return result;
+        return result;
+      }
     }
 
     // GraphicComponent
-
     if (_config.graphicsConfiguration.graphicInterface == eGRAPHIC_INTERFACE::kOpenGL)
     {
       result = _m_pluginManager.connectPlugin
@@ -159,7 +94,7 @@ namespace hk
       if (result != eRESULT::kSuccess)
       {
         Logger::Error("Couldn't connect to the graphics library.");
-        _clean();
+        clean();
 
         return result;
       }
@@ -169,12 +104,12 @@ namespace hk
         IPlugin* plugin = _m_pluginManager.getPlugin("GraphicsDLL");
         _m_pGraphicComponent = reinterpret_cast<GraphicComponent*>(plugin->getData());
         _m_pGraphicComponent->setHakool(*this);
-        
+
         result = _m_pGraphicComponent->init(_m_pWindow, _config.graphicsConfiguration);
         if (result != eRESULT::kSuccess)
         {
           Logger::Error("Couldn't initialize the graphics.");
-          _clean();
+          clean();
 
           return result;
         }
@@ -182,7 +117,7 @@ namespace hk
       else
       {
         Logger::Error("Couldn't find the graphics plug-in.");
-        _clean();
+        clean();
 
         return eRESULT::kFail;
       }
@@ -190,77 +125,43 @@ namespace hk
     else
     {
       Logger::Error("Graphic API not implemented yet.");
-      _clean();
+      clean();
 
       return eRESULT::kFail;
     }
+
+    // SceneManager
+    _m_sceneManager.init(this);
 
     _m_isInitialized = !_m_isInitialized;
 
     return eRESULT::kSuccess;
   }
 
-  void
-  Hakool::_run(const String& _sceneKey)
+  eRESULT 
+  Hakool::update()
   {
-    if (!_m_isInitialized)
-    {
-      Logger::Error("Hakool has not been initialized yet.");
-      return;
-    }
-
-    if (_m_isRunning)
-    {
-      Logger::Error("Hakool is already running.");
-      return;
-    }
-
-    _m_isRunning = !_m_isRunning;
-
-    _m_sceneManager.init(this);
-    _m_sceneManager.setActive(_sceneKey);
-
-    while (_m_pWindow->isOpen())
-    {
-      // Update stage
-      
-      _m_pWindow->update();
-      _m_sceneManager.update();
-      _m_pGraphicComponent->update();
-
-      // Post-update stage
-
-      _m_pWindow->postUpdate();
-    }
-
-    _clean();
-
-    _m_isInitialized = !_m_isInitialized;
-    _m_isRunning = !_m_isRunning;
-
-    return;
+    _m_pWindow->update();
+    _m_sceneManager.update();
+    _m_pGraphicComponent->update();
+    return eRESULT::kSuccess;
   }
-  
-  void 
-  Hakool::_onPrepare()
+
+  eRESULT 
+  Hakool::postUpdate()
   {
-    return;
+    _m_pWindow->postUpdate();
+    return eRESULT::kSuccess;
+  }
+
+  eRESULT 
+  Hakool::draw()
+  {
+    return eRESULT::kSuccess;
   }
 
   void 
-  Hakool::_onShutdown()
-  {
-    _clean();
-
-    _m_resourceManager.destroy();
-    _m_pluginManager.destroy();
-    _m_sceneManager.destroy();
-    Logger::Shutdown();
-
-    return;
-  }
-
-  void Hakool::_clean()
+  Hakool::clean()
   {
     _m_sceneManager.clear();
 
@@ -283,10 +184,47 @@ namespace hk
     return;
   }
 
-  eRESULT 
-  Hakool::_addScene(const String& _key, Scene* _pScene)
+  ResourceManager& 
+  Hakool::getResourceManager()
   {
-    return this->_m_sceneManager.add(_key, _pScene);
+    return this->_m_resourceManager;
+  }
+
+  SceneManager& 
+  Hakool::getSceneManager()
+  {
+    return this->_m_sceneManager;
+  }
+
+  Hakool::Hakool():
+    _m_isInitialized(false),
+    _m_isRunning(false),
+    _m_pGraphicComponent(nullptr),
+    _m_pLogger(nullptr),
+    _m_pWindow(nullptr),
+    _m_sceneManager(),
+    _m_resourceManager()
+  {
+    return;
+  }
+  
+  void 
+  Hakool::_onPrepare()
+  {
+    return;
+  }
+
+  void 
+  Hakool::_onShutdown()
+  {
+    clean();
+
+    _m_resourceManager.destroy();
+    _m_pluginManager.destroy();
+    _m_sceneManager.destroy();
+    Logger::Shutdown();
+
+    return;
   }
 
   Hakool*& 

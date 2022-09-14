@@ -1,10 +1,12 @@
 #pragma once
 
-#include<Hakool\Utils\hkUtilsPrerequisites.h>
+#include <Hakool\Utils\hkUtilsPrerequisites.h>
 #include <Hakool\Utils\hkMath.h>
 
 namespace hk
 {
+  class Window;
+
   /**
   *
   */
@@ -37,7 +39,8 @@ namespace hk
     WindowConfiguration() :
       width(256),
       height(256),
-      title("Hakool Window")
+      title("Hakool Window"),
+      pWindow(nullptr)
     {
       return;
     }
@@ -46,19 +49,25 @@ namespace hk
     * Screen width in pixels.
     */
     uint32
-      width;
+    width;
 
     /**
     * Screen height in pixels.
     */
     uint32
-      height;
+    height;
 
     /**
     * The title of the window.
     */
     String
-      title;
+    title;
+
+    /**
+     * Window.
+     */
+    Window*
+    pWindow;
   };
 
   /**
@@ -70,7 +79,7 @@ namespace hk
   * @return True if both numbers are relatively equal.
   */
   HK_UTILITY_EXPORT bool
-    RelativelyEqual(const float& _a, const float& _b);
+  RelativelyEqual(const float& _a, const float& _b);
 
   /**
   *

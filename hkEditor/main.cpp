@@ -3,8 +3,16 @@
 
 int main(int argc, char *argv[])
 {
-    QApplication a(argc, argv);
-    Editor w;
-    w.show();
-    return a.exec();
+    QApplication editorApp(argc, argv);
+
+    editorApp.setOrganizationName("HummingFlight");
+    editorApp.setOrganizationDomain("https://hummingflight.com");
+    editorApp.setApplicationName("Hakool Editor");
+    editorApp.setApplicationDisplayName("Hakool Editor");
+    editorApp.setApplicationVersion("0.0.0");
+    
+    Editor editor;
+
+    editor.show();
+    return editorApp.exec();
 }
