@@ -99,7 +99,7 @@
     <ClInclude Include="..\include\Hakool\Utils\hkConfigWindow.h">
       <Filter>Header Files\config</Filter>
     </ClInclude>
-    <ClInclude Include="..\include\Hakool\Utils\hkWindowFactory.h">
+    <ClInclude Include="..\include\Hakool\Utils\hkIWindowFactory.h">
       <Filter>Header Files\window</Filter>
     </ClInclude>
     <ClInclude Include="..\include\Hakool\Utils\hkColor.h">
@@ -107,6 +107,9 @@
     </ClInclude>
     <ClInclude Include="..\include\Hakool\Utils\guid.hpp">
       <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\Hakool\Utils\hkWindowFactoryWin32.h">
+      <Filter>Header Files\window</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -142,7 +145,7 @@
     <ClCompile Include="src\hkWindowWin32.cpp">
       <Filter>Source Files\window</Filter>
     </ClCompile>
-    <ClCompile Include="src\hkWindowFactory.cpp">
+    <ClCompile Include="src\hkWindowFactoryWin32.cpp">
       <Filter>Source Files\window</Filter>
     </ClCompile>
     <ClCompile Include="src\hkColor.cpp">

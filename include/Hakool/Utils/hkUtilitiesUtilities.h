@@ -39,8 +39,7 @@ namespace hk
     WindowConfiguration() :
       width(256),
       height(256),
-      title("Hakool Window"),
-      pWindow(nullptr)
+      title("Hakool Window")
     {
       return;
     }
@@ -62,12 +61,6 @@ namespace hk
     */
     String
     title;
-
-    /**
-     * Window.
-     */
-    Window*
-    pWindow;
   };
 
   /**

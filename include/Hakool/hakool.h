@@ -2,6 +2,7 @@
 
 #include <Hakool\Utils\hkUtilitiesUtilities.h>
 #include <Hakool\Utils\hkPluginManager.h>
+#include <Hakool\Utils\hkIWindowFactory.h>
 #include <Hakool\Core\hkCorePrerequisites.h>
 #include <Hakool\Core\hkSceneManager.h>
 #include <Hakool\Core\hkResourceManager.h>
@@ -47,12 +48,16 @@ namespace hk
     *
     * @param _config Configuration object that describes the properties of the
     * Hakool engine.
-    * @param _pLogger Logger.
+    * @param _pLogger Pointer to the logger.
+    * @param _windowFactory Reference to the window factory.
     *
     * @return Operation result.
     */
     eRESULT
-    init(HakoolConfiguration& _config, Logger* _pLogger);
+    init(
+      HakoolConfiguration& _config, 
+      Logger* _pLogger,
+      IWindowFactory& _windowFactory);
 
     /**
      * @brief TODO

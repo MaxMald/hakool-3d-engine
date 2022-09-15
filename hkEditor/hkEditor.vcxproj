@@ -119,9 +119,9 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="src\hkWindowFactoryQtWidget.cpp" />
     <ClCompile Include="src\plainTextWidgetLogger.cpp" />
-    <ClCompile Include="src\viewWidget.cpp" />
-    <ClCompile Include="src\windowWidget.cpp" />
+    <ClCompile Include="src\hkWindowQtWidget.cpp" />
     <QtRcc Include="Editor.qrc" />
     <QtUic Include="Editor.ui" />
     <QtMoc Include="Editor.h" />
@@ -129,9 +129,9 @@
     <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="include\hkWindowFactoryQtWidget.h" />
     <ClInclude Include="include\plainTextWidgetLogger.h" />
-    <ClInclude Include="include\viewWidget.h" />
-    <ClInclude Include="include\windowWidget.h" />
+    <ClInclude Include="include\hkWindowQtWidget.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Condition="Exists('$(QtMsBuild)\qt.targets')">

@@ -21,6 +21,18 @@
       <UniqueIdentifier>{639EADAA-A684-42e4-A9AD-28FC9BCB8F7C}</UniqueIdentifier>
       <Extensions>ts</Extensions>
     </Filter>
+    <Filter Include="Source Files\Forms">
+      <UniqueIdentifier>{eaa4dfd5-8ba8-4a59-8931-d053fbdbde34}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Forms">
+      <UniqueIdentifier>{389c22bd-a804-4091-a1da-133ae799bdd6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Window">
+      <UniqueIdentifier>{1d0e8fe2-9d08-4e5a-b418-4fee3d82b790}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Window">
+      <UniqueIdentifier>{689dea86-7194-4564-a40c-deee41f34022}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <QtRcc Include="Editor.qrc">
@@ -29,36 +41,38 @@
     <QtUic Include="Editor.ui">
       <Filter>Form Files</Filter>
     </QtUic>
-    <QtMoc Include="Editor.h">
-      <Filter>Header Files</Filter>
-    </QtMoc>
-    <ClCompile Include="Editor.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\windowWidget.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="src\viewWidget.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="src\plainTextWidgetLogger.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Editor.cpp">
+      <Filter>Source Files\Forms</Filter>
+    </ClCompile>
+    <ClCompile Include="src\hkWindowFactoryQtWidget.cpp">
+      <Filter>Source Files\Window</Filter>
+    </ClCompile>
+    <ClCompile Include="src\hkWindowQtWidget.cpp">
+      <Filter>Source Files\Window</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="include\windowWidget.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="include\plainTextWidgetLogger.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="include\viewWidget.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="include\hkWindowFactoryQtWidget.h">
+      <Filter>Header Files\Window</Filter>
     </ClInclude>
+    <ClInclude Include="include\hkWindowQtWidget.h">
+      <Filter>Header Files\Window</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <QtMoc Include="Editor.h">
+      <Filter>Header Files\Forms</Filter>
+    </QtMoc>
   </ItemGroup>
 </Project>

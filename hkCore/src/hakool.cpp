@@ -1,4 +1,3 @@
-#include <Hakool\Utils\hkWindowFactory.h>
 #include <Hakool\Utils\hkWindow.h>
 #include <Hakool\Utils\hkIPlugin.h>
 #include <Hakool\Utils\hkLoggerConsole.h>
@@ -50,34 +49,28 @@ namespace hk
   }
 
   eRESULT
-    Hakool::init(
-      HakoolConfiguration& _config,
-      Logger* _pLogger)
+  Hakool::init(
+    HakoolConfiguration& _config,
+    Logger* _pLogger,
+    IWindowFactory& _windowFactory)
   {
     if (_m_isInitialized)
     {
       Logger::Error("Hakool is already initialized");
       return eRESULT::kFail;
     }
-
     Logger::Prepare(_pLogger);
-
     eRESULT result;
-    if (_config.windowConfiguration.pWindow != nullptr)
+    
+    // Window
+    _m_pWindow = _windowFactory.createHakoolWindow();
+    result = _m_pWindow->init(_config.windowConfiguration);
+    if (result != eRESULT::kSuccess)
     {
-      _m_pWindow = _config.windowConfiguration.pWindow;
-    }
-    else
-    {
-      _m_pWindow = WindowFactory::GetWindow();
-      result = _m_pWindow->init(_config.windowConfiguration);
-      if (result != eRESULT::kSuccess)
-      {
-        Logger::Error("Couldn't initialize the window.");
-        clean();
+      Logger::Error("Couldn't initialize the window.");
+      clean();
 
-        return result;
-      }
+      return result;
     }
 
     // GraphicComponent

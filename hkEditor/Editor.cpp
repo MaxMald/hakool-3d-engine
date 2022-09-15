@@ -1,12 +1,14 @@
 #include "Editor.h"
 
+#include <QBoxLayout>
 #include <QHBoxLayout>
 
 #include <Hakool\hakool.h>
 #include <Hakool/Core/hkCoreUtilities.h>
 
 #include "plainTextWidgetLogger.h"
-#include "viewWidget.h"
+#include "hkWindowQtWidget.h"
+#include "hkWindowFactoryQtWidget.h"
 
 using hk::Hakool;
 using hk::Color;
@@ -25,18 +27,13 @@ void
 Editor::init()
 {
   Hakool::Start();
-  Hakool* pEngine = Hakool::GetEngine();
+  Hakool* pEngine = Hakool::GetEngine();  
 
-  ViewWidget* pViewWidget = new ViewWidget(ui.viewGroup, *pEngine);
-  QHBoxLayout* pHBoxLayout = new QHBoxLayout(ui.viewGroup);
-  pHBoxLayout->addWidget(pViewWidget);
-
-  m_windowWidget.SetWId(pViewWidget->winId());
+  hk::WindowFactoryQtWidget windowFactory(*pEngine, ui.viewGroup);
 
   hk::HakoolConfiguration engineConfig;
-  engineConfig.windowConfiguration.pWindow = &m_windowWidget;
   engineConfig.graphicsConfiguration.graphicInterface = hk::eGRAPHIC_INTERFACE::kOpenGL;
   engineConfig.graphicsConfiguration.backgroundColor = hk::Color::RED;
 
-  pEngine->init(engineConfig, new PlainTextWidgetLogger());
+  pEngine->init(engineConfig, new PlainTextWidgetLogger(), windowFactory);
 }

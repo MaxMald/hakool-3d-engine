@@ -42,7 +42,8 @@
     <ClInclude Include="..\include\Hakool\Utils\hkVector3.h" />
     <ClInclude Include="..\include\Hakool\Utils\hkVector4.h" />
     <ClInclude Include="..\include\Hakool\Utils\hkWindow.h" />
-    <ClInclude Include="..\include\Hakool\Utils\hkWindowFactory.h" />
+    <ClInclude Include="..\include\Hakool\Utils\hkIWindowFactory.h" />
+    <ClInclude Include="..\include\Hakool\Utils\hkWindowFactoryWin32.h" />
     <ClInclude Include="..\include\Hakool\Utils\hkWindowWin32.h" />
   </ItemGroup>
   <ItemGroup>
@@ -59,7 +60,7 @@
     <ClCompile Include="src\hkPluginManager.cpp" />
     <ClCompile Include="src\hkPluginSlotWin.cpp" />
     <ClCompile Include="src\hkWindow.cpp" />
-    <ClCompile Include="src\hkWindowFactory.cpp" />
+    <ClCompile Include="src\hkWindowFactoryWin32.cpp" />
     <ClCompile Include="src\hkWindowWin32.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
