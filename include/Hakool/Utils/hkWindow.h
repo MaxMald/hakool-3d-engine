@@ -7,6 +7,8 @@
 
 namespace hk
 {
+  class WindowObserver;
+
   /**
   * Provides a common interface for all specific-platform window instances.
   */
@@ -95,6 +97,14 @@ namespace hk
     destroy();
 
     /**
+     * Adds an observer to this Window.
+     *
+     * @param observer Observer.
+     */
+    void
+    addObserver(const WindowObserver* pObserver);
+
+    /**
     * Get the size of the rendering region of the window (pixels).
     *
     * @return The size in pixels.
@@ -139,5 +149,10 @@ namespace hk
     */
     Vector2u 
     _m_size;
+
+    /**
+     * List of observers to this window's events.
+     */
+    Vector<const WindowObserver*> _m_observers;
   };
 }

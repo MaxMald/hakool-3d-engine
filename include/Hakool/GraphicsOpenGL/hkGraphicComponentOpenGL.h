@@ -87,6 +87,9 @@ namespace hk
     virtual eGRAPHIC_INTERFACE
     getGraphicInterfaceId() override;
 
+    virtual void
+    onWindowSizeChanged(Window& window) const override;
+
     /**
     * Pointer to the window.
     */

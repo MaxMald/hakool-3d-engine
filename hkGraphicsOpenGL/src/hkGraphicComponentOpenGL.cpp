@@ -185,6 +185,9 @@ namespace hk
 
     _m_isReady = !_m_isReady;
 
+    // Subscribe to events
+    _m_pWindow->addObserver(this);
+
     return eRESULT::kSuccess;
   }
 
@@ -232,6 +235,13 @@ namespace hk
   GraphicComponentOpenGL::getGraphicInterfaceId()
   {
     return this->_m_graphicInterfaceId;
+  }
+
+  void 
+  GraphicComponentOpenGL::onWindowSizeChanged(Window& window) const
+  {
+    glViewport(0, 0, window.getWidth(), window.getHeight());
+    return;
   }
 
   void 

@@ -32,6 +32,8 @@ Editor::init()
   hk::WindowFactoryQtWidget windowFactory(*pEngine, ui.viewGroup);
 
   hk::HakoolConfiguration engineConfig;
+  engineConfig.windowConfiguration.height = 800;
+  engineConfig.windowConfiguration.width = 800;
   engineConfig.graphicsConfiguration.graphicInterface = hk::eGRAPHIC_INTERFACE::kOpenGL;
   engineConfig.graphicsConfiguration.backgroundColor = hk::Color::RED;
 

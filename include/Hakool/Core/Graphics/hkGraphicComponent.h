@@ -1,5 +1,6 @@
 #pragma once
 
+#include <Hakool\Utils\hkWindowObserver.h>
 #include <Hakool\Core\hkCorePrerequisites.h>
 #include <Hakool\Core\hkEngineComponent.h>
 
@@ -14,7 +15,7 @@ namespace hk
   * Provides a common interface for graphics component.
   */
   class HK_CORE_EXPORT GraphicComponent
-  : public EngineComponent 
+  : public EngineComponent, public WindowObserver
   {
   public:
 
@@ -82,6 +83,14 @@ namespace hk
     */
     virtual eGRAPHIC_INTERFACE
     getGraphicInterfaceId();
+
+    /**
+     * Called when the window's size has changed.
+     *
+     * @param window Reference to the window which size has changed.
+     */
+    virtual void
+    onWindowSizeChanged(Window& window) const override;
 
   protected:
 

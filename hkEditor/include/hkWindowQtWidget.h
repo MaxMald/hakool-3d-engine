@@ -45,6 +45,12 @@ public:
   virtual void
   paintEvent(QPaintEvent* event) override;
 
+  virtual QPaintEngine*
+  paintEngine() const;
+
+  virtual void
+  resizeEvent(QResizeEvent* event);
+
 private:
 
   Hakool& m_hakool;

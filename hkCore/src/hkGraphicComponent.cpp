@@ -20,7 +20,7 @@ namespace hk
     const GraphicsConfiguration& _graphicConfiguration
   )
   {
-      return eRESULT::kFail;
+    return eRESULT::kFail;
   }
 
   void 
@@ -57,5 +57,10 @@ namespace hk
   GraphicComponent::getGraphicInterfaceId()
   {
     return this->_m_graphicInterfaceId;
+  }
+
+  void 
+  GraphicComponent::onWindowSizeChanged(Window& window) const
+  {
   }
 }

@@ -111,6 +111,9 @@
     <ClInclude Include="..\include\Hakool\Utils\hkWindowFactoryWin32.h">
       <Filter>Header Files\window</Filter>
     </ClInclude>
+    <ClInclude Include="..\include\Hakool\Utils\hkWindowObserver.h">
+      <Filter>Header Files\window</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="..\include\Hakool\Utils\hkModule.inl">

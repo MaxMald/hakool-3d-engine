@@ -44,6 +44,7 @@
     <ClInclude Include="..\include\Hakool\Utils\hkWindow.h" />
     <ClInclude Include="..\include\Hakool\Utils\hkIWindowFactory.h" />
     <ClInclude Include="..\include\Hakool\Utils\hkWindowFactoryWin32.h" />
+    <ClInclude Include="..\include\Hakool\Utils\hkWindowObserver.h" />
     <ClInclude Include="..\include\Hakool\Utils\hkWindowWin32.h" />
   </ItemGroup>
   <ItemGroup>

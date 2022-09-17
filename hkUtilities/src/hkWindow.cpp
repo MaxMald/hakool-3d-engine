@@ -1,10 +1,12 @@
 #include <Hakool\Utils\hkWindow.h>
+#include <Hakool/Utils/hkWindowObserver.h>
 
 namespace hk
 {
   Window::Window() :
     _m_size(0, 0),
-    _m_title("")
+    _m_title(""),
+    _m_observers()
   {
     return;
   }
@@ -30,7 +32,10 @@ namespace hk
   {
     this->_m_size.x = _width;
     this->_m_size.y = _height;
-
+    for (auto pObserver : _m_observers)
+    {
+      pObserver->onWindowSizeChanged(*this);
+    }
     return;
   }
 
@@ -38,7 +43,10 @@ namespace hk
   Window::setSize(const Vector2u& _v2)
   {
     this->_m_size = _v2;
-
+    for (auto pObserver : _m_observers)
+    {
+      pObserver->onWindowSizeChanged(*this);
+    }
     return;
   }
 
@@ -77,6 +85,13 @@ namespace hk
   void 
   Window::destroy()
   {
+    return;
+  }
+
+  void 
+  Window::addObserver(const WindowObserver* pObserver)
+  {
+    _m_observers.push_back(pObserver);
     return;
   }
 
