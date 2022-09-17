@@ -1,7 +1,6 @@
 #pragma once
 
 #include <Hakool/Utils/hkUtilitiesUtilities.h>
-
 #include <Hakool/Core/hkCorePrerequisites.h>
 
 namespace hk
@@ -23,7 +22,7 @@ namespace hk
     /**
     * TODO
     */
-    Model(const Model& _model);
+    explicit Model(const Model& _model);
 
     /**
     * TODO
@@ -31,10 +30,12 @@ namespace hk
     ~Model();
 
     /**
-    * TODO
+    * Sets the mesh of this Model.
+    * 
+    * @param pMesh The mesh of the model.
     */
-    eRESULT
-    setMesh(const String& _id);
+    void
+    setMesh(Mesh* pMesh);
 
   private:
 

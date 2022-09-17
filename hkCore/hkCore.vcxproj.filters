@@ -84,6 +84,9 @@
     <ClCompile Include="src\hkModel.cpp">
       <Filter>Source Files\graphics</Filter>
     </ClCompile>
+    <ClCompile Include="src\hkMeshResourceGroup.cpp">
+      <Filter>Source Files\resource</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\include\Hakool\hakool.h">
@@ -148,6 +151,9 @@
     </ClInclude>
     <ClInclude Include="..\include\Hakool\Core\hkModelComponent.h">
       <Filter>Header Files\components</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\Hakool\Core\hkMeshResourceGroup.h">
+      <Filter>Header Files\resource</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

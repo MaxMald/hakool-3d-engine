@@ -18,7 +18,6 @@ namespace hk
   Mesh::~Mesh()
   {
     destroy();
-
     return;
   }
 
@@ -30,7 +29,6 @@ namespace hk
       delete _m_aVertexes;
     }
     _m_vertexesSize = 0;
-
     return;
   }
 
@@ -51,7 +49,6 @@ namespace hk
   {
     _m_aVertexes = _aVertexes;
     _m_vertexesSize = _size;
-
     return;
   }
 }

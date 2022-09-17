@@ -3,7 +3,7 @@
 #include <Hakool\Utils\hkUtilitiesUtilities.h>
 
 #include <Hakool\Core\hkCorePrerequisites.h>
-#include <Hakool\Core\hkResourceGroup.h>
+#include <Hakool\Core\hkMeshResourceGroup.h>
 
 namespace hk
 {
@@ -11,7 +11,7 @@ namespace hk
   class Mesh;
 
   /**
-  * TODO
+  * Manage all type of resources in the engine.
   */
   class HK_CORE_EXPORT ResourceManager
   {
@@ -36,19 +36,23 @@ namespace hk
     init();
 
     /**
-    * Get shader.
+    * Gets the Shader group.
+    * 
+    * @return A reference to the ShaderResourceGroup.
     */
     ResourceGroup<Shader>&
     getShaders();
 
     /**
-    * Get Meshes.
+    * Gets the Mesh group.
+    * 
+    * @return A reference to the MeshResourceGroup.
     */
-    ResourceGroup<Mesh>&
+    MeshResourceGroup&
     getMeshes();
 
     /**
-    * Clear from all resources.
+    * Clears all the resources.
     */
     void
     clear();
@@ -62,15 +66,15 @@ namespace hk
   private:
 
     /**
-    * Group of shader.
+    * The Shader group in this ResourceManager.
     */
     ResourceGroup<Shader>
     _m_shaders;
 
     /**
-    * Group of meshes.
+    * The Mesh group in this ResourceManager.
     */
-    ResourceGroup<Mesh>
+    MeshResourceGroup
     _m_meshes;
   };
 }

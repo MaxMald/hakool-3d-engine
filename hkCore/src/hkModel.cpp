@@ -15,8 +15,10 @@ namespace hk
   Model::~Model()
   {
   }
-  eRESULT Model::setMesh(const String& _id)
+
+  void
+  Model::setMesh(Mesh* pMesh)
   {
-    return eRESULT();
+    this->_m_mesh = pMesh;
   }
 }

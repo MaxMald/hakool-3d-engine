@@ -179,6 +179,7 @@
     <ClCompile Include="src\hkGameObject.cpp" />
     <ClCompile Include="src\hkGraphicComponent.cpp" />
     <ClCompile Include="src\hkMesh.cpp" />
+    <ClCompile Include="src\hkMeshResourceGroup.cpp" />
     <ClCompile Include="src\hkModel.cpp" />
     <ClCompile Include="src\hkModelComponent.cpp" />
     <ClCompile Include="src\hkResource.cpp" />
@@ -200,6 +201,7 @@
     <ClInclude Include="..\include\Hakool\Core\hkCoreUtilities.h" />
     <ClInclude Include="..\include\Hakool\Core\hkEngineComponent.h" />
     <ClInclude Include="..\include\Hakool\Core\hkGameObject.h" />
+    <ClInclude Include="..\include\Hakool\Core\hkMeshResourceGroup.h" />
     <ClInclude Include="..\include\Hakool\Core\hkModelComponent.h" />
     <ClInclude Include="..\include\Hakool\Core\hkNode.h" />
     <ClInclude Include="..\include\Hakool\Core\hkResource.h" />

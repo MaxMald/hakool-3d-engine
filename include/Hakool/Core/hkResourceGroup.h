@@ -24,7 +24,7 @@ namespace hk
     /**
     * Destructor.
     */
-    ~ResourceGroup();
+    virtual ~ResourceGroup();
 
     /**
     * Add an asset and pass its memory management to this resource group. If 

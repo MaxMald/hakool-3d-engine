@@ -2,11 +2,10 @@
 
 namespace hk
 {
-  ResourceManager::ResourceManager()
-  {
-    // Intentionally blank.
-    return;
-  }
+  ResourceManager::ResourceManager() :
+    _m_shaders(),
+    _m_meshes()
+  { }
 
   ResourceManager::~ResourceManager()
   {
@@ -27,7 +26,7 @@ namespace hk
     return _m_shaders;
   }
 
-  ResourceGroup<Mesh>& 
+  MeshResourceGroup& 
   ResourceManager::getMeshes()
   {
     return _m_meshes;
@@ -38,7 +37,6 @@ namespace hk
   {
     _m_shaders.clear();
     _m_meshes.clear();
-
     return;
   }
 
@@ -46,7 +44,6 @@ namespace hk
   ResourceManager::destroy()
   {
     clear();
-
     return;
   }
 }
