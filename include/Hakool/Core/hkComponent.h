@@ -6,73 +6,56 @@
 namespace hk
 {
   class GameObject;
+  class GraphicComponent;
 
   /**
-  * TODO
+  * Encapsulates a piece of logic that defines part of the behavior of the GameObject
+  * which it belongs to.
   */
-  class HK_CORE_EXPORT Component
+  class Component
   {
   public:
 
-    /**
-    * Constructor.
-    */
-    Component();
-
-    /**
-    * TODO.
-    */
-    Component(const eCOMPONENT& _m_id);
-
-    /**
-    * Destructor.
-    */
     virtual ~Component();
 
     /**
-    * Called when the game object is been created.
+    * Called when the GameObject is being initialized.
     */
     virtual void
-    create();
-
-    /**
-    * Called when the game object is been initialized.
-    */
-    virtual void
-    init();
+    init(GameObject* _m_pGameObject) = 0;
 
     /**
     * Called every game cycle.
     */
     virtual void
-    update();
+    update() = 0;
 
     /**
-    * Called when the game object is been destroyed.
+     *
+     */
+    virtual void
+    draw(GraphicComponent* pGraphicComponent) = 0;
+
+    /**
+    * Called when the GameObject is being destroyed.
     */
     virtual void
-    destroy();
+    destroy() = 0;
 
     /**
     * Get the component identifier.
+    * 
+    * @param eCOMPONENT.
     */
-    eCOMPONENT
-    getID();
-
-  protected:
+    virtual eCOMPONENT
+    getID() = 0;
 
     /**
-    * Pointer to the game object which this component belongs.
-    */
-    GameObject*
-    _m_pGameObject;
-
-    /**
-    * Component identifier.
-    */
-    eCOMPONENT
-    _m_id;
-
-    friend GameObject;
+     * Get the GameObject.
+     * 
+     * @return Pointer to the GameObject which this component belongs to.
+     */
+    virtual GameObject*
+    getGameObject() = 0;
   };
 }

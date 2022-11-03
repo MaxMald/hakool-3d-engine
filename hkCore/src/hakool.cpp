@@ -96,9 +96,12 @@ namespace hk
       {
         IPlugin* plugin = _m_pluginManager.getPlugin("GraphicsDLL");
         _m_pGraphicComponent = reinterpret_cast<GraphicComponent*>(plugin->getData());
-        _m_pGraphicComponent->setHakool(*this);
 
-        result = _m_pGraphicComponent->init(_m_pWindow, _config.graphicsConfiguration);
+        result = _m_pGraphicComponent->init(
+          _m_pWindow, 
+          _config.graphicsConfiguration,
+          _m_resourceManager);
+
         if (result != eRESULT::kSuccess)
         {
           Logger::Error("Couldn't initialize the graphics.");
@@ -123,7 +126,7 @@ namespace hk
       return eRESULT::kFail;
     }
 
-    // SceneManager
+    _m_resourceManager.init(_m_pGraphicComponent);
     _m_sceneManager.init(this);
 
     _m_isInitialized = !_m_isInitialized;
@@ -136,7 +139,6 @@ namespace hk
   {
     _m_pWindow->update();
     _m_sceneManager.update();
-    _m_pGraphicComponent->update();
     return eRESULT::kSuccess;
   }
 
@@ -150,6 +152,10 @@ namespace hk
   eRESULT 
   Hakool::draw()
   {
+    _m_pGraphicComponent->clear();
+    _m_pGraphicComponent->prepareToDraw();
+    _m_sceneManager.draw(_m_pGraphicComponent);
+    _m_pGraphicComponent->present();
     return eRESULT::kSuccess;
   }
 

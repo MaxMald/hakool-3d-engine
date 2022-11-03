@@ -108,6 +108,19 @@ namespace hk
     return _m_pActiveScene;
   }
 
+  Scene& 
+  SceneManager::create(const String& key)
+  {
+    if (has(key))
+    {
+      throw std::invalid_argument("Scene with key: " + key + " already exists.");
+    }
+
+    Scene* pScene = new Scene();
+    add(key, pScene);
+    return *pScene;
+  }
+
   eRESULT 
   SceneManager::add(const String& _key, Scene* _pScene)
   {
@@ -166,7 +179,23 @@ namespace hk
     return _m_hScenes.find(_key) != _m_hScenes.end();
   }
 
+  bool 
+  SceneManager::hasActiveScene()
+  {
+    return _m_pActiveScene != nullptr;
+  }
+
   void 
+  SceneManager::draw(GraphicComponent* pGraphicComponent)
+  {
+    if (_m_pActiveScene != nullptr)
+    {
+      _m_pActiveScene->_draw(pGraphicComponent);
+    }
+    return;
+  }
+
+  void
   SceneManager::clear()
   {
     for (auto iterator : _m_hScenes)
@@ -178,7 +207,6 @@ namespace hk
     this->_m_hScenes.clear();
     this->_m_pActiveScene = nullptr;
     this->_m_pNextScene = nullptr;
-
     return;
   }
 

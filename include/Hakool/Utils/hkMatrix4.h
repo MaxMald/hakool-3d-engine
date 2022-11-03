@@ -50,6 +50,16 @@ namespace hk
     GetTranslation(const float& _x, const float& _y, const float& _z);
 
     /**
+     * Get a new translation matrix.
+     * 
+     * @param vector Vector3f.
+     * 
+     * @return Translation Matrix.
+     */
+    static Matrix4
+    GetTranslation(const Vector3f& vector);
+
+    /**
     * Get a new scale matrix.
     * 
     * @param _x The x component.
@@ -60,6 +70,16 @@ namespace hk
     */
     static Matrix4
     GetScale(const float& _x, const float& _y, const float& _z);
+
+    /**
+    * Get a new scale matrix.
+    *
+    * @param vector Vector3f.
+    *
+    * @return Scaling Matrix.
+    */
+    static Matrix4
+    GetScale(const Vector3f& vector);
 
     /**
     * Get a new rotation matrix about the given axis (normalized) and a given 
@@ -80,6 +100,17 @@ namespace hk
       const float& _y, 
       const float& _z
     );
+
+    /**
+    * Get a new rotation matrix about the given axis (normalized) and a given
+    * angle.
+    *
+    * @param vector Vector3f.
+    *
+    * @return Rotate Matrix.
+    */
+    static Matrix4
+    GetRotation(const Vector3f& vector);
 
     /**
     * Get a new rotation matrix about the given axis (normalized) and a given 
@@ -484,6 +515,7 @@ namespace hk
 
     union
     {
+      float a[16];
       float m[4][4];
 
       struct

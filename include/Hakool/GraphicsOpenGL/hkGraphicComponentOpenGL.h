@@ -1,9 +1,17 @@
 #pragma once
 
 #include <Hakool\Utils\hkColor.h>
+#include <Hakool\Utils\hkMatrix4.h>
 
 #include <Hakool\GraphicsOpenGL\hkGraphicsOpenGLPrerequisites.h>
 #include <Hakool\Core\Graphics\hkGraphicComponent.h>
+
+#include <glm/vec3.hpp>
+#include <glm/vec4.hpp>
+#include <glm/mat4x4.hpp>
+#include <glm/ext/matrix_transform.hpp>
+#include <glm/ext/matrix_clip_space.hpp>
+#include <glm/gtc/type_ptr.hpp>
 
 namespace hk
 {
@@ -41,14 +49,47 @@ namespace hk
     init
     (
       Window* _pWindow, 
-      const GraphicsConfiguration& _graphicConfiguration
+      const GraphicsConfiguration& _graphicConfiguration,
+      ResourceManager& resourceManager
     ) override;
 
+    virtual Mesh*
+    createMesh() override;
+
     /**
-    * Draws on screen.
-    */
+     * Sets the color to clear the graphic buffers.
+     *
+     * @param color Color.
+     */
     virtual void
-    update() override;
+    setClearColor(const Color& color) override;
+
+    /**
+     * Clear the graphics buffers.
+     */
+    virtual void
+    clear() override;
+
+    /**
+     * Prepare the GraphicComponent to draw.
+     */
+    virtual void
+    prepareToDraw() override;
+
+    /**
+     * Draw the given scene in the screen.
+     */
+    virtual void
+    drawScene(Scene* pScene);
+
+    virtual void
+    drawMesh(Mesh& _Mesh) override;
+
+    /**
+     * TODO
+     */
+    virtual void
+    present() override;
 
     /**
     * Get a pointer to a new vertex shader.
@@ -109,18 +150,11 @@ namespace hk
     _m_isReady;
 
   private:
-
-    /**
-    * Draw on screen.
-    */
-    void
-    _draw();
-
     /**
     * TODO
     */
     void
-    _clean();
+    _releaseResources(ResourceManager& resourceManager);
 
     /**
     * Screen clear color.
@@ -138,5 +172,20 @@ namespace hk
     */
     ProgramOpenGL*
     _m_pProgramOpenGL;
+
+    ResourceManager*
+    _m_pResourceManager;
+
+    Matrix4 
+    _m_perspectiveMat;
+
+    Matrix4
+    _m_modelViewMat;
+
+    glm::mat4x4
+    _m_pers;
+
+    glm::mat4x4
+    _m_model;
   };
 }

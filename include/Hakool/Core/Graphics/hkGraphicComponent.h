@@ -10,12 +10,17 @@ namespace hk
   class Hakool;
   class IShader;
   class IProgram;
+  class GraphicComponent;
+  class ResourceManager;
+  class Scene;
+  class Color;
+  class Mesh;
 
   /**
   * Provides a common interface for graphics component.
   */
   class HK_CORE_EXPORT GraphicComponent
-  : public EngineComponent, public WindowObserver
+  : public WindowObserver
   {
   public:
 
@@ -35,17 +40,53 @@ namespace hk
     * 
     * @param _pWindow Pointer to the application window.
     * @param _graphicConfiguration Configuration object.
+    * @param resourceManager ResourceManager.
     * 
     * @return Operation result.
     */
     virtual eRESULT
-    init(Window* _pWindow, const GraphicsConfiguration& _graphicConfiguration);
+    init(
+      Window* _pWindow, 
+      const GraphicsConfiguration& _graphicConfiguration,
+      ResourceManager& resourceManager);
+
+    virtual Mesh*
+    createMesh();
 
     /**
-    * Called every frame.
-    */
+     * Sets the color to clear the graphic buffers.
+     * 
+     * @param color Color.
+     */
     virtual void
-    update();
+    setClearColor(const Color& color);
+
+    /**
+     * Clear the graphics buffers.
+     */
+    virtual void
+    clear();
+
+    /**
+     * Prepare the GraphicComponent to draw.
+     */
+    virtual void
+    prepareToDraw();
+
+    /**
+     * Draw the given scene in the screen.
+     */
+    virtual void
+    drawScene(Scene* pScene);
+
+    virtual void
+    drawMesh(Mesh& _Mesh);
+
+    /**
+     * TODO
+     */
+    virtual void
+    present();
 
     /**
     * Get a pointer to a new vertex shader.

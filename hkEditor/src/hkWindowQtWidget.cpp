@@ -6,9 +6,7 @@ WindowQtWidget::WindowQtWidget(QWidget* pParent, Hakool& hakool):
   QWidget(pParent),
   m_hakool(hakool)
 { 
-  setAttribute(Qt::WA_PaintOnScreen);
-  setAttribute(Qt::WA_OpaquePaintEvent);
-  setAttribute(Qt::WA_NoSystemBackground);
+ 
 }
 
 WindowQtWidget::~WindowQtWidget()
@@ -18,7 +16,8 @@ WindowQtWidget::~WindowQtWidget()
 eRESULT 
 WindowQtWidget::init(const WindowConfiguration& _config)
 {
-  Window::init(_config);
+  Window::init(_config); 
+
   resize(_config.width, _config.height);
   return eRESULT::kSuccess;
 }
@@ -67,4 +66,12 @@ void
 WindowQtWidget::resizeEvent(QResizeEvent* evt)
 {
   setSize((hk::uint32)evt->size().width(), (hk::uint32)evt->size().height());
+}
+
+void 
+WindowQtWidget::showEvent(QShowEvent*)
+{
+  setAttribute(Qt::WA_PaintOnScreen);
+  setAttribute(Qt::WA_OpaquePaintEvent);
+  setAttribute(Qt::WA_NoSystemBackground);
 }

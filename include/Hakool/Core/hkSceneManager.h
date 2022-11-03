@@ -7,6 +7,7 @@ namespace hk
 {
   class Hakool;
   class Scene;
+  class GraphicComponent;
 
   /**
   * Create, process and updates all the scenes of the application.
@@ -60,6 +61,16 @@ namespace hk
     getActive();
 
     /**
+     * Creates and returns a new Scene.
+     * 
+     * @param key Scene's key.
+     * 
+     * @return The new Scene.
+     */
+    Scene&
+    create(const String& key);
+
+    /**
     * Add a new scene to the scene manager. 
     
     * Returns 'ObjectAlreadyExits' if another scene has the same key; take into
@@ -68,7 +79,7 @@ namespace hk
     * @param _key The scene identifier.
     * @param _pScene The pointer to the scene.
     * 
-    * @returns 'Success' if the scene was added without problems. Returns 
+    * @return 'Success' if the scene was added without problems. Returns 
     * 'ObjectAlreadyExists' if there is another scene with the same key.
     */
     eRESULT
@@ -107,6 +118,22 @@ namespace hk
     */
     bool
     has(const String& _key);
+
+    /**
+     * Indicates if this SceneManager has an active scene.
+     * 
+     * @return True if the SceneManager has an active scene.
+     */
+    bool
+    hasActiveScene();
+
+    /**
+     * Draw method.
+     * 
+     * @param pGraphicComponent GraphicComponent.
+     */
+    void
+    draw(GraphicComponent* pGraphicComponent);
 
     /**
     * Remove and delete all the registered scenes in this scene manager.

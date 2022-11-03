@@ -25,6 +25,13 @@ namespace hk
   }
 
   void 
+  Scene::draw()
+  {
+    // Intentionally blank
+    return;
+  }
+
+  void 
   Scene::exit()
   {
     // Intentionally blank
@@ -54,9 +61,7 @@ namespace hk
     }
 
     GameObject* pNewGameObject = new GameObject(_name);
-    registerGameObject(*pNewGameObject);
-    _m_root.addChild(*pNewGameObject);
-
+    _m_root.addChild(pNewGameObject);
     return *pNewGameObject;
   }
 
@@ -77,8 +82,7 @@ namespace hk
     }
 
     GameObject* pNewGameObject = new GameObject(_name);
-    registerGameObject(*pNewGameObject);
-    parent.addChild(*pNewGameObject);
+    parent.addChild(pNewGameObject);
 
     return *pNewGameObject;
   }
@@ -106,72 +110,11 @@ namespace hk
     return *_m_pSceneManager;
   }
 
-  void 
-  Scene::registerGameObject(GameObject& _gameObject)
-  {
-    // Check if GameObject is already registered.
-    if (hasRegisteredGameObject(_gameObject))
-    {
-      Logger::Log("| Scene | GameObject: " + _gameObject.getName() + " is already registered in this scene.");
-      return;
-    }
-
-    // Detach GameObject from current scene.
-    if (_gameObject._m_pScene != nullptr)
-    {
-      _gameObject._m_pScene->unregisterGameObject(_gameObject);
-    }
-    _gameObject._m_pScene = this;
-    
-    // Add GameObject to list.
-    String uuid = _gameObject._m_uuid;
-    _m_hGameObjects.insert(Map<String, GameObject*>::value_type(uuid, &_gameObject));
-  }
-
-  void 
-  Scene::unregisterGameObject(const String& _uuid)
-  {
-    // Check if GameObject is registered.
-    if (!hasRegisteredGameObject(_uuid))
-    {
-      Logger::Error("| Scene | GameObject with UUID: " + _uuid + " doesn't exists in this scene.");
-      return;
-    }
-
-    // Detach GameObject from this scene.
-    GameObject* pGameObject = _m_hGameObjects.find(_uuid)->second;
-    pGameObject->_m_pScene = nullptr;
-
-    // Remove reference.
-    _m_hGameObjects.erase(_uuid);
-
-    return;
-  }
-
-  void 
-  Scene::unregisterGameObject(GameObject& _gameObject)
-  {
-    unregisterGameObject(_gameObject.getUUID());
-    return;
-  }
-
-  bool 
-  Scene::hasRegisteredGameObject(const String& _uuid) const
-  {
-    return _m_hGameObjects.find(_uuid) != _m_hGameObjects.end();
-  }
-
-  bool
-  Scene::hasRegisteredGameObject(const GameObject& _gameObject) const
-  {
-    return _m_hGameObjects.find(_gameObject.getUUID()) != _m_hGameObjects.end();
-  }
-
   Scene::Scene() :
     _m_pSceneManager(nullptr),
     _m_root("__root")
   {
-    // Intentionally blank
+    _m_root._m_pScene = this;
     return;
   }
 
@@ -179,7 +122,6 @@ namespace hk
   {
     _destroy();
     _m_pSceneManager = nullptr;
-    
     return;
   }
 
@@ -187,7 +129,6 @@ namespace hk
   Scene::_start()
   {
     start();
-
     return;
   }
 
@@ -195,50 +136,36 @@ namespace hk
   Scene::_enter()
   {
     enter();
-
     return;
   }
 
   void 
   Scene::_update()
   {
-    // Update each registered GameObject.
-    for (auto it : _m_hGameObjects)
-    {
-      it.second->update();
-    }
-
+    _m_root.update();
     update();
-
     return;
   }
 
   void 
+  Scene::_draw(GraphicComponent* pGraphicComponent)
+  {
+    _m_root.draw(pGraphicComponent);
+    draw();
+  }
+
+  void
   Scene::_exit()
   {
     exit();
-
     return;
   }
   
   void 
   Scene::_destroy()
   {
-    // Destroy scene root.
     _m_root.destroy();
-
-    if (_m_hGameObjects.size() > 0)
-    {
-      // Delete each registered GameObject.
-      for (auto it : _m_hGameObjects)
-      {
-        delete it.second;
-      }
-
-      // Clear map.
-      _m_hGameObjects.clear();
-    }
-
+    destroy();
     return;
   }
 }

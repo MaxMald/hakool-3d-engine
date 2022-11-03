@@ -7,6 +7,7 @@ namespace hk
 {
   class Hakool;
   class SceneManager;
+  class GraphicComponent;
 
   /**
   * Base class that provides an interface which can be extended for custom
@@ -36,6 +37,12 @@ namespace hk
     */
     virtual void
     update();
+
+    /**
+     * Called by the scene when the scene is being rendered.
+     */
+    virtual void
+    draw();
 
     /**
     * Called by the engine when the scene is about to be deactivated. This method
@@ -109,50 +116,6 @@ namespace hk
     SceneManager&
     getSceneManager();
 
-    /**
-    * Register GameObject in this scene.
-    * 
-    * @param _gameObject GameObject.
-    */
-    void
-    registerGameObject(GameObject& _gameObject);
-
-    /**
-    * Unregister GameObject from this scene.
-    * 
-    * @param _uuid GameObject's uuid.
-    */
-    void
-    unregisterGameObject(const String& _uuid);
-
-    /**
-    * Unregister GameObject from this scene.
-    * 
-    * @param _gameObject GameObject.
-    */
-    void
-    unregisterGameObject(GameObject& _gameObject);
-
-    /**
-    * Check if this scene has a registered GameObject.
-    * 
-    * @param _uuid GameObject's uuid.
-    * 
-    * @return True if the GameObject is registered in this scene.
-    */
-    bool
-    hasRegisteredGameObject(const String& _uuid) const;
-
-    /**
-    * Check if the given GameObject is regitered in this scene.
-    * 
-    * @param _gameObject GameObject.
-    * 
-    * @return True if the GameObject is registerd in this scene.
-    */
-    bool
-    hasRegisteredGameObject(const GameObject& _gameObject) const;
-
   protected:    
 
     /**
@@ -186,6 +149,14 @@ namespace hk
     _update();
 
     /**
+     * Draws elements in the scene.
+     * 
+     * @param Pointer to the GraphicComponent.
+     */
+    void
+    _draw(GraphicComponent* pGraphicComponent);
+
+    /**
     * Called by the engine when the scene is about to be deactivated.
     */
     void
@@ -208,11 +179,6 @@ namespace hk
     */
     GameObject
     _m_root;
-
-    /**
-    * Map of registered GameObjects in this scene.
-    */
-    Map<String, GameObject*> _m_hGameObjects;
 
     friend SceneManager;
   };

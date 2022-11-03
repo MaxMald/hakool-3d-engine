@@ -2,8 +2,7 @@
 
 namespace hk
 {
-  GraphicComponent::GraphicComponent()
-    : EngineComponent(eENGINE_COMPONENT::kGraphics), 
+  GraphicComponent::GraphicComponent() :
     _m_graphicInterfaceId(eGRAPHIC_INTERFACE::kUndefined)
   {
     return;
@@ -11,20 +10,59 @@ namespace hk
 
   GraphicComponent::~GraphicComponent()
   {
+    destroy();
+    return;
   }
 
   eRESULT 
   GraphicComponent::init
   (
     Window* _pWindow, 
-    const GraphicsConfiguration& _graphicConfiguration
+    const GraphicsConfiguration& _graphicConfiguration,
+    ResourceManager& resourceManager
   )
   {
     return eRESULT::kFail;
   }
 
+  Mesh* 
+  GraphicComponent::createMesh()
+  {
+    return nullptr;
+  }
+
   void 
-  GraphicComponent::update()
+  GraphicComponent::setClearColor(const Color& color)
+  {
+    return;
+  }
+
+  void
+  GraphicComponent::clear()
+  {
+    return;
+  }
+
+  void 
+  GraphicComponent::prepareToDraw()
+  {
+    return;
+  }
+
+  void 
+  GraphicComponent::drawScene(Scene* pScene)
+  {
+    return;
+  }
+
+  void 
+  GraphicComponent::drawMesh(Mesh& _Mesh)
+  {
+    return;
+  }
+
+  void 
+  GraphicComponent::present()
   {
     return;
   }
@@ -32,19 +70,19 @@ namespace hk
   IShader* 
   GraphicComponent::getVShader()
   {
-      return nullptr;
+    return nullptr;
   }
 
   IShader* 
   GraphicComponent::getFShader()
   {
-      return nullptr;
+    return nullptr;
   }
 
   IProgram* 
   GraphicComponent::getProgram()
   {
-      return nullptr;
+    return nullptr;
   }
 
   void
@@ -62,5 +100,6 @@ namespace hk
   void 
   GraphicComponent::onWindowSizeChanged(Window& window) const
   {
+    return;
   }
 }

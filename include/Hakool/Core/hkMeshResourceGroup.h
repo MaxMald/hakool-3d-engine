@@ -1,11 +1,13 @@
 #pragma once
 
-#include "hkCorePrerequisites.h";
-#include "Graphics/hkMesh.h";
-#include "hkResourceGroup.h";
+#include "hkCorePrerequisites.h"
+#include "Graphics/hkMesh.h"
+#include "hkResourceGroup.h"
 
 namespace hk
 {
+  class GraphicComponent;
+
   class HK_CORE_EXPORT MeshResourceGroup : public ResourceGroup<Mesh>
   {
   public:
@@ -13,6 +15,12 @@ namespace hk
     MeshResourceGroup();
 
     virtual ~MeshResourceGroup();
+
+    /**
+     * TODO
+     */
+    void
+    init(GraphicComponent* pGraphicComponent);
 
     /**
      * Gets the cube mesh.
@@ -24,5 +32,13 @@ namespace hk
      */
     Mesh*
     getCube();
+
+  protected:
+
+    /**
+     * TODO 
+     */
+    GraphicComponent* 
+    _m_pGraphicComponent;
   };
 }

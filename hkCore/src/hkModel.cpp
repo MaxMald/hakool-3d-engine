@@ -1,5 +1,7 @@
 #include <Hakool/Core/Graphics/hkModel.h>
 
+#include <Hakool/Core/Graphics/hkMesh.h>
+
 namespace hk
 {
   Model::Model()
@@ -20,5 +22,12 @@ namespace hk
   Model::setMesh(Mesh* pMesh)
   {
     this->_m_mesh = pMesh;
+  }
+
+  void 
+  Model::draw(GraphicComponent* pGraphicComponent)
+  {
+    _m_mesh->draw(pGraphicComponent);
+    return;
   }
 }

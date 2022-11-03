@@ -1,59 +1,76 @@
 #pragma once
 
+#include <Hakool/Utils/hkUtilitiesUtilities.h>
 #include <Hakool/Core/hkCorePrerequisites.h>
 #include <Hakool/Core/hkComponent.h>
 #include <Hakool/Core/Graphics/hkModel.h>
+#include <Hakool/Core/hkModelObserver.h>
 
 namespace hk
 {
+  class ResourceManager;
+
   /**
   * TODO
   */
-  class HK_CORE_EXPORT ModelComponent :
-    public Component
+  class HK_CORE_EXPORT ModelComponent : public Component, public ModelObserver
   {
   public:
-    
-    /**
-    * Constructor.
-    */
-    ModelComponent();
 
-    /**
-    * Destructor.
-    */
+    ModelComponent(ResourceManager&);
+
     virtual ~ModelComponent();
 
-    /**
-    * Called when the game object is been created.
-    */
-    virtual void
-    create() override;
+    void
+    init(GameObject* pGameObject);
+    
+    void
+    update();
+
+    void
+    draw(GraphicComponent* pGraphicComponent);
+
+    void
+    destroy();
+
+    eCOMPONENT
+    getID();
+
+    GameObject*
+    getGameObject();
 
     /**
-    * Called when the game object is been initialized.
-    */
-    virtual void
-    init() override;
+     * 
+     */
+    eRESULT
+    setMesh(const String& meshKey);
 
     /**
-    * Called every game cycle.
-    */
-    virtual void
-    update() override;
-
-    /**
-    * Called when the game object is been destroyed.
-    */
-    virtual void
-    destroy() override;
+     * Set the Mesh of the Model.
+     * 
+     * @param pMesh The Mesh's pointer.
+     */
+    void
+    setMesh(Mesh* pMesh);
 
   private:
 
     /**
-    * Model.
+    * Reference to the Model which this component belongs to.
     */
     Model
     _m_model;
+
+    /**
+     * Pointer to the GameObject which this component belongs to.
+     */
+    GameObject*
+    _m_pGameObject;
+
+    /**
+     * Reference to the ResourceManager.
+     */
+    ResourceManager&
+    _m_resourceManager;
   };
 }

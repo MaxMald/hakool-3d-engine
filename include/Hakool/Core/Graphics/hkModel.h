@@ -6,6 +6,7 @@
 namespace hk
 {
   class Mesh;
+  class GraphicComponent;
 
   /**
   * TODO
@@ -36,6 +37,9 @@ namespace hk
     */
     void
     setMesh(Mesh* pMesh);
+
+    void
+    draw(GraphicComponent* pGraphicComponent);
 
   private:
 

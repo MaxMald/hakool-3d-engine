@@ -3,11 +3,13 @@
 
 #include <Hakool\hakool.h>
 #include <Hakool\Core\hkResourceManager.h>
+#include <Hakool\Core\hkScene.h>
 
 #include <Hakool\GraphicsOpenGL\hkGraphicComponentOpenGL.h>
 #include <Hakool\GraphicsOpenGL\hkContextOpenGL.h>
 #include <Hakool\GraphicsOpenGL\hkShaderOpenGL.h>
 #include <Hakool\GraphicsOpenGL\hkProgramOpenGL.h>
+#include <Hakool\GraphicsOpenGL\hkMeshOpenGL.h>
 
 #define GL_LITE_IMPLEMENTATION
 #include <Hakool\GraphicsOpenGL\gl_lite.h>
@@ -15,7 +17,10 @@
 namespace hk
 {
   GraphicComponentOpenGL::GraphicComponentOpenGL():
-    GraphicComponent()
+    GraphicComponent(),
+    _m_pResourceManager(nullptr),
+    _m_perspectiveMat(),
+    _m_modelViewMat()
   {
     _m_graphicInterfaceId = eGRAPHIC_INTERFACE::kOpenGL;
     _m_isReady = false;
@@ -25,7 +30,6 @@ namespace hk
   GraphicComponentOpenGL::~GraphicComponentOpenGL()
   {
     destroy();
-
     return;
   }
 
@@ -33,7 +37,8 @@ namespace hk
   GraphicComponentOpenGL::init
   (
     Window* _pWindow,
-    const GraphicsConfiguration& _graphicConfiguration
+    const GraphicsConfiguration& _graphicConfiguration,
+    ResourceManager& resourceManager
   )
   {
     if (_m_isReady)
@@ -43,6 +48,7 @@ namespace hk
     }
 
     _m_pWindow = _pWindow;
+    _m_pResourceManager = &resourceManager;
 
     // Creates the OpenGL Context.
     
@@ -83,13 +89,13 @@ namespace hk
     // Create default vertex shader
 
     const char* pVertexSource =
-      "#version 430 \n"
-      "out vec3 forFragColor;\n"
+      "#version 410 \n"
+      "layout (location=0) in vec3 position;\n"
+      "uniform mat4 mv_matrix;\n"
+      "uniform mat4 proj_matrix;\n"
       "void main(void) \n"
-      "{ \n"
-      "  if(gl_VertexID == 0){ gl_Position = vec4(-1.0, -1.0, 0.0, 1.0); forFragColor = vec3(1.0, 0.0, 0.0);}\n"
-      "  else if(gl_VertexID == 1){ gl_Position = vec4(1.0, -1.0, 0.0, 1.0); forFragColor = vec3(0.0, 1.0, 0.0);}\n"
-      "  else{ gl_Position = vec4(0.0, 1.0, 0.0, 1.0); forFragColor = vec3(0.0, 0.0, 1.0);}\n;"
+      "{\n"
+      " gl_Position = proj_matrix * mv_matrix * vec4(position,1.0);\n"
       "}";
 
     eRESULT result(eRESULT::kFail);
@@ -99,14 +105,12 @@ namespace hk
     if (result != eRESULT::kSuccess)
     {
       Logger::Error("| GraphicComponentOpenGL | Cannot initialize the component.");
-      _clean();
+      _releaseResources(resourceManager);
 
       return eRESULT::kFail;
     }
 
     // Add vertex shader to the resource manager.
-
-    ResourceManager& resourceManager = _m_hakool->getResourceManager();
     ResourceGroup<Shader>& shaders = resourceManager.getShaders();
     result = shaders.add
     (
@@ -117,7 +121,7 @@ namespace hk
     if (result != eRESULT::kSuccess)
     {
       Logger::Error("| GraphicComponentOpenGL | Cannot initialize the component.");
-      _clean();
+      _releaseResources(resourceManager);
 
       return eRESULT::kFail;
     }
@@ -125,11 +129,12 @@ namespace hk
     // Create default fragment shader
 
     const char* pFragmentSource =
-      "#version 430 \n"
-      "in vec3 forFragColor;\n"
+      "#version 410 \n"
       "out vec4 color; \n"
-      "void main() \n"
-      "{ color = vec4(forFragColor, 1.0); }";    
+      "uniform mat4 mv_matrix;\n"
+      "uniform mat4 proj_matrix;\n"
+      "void main(void) \n"
+      "{ color = vec4(1.0, 0.0, 0.0, 1.0); }";    
 
     ShaderOpenGL fragShader;
     result = fragShader.create(pFragmentSource, eSHADER_TYPE::kFragment);
@@ -138,7 +143,7 @@ namespace hk
     {
       Logger::Error("| GraphicComponentOpenGL | Cannot initialize the component.");
 
-      _clean();
+      _releaseResources(resourceManager);
       return eRESULT::kFail;
     }
 
@@ -153,7 +158,7 @@ namespace hk
     if (result != eRESULT::kSuccess)
     {
       Logger::Error("| GraphicComponentOpenGL | Cannot initialize the component.");
-      _clean();
+      _releaseResources(resourceManager);
 
       return eRESULT::kFail;
     }
@@ -172,29 +177,101 @@ namespace hk
     {
       Logger::Error("| GraphicComponentOpenGL | Cannot initialize the component.");
 
-      _clean();
+      _releaseResources(resourceManager);
       return eRESULT::kFail;
     }
 
-    // Create vertex array objects.
-
+    //glSwapInterval(1);
     glGenVertexArrays(1, _m_aVAO);
     glBindVertexArray(_m_aVAO[0]);
+    
+    GLenum err;
+    while ((err = glGetError()) != GL_NO_ERROR)
+    {
+      // Process/log the error.
+      return eRESULT::kFail;
+    }
 
-    // Component is ready.
-
-    _m_isReady = !_m_isReady;
-
-    // Subscribe to events
     _m_pWindow->addObserver(this);
 
+    setClearColor(_m_clearColor);
+
+    _m_isReady = !_m_isReady;
     return eRESULT::kSuccess;
   }
 
-  void 
-  GraphicComponentOpenGL::update()
+  Mesh* 
+  GraphicComponentOpenGL::createMesh()
   {
-    _draw();
+    return new MeshOpenGL();
+  }
+
+  void 
+  GraphicComponentOpenGL::setClearColor(const Color& color)
+  {
+    _m_clearColor = color;
+    glClearColor
+    (
+      _m_clearColor.r,
+      _m_clearColor.g,
+      _m_clearColor.b,
+      _m_clearColor.a
+    );
+    return;
+  }
+
+  void
+  GraphicComponentOpenGL::clear()
+  {
+    glClear(GL_COLOR_BUFFER_BIT);
+    return;
+  }
+
+  void 
+  GraphicComponentOpenGL::prepareToDraw()
+  {
+    uint32 programId = *(reinterpret_cast<uint32*>(_m_pProgramOpenGL->getProgramPtr()));
+    glUseProgram(static_cast<GLuint>(programId));
+
+    GLuint mvLoc = glGetUniformLocation(programId, "mv_matrix");
+    GLuint projLoc = glGetUniformLocation(programId, "proj_matrix");
+
+    float aspect = (float)_m_pWindow->getWidth() / (float)_m_pWindow->getHeight();
+    
+    /*
+    _m_perspectiveMat = Matrix4::GetPerspective(1.0472f, aspect, 0.1f, 1000.f).transpose();
+    Matrix4 view = Matrix4::GetTranslation(0.0f, 0.0f, 8.0f).transpose();
+    Matrix4 model = Matrix4::GetTranslation(0.0f, 0.0f, 0.0f).transpose();
+    _m_modelViewMat = view * model;    
+    */
+
+    
+    _m_pers = glm::perspective(1.0472f, aspect, 0.1f, 1000.0f);
+    _m_model = glm::translate(glm::mat4(1.0f), glm::vec3(0.0f, 0.0f, -8.0f)) * glm::translate(glm::mat4(1.0f), glm::vec3(0.0f, -2.0f, 0.0f));
+
+    //glUniformMatrix4fv(mvLoc, 1, GL_FALSE, &_m_modelViewMat.a[0]);
+    //glUniformMatrix4fv(projLoc, 1, GL_FALSE, &_m_perspectiveMat.a[0]);
+
+    glUniformMatrix4fv(mvLoc, 1, GL_FALSE, glm::value_ptr(_m_model));
+    glUniformMatrix4fv(projLoc, 1, GL_FALSE, glm::value_ptr(_m_pers));
+    return;
+  }
+
+  void 
+  GraphicComponentOpenGL::drawScene(Scene* pScene)
+  {
+    return;
+  }
+
+  void 
+  GraphicComponentOpenGL::drawMesh(Mesh& _Mesh)
+  {
+
+  }
+
+  void 
+  GraphicComponentOpenGL::present()
+  { 
     SwapBuffers(GetDC(_m_pWindow->getWindowHandler()));
     return;
   }
@@ -225,9 +302,12 @@ namespace hk
       return;
     }
 
-    _clean();
-    _m_isReady = !_m_isReady;
-    
+    if (_m_pResourceManager != nullptr)
+    {
+      _releaseResources(*_m_pResourceManager);
+    }
+
+    _m_isReady = !_m_isReady;    
     return;
   }
 
@@ -245,30 +325,8 @@ namespace hk
   }
 
   void 
-  GraphicComponentOpenGL::_draw()
+  GraphicComponentOpenGL::_releaseResources(ResourceManager& resourceManager)
   {
-    glClearColor
-    (
-      _m_clearColor.r, 
-      _m_clearColor.g, 
-      _m_clearColor.b, 
-      _m_clearColor.a
-    );
-    glClear(GL_COLOR_BUFFER_BIT);
-
-    uint32 programId = *(reinterpret_cast<uint32*>(_m_pProgramOpenGL->getProgramPtr()));
-    glUseProgram(static_cast<GLuint>(programId));
-
-    glDrawArrays(GL_TRIANGLES, 0, 3);
-
-    return;
-  }
-
-  void 
-  GraphicComponentOpenGL::_clean()
-  {
-    // Destroy default program
-
     if (_m_pProgramOpenGL != nullptr)
     {
       _m_pProgramOpenGL->destroy();
@@ -276,22 +334,15 @@ namespace hk
       _m_pProgramOpenGL = nullptr;
     }
 
-    // Destroy default shader objects
-
-    ResourceManager & resourceManager = _m_hakool->getResourceManager();
-    ResourceGroup<Shader>& shaders = resourceManager.getShaders();
-    
+    ResourceGroup<Shader>& shaders = resourceManager.getShaders();    
     if (shaders.has("__fragment_default"))
     {
       shaders.removeAndDestroy("__fragment_default");
     }
-
     if (shaders.has("__vertex_default"))
     {
       shaders.removeAndDestroy("__vertex_default");
     }
-
-    // Detach context
 
     HDC windowDeviceContext = GetDC(_m_pWindow->getWindowHandler());
 
@@ -299,5 +350,6 @@ namespace hk
     wglDeleteContext(reinterpret_cast<HGLRC>(_m_pContextOpenGL->get()));
 
     delete _m_pContextOpenGL;
+    return;
   }
 }

@@ -33,6 +33,9 @@
     <ClCompile Include="src\hkProgramOpenGL.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="src\hkMeshOpenGL.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\include\Hakool\GraphicsOpenGL\hkGraphicComponentOpenGL.h">

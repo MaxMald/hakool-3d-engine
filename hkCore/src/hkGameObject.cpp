@@ -2,6 +2,8 @@
 
 #include <Hakool\Core\hkGameObject.h>
 
+using std::pair;
+
 namespace hk
 {
   GameObject::GameObject(const String& _name) :
@@ -10,21 +12,29 @@ namespace hk
     _m_isInitialized(false),
     _m_hComponents(),
     _m_pScene(nullptr),
-    _m_uuid(xg::newGuid())
+    _m_uuid(xg::newGuid()),
+    _m_localPosition(0.0f, 0.0f, 0.0f),
+    _m_localRotation(0.0f, 0.0f, 0.0f),
+    _m_localScale(1.0f, 1.0f, 1.0f),
+    _m_isDirty(true),
+    _m_isInverseDirty(true)
   {
-    // Intentionally blank
     return;
   }
 
-  GameObject::GameObject(const String& _name, GameObject& _pParent) : 
+  GameObject::GameObject(const String& _name, GameObject& _pParent) :
     Node<GameObject>(_name, _pParent),
     _m_toDestroy(false),
     _m_isInitialized(false),
     _m_hComponents(),
     _m_pScene(nullptr),
-    _m_uuid(xg::newGuid())
+    _m_uuid(xg::newGuid()),
+    _m_localPosition(0.0f, 0.0f, 0.0f),
+    _m_localRotation(0.0f, 0.0f, 0.0f),
+    _m_localScale(1.0f, 1.0f, 1.0f),
+    _m_isDirty(true),
+    _m_isInverseDirty(true)
   {
-    // Intentionally blank
     return;
   }
 
@@ -34,43 +44,48 @@ namespace hk
     return;
   }
 
-  bool 
-  GameObject::operator==(const GameObject& _gameObject)
+  bool
+    GameObject::operator==(const GameObject& _gameObject)
   {
     return _m_uuid == _gameObject._m_uuid;
   }
 
   void
-  GameObject::init()
+    GameObject::init()
   {
     if (!_m_isInitialized)
     {
-      // Create callback
       for (auto iterator : _m_hComponents)
       {
-        iterator.second->create();
+        iterator.second->init(this);
       }
-
-      // Init callback
-      for (auto iterator : _m_hComponents)
-      {
-        iterator.second->init();
-      }
-
       _m_isInitialized = !_m_isInitialized;
     }
-
     return;
   }
 
-  void 
-  GameObject::update()
+  void
+    GameObject::update()
   {
-    for (auto iterator : _m_hComponents)
+    for (pair<const eCOMPONENT, Component*> item : _m_hComponents)
     {
-      iterator.second->update();
+      item.second->update();
+    }
+    return;
+  }
+
+  void
+    GameObject::draw(GraphicComponent* pGraphicComponet)
+  {
+    for (pair<const eCOMPONENT, Component*> item : _m_hComponents)
+    {
+      item.second->draw(pGraphicComponet);
     }
 
+    for (pair <String, GameObject*> item : _m_hChildren)
+    {
+      item.second->draw(pGraphicComponet);
+    }
     return;
   }
 
@@ -80,10 +95,9 @@ namespace hk
     eCOMPONENT type = _pComponent->getID();
     if (hasComponent(type))
     {
-      throw "GameObject: " + getName() + " Component with same type already exists.";
+      throw "GameObject: " + getName() + " Component already exists.";
     }
-
-    if (_pComponent->_m_pGameObject != nullptr) {
+    if (_pComponent->getGameObject() != nullptr) {
       throw "GameObject: " + getName() + ": Component is already attached to a game object.";
     }
 
@@ -92,14 +106,10 @@ namespace hk
       Map<eCOMPONENT, Component*>::value_type(type, _pComponent)
     );
 
-    _pComponent->_m_pGameObject = this;
-
     if (_m_isInitialized)
     {
-      _pComponent->create();
-      _pComponent->init();
+      _pComponent->init(this);
     }
-
     return;
   }
 
@@ -126,7 +136,7 @@ namespace hk
   }
 
   bool 
-  GameObject::onScene() const
+  GameObject::hasScene() const
   {
     return _m_pScene != nullptr;
   }
@@ -165,10 +175,30 @@ namespace hk
     return String(_m_uuid);
   }
 
+  const Vector3f& 
+  GameObject::getLocalPosition() const
+  {
+    return _m_localPosition;
+  }
+
+  void 
+  GameObject::setLocalPosition(const Vector3f& localPosition)
+  {
+    _m_localPosition = localPosition;
+    _setDirty();
+    return;
+  }
+
+  Matrix4 
+  GameObject::calculateLocalToParentMatrix()
+  {
+    // TODO
+    return Matrix4();
+  }
+
   void
   GameObject::destroy()
   {
-    // Destroy components.
     Component* pComponent = nullptr;
     for (auto iterator : _m_hComponents)
     {
@@ -177,30 +207,59 @@ namespace hk
       delete pComponent;
     }
     _m_hComponents.clear();
-  
-    // Remove from its parent.
-    removeFromParent();
-
-    // Destroy children.
+    
     if (_m_hChildren.size() > 0)
     {
-      // Hold children in a temporary list.
-      Vector<GameObject*> childrenList;
       for (auto child : _m_hChildren)
       {
-        childrenList.push_back(child.second);
+        child.second->destroy();
+        delete child.second;
       }
-
-      // Destroy children.
-      for (GameObject* pChild : childrenList)
-      {
-        pChild->destroy();
-      }
-
-      // Clear children list.
       _m_hChildren.clear();
-    }   
+    }
+    return;
+  }
+  
+  void 
+  GameObject::_onParentChanged(GameObject* pParent)
+  {
+    _setScene(pParent->_m_pScene);
+    _setDirty();
+    return;
+  }
 
+  void 
+  GameObject::_setScene(Scene* pScene)
+  {
+    _m_pScene = pScene;
+    for (auto child : _m_hChildren)
+    {
+      child.second->_setScene(pScene);
+    }
+    return;
+  }
+
+  const Matrix4& 
+  GameObject::_updateLocalToWorld()
+  {
+    // TODO
+    _m_isDirty = false;
+    return _m_localToWorld;
+  }
+
+  void 
+  GameObject::_setDirty()
+  {
+    if (!_m_isDirty)
+    {
+      _m_isDirty = true;
+      _m_isInverseDirty = true;
+
+      for (auto child : _m_hChildren)
+      {
+        child.second->_setDirty();
+      }
+    }
     return;
   }
 }

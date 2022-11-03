@@ -3,6 +3,11 @@
 #include <QtWidgets/QMainWindow>
 #include "ui_Editor.h"
 
+namespace hk
+{
+  class Scene;
+}
+
 class Editor : public QMainWindow
 {
     Q_OBJECT
@@ -23,4 +28,7 @@ private:
 
     Ui::EditorClass 
     ui;
+
+    hk::Scene*
+    _m_pDefaultScene;
 };

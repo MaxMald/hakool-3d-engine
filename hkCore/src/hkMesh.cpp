@@ -45,10 +45,15 @@ namespace hk
   }
 
   void 
-  Mesh::setVertexesArray(float* _aVertexes, const uint32& _size)
+  Mesh::init(float* _aVertexes, const uint32& _size)
   {
     _m_aVertexes = _aVertexes;
     _m_vertexesSize = _size;
     return;
+  }
+
+  void 
+  Mesh::draw(GraphicComponent* pGraphicComponent)
+  {
   }
 }

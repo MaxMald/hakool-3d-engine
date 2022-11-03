@@ -5,6 +5,8 @@
 
 namespace hk
 {
+  class GraphicComponent;
+
   /**
   * TODO
   */
@@ -20,12 +22,27 @@ namespace hk
     /**
     * 
     */
-    Mesh(const Mesh& _mesh);
+    explicit Mesh(const Mesh& _mesh);
 
     /**
     * Destructor.
     */
-    ~Mesh();
+    virtual ~Mesh();
+
+    /**
+    * Set the array of vertexes.
+    *
+    * @param _aVertexes Array of vertexes.
+    * @param _size Array size.
+    */
+    virtual void
+    init(float* _aVertexes, const uint32& _size);
+
+    /**
+     * TODO
+     */
+    virtual void
+    draw(GraphicComponent* pGraphicComponent);
 
     /**
     * Safely destroys this object.
@@ -49,16 +66,7 @@ namespace hk
     float*
     getVertexesArray();
 
-    /**
-    * Set the array of vertexes.
-    * 
-    * @param _aVertexes Array of vertexes.
-    * @param _size Array size.
-    */
-    void
-    setVertexesArray(float* _aVertexes, const uint32& _size);
-
-  private:
+  protected:
     
     /**
     * Size of the list of vertexes.

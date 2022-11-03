@@ -2,7 +2,8 @@
 
 #include <Hakool\Utils\hkUtilitiesUtilities.h>
 #include <Hakool\Utils\hkLogger.h>
-
+#include <Hakool/Utils/hkVector3.h>
+#include <Hakool/Utils/hkMatrix4.h>
 #include <Hakool\Core\hkCorePrerequisites.h>
 #include <Hakool\Core\hkCoreUtilities.h>
 #include <Hakool\Core\hkComponent.h>
@@ -11,6 +12,7 @@
 namespace hk
 {
   class Scene;
+  class GraphicComponent;
 
   /**
   * Base class for any entity in scene.
@@ -56,6 +58,12 @@ namespace hk
     */
     void
     update();
+
+    /**
+     * TODO
+     */
+    void
+    draw(GraphicComponent* pGraphicComponet);
 
     /**
     * Add a new component to this game object.
@@ -106,7 +114,7 @@ namespace hk
     * @return True if the GameObject belongs to a scene, otherwise returns false.
     */
     bool
-    onScene() const;
+    hasScene() const;
 
     /**
     * Get the scene this GameObject belongs to.
@@ -134,13 +142,55 @@ namespace hk
     String
     getUUID() const;
 
+    const Vector3f&
+    getLocalPosition() const;
+
+    void
+    setLocalPosition(const Vector3f&);
+
+    Matrix4
+    calculateLocalToParentMatrix();
+
     /**
-    * Safely destroys this game object.
+    * Safely destroys this GameObject. Destroys and deletes its children.
     */
     void
     destroy();
 
   protected:
+
+    virtual void
+    _onParentChanged(GameObject* pGameObject) override;
+
+    void
+    _setScene(Scene* pScene);
+
+    const Matrix4&
+    _updateLocalToWorld();
+
+    void
+    _setDirty();
+
+    Vector3f
+    _m_localPosition;
+
+    Vector3f
+    _m_localRotation;
+
+    Vector3f
+    _m_localScale;
+
+    Matrix4
+    _m_localToWorld;
+
+    Matrix4
+    _m_worldToLocal;
+
+    float
+    _m_isDirty;
+
+    float
+    _m_isInverseDirty;
 
   private:
 
@@ -157,13 +207,13 @@ namespace hk
     _m_hComponents;
 
     /**
-    * Indicates if this gameObject is marked to be destroyed.
+    * Indicates if this GameObject is marked to be destroyed.
     */
     bool
     _m_toDestroy;
 
     /**
-    * Indicates if the gameObject is already initialized.
+    * Indicates if the GameObject is already initialized.
     */
     bool
     _m_isInitialized;

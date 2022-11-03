@@ -53,5 +53,7 @@ public:
 
 private:
 
+  virtual void showEvent(QShowEvent*);
+
   Hakool& m_hakool;
 };

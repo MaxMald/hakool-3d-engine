@@ -1,13 +1,23 @@
 #include <Hakool/Core/hkMeshResourceGroup.h>
 
+#include <Hakool/Core/Graphics/hkGraphicComponent.h>
+
 namespace hk
 {
   MeshResourceGroup::MeshResourceGroup() :
-  ResourceGroup<Mesh>()
+    ResourceGroup<Mesh>(),
+    _m_pGraphicComponent(nullptr)
   { }
 
   MeshResourceGroup::~MeshResourceGroup()
   { }
+
+  void 
+  MeshResourceGroup::init(GraphicComponent * pGraphicComponent)
+  {
+    _m_pGraphicComponent = pGraphicComponent;
+    return;
+  }
 
   Mesh*
   MeshResourceGroup::getCube()
@@ -32,8 +42,8 @@ namespace hk
         1.0f,  1.0f,  1.0f, -1.0f,  1.0f,  1.0f, -1.0f,  1.0f, -1.0f,
     };
 
-    Mesh* pCubeMesh = new Mesh();
-    pCubeMesh->setVertexesArray(pVertexes, (uint32)108);
+    Mesh* pCubeMesh = _m_pGraphicComponent->createMesh();
+    pCubeMesh->init(pVertexes, (uint32)108);
 
     add(cubeKey, pCubeMesh);
     return pCubeMesh;

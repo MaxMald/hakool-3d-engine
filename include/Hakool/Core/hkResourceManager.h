@@ -9,6 +9,7 @@ namespace hk
 {
   class Shader;
   class Mesh;
+  class GraphicComponent;
 
   /**
   * Manage all type of resources in the engine.
@@ -32,8 +33,8 @@ namespace hk
     * 
     * @return Operation result.
     */
-    eRESULT
-    init();
+    void
+    init(GraphicComponent* pGraphicComponent);
 
     /**
     * Gets the Shader group.

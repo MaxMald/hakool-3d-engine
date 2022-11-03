@@ -140,6 +140,7 @@
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
       <LanguageStandard>stdcpp14</LanguageStandard>
       <AdditionalIncludeDirectories>$(SolutionDir)include\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <DisableSpecificWarnings>4100;%(DisableSpecificWarnings)</DisableSpecificWarnings>
     </ClCompile>
     <Link>
       <SubSystem>NotSet</SubSystem>
@@ -172,9 +173,9 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="..\include\Hakool\Core\hkComponent.cpp" />
     <ClCompile Include="src\hakool.cpp" />
     <ClCompile Include="src\hkCamera.cpp" />
-    <ClCompile Include="src\hkComponent.cpp" />
     <ClCompile Include="src\hkEngineComponent.cpp" />
     <ClCompile Include="src\hkGameObject.cpp" />
     <ClCompile Include="src\hkGraphicComponent.cpp" />
@@ -182,6 +183,7 @@
     <ClCompile Include="src\hkMeshResourceGroup.cpp" />
     <ClCompile Include="src\hkModel.cpp" />
     <ClCompile Include="src\hkModelComponent.cpp" />
+    <ClCompile Include="src\hkModelObserver.cpp" />
     <ClCompile Include="src\hkResource.cpp" />
     <ClCompile Include="src\hkResourceManager.cpp" />
     <ClCompile Include="src\hkScene.cpp" />
@@ -203,6 +205,7 @@
     <ClInclude Include="..\include\Hakool\Core\hkGameObject.h" />
     <ClInclude Include="..\include\Hakool\Core\hkMeshResourceGroup.h" />
     <ClInclude Include="..\include\Hakool\Core\hkModelComponent.h" />
+    <ClInclude Include="..\include\Hakool\Core\hkModelObserver.h" />
     <ClInclude Include="..\include\Hakool\Core\hkNode.h" />
     <ClInclude Include="..\include\Hakool\Core\hkResource.h" />
     <ClInclude Include="..\include\Hakool\Core\hkResourceGroup.h" />

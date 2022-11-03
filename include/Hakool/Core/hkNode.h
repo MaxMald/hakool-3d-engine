@@ -55,13 +55,8 @@ namespace hk
     * Set the name of this node.
     * 
     * @param _newName The new name of this node.
-    * 
-    * @return Operation result.
-    * 
-    * * kSuccess: The node is renamed.
-    * * kObjectAlreadyExists: The parent already has a node with this name.
     */
-    eRESULT
+    void
     setName(const String& _newName);
     
     /**
@@ -87,8 +82,8 @@ namespace hk
     * the node wasn't added.
     * * kFail: A node cannot be a child of itself.
     */
-    eRESULT
-    addChild(T& _child);
+    void
+    addChild(T* pChild);
 
     /**
     * Get a child.
@@ -105,7 +100,7 @@ namespace hk
     *
     * @param _name The name of the child.
     */
-    void
+    T*
     removeChild(const String& _name);
 
     /**
@@ -117,6 +112,12 @@ namespace hk
     */
     bool
     hasChild(const String& _name) const;
+
+    /**
+    * Sets the parent of this Node.
+    */
+    void
+    setParent(T* _pParent);
 
     /**
     * Get the parent of this node.
@@ -134,13 +135,13 @@ namespace hk
     bool
     hasParent() const;
 
-    /**
-    * Remove this node from its current parent.
-    */
-    void
-    removeFromParent();
-
   protected:
+
+    virtual void
+    _onParentChanged(T* parent);
+
+    virtual void
+    _onChildAdded(T* child);
 
     /**
     * List of children.
@@ -227,8 +228,7 @@ namespace hk
     _m_pParent(nullptr)
   {
     Node* pParentNode = static_cast<Node*>(&_parent);
-    pParentNode->addChild(reinterpret_cast<T&>(*this));
-
+    pParentNode->addChild(reinterpret_cast<T*>(this));
     return;
   }
 
@@ -240,31 +240,33 @@ namespace hk
   }
 
   template<typename T>
-  inline eRESULT 
+  inline void 
   Node<T>::setName(const String& _newName)
   {
     if (_m_name == _newName)
     {
-      return eRESULT::kSuccess;
+      return;
     }
 
     if (_m_pParent == nullptr)
     {
       _m_name = _newName;
-      return eRESULT::kSuccess;
+      return;
     }
 
     Node* pParentNode = static_cast<Node*>(_m_pParent);
     if(pParentNode->hasChild(_newName))
     {
-      return eRESULT::kObjectAlreadyExists;
+      throw std::invalid_argument("The parent already has a node with the name: " + _newName);
     }
 
-    pParentNode->removeChild(_m_name);
+    pParentNode->_m_hChildren.erase(_m_name);
     _m_name = _newName;
-    pParentNode->addChild(reinterpret_cast<T&>(*this));
-
-    return eRESULT::kSuccess;
+    pParentNode->_m_hChildren.insert
+    (
+      Map<String, T*>::value_type(_m_name, reinterpret_cast<T*>(this))
+    );
+    return;
   }
 
   template<typename T>
@@ -275,30 +277,39 @@ namespace hk
   }
 
   template<typename T>
-  inline eRESULT 
-  Node<T>::addChild(T& _child)
+  inline void
+  Node<T>::addChild(T* pChild)
   {
-    Node* pChildNode = reinterpret_cast<Node*>(&_child);
+    Node* pChildNode = reinterpret_cast<Node*>(pChild);
     if (hasChild(pChildNode->_m_name)) 
     {
-      return eRESULT::kObjectAlreadyExists;
+      throw std::invalid_argument("The parent already has a node with the name: " + pChildNode->_m_name);
     }
 
-    if (&_child == this) 
+    if (pChild == this)
     {
-      return eRESULT::kFail;
+      throw std::invalid_argument("A Node cannot be a child of itself.");
     }
 
-    pChildNode->removeFromParent();
+    if (pChildNode->_m_pParent != nullptr)
+    {
+      Node* pChildParent = reinterpret_cast<Node*>(pChildNode->_m_pParent);
+      if (pChildNode != nullptr)
+      {
+        pChildParent->_m_hChildren.erase(pChildNode->getName());
+      }
+    }
 
     _m_hChildren.insert
     (
-      Map<String, T*>::value_type(pChildNode->_m_name, &_child)
+      Map<String, T*>::value_type(pChildNode->_m_name, pChild)
     );
 
     pChildNode->_m_pParent = reinterpret_cast<T*>(this);
+    pChildNode->_onParentChanged(reinterpret_cast<T*>(this));
 
-    return eRESULT::kSuccess;
+    _onChildAdded(pChild);
+    return;
   }
 
   template<typename T>
@@ -315,21 +326,21 @@ namespace hk
   }
 
   template<typename T>
-  inline void 
+  inline T* 
   Node<T>::removeChild(const String& _name)
   {
     if (!hasChild(_name))
     {
-      return;
+      return nullptr;
     }
 
-    T* pChild = _m_hChildren.find(_name)->second;    
+    T* pChild = _m_hChildren.find(_name)->second;
     _m_hChildren.erase(_name);
-
+    
     Node* pChildNode = reinterpret_cast<Node*>(pChild);
-    pChildNode->removeFromParent();
-
-    return;
+    pChildNode->_m_pParent = nullptr;
+    pChildNode->_onParentChanged(nullptr);
+    return pChild;
   }
 
   template<typename T>
@@ -337,6 +348,47 @@ namespace hk
   Node<T>::hasChild(const String& _name) const
   {
     return _m_hChildren.find(_name) != _m_hChildren.end();
+  }
+
+  template<typename T>
+  inline void 
+  Node<T>::setParent(T* _pParent)
+  {
+    if (_m_pParent == _pParent)
+    {
+      return;
+    }
+
+    if (this == _pParent)
+    {
+      throw std::invalid_argument("A Node cannot be the parent of itself.");
+    }
+
+    if (_pParent != nullptr)
+    {
+      Node* pDesireParentNode = reinterpret_cast<Node*>(_pParent);
+      if (pDesireParentNode->hasChild(_m_name))
+      {
+        throw std::invalid_argument("The parent already has a node with the name: " + _m_name);
+      }
+
+      pDesireParentNode->_m_hChildren.insert
+      (
+        Map<String, T*>::value_type(_m_name, reinterpret_cast<T*>(this))
+      );
+    }
+
+    if (_m_pParent != nullptr)
+    {
+      _m_pParent->_m_hChildren.erase(_m_name);
+    }
+
+    _m_pParent = _pParent;
+    _onParentChanged(_m_pParent);
+
+    Node* pDesireParentNode = reinterpret_cast<Node*>(_pParent);
+    pDesireParentNode->_onChildAdded(reinterpret_cast<T*>(this));
+    return;
   }
 
   template<typename T>
@@ -360,18 +412,18 @@ namespace hk
   }
 
   template<typename T>
-  inline void Node<T>::removeFromParent()
+  inline void 
+  Node<T>::_onParentChanged(T* pParent)
   {
-    if (!hasParent())
-    {
-      return;
-    }
+    // Define in concrete class.
+    return;
+  }
 
-    T* pParent = _m_pParent;
-    Node* pParentNode = reinterpret_cast<Node*>(_m_pParent);
-    pParentNode->removeChild(_m_name);
-    _m_pParent = nullptr;
-
+  template<typename T>
+  inline void 
+  Node<T>::_onChildAdded(T* pChild)
+  {
+    // Define in concrete class.
     return;
   }
 

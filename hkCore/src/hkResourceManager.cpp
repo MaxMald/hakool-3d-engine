@@ -13,11 +13,11 @@ namespace hk
     return;
   }
 
-  eRESULT 
-  ResourceManager::init()
+  void 
+  ResourceManager::init(GraphicComponent* pGraphicComponent)
   {
-    // TODO.
-    return eRESULT::kSuccess;
+    _m_meshes.init(pGraphicComponent);
+    return;
   }
 
   ResourceGroup<Shader>&
@@ -26,7 +26,7 @@ namespace hk
     return _m_shaders;
   }
 
-  MeshResourceGroup& 
+  MeshResourceGroup&
   ResourceManager::getMeshes()
   {
     return _m_meshes;
