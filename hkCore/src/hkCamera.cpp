@@ -1,4 +1,4 @@
-#include <Hakool/Core/Graphics/hkCamera.h>
+#include <Hakool/Core/hkCamera.h>
 
 namespace hk
 {

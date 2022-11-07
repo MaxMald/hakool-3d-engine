@@ -67,7 +67,7 @@ namespace hk
   void
     GameObject::update()
   {
-    for (pair<const eCOMPONENT, Component*> item : _m_hComponents)
+    for (pair<const eCOMPONENT, IGameObjectComponent*> item : _m_hComponents)
     {
       item.second->update();
     }
@@ -77,7 +77,7 @@ namespace hk
   void
     GameObject::draw(GraphicComponent* pGraphicComponet)
   {
-    for (pair<const eCOMPONENT, Component*> item : _m_hComponents)
+    for (pair<const eCOMPONENT, IGameObjectComponent*> item : _m_hComponents)
     {
       item.second->draw(pGraphicComponet);
     }
@@ -90,7 +90,7 @@ namespace hk
   }
 
   void
-  GameObject::addComponent(Component* _pComponent)
+  GameObject::addComponent(IGameObjectComponent* _pComponent)
   {
     eCOMPONENT type = _pComponent->getID();
     if (hasComponent(type))
@@ -103,7 +103,7 @@ namespace hk
 
     _m_hComponents.insert
     (
-      Map<eCOMPONENT, Component*>::value_type(type, _pComponent)
+      Map<eCOMPONENT, IGameObjectComponent*>::value_type(type, _pComponent)
     );
 
     if (_m_isInitialized)
@@ -127,7 +127,7 @@ namespace hk
       return;
     }
 
-    Component* pComponent = _m_hComponents.find(_id)->second;
+    IGameObjectComponent* pComponent = _m_hComponents.find(_id)->second;
     pComponent->destroy();
     delete pComponent;
     _m_hComponents.erase(_id);
@@ -199,7 +199,7 @@ namespace hk
   void
   GameObject::destroy()
   {
-    Component* pComponent = nullptr;
+    IGameObjectComponent* pComponent = nullptr;
     for (auto iterator : _m_hComponents)
     {
       pComponent = iterator.second;

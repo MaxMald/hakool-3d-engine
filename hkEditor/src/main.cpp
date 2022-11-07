@@ -1,4 +1,4 @@
-#include <Hakool/hakool.h>
+#include <Hakool/Core/hakool.h>
 #include <Hakool/Utils/hkLoggerConsole.h>
 #include <Hakool/Core/hkScene.h>
 #include <Hakool/Core/hkModelComponent.h>

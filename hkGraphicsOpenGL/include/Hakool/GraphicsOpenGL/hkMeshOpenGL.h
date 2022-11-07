@@ -1,10 +1,10 @@
 #pragma once
 
-#include <Hakool\Core\Graphics\hkIContext.h>
-#include <Hakool\Core\Graphics\hkIMesh.h>
-
+#include <Hakool\Core\hkIContext.h>
+#include <Hakool\Core\hkIMesh.h>
 #include <Hakool\GraphicsOpenGL\hkGraphicsOpenGLPrerequisites.h>
 #include <GL/glew.h>
+
 namespace hk
 {
   class MeshOpenGL : public IMesh

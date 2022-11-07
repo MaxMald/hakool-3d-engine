@@ -1,6 +1,5 @@
 #include <Hakool/Core/hkMeshResourceGroup.h>
-
-#include <Hakool/Core/Graphics/hkGraphicComponent.h>
+#include <Hakool/Core/hkGraphicComponent.h>
 
 namespace hk
 {

@@ -1,5 +1,5 @@
-#include <Hakool/Core/Graphics/hkModel.h>
-#include <Hakool/Core/Graphics/hkIMesh.h>
+#include <Hakool/Core/hkModel.h>
+#include <Hakool/Core/hkIMesh.h>
 
 namespace hk
 {

@@ -100,7 +100,7 @@
       <ConformanceMode>true</ConformanceMode>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
       <LanguageStandard>stdcpp14</LanguageStandard>
-      <AdditionalIncludeDirectories>$(SolutionDir)include\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)include\;$(SolutionDir)hkUtilities\include\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>NotSet</SubSystem>
@@ -119,7 +119,7 @@
       <PreprocessorDefinitions>HK_CORE_EXPORTS;WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
-      <AdditionalIncludeDirectories>$(SolutionDir)include\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)include\;$(SolutionDir)hkUtilities\include\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <LanguageStandard>stdcpp14</LanguageStandard>
     </ClCompile>
     <Link>
@@ -140,7 +140,7 @@
       <ConformanceMode>true</ConformanceMode>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
       <LanguageStandard>stdcpp14</LanguageStandard>
-      <AdditionalIncludeDirectories>$(SolutionDir)include\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)include\;$(SolutionDir)hkUtilities\include\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <DisableSpecificWarnings>4100;%(DisableSpecificWarnings)</DisableSpecificWarnings>
     </ClCompile>
     <Link>
@@ -160,7 +160,7 @@
       <PreprocessorDefinitions>HK_CORE_EXPORTS;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
-      <AdditionalIncludeDirectories>$(SolutionDir)include\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)include\;$(SolutionDir)hkUtilities\include\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <LanguageStandard>stdcpp14</LanguageStandard>
     </ClCompile>
     <Link>
@@ -174,7 +174,6 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="..\include\Hakool\Core\hkComponent.cpp" />
     <ClCompile Include="src\hakool.cpp" />
     <ClCompile Include="src\hkCamera.cpp" />
     <ClCompile Include="src\hkEngineComponent.cpp" />
@@ -188,29 +187,29 @@
     <ClCompile Include="src\hkSceneManager.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\include\Hakool\Core\Graphics\hkCamera.h" />
-    <ClInclude Include="..\include\Hakool\Core\Graphics\hkGraphicComponent.h" />
-    <ClInclude Include="..\include\Hakool\Core\Graphics\hkIContext.h" />
-    <ClInclude Include="..\include\Hakool\Core\Graphics\hkIProgram.h" />
-    <ClInclude Include="..\include\Hakool\Core\Graphics\hkIMesh.h" />
-    <ClInclude Include="..\include\Hakool\Core\Graphics\hkModel.h" />
-    <ClInclude Include="..\include\Hakool\Core\Graphics\hkShader.h" />
-    <ClInclude Include="..\include\Hakool\Core\hkComponent.h" />
-    <ClInclude Include="..\include\Hakool\Core\hkConfigCore.h" />
-    <ClInclude Include="..\include\Hakool\Core\hkCorePrerequisites.h" />
-    <ClInclude Include="..\include\Hakool\Core\hkCoreUtilities.h" />
-    <ClInclude Include="..\include\Hakool\Core\hkEngineComponent.h" />
-    <ClInclude Include="..\include\Hakool\Core\hkGameObject.h" />
-    <ClInclude Include="..\include\Hakool\Core\hkMeshResourceGroup.h" />
-    <ClInclude Include="..\include\Hakool\Core\hkModelComponent.h" />
-    <ClInclude Include="..\include\Hakool\Core\hkModelObserver.h" />
-    <ClInclude Include="..\include\Hakool\Core\hkNode.h" />
-    <ClInclude Include="..\include\Hakool\Core\hkIResource.h" />
-    <ClInclude Include="..\include\Hakool\Core\hkResourceGroup.h" />
-    <ClInclude Include="..\include\Hakool\Core\hkResourceManager.h" />
-    <ClInclude Include="..\include\Hakool\Core\hkScene.h" />
-    <ClInclude Include="..\include\Hakool\Core\hkSceneManager.h" />
-    <ClInclude Include="..\include\Hakool\hakool.h" />
+    <ClInclude Include="include\Hakool\Core\hkCamera.h" />
+    <ClInclude Include="include\Hakool\Core\hkGraphicComponent.h" />
+    <ClInclude Include="include\Hakool\Core\hkIContext.h" />
+    <ClInclude Include="include\Hakool\Core\hkIProgram.h" />
+    <ClInclude Include="include\Hakool\Core\hkIMesh.h" />
+    <ClInclude Include="include\Hakool\Core\hkModel.h" />
+    <ClInclude Include="include\Hakool\Core\hkShader.h" />
+    <ClInclude Include="include\Hakool\Core\hkIGameObjectComponent.h" />
+    <ClInclude Include="include\Hakool\Core\hkConfigCore.h" />
+    <ClInclude Include="include\Hakool\Core\hkCorePrerequisites.h" />
+    <ClInclude Include="include\Hakool\Core\hkCoreUtilities.h" />
+    <ClInclude Include="include\Hakool\Core\hkEngineComponent.h" />
+    <ClInclude Include="include\Hakool\Core\hkGameObject.h" />
+    <ClInclude Include="include\Hakool\Core\hkMeshResourceGroup.h" />
+    <ClInclude Include="include\Hakool\Core\hkModelComponent.h" />
+    <ClInclude Include="include\Hakool\Core\hkModelObserver.h" />
+    <ClInclude Include="include\Hakool\Core\hkNode.h" />
+    <ClInclude Include="include\Hakool\Core\hkIResource.h" />
+    <ClInclude Include="include\Hakool\Core\hkResourceGroup.h" />
+    <ClInclude Include="include\Hakool\Core\hkResourceManager.h" />
+    <ClInclude Include="include\Hakool\Core\hkScene.h" />
+    <ClInclude Include="include\Hakool\Core\hkSceneManager.h" />
+    <ClInclude Include="include\Hakool\Core\hakool.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -12,11 +12,14 @@ namespace hk
   * Encapsulates a piece of logic that defines part of the behavior of the GameObject
   * which it belongs to.
   */
-  class Component
+  class IGameObjectComponent
   {
   public:
 
-    virtual ~Component();
+    IGameObjectComponent() = default;
+
+    virtual 
+    ~IGameObjectComponent() = default;
 
     /**
     * Called when the GameObject is being initialized.

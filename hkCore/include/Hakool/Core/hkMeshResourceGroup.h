@@ -1,7 +1,7 @@
 #pragma once
 
 #include "hkCorePrerequisites.h"
-#include "Graphics/hkIMesh.h"
+#include "hkIMesh.h"
 #include "hkResourceGroup.h"
 
 namespace hk

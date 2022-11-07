@@ -41,31 +41,31 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\include\Hakool\GraphicsOpenGL\hkGraphicComponentOpenGL.h">
+    <ClInclude Include="include\Hakool\GraphicsOpenGL\hkGraphicComponentOpenGL.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\include\Hakool\GraphicsOpenGL\hkConfigGraphicsOpenGL.h">
+    <ClInclude Include="include\Hakool\GraphicsOpenGL\hkConfigGraphicsOpenGL.h">
       <Filter>Header Files\config</Filter>
     </ClInclude>
-    <ClInclude Include="..\include\Hakool\GraphicsOpenGL\hkGraphicsOpenGLPrerequisites.h">
+    <ClInclude Include="include\Hakool\GraphicsOpenGL\hkGraphicsOpenGLPrerequisites.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\include\Hakool\GraphicsOpenGL\hkGraphicsOpenGLPlugin.h">
+    <ClInclude Include="include\Hakool\GraphicsOpenGL\hkGraphicsOpenGLPlugin.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\include\Hakool\GraphicsOpenGL\hkContextOpenGL.h">
+    <ClInclude Include="include\Hakool\GraphicsOpenGL\hkContextOpenGL.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\include\Hakool\GraphicsOpenGL\hkProgramOpenGL.h">
+    <ClInclude Include="include\Hakool\GraphicsOpenGL\hkProgramOpenGL.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\include\Hakool\GraphicsOpenGL\hkShaderOpenGL.h">
+    <ClInclude Include="include\Hakool\GraphicsOpenGL\hkShaderOpenGL.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\include\Hakool\GraphicsOpenGL\hkMeshOpenGL.h">
+    <ClInclude Include="include\Hakool\GraphicsOpenGL\hkMeshOpenGL.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\include\Hakool\GraphicsOpenGL\hkWindowOpenGL.h">
+    <ClInclude Include="include\Hakool\GraphicsOpenGL\hkWindowOpenGL.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

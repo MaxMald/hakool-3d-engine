@@ -6,7 +6,7 @@
 #include <Hakool\Utils\hkLogger.h>
 #include <Hakool\Utils\hkIWindow.h>
 
-#include <Hakool\hakool.h>
+#include <Hakool\Core\hakool.h>
 #include <Hakool\Core\hkResourceManager.h>
 #include <Hakool\Core\hkScene.h>
 
@@ -194,8 +194,8 @@ namespace hk
   void
   GraphicComponentOpenGL::clear()
   {
+    glClear(GL_COLOR_BUFFER_BIT);
     glClear(GL_DEPTH_BUFFER_BIT);
-    return;
   }
 
   void 

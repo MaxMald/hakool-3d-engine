@@ -2,8 +2,8 @@
 
 #include <Hakool/Utils/hkUtilitiesUtilities.h>
 #include <Hakool/Core/hkCorePrerequisites.h>
-#include <Hakool/Core/hkComponent.h>
-#include <Hakool/Core/Graphics/hkModel.h>
+#include <Hakool/Core/hkIGameObjectComponent.h>
+#include <Hakool/Core/hkModel.h>
 #include <Hakool/Core/hkModelObserver.h>
 
 namespace hk
@@ -13,7 +13,7 @@ namespace hk
   /**
   * TODO
   */
-  class HK_CORE_EXPORT ModelComponent : public Component, public ModelObserver
+  class HK_CORE_EXPORT ModelComponent : public IGameObjectComponent, public ModelObserver
   {
   public:
 

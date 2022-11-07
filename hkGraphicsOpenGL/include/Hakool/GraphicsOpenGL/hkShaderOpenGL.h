@@ -1,7 +1,6 @@
 #pragma once
 
-#include <Hakool\Core\Graphics\hkShader.h>
-
+#include <Hakool\Core\hkShader.h>
 #include <Hakool\GraphicsOpenGL\hkGraphicsOpenGLPrerequisites.h>
 
 namespace hk

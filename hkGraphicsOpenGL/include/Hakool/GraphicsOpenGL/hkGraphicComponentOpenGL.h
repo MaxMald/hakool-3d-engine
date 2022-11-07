@@ -4,7 +4,7 @@
 #include <Hakool\Utils\hkMatrix4.h>
 
 #include <Hakool\GraphicsOpenGL\hkGraphicsOpenGLPrerequisites.h>
-#include <Hakool\Core\Graphics\hkGraphicComponent.h>
+#include <Hakool\Core\hkGraphicComponent.h>
 
 #include <glm/vec3.hpp>
 #include <glm/vec4.hpp>

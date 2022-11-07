@@ -2,7 +2,7 @@
 
 #include <windows.h>
 
-#include <Hakool\Core\Graphics\hkIContext.h>
+#include <Hakool\Core\hkIContext.h>
 #include <Hakool\GraphicsOpenGL\hkGraphicsOpenGLPrerequisites.h>
 
 namespace hk

@@ -33,90 +33,90 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\include\Hakool\Utils\hkVector2.h">
+    <ClInclude Include="include\Hakool\Utils\hkVector2.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\include\Hakool\Utils\hkConfigPlatform.h">
+    <ClInclude Include="include\Hakool\Utils\hkConfigPlatform.h">
       <Filter>Header Files\config</Filter>
     </ClInclude>
-    <ClInclude Include="..\include\Hakool\Utils\hkConfigTypes.h">
+    <ClInclude Include="include\Hakool\Utils\hkConfigTypes.h">
       <Filter>Header Files\config</Filter>
     </ClInclude>
-    <ClInclude Include="..\include\Hakool\Utils\hkConfigUtilities.h">
+    <ClInclude Include="include\Hakool\Utils\hkConfigUtilities.h">
       <Filter>Header Files\config</Filter>
     </ClInclude>
-    <ClInclude Include="..\include\Hakool\Utils\hkMath.h">
+    <ClInclude Include="include\Hakool\Utils\hkMath.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\include\Hakool\Utils\hkUtilsPrerequisites.h">
+    <ClInclude Include="include\Hakool\Utils\hkUtilsPrerequisites.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\include\Hakool\Utils\hkSharedPointer.h">
+    <ClInclude Include="include\Hakool\Utils\hkSharedPointer.h">
       <Filter>Header Files\smartPointers</Filter>
     </ClInclude>
-    <ClInclude Include="..\include\Hakool\Utils\hkLogger.h">
+    <ClInclude Include="include\Hakool\Utils\hkLogger.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\include\Hakool\Utils\hkModule.h">
+    <ClInclude Include="include\Hakool\Utils\hkModule.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\include\Hakool\Utils\hkLoggerConsole.h">
+    <ClInclude Include="include\Hakool\Utils\hkLoggerConsole.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\include\Hakool\Utils\hkMatrix3.h">
+    <ClInclude Include="include\Hakool\Utils\hkMatrix3.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\include\Hakool\Utils\hkVector3.h">
+    <ClInclude Include="include\Hakool\Utils\hkVector3.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\include\Hakool\Utils\hkVector4.h">
+    <ClInclude Include="include\Hakool\Utils\hkVector4.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\include\Hakool\Utils\hkMatrix4.h">
+    <ClInclude Include="include\Hakool\Utils\hkMatrix4.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\include\Hakool\Utils\hkUtilitiesUtilities.h">
+    <ClInclude Include="include\Hakool\Utils\hkUtilitiesUtilities.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\include\Hakool\Utils\hkIPlugin.h">
-      <Filter>Header Files\plug-in</Filter>
-    </ClInclude>
-    <ClInclude Include="..\include\Hakool\Utils\hkPluginSlotWin.h">
-      <Filter>Header Files\plug-in</Filter>
-    </ClInclude>
-    <ClInclude Include="..\include\Hakool\Utils\hkIPluginSlot.h">
-      <Filter>Header Files\plug-in</Filter>
-    </ClInclude>
-    <ClInclude Include="..\include\Hakool\Utils\hkPluginManager.h">
-      <Filter>Header Files\plug-in</Filter>
-    </ClInclude>
-    <ClInclude Include="..\include\Hakool\Utils\hkIWindow.h">
+    <ClInclude Include="include\Hakool\Utils\hkIWindow.h">
       <Filter>Header Files\window</Filter>
     </ClInclude>
-    <ClInclude Include="..\include\Hakool\Utils\hkWindowWin32.h">
+    <ClInclude Include="include\Hakool\Utils\hkWindowWin32.h">
       <Filter>Header Files\window</Filter>
     </ClInclude>
-    <ClInclude Include="..\include\Hakool\Utils\hkConfigWindow.h">
+    <ClInclude Include="include\Hakool\Utils\hkConfigWindow.h">
       <Filter>Header Files\config</Filter>
     </ClInclude>
-    <ClInclude Include="..\include\Hakool\Utils\hkIWindowFactory.h">
+    <ClInclude Include="include\Hakool\Utils\hkIWindowFactory.h">
       <Filter>Header Files\window</Filter>
     </ClInclude>
-    <ClInclude Include="..\include\Hakool\Utils\hkColor.h">
+    <ClInclude Include="include\Hakool\Utils\hkColor.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\include\Hakool\Utils\guid.hpp">
+    <ClInclude Include="include\Hakool\Utils\guid.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\include\Hakool\Utils\hkWindowFactoryWin32.h">
+    <ClInclude Include="include\Hakool\Utils\hkWindowFactoryWin32.h">
       <Filter>Header Files\window</Filter>
     </ClInclude>
-    <ClInclude Include="..\include\Hakool\Utils\hkWindowObserver.h">
+    <ClInclude Include="include\Hakool\Utils\hkWindowObserver.h">
       <Filter>Header Files\window</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Hakool\Utils\hkIPlugin.h">
+      <Filter>Header Files\plug-in</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Hakool\Utils\hkIPluginSlot.h">
+      <Filter>Header Files\plug-in</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Hakool\Utils\hkPluginManager.h">
+      <Filter>Header Files\plug-in</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Hakool\Utils\hkPluginSlotWin.h">
+      <Filter>Header Files\plug-in</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <None Include="..\include\Hakool\Utils\hkModule.inl">
+    <None Include="include\Hakool\Utils\hkModule.inl">
       <Filter>Header Files</Filter>
     </None>
   </ItemGroup>

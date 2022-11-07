@@ -1,5 +1,5 @@
 #include <Hakool\Core\hkScene.h>
-#include <Hakool\hakool.h>
+#include <Hakool\Core\hakool.h>
 
 namespace hk
 {

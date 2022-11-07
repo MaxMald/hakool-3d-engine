@@ -78,78 +78,75 @@
     <ClCompile Include="src\hkModelObserver.cpp">
       <Filter>Source Files\graphics</Filter>
     </ClCompile>
-    <ClCompile Include="..\include\Hakool\Core\hkComponent.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\include\Hakool\hakool.h">
+    <ClInclude Include="include\Hakool\Core\hakool.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\include\Hakool\Core\hkConfigCore.h">
+    <ClInclude Include="include\Hakool\Core\hkConfigCore.h">
       <Filter>Header Files\config</Filter>
     </ClInclude>
-    <ClInclude Include="..\include\Hakool\Core\hkCorePrerequisites.h">
+    <ClInclude Include="include\Hakool\Core\hkCorePrerequisites.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\include\Hakool\Core\hkEngineComponent.h">
+    <ClInclude Include="include\Hakool\Core\hkEngineComponent.h">
       <Filter>Header Files\system</Filter>
     </ClInclude>
-    <ClInclude Include="..\include\Hakool\Core\hkCoreUtilities.h">
+    <ClInclude Include="include\Hakool\Core\hkCoreUtilities.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\include\Hakool\Core\Graphics\hkGraphicComponent.h">
+    <ClInclude Include="include\Hakool\Core\hkGraphicComponent.h">
       <Filter>Header Files\graphics</Filter>
     </ClInclude>
-    <ClInclude Include="..\include\Hakool\Core\Graphics\hkIContext.h">
+    <ClInclude Include="include\Hakool\Core\hkIContext.h">
       <Filter>Header Files\graphics</Filter>
     </ClInclude>
-    <ClInclude Include="..\include\Hakool\Core\Graphics\hkShader.h">
+    <ClInclude Include="include\Hakool\Core\hkShader.h">
       <Filter>Header Files\graphics</Filter>
     </ClInclude>
-    <ClInclude Include="..\include\Hakool\Core\Graphics\hkIProgram.h">
+    <ClInclude Include="include\Hakool\Core\hkIProgram.h">
       <Filter>Header Files\graphics</Filter>
     </ClInclude>
-    <ClInclude Include="..\include\Hakool\Core\hkResourceGroup.h">
+    <ClInclude Include="include\Hakool\Core\hkResourceGroup.h">
       <Filter>Header Files\resource</Filter>
     </ClInclude>
-    <ClInclude Include="..\include\Hakool\Core\hkResourceManager.h">
+    <ClInclude Include="include\Hakool\Core\hkResourceManager.h">
       <Filter>Header Files\resource</Filter>
     </ClInclude>
-    <ClInclude Include="..\include\Hakool\Core\hkScene.h">
+    <ClInclude Include="include\Hakool\Core\hkScene.h">
       <Filter>Header Files\scene</Filter>
     </ClInclude>
-    <ClInclude Include="..\include\Hakool\Core\hkSceneManager.h">
+    <ClInclude Include="include\Hakool\Core\hkSceneManager.h">
       <Filter>Header Files\scene</Filter>
     </ClInclude>
-    <ClInclude Include="..\include\Hakool\Core\hkGameObject.h">
+    <ClInclude Include="include\Hakool\Core\hkGameObject.h">
       <Filter>Header Files\scene</Filter>
     </ClInclude>
-    <ClInclude Include="..\include\Hakool\Core\hkComponent.h">
+    <ClInclude Include="include\Hakool\Core\hkIGameObjectComponent.h">
       <Filter>Header Files\components</Filter>
     </ClInclude>
-    <ClInclude Include="..\include\Hakool\Core\hkNode.h">
+    <ClInclude Include="include\Hakool\Core\hkNode.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\include\Hakool\Core\Graphics\hkCamera.h">
+    <ClInclude Include="include\Hakool\Core\hkCamera.h">
       <Filter>Header Files\graphics</Filter>
     </ClInclude>
-    <ClInclude Include="..\include\Hakool\Core\Graphics\hkIMesh.h">
+    <ClInclude Include="include\Hakool\Core\hkIMesh.h">
       <Filter>Header Files\graphics</Filter>
     </ClInclude>
-    <ClInclude Include="..\include\Hakool\Core\Graphics\hkModel.h">
+    <ClInclude Include="include\Hakool\Core\hkModel.h">
       <Filter>Header Files\graphics</Filter>
     </ClInclude>
-    <ClInclude Include="..\include\Hakool\Core\hkModelComponent.h">
+    <ClInclude Include="include\Hakool\Core\hkModelComponent.h">
       <Filter>Header Files\components</Filter>
     </ClInclude>
-    <ClInclude Include="..\include\Hakool\Core\hkMeshResourceGroup.h">
+    <ClInclude Include="include\Hakool\Core\hkMeshResourceGroup.h">
       <Filter>Header Files\resource</Filter>
     </ClInclude>
-    <ClInclude Include="..\include\Hakool\Core\hkModelObserver.h">
+    <ClInclude Include="include\Hakool\Core\hkModelObserver.h">
       <Filter>Header Files\graphics</Filter>
     </ClInclude>
-    <ClInclude Include="..\include\Hakool\Core\hkIResource.h">
+    <ClInclude Include="include\Hakool\Core\hkIResource.h">
       <Filter>Header Files\resource</Filter>
     </ClInclude>
   </ItemGroup>

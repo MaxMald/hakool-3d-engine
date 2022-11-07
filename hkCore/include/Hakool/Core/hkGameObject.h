@@ -6,7 +6,7 @@
 #include <Hakool/Utils/hkMatrix4.h>
 #include <Hakool\Core\hkCorePrerequisites.h>
 #include <Hakool\Core\hkCoreUtilities.h>
-#include <Hakool\Core\hkComponent.h>
+#include <Hakool\Core\hkIGameObjectComponent.h>
 #include <Hakool\Core\hkNode.h>
 
 namespace hk
@@ -77,7 +77,7 @@ namespace hk
     * * kFail: An error occurs.
     */
     void
-    addComponent(Component* _pComponent);
+    addComponent(IGameObjectComponent* _pComponent);
 
     /**
     * Check if the game object has a component.
@@ -203,7 +203,7 @@ namespace hk
     /**
     * Map of components attached to this game object.
     */
-    Map<eCOMPONENT, Component*>
+    Map<eCOMPONENT, IGameObjectComponent*>
     _m_hComponents;
 
     /**
@@ -236,7 +236,7 @@ namespace hk
       throw "GameObject: " + getName() + " doesn't has component.";
     }
 
-    if (!IsBaseOf<Component, T>::value)
+    if (!IsBaseOf<IGameObjectComponent, T>::value)
     {
       throw "GameObject: " + getName() + " cannot convert to a type that is not base of Component";
     }

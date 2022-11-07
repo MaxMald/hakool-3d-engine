@@ -1,9 +1,9 @@
 #include <Hakool\Utils\hkIWindow.h>
 #include <Hakool\Utils\hkIPlugin.h>
 #include <Hakool\Utils\hkLoggerConsole.h>
-#include <Hakool\hakool.h>
+#include <Hakool\Core\hakool.h>
 #include <Hakool\Core\hkCoreUtilities.h>
-#include <Hakool\Core\Graphics\hkGraphicComponent.h>
+#include <Hakool\Core\hkGraphicComponent.h>
 
 namespace hk
 {
