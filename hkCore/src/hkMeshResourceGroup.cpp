@@ -5,7 +5,7 @@
 namespace hk
 {
   MeshResourceGroup::MeshResourceGroup() :
-    ResourceGroup<Mesh>(),
+    ResourceGroup<IMesh>(),
     _m_pGraphicComponent(nullptr)
   { }
 
@@ -19,7 +19,7 @@ namespace hk
     return;
   }
 
-  Mesh*
+  IMesh*
   MeshResourceGroup::getCube()
   {
     String cubeKey = "_HAKOOL_CUBE_MESH_";
@@ -42,8 +42,8 @@ namespace hk
         1.0f,  1.0f,  1.0f, -1.0f,  1.0f,  1.0f, -1.0f,  1.0f, -1.0f,
     };
 
-    Mesh* pCubeMesh = _m_pGraphicComponent->createMesh();
-    pCubeMesh->init(pVertexes, (uint32)108);
+    IMesh* pCubeMesh = _m_pGraphicComponent->createMesh();
+    pCubeMesh->init(pVertexes, (uint32)36);
 
     add(cubeKey, pCubeMesh);
     return pCubeMesh;

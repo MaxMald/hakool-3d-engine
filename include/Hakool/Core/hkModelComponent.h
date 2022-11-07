@@ -51,7 +51,7 @@ namespace hk
      * @param pMesh The Mesh's pointer.
      */
     void
-    setMesh(Mesh* pMesh);
+    setMesh(IMesh* pMesh);
 
   private:
 

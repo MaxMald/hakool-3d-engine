@@ -1,35 +1,20 @@
 #pragma once
 
 #include <Hakool\Core\Graphics\hkIContext.h>
-#include <Hakool\Core\Graphics\hkMesh.h>
+#include <Hakool\Core\Graphics\hkIMesh.h>
 
 #include <Hakool\GraphicsOpenGL\hkGraphicsOpenGLPrerequisites.h>
-#include <Hakool\GraphicsOpenGL\gl_lite.h>
-
+#include <GL/glew.h>
 namespace hk
 {
-  /**
-   * Object that handles a single Mesh.
-   */
-  class MeshOpenGL : 
-    public Mesh
+  class MeshOpenGL : public IMesh
   {
   public:
 
-    /**
-    * Constructor.
-    */
     MeshOpenGL();
 
-    /**
-    * Copy constructor.
-    */
-    explicit MeshOpenGL(const MeshOpenGL& _context);
-
-    /**
-    * Destructor.
-    */
-    virtual ~MeshOpenGL();
+    virtual 
+    ~MeshOpenGL();
 
     virtual void
     init(float* _aVertexes, const uint32& _size) override;
@@ -37,9 +22,21 @@ namespace hk
     virtual void
     draw(GraphicComponent* pGraphicComponent) override;
 
+    virtual uint32
+    getVertexesSize() override;
+
+    virtual float*
+    getVertexesArray() override;
+
+    virtual void
+    destroy() override;
+
   private:
 
     GLuint 
-    _m_vbo[2];
+    _m_vbo;
+
+    uint32
+    _m_size;
   };
 }

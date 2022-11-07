@@ -1,95 +1,81 @@
+#include <Hakool\GraphicsOpenGL\hkGraphicComponentOpenGL.h>
+
+#include <GL/glew.h>
+#include <GLFW/glfw3.h>
+
 #include <Hakool\Utils\hkLogger.h>
-#include <Hakool\Utils\hkWindow.h>
+#include <Hakool\Utils\hkIWindow.h>
 
 #include <Hakool\hakool.h>
 #include <Hakool\Core\hkResourceManager.h>
 #include <Hakool\Core\hkScene.h>
 
-#include <Hakool\GraphicsOpenGL\hkGraphicComponentOpenGL.h>
 #include <Hakool\GraphicsOpenGL\hkContextOpenGL.h>
 #include <Hakool\GraphicsOpenGL\hkShaderOpenGL.h>
 #include <Hakool\GraphicsOpenGL\hkProgramOpenGL.h>
 #include <Hakool\GraphicsOpenGL\hkMeshOpenGL.h>
-
-#define GL_LITE_IMPLEMENTATION
-#include <Hakool\GraphicsOpenGL\gl_lite.h>
+#include <Hakool\GraphicsOpenGL\hkWindowOpenGL.h>
 
 namespace hk
 {
-  GraphicComponentOpenGL::GraphicComponentOpenGL():
-    GraphicComponent(),
+  GraphicComponentOpenGL::GraphicComponentOpenGL() :
     _m_pResourceManager(nullptr),
     _m_perspectiveMat(),
-    _m_modelViewMat()
-  {
-    _m_graphicInterfaceId = eGRAPHIC_INTERFACE::kOpenGL;
-    _m_isReady = false;
-    return;
-  }
+    _m_modelViewMat(),
+    _m_pWindow(nullptr),
+    _m_pContextOpenGL(nullptr),
+    _m_isReady(false)
+  { }
 
   GraphicComponentOpenGL::~GraphicComponentOpenGL()
   {
     destroy();
-    return;
   }
 
   eRESULT
-  GraphicComponentOpenGL::init
-  (
-    Window* _pWindow,
+  GraphicComponentOpenGL::init(
     const GraphicsConfiguration& _graphicConfiguration,
-    ResourceManager& resourceManager
-  )
+    const WindowConfiguration& windowConfig,
+    ResourceManager& resourceManager)
   {
     if (_m_isReady)
     {
       Logger::GetReference().warning("OpenGL GraphicComponent already created.");
       return eRESULT::kFail;
     }
-
-    _m_pWindow = _pWindow;
-    _m_pResourceManager = &resourceManager;
-
-    // Creates the OpenGL Context.
     
-    PIXELFORMATDESCRIPTOR pfd =
+    _m_pResourceManager = &resourceManager;
+    if (!glfwInit())
     {
-      sizeof(PIXELFORMATDESCRIPTOR),
-      1,
-      PFD_DRAW_TO_WINDOW | PFD_SUPPORT_OPENGL | PFD_DOUBLEBUFFER,
-      PFD_TYPE_RGBA,
-      32,
-      0, 0, 0, 0, 0, 0,
-      0,
-      0,
-      0,
-      0, 0, 0, 0,
-      24,
-      8,
-      0,
-      PFD_MAIN_PLANE,
-      0,
-      0, 0, 0
-    };
+      throw std::runtime_error("Couldn't initialize GLFW.");
+    }
+    
+    try
+    {
+      _m_pWindow = new WindowOpenGL();
+      _m_pWindow->init(windowConfig);
+    }
+    catch (...)
+    {
+      glfwTerminate();
+      throw;
+    }
 
-    HDC windowDeviceContext = GetDC(_pWindow->getWindowHandler());
+    if (glewInit() != GLEW_OK)
+    {
+      _m_pWindow->destroy();
+      glfwTerminate();
+      
+      throw std::runtime_error("Couldn't initialize GLEW.");
+    }
 
-    uint32  letWindowsChooseThisPixelFormat;
-    letWindowsChooseThisPixelFormat = ChoosePixelFormat(windowDeviceContext, &pfd);
-    SetPixelFormat(windowDeviceContext, letWindowsChooseThisPixelFormat, &pfd);
+    glfwSwapInterval(1);
 
-    HGLRC contextOpenGL = wglCreateContext(windowDeviceContext);
-    wglMakeCurrent(windowDeviceContext, contextOpenGL);
-
-    gl_lite_init();
-
-    _m_pContextOpenGL = new ContextOpenGL(contextOpenGL);
     _m_clearColor = _graphicConfiguration.backgroundColor;
 
-    // Create default vertex shader
-
+    // Default vertex shader.
     const char* pVertexSource =
-      "#version 410 \n"
+      "#version 430 \n"
       "layout (location=0) in vec3 position;\n"
       "uniform mat4 mv_matrix;\n"
       "uniform mat4 proj_matrix;\n"
@@ -106,7 +92,7 @@ namespace hk
     {
       Logger::Error("| GraphicComponentOpenGL | Cannot initialize the component.");
       _releaseResources(resourceManager);
-
+      glfwTerminate();
       return eRESULT::kFail;
     }
 
@@ -122,14 +108,13 @@ namespace hk
     {
       Logger::Error("| GraphicComponentOpenGL | Cannot initialize the component.");
       _releaseResources(resourceManager);
-
+      glfwTerminate();
       return eRESULT::kFail;
     }
 
     // Create default fragment shader
-
     const char* pFragmentSource =
-      "#version 410 \n"
+      "#version 430 \n"
       "out vec4 color; \n"
       "uniform mat4 mv_matrix;\n"
       "uniform mat4 proj_matrix;\n"
@@ -142,8 +127,8 @@ namespace hk
     if (result != eRESULT::kSuccess)
     {
       Logger::Error("| GraphicComponentOpenGL | Cannot initialize the component.");
-
       _releaseResources(resourceManager);
+      glfwTerminate();
       return eRESULT::kFail;
     }
 
@@ -159,7 +144,7 @@ namespace hk
     {
       Logger::Error("| GraphicComponentOpenGL | Cannot initialize the component.");
       _releaseResources(resourceManager);
-
+      glfwTerminate();
       return eRESULT::kFail;
     }
 
@@ -176,21 +161,13 @@ namespace hk
     if (result != eRESULT::kSuccess)
     {
       Logger::Error("| GraphicComponentOpenGL | Cannot initialize the component.");
-
       _releaseResources(resourceManager);
+      glfwTerminate();
       return eRESULT::kFail;
     }
 
-    //glSwapInterval(1);
     glGenVertexArrays(1, _m_aVAO);
     glBindVertexArray(_m_aVAO[0]);
-    
-    GLenum err;
-    while ((err = glGetError()) != GL_NO_ERROR)
-    {
-      // Process/log the error.
-      return eRESULT::kFail;
-    }
 
     _m_pWindow->addObserver(this);
 
@@ -198,12 +175,6 @@ namespace hk
 
     _m_isReady = !_m_isReady;
     return eRESULT::kSuccess;
-  }
-
-  Mesh* 
-  GraphicComponentOpenGL::createMesh()
-  {
-    return new MeshOpenGL();
   }
 
   void 
@@ -223,7 +194,7 @@ namespace hk
   void
   GraphicComponentOpenGL::clear()
   {
-    glClear(GL_COLOR_BUFFER_BIT);
+    glClear(GL_DEPTH_BUFFER_BIT);
     return;
   }
 
@@ -263,35 +234,34 @@ namespace hk
     return;
   }
 
-  void 
-  GraphicComponentOpenGL::drawMesh(Mesh& _Mesh)
+  IMesh*
+  GraphicComponentOpenGL::createMesh()
   {
-
-  }
-
-  void 
-  GraphicComponentOpenGL::present()
-  { 
-    SwapBuffers(GetDC(_m_pWindow->getWindowHandler()));
-    return;
+    return new MeshOpenGL();
   }
 
   IShader* 
-  GraphicComponentOpenGL::getVShader()
+  GraphicComponentOpenGL::createVertexShader()
   {
       return new ShaderOpenGL();
   }
 
   IShader* 
-  GraphicComponentOpenGL::getFShader()
+  GraphicComponentOpenGL::createFragmentShader()
   {
       return new ShaderOpenGL();
   }
 
   IProgram* 
-  GraphicComponentOpenGL::getProgram()
+  GraphicComponentOpenGL::createProgram()
   {
       return new ProgramOpenGL();
+  }
+
+  IWindow* 
+  GraphicComponentOpenGL::getWindow()
+  {
+    return _m_pWindow;
   }
 
   void
@@ -307,6 +277,7 @@ namespace hk
       _releaseResources(*_m_pResourceManager);
     }
 
+    glfwTerminate();
     _m_isReady = !_m_isReady;    
     return;
   }
@@ -314,14 +285,16 @@ namespace hk
   eGRAPHIC_INTERFACE 
   GraphicComponentOpenGL::getGraphicInterfaceId()
   {
-    return this->_m_graphicInterfaceId;
+    return eGRAPHIC_INTERFACE::kOpenGL;
   }
 
   void 
-  GraphicComponentOpenGL::onWindowSizeChanged(Window& window) const
+  GraphicComponentOpenGL::onWindowSizeChanged(
+    const uint32& width, 
+    const uint32& height, 
+    IWindow* pWindow) const
   {
-    glViewport(0, 0, window.getWidth(), window.getHeight());
-    return;
+    glViewport(0, 0, width, height);
   }
 
   void 
@@ -343,11 +316,6 @@ namespace hk
     {
       shaders.removeAndDestroy("__vertex_default");
     }
-
-    HDC windowDeviceContext = GetDC(_m_pWindow->getWindowHandler());
-
-    wglMakeCurrent(windowDeviceContext, NULL);
-    wglDeleteContext(reinterpret_cast<HGLRC>(_m_pContextOpenGL->get()));
 
     delete _m_pContextOpenGL;
     return;

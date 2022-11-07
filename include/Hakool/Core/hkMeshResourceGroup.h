@@ -1,14 +1,14 @@
 #pragma once
 
 #include "hkCorePrerequisites.h"
-#include "Graphics/hkMesh.h"
+#include "Graphics/hkIMesh.h"
 #include "hkResourceGroup.h"
 
 namespace hk
 {
   class GraphicComponent;
 
-  class HK_CORE_EXPORT MeshResourceGroup : public ResourceGroup<Mesh>
+  class HK_CORE_EXPORT MeshResourceGroup : public ResourceGroup<IMesh>
   {
   public:
 
@@ -30,7 +30,7 @@ namespace hk
      * 
      * @return Mesh of the cube.
      */
-    Mesh*
+    IMesh*
     getCube();
 
   protected:

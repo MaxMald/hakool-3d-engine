@@ -12,19 +12,13 @@ namespace hk
   /**
   * Provides a common interface for all specific-platform window instances.
   */
-  class HK_UTILITY_EXPORT Window
+  class IWindow
   {
   public:
 
-    /**
-    * Constructor.
-    */
-    Window();
+    IWindow() = default;
 
-    /**
-    * Closes the window and frees all the resources attached to it.
-    */
-    virtual ~Window();
+    virtual ~IWindow() = default;
 
     /**
     * Creates a new window using the specified configuration.
@@ -34,7 +28,7 @@ namespace hk
     * @returns Operation result.
     */
     virtual eRESULT
-    init(const WindowConfiguration& _config);
+    init(const WindowConfiguration& _config) = 0;
 
     /**
     * Set the size of the rendering region of the window (pixels).
@@ -43,7 +37,7 @@ namespace hk
     * @param _heiht The height in pixels.
     */
     virtual void
-    setSize(const uint32& _width, const uint32& _height);
+    setSize(const uint32& _width, const uint32& _height) = 0;
 
     /**
     * Set the size of the rendering region of the window (pixels).
@@ -52,7 +46,7 @@ namespace hk
     * @param _heiht The height in pixels.
     */
     virtual void
-    setSize(const Vector2u& _v2);
+    setSize(const Vector2u& _v2) = 0;
 
     /**
     * Set the title of this window.
@@ -60,7 +54,7 @@ namespace hk
     * @param _title Window's title.
     */
     virtual void
-    setTitle(const String& _title);
+    setTitle(const String& _title) = 0;
 
     /**
     * Get the window system handler.
@@ -68,7 +62,7 @@ namespace hk
     * @return Handler.
     */
     virtual HANDLER
-    getWindowHandler();
+    getWindowHandler() = 0;
 
     /**
     * Indicates if the window is open.
@@ -76,83 +70,73 @@ namespace hk
     * @return True if the window is open.
     */
     virtual bool
-    isOpen();
+    isOpen() = 0;
 
     /**
     * Called every frame.
     */
     virtual void
-    update();
+    update() = 0;
 
     /**
     * Called every frame after the update stage.
     */
     virtual void
-    postUpdate();
+    postUpdate() = 0;
+
+    /**
+     * Presents on screen what has been rendered to the window.
+     */
+    virtual void
+    present() = 0;
 
     /**
     * Destroy this window and release its resources.
     */
     virtual void
-    destroy();
+    destroy() = 0;
 
     /**
      * Adds an observer to this Window.
      *
      * @param observer Observer.
      */
-    void
-    addObserver(const WindowObserver* pObserver);
+    virtual void
+    addObserver(const WindowObserver* pObserver) = 0;
 
     /**
     * Get the size of the rendering region of the window (pixels).
     *
     * @return The size in pixels.
     */
-    Vector2u
-    getSize();
+    virtual Vector2u
+    getSize() = 0;
 
     /**
     * Get the width of the rendering region of the window (pixels).
     * 
     * @return The window's width in pixels.
     */
-    uint32
-    getWidth();
+    virtual uint32
+    getWidth() = 0;
 
     /**
     * Get the height of the rendering region of the window (pixels).
     *
     * @return The window's height in pixels.
     */
-    uint32
-    getHeight();
+    virtual uint32
+    getHeight() = 0;
 
     /**
     * Get the name of the window.
     * 
     * @return Window's name.
     */
-    String
-    getTitle();
+    virtual String
+    getTitle() = 0;
 
-  protected:
-
-    /**
-    * The title of the Window.
-    */
-    String 
-    _m_title;
-
-    /**
-    * The size of the Window.
-    */
-    Vector2u 
-    _m_size;
-
-    /**
-     * List of observers to this window's events.
-     */
-    Vector<const WindowObserver*> _m_observers;
+    IWindow(const IWindow&) = delete;
+    IWindow& operator= (const IWindow&) = delete;
   };
 }

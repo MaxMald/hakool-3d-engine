@@ -4,7 +4,7 @@
 #include <Hakool\Utils\hkLogger.h>
 
 #include <Hakool\Core\hkCorePrerequisites.h>
-#include <Hakool\Core\hkResource.h>
+#include <Hakool\Core\hkIResource.h>
 
 namespace hk
 {
@@ -86,7 +86,7 @@ namespace hk
     /**
     * Table of resources, each one identified by a unique string key.
     */
-    Map<String, Resource*>
+    Map<String, IResource*>
     _m_hResources;    
   };
 
@@ -107,7 +107,7 @@ namespace hk
   template<class C>
   inline eRESULT ResourceGroup<C>::add(const String& _key, C* _pAsset)
   {    
-    Resource* pResource = reinterpret_cast<Resource*>(_pAsset);
+    IResource* pResource = reinterpret_cast<IResource*>(_pAsset);
 
     if (pResource == nullptr)
     {
@@ -132,7 +132,7 @@ namespace hk
 
     _m_hResources.insert
     (
-      Map<String, Resource*>::value_type(_key, pResource)
+      Map<String, IResource*>::value_type(_key, pResource)
     );
 
     return eRESULT::kSuccess;
@@ -168,7 +168,7 @@ namespace hk
   inline eRESULT 
   ResourceGroup<C>::removeAndDestroy(const String& _key)
   {
-    Resource* pResource = reinterpret_cast<Resource*>(get(_key));
+    IResource* pResource = reinterpret_cast<IResource*>(get(_key));
 
     _m_hResources.erase(_key);
 
@@ -189,7 +189,7 @@ namespace hk
   {
     for (auto iterator : _m_hResources)
     {
-      Resource* pResource = iterator.second;
+      IResource* pResource = iterator.second;
       pResource->destroy();
       delete pResource;
     }

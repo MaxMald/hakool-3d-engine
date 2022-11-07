@@ -2,7 +2,7 @@
 
 namespace hk
 {
-  class Window;
+  class IWindow;
 
   /**
   * Creates specific windows.
@@ -11,12 +11,14 @@ namespace hk
   {
   public:
 
+    virtual ~IWindowFactory() = default;
+
     /**
      * Creates a new window.
      * 
      * @return A new Window.
      */
-    virtual Window*
+    virtual IWindow*
     createHakoolWindow() = 0;
   };
 }

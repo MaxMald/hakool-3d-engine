@@ -4,7 +4,7 @@
 
 #include <Hakool\Core\hkCorePrerequisites.h>
 #include <Hakool\Core\hkCoreUtilities.h>
-#include <Hakool\Core\hkResource.h>
+#include <Hakool\Core\hkIResource.h>
 
 namespace hk
 {
@@ -14,10 +14,9 @@ namespace hk
   * Provides a common interface for extended shader.
   */
   class IShader :
-    public Resource
+    public IResource
   {
-  public:   
-
+  public:
     /**
     * Get the pointer to the wrapped API's shader.
     * 

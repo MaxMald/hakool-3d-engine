@@ -90,7 +90,7 @@
     <ClInclude Include="..\include\Hakool\Utils\hkPluginManager.h">
       <Filter>Header Files\plug-in</Filter>
     </ClInclude>
-    <ClInclude Include="..\include\Hakool\Utils\hkWindow.h">
+    <ClInclude Include="..\include\Hakool\Utils\hkIWindow.h">
       <Filter>Header Files\window</Filter>
     </ClInclude>
     <ClInclude Include="..\include\Hakool\Utils\hkWindowWin32.h">
@@ -141,9 +141,6 @@
     </ClCompile>
     <ClCompile Include="src\hkPluginSlotWin.cpp">
       <Filter>Source Files\plug-in</Filter>
-    </ClCompile>
-    <ClCompile Include="src\hkWindow.cpp">
-      <Filter>Source Files\window</Filter>
     </ClCompile>
     <ClCompile Include="src\hkWindowWin32.cpp">
       <Filter>Source Files\window</Filter>

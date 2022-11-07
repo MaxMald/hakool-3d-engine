@@ -6,7 +6,7 @@
 #if HK_PLATFORM == HK_PLATFORM_WIN32
 namespace hk
 {
-  class Window;
+  class IWindow;
 
   /**
   * Creates specific windows for the Win32 platform.
@@ -20,7 +20,7 @@ namespace hk
      *
      * @return A new Window.
      */
-    virtual Window*
+    virtual IWindow*
     createHakoolWindow();
   };
 }

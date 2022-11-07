@@ -4,7 +4,7 @@
 
 namespace hk
 {
-  class Window;
+  class IWindow;
 
   /**
    * Provides a base interface to listen Window's events.
@@ -19,6 +19,6 @@ namespace hk
      * @param window Reference to the window which size has changed.
      */
     virtual void
-    onWindowSizeChanged(Window& window) const = 0;
+    onWindowSizeChanged(const uint32& width, const uint32& height, IWindow* window) const = 0;
   };
 }

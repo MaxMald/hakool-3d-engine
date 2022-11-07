@@ -8,7 +8,7 @@
 namespace hk
 {
   class Shader;
-  class Mesh;
+  class IMesh;
   class GraphicComponent;
 
   /**

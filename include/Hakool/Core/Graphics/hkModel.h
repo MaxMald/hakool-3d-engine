@@ -5,7 +5,7 @@
 
 namespace hk
 {
-  class Mesh;
+  class IMesh;
   class GraphicComponent;
 
   /**
@@ -36,7 +36,7 @@ namespace hk
     * @param pMesh The mesh of the model.
     */
     void
-    setMesh(Mesh* pMesh);
+    setMesh(IMesh* pMesh);
 
     void
     draw(GraphicComponent* pGraphicComponent);
@@ -46,8 +46,7 @@ namespace hk
     /**
     * Model's mesh.
     */
-    Mesh* 
+    IMesh* 
     _m_mesh;
-
   };
 }

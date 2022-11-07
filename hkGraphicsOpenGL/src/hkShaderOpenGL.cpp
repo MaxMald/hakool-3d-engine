@@ -1,8 +1,10 @@
-#include <Hakool\Utils\hkLogger.h>
-
 #include <Hakool\GraphicsOpenGL\hkShaderOpenGL.h>
+
+#include <GL/glew.h>
+#include <GLFW/glfw3.h>
+
+#include <Hakool\Utils\hkLogger.h>
 #include <Hakool\GraphicsOpenGL\hkGraphicComponentOpenGL.h>
-#include <Hakool\GraphicsOpenGL\gl_lite.h>
 
 namespace hk
 {

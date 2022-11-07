@@ -68,7 +68,7 @@ namespace hk
   }
 
   void
-  ModelComponent::setMesh(Mesh* pMesh)
+  ModelComponent::setMesh(IMesh* pMesh)
   {
     _m_model.setMesh(pMesh);
     return;

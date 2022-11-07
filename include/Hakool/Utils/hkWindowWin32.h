@@ -1,100 +1,65 @@
 #pragma once
 
-#include <Hakool\Utils\hkWindow.h>
+#include <Hakool\Utils\hkIWindow.h>
 
 namespace hk
 {
   /**
   * Windows 32 implementation for the window class.
   */
-  class HK_UTILITY_EXPORT WindowWin32 :
-    public Window
+  class HK_UTILITY_EXPORT WindowWin32 : public IWindow
   {
   public:
 
-    /**
-    * Constructor.
-    */
     WindowWin32();
 
-    /**
-    * Closes the window if it is open and release its resources.
-    */
     virtual ~WindowWin32();
 
-    /**
-    * Creates a new window with the size and title specified.
-    *
-    * @param _config Window preferred properties.
-    *
-    * @returns Operation result.
-    */
     virtual eRESULT
     init(const WindowConfiguration& _config) override;
 
-    /**
-    * Set the size of the rendering region of the window (pixels).
-    *
-    * @param _width The width in pixels.
-    * @param _heiht The height in pixels.
-    */
     virtual void
     setSize(const uint32& _width, const uint32& _height) override;
 
-    /**
-    * Set the size of the rendering region of the window (pixels).
-    *
-    * @param _width The width in pixels.
-    * @param _heiht The height in pixels.
-    */
     virtual void
     setSize(const Vector2u& _v2) override;
 
-    /**
-    * Set the title of this window.
-    *
-    * @para _title Window's title.
-    */
     virtual void
     setTitle(const String& _title) override;
 
-    /**
-    * Indicates if the window is open.
-    *
-    * @return True if the window is open.
-    */
     virtual bool
     isOpen() override;
 
-    /**
-    * Dispatch messages.
-    */
     virtual void
     update() override;
 
-    /**
-    * Called every frame after the update stage.
-    */
     virtual void
     postUpdate() override;
 
-    /**
-    * Get the window system handler.
-    *
-    * @return Handler.
-    */
+    virtual void
+    present() override;
+
     virtual HANDLER
     getWindowHandler() override;
 
-    /**
-    * Closes the window if it exists and release its resources.
-    */
     virtual void
     destroy() override;
 
-    /**
-    * 
-    */
+    virtual void
+    addObserver(const WindowObserver* pObserver) override;
+
+    virtual Vector2u
+    getSize() override;
+
+    virtual uint32
+    getWidth() override;
+
+    virtual uint32
+    getHeight() override;
+
+    virtual String
+    getTitle() override;
+
     static LRESULT CALLBACK
     WindowProc(HWND _hwnd, UINT _uMsg, WPARAM _wParam, LPARAM _lParam);
 
@@ -143,5 +108,14 @@ namespace hk
     */
     bool
     _m_toClose;
+
+    Vector2u 
+    _m_size;
+
+    Vector2u 
+    _m_position;
+
+    String
+    _m_title;
   };
 }

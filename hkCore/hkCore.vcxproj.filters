@@ -51,17 +51,11 @@
     <ClCompile Include="src\hkEngineComponent.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\hkGraphicComponent.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="src\hkScene.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="src\hkSceneManager.cpp">
       <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="src\hkResource.cpp">
-      <Filter>Source Files\resource</Filter>
     </ClCompile>
     <ClCompile Include="src\hkResourceManager.cpp">
       <Filter>Source Files\resource</Filter>
@@ -70,9 +64,6 @@
       <Filter>Source Files\scene</Filter>
     </ClCompile>
     <ClCompile Include="src\hkCamera.cpp">
-      <Filter>Source Files\graphics</Filter>
-    </ClCompile>
-    <ClCompile Include="src\hkMesh.cpp">
       <Filter>Source Files\graphics</Filter>
     </ClCompile>
     <ClCompile Include="src\hkModelComponent.cpp">
@@ -119,9 +110,6 @@
     <ClInclude Include="..\include\Hakool\Core\Graphics\hkIProgram.h">
       <Filter>Header Files\graphics</Filter>
     </ClInclude>
-    <ClInclude Include="..\include\Hakool\Core\hkResource.h">
-      <Filter>Header Files\resource</Filter>
-    </ClInclude>
     <ClInclude Include="..\include\Hakool\Core\hkResourceGroup.h">
       <Filter>Header Files\resource</Filter>
     </ClInclude>
@@ -146,7 +134,7 @@
     <ClInclude Include="..\include\Hakool\Core\Graphics\hkCamera.h">
       <Filter>Header Files\graphics</Filter>
     </ClInclude>
-    <ClInclude Include="..\include\Hakool\Core\Graphics\hkMesh.h">
+    <ClInclude Include="..\include\Hakool\Core\Graphics\hkIMesh.h">
       <Filter>Header Files\graphics</Filter>
     </ClInclude>
     <ClInclude Include="..\include\Hakool\Core\Graphics\hkModel.h">
@@ -160,6 +148,9 @@
     </ClInclude>
     <ClInclude Include="..\include\Hakool\Core\hkModelObserver.h">
       <Filter>Header Files\graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\Hakool\Core\hkIResource.h">
+      <Filter>Header Files\resource</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

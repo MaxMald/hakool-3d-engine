@@ -1,15 +1,16 @@
 #include <Hakool/Core/Graphics/hkModel.h>
-
-#include <Hakool/Core/Graphics/hkMesh.h>
+#include <Hakool/Core/Graphics/hkIMesh.h>
 
 namespace hk
 {
-  Model::Model()
+  Model::Model():
+    _m_mesh(nullptr)
   {
     return;
   }
 
-  Model::Model(const Model& _model)
+  Model::Model(const Model& _model):
+    _m_mesh(_model._m_mesh)
   {
     return;
   }
@@ -19,7 +20,7 @@ namespace hk
   }
 
   void
-  Model::setMesh(Mesh* pMesh)
+  Model::setMesh(IMesh* pMesh)
   {
     this->_m_mesh = pMesh;
   }

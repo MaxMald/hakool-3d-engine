@@ -1,9 +1,9 @@
 #pragma once
 
-#include <Hakool\Core\Graphics\hkIContext.h>
+#include <windows.h>
 
+#include <Hakool\Core\Graphics\hkIContext.h>
 #include <Hakool\GraphicsOpenGL\hkGraphicsOpenGLPrerequisites.h>
-#include <Hakool\GraphicsOpenGL\gl_lite.h>
 
 namespace hk
 {

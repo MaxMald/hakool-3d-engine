@@ -4,10 +4,13 @@ namespace hk
 {
   String WindowWin32::_WINDOW_NAME = "Hakool_Window";
 
-  WindowWin32::WindowWin32():
-    _m_callback(NULL),
+  WindowWin32::WindowWin32()
+    : _m_callback(NULL),
     _m_winHandler(NULL),
-    _m_toClose(false)
+    _m_toClose(false),
+    _m_size(),
+    _m_position(),
+    _m_title("")
   {
     return;
   }
@@ -110,6 +113,10 @@ namespace hk
     return;
   }
 
+  void 
+  WindowWin32::present()
+  { }
+
   HANDLER 
   WindowWin32::getWindowHandler()
   {
@@ -135,6 +142,35 @@ namespace hk
     }
 
     return;
+  }
+
+  void 
+  WindowWin32::addObserver(const WindowObserver* pObserver)
+  {
+  }
+
+  Vector2u 
+  WindowWin32::getSize()
+  {
+      return _m_size;
+  }
+
+  uint32 
+  WindowWin32::getWidth()
+  {
+      return _m_size.x;
+  }
+
+  uint32 
+  WindowWin32::getHeight()
+  {
+      return _m_size.y;
+  }
+
+  String 
+  WindowWin32::getTitle()
+  {
+      return _m_title;
   }
 
   LRESULT 

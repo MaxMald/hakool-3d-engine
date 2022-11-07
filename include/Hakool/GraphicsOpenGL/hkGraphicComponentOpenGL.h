@@ -15,7 +15,8 @@
 
 namespace hk
 {
-  class Window;
+  class IWindow;
+  class WindowOpenGL;
   class ContextOpenGL;
   class ProgramOpenGL;
 
@@ -35,119 +36,54 @@ namespace hk
     /**
     * Destructor.
     */
+    virtual
     ~GraphicComponentOpenGL();
 
-    /**
-    * Initialize the graphic component.
-    *
-    * @param _pWindow Pointer to the application window.
-    * @param _graphicConfiguration Configuration object.
-    *
-    * @return Operation result.
-    */
     virtual eRESULT
-    init
-    (
-      Window* _pWindow, 
+    init(
       const GraphicsConfiguration& _graphicConfiguration,
-      ResourceManager& resourceManager
-    ) override;
+      const WindowConfiguration& windowConfig,
+      ResourceManager& resourceManager) override;
 
-    virtual Mesh*
-    createMesh() override;
-
-    /**
-     * Sets the color to clear the graphic buffers.
-     *
-     * @param color Color.
-     */
     virtual void
     setClearColor(const Color& color) override;
 
-    /**
-     * Clear the graphics buffers.
-     */
     virtual void
     clear() override;
 
-    /**
-     * Prepare the GraphicComponent to draw.
-     */
     virtual void
     prepareToDraw() override;
 
-    /**
-     * Draw the given scene in the screen.
-     */
     virtual void
     drawScene(Scene* pScene);
 
-    virtual void
-    drawMesh(Mesh& _Mesh) override;
+    virtual IMesh*
+    createMesh() override;
 
-    /**
-     * TODO
-     */
-    virtual void
-    present() override;
-
-    /**
-    * Get a pointer to a new vertex shader.
-    *
-    * @return Vertex shader.
-    */
     virtual IShader*
-    getVShader() override;
+    createVertexShader() override;
 
-    /**
-    * Get a pointer to a new fragment shader.
-    *
-    * @return Fragment shader.
-    */
     virtual IShader*
-    getFShader() override;
+    createFragmentShader() override;
 
-    /**
-    * Get a pointer to a new program.
-    *
-    * @return Program.
-    */
     virtual IProgram*
-    getProgram() override;
+    createProgram() override;
 
-    /**
-    * Shutdown the graphic component and release its resources.
-    */
+    virtual IWindow*
+    getWindow() override;
+
     virtual void
     destroy() override;
 
-    /**
-    * Get the id that indicates the graphic API been used by this
-    * GraphicComponent.
-    */
     virtual eGRAPHIC_INTERFACE
     getGraphicInterfaceId() override;
 
     virtual void
-    onWindowSizeChanged(Window& window) const override;
-
-    /**
-    * Pointer to the window.
-    */
-    Window*
-    _m_pWindow;
-
-    /**
-    * Pointer to the context of the OpenGL instance.
-    */
-    ContextOpenGL*
-    _m_pContextOpenGL;
-
-    /**
-    * Indicates if the graphic component is ready.
-    */
-    bool
-    _m_isReady;
+    onWindowSizeChanged(
+      const uint32& width, 
+      const uint32& height, 
+      IWindow* pWindow) const override;
+    
 
   private:
     /**
@@ -165,7 +101,8 @@ namespace hk
     /**
     * Array of vertex array objects.
     */
-    uint32 _m_aVAO[1];
+    uint32 
+    _m_aVAO[1];
 
     /**
     * Pointer to the program.
@@ -187,5 +124,14 @@ namespace hk
 
     glm::mat4x4
     _m_model;
+
+    WindowOpenGL*
+    _m_pWindow;
+
+    ContextOpenGL*
+    _m_pContextOpenGL;
+
+    bool
+    _m_isReady;
   };
 }

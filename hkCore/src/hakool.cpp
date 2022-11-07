@@ -1,4 +1,4 @@
-#include <Hakool\Utils\hkWindow.h>
+#include <Hakool\Utils\hkIWindow.h>
 #include <Hakool\Utils\hkIPlugin.h>
 #include <Hakool\Utils\hkLoggerConsole.h>
 #include <Hakool\hakool.h>
@@ -51,8 +51,7 @@ namespace hk
   eRESULT
   Hakool::init(
     HakoolConfiguration& _config,
-    Logger* _pLogger,
-    IWindowFactory& _windowFactory)
+    Logger* _pLogger)
   {
     if (_m_isInitialized)
     {
@@ -60,20 +59,8 @@ namespace hk
       return eRESULT::kFail;
     }
     Logger::Prepare(_pLogger);
-    eRESULT result;
-    
-    // Window
-    _m_pWindow = _windowFactory.createHakoolWindow();
-    result = _m_pWindow->init(_config.windowConfiguration);
-    if (result != eRESULT::kSuccess)
-    {
-      Logger::Error("Couldn't initialize the window.");
-      clean();
+    eRESULT result;   
 
-      return result;
-    }
-
-    // GraphicComponent
     if (_config.graphicsConfiguration.graphicInterface == eGRAPHIC_INTERFACE::kOpenGL)
     {
       result = _m_pluginManager.connectPlugin
@@ -98,8 +85,8 @@ namespace hk
         _m_pGraphicComponent = reinterpret_cast<GraphicComponent*>(plugin->getData());
 
         result = _m_pGraphicComponent->init(
-          _m_pWindow, 
           _config.graphicsConfiguration,
+          _config.windowConfiguration,
           _m_resourceManager);
 
         if (result != eRESULT::kSuccess)
@@ -136,8 +123,8 @@ namespace hk
 
   eRESULT 
   Hakool::update()
-  {
-    _m_pWindow->update();
+  { 
+    _m_pGraphicComponent->getWindow()->update();
     _m_sceneManager.update();
     return eRESULT::kSuccess;
   }
@@ -145,7 +132,7 @@ namespace hk
   eRESULT 
   Hakool::postUpdate()
   {
-    _m_pWindow->postUpdate();
+    _m_pGraphicComponent->getWindow()->update();
     return eRESULT::kSuccess;
   }
 
@@ -155,7 +142,7 @@ namespace hk
     _m_pGraphicComponent->clear();
     _m_pGraphicComponent->prepareToDraw();
     _m_sceneManager.draw(_m_pGraphicComponent);
-    _m_pGraphicComponent->present();
+    _m_pGraphicComponent->getWindow()->present();
     return eRESULT::kSuccess;
   }
 
@@ -171,16 +158,14 @@ namespace hk
     }
 
     _m_resourceManager.clear();
-
-    if (_m_pWindow != nullptr)
-    {
-      _m_pWindow->destroy();
-      _m_pWindow = nullptr;
-    }
-
     _m_pluginManager.closeAll();
-
     return;
+  }
+
+  bool 
+  Hakool::isWindowOpen()
+  {
+    return _m_pGraphicComponent->getWindow()->isOpen();
   }
 
   ResourceManager& 
@@ -200,7 +185,6 @@ namespace hk
     _m_isRunning(false),
     _m_pGraphicComponent(nullptr),
     _m_pLogger(nullptr),
-    _m_pWindow(nullptr),
     _m_sceneManager(),
     _m_resourceManager()
   {
@@ -222,8 +206,6 @@ namespace hk
     _m_pluginManager.destroy();
     _m_sceneManager.destroy();
     Logger::Shutdown();
-
-    return;
   }
 
   Hakool*& 

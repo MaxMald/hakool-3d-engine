@@ -120,6 +120,7 @@
       <ConformanceMode>true</ConformanceMode>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
       <AdditionalIncludeDirectories>$(SolutionDir)include\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <LanguageStandard>stdcpp14</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>NotSet</SubSystem>
@@ -178,13 +179,10 @@
     <ClCompile Include="src\hkCamera.cpp" />
     <ClCompile Include="src\hkEngineComponent.cpp" />
     <ClCompile Include="src\hkGameObject.cpp" />
-    <ClCompile Include="src\hkGraphicComponent.cpp" />
-    <ClCompile Include="src\hkMesh.cpp" />
     <ClCompile Include="src\hkMeshResourceGroup.cpp" />
     <ClCompile Include="src\hkModel.cpp" />
     <ClCompile Include="src\hkModelComponent.cpp" />
     <ClCompile Include="src\hkModelObserver.cpp" />
-    <ClCompile Include="src\hkResource.cpp" />
     <ClCompile Include="src\hkResourceManager.cpp" />
     <ClCompile Include="src\hkScene.cpp" />
     <ClCompile Include="src\hkSceneManager.cpp" />
@@ -194,7 +192,7 @@
     <ClInclude Include="..\include\Hakool\Core\Graphics\hkGraphicComponent.h" />
     <ClInclude Include="..\include\Hakool\Core\Graphics\hkIContext.h" />
     <ClInclude Include="..\include\Hakool\Core\Graphics\hkIProgram.h" />
-    <ClInclude Include="..\include\Hakool\Core\Graphics\hkMesh.h" />
+    <ClInclude Include="..\include\Hakool\Core\Graphics\hkIMesh.h" />
     <ClInclude Include="..\include\Hakool\Core\Graphics\hkModel.h" />
     <ClInclude Include="..\include\Hakool\Core\Graphics\hkShader.h" />
     <ClInclude Include="..\include\Hakool\Core\hkComponent.h" />
@@ -207,7 +205,7 @@
     <ClInclude Include="..\include\Hakool\Core\hkModelComponent.h" />
     <ClInclude Include="..\include\Hakool\Core\hkModelObserver.h" />
     <ClInclude Include="..\include\Hakool\Core\hkNode.h" />
-    <ClInclude Include="..\include\Hakool\Core\hkResource.h" />
+    <ClInclude Include="..\include\Hakool\Core\hkIResource.h" />
     <ClInclude Include="..\include\Hakool\Core\hkResourceGroup.h" />
     <ClInclude Include="..\include\Hakool\Core\hkResourceManager.h" />
     <ClInclude Include="..\include\Hakool\Core\hkScene.h" />

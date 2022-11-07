@@ -6,7 +6,7 @@
 
 namespace hk
 {
-  class Window;
+  class IWindow;
   class Hakool;
   class IShader;
   class IProgram;
@@ -14,12 +14,14 @@ namespace hk
   class ResourceManager;
   class Scene;
   class Color;
-  class Mesh;
+  class IMesh;
+
+  struct WindowConfiguration;
 
   /**
   * Provides a common interface for graphics component.
   */
-  class HK_CORE_EXPORT GraphicComponent
+  class GraphicComponent
   : public WindowObserver
   {
   public:
@@ -27,18 +29,17 @@ namespace hk
     /**
     * Constructor.
     */
-    GraphicComponent();
+    GraphicComponent() = default;
 
     /**
     * Destructor.
     */
     virtual
-    ~GraphicComponent();
+    ~GraphicComponent() = default;
 
     /**
     * Initialize the graphic component.
     * 
-    * @param _pWindow Pointer to the application window.
     * @param _graphicConfiguration Configuration object.
     * @param resourceManager ResourceManager.
     * 
@@ -46,12 +47,9 @@ namespace hk
     */
     virtual eRESULT
     init(
-      Window* _pWindow, 
       const GraphicsConfiguration& _graphicConfiguration,
-      ResourceManager& resourceManager);
-
-    virtual Mesh*
-    createMesh();
+      const WindowConfiguration& windowConfig,
+      ResourceManager& resourceManager) = 0;    
 
     /**
      * Sets the color to clear the graphic buffers.
@@ -59,34 +57,33 @@ namespace hk
      * @param color Color.
      */
     virtual void
-    setClearColor(const Color& color);
+    setClearColor(const Color& color) = 0;
 
     /**
      * Clear the graphics buffers.
      */
     virtual void
-    clear();
+    clear() = 0;
 
     /**
      * Prepare the GraphicComponent to draw.
      */
     virtual void
-    prepareToDraw();
+    prepareToDraw() = 0;
 
     /**
      * Draw the given scene in the screen.
      */
     virtual void
-    drawScene(Scene* pScene);
-
-    virtual void
-    drawMesh(Mesh& _Mesh);
+    drawScene(Scene* pScene) = 0;
 
     /**
-     * TODO
+     * Create a Mesh.
+     * 
+     * @returns a pointer to the Mesh.
      */
-    virtual void
-    present();
+    virtual IMesh*
+    createMesh() = 0;
 
     /**
     * Get a pointer to a new vertex shader.
@@ -94,7 +91,7 @@ namespace hk
     * @return Vertex shader.
     */
     virtual IShader*
-    getVShader();
+    createVertexShader() = 0;
 
     /**
     * Get a pointer to a new fragment shader.
@@ -102,7 +99,7 @@ namespace hk
     * @return Fragment shader.
     */
     virtual IShader*
-    getFShader();
+    createFragmentShader() = 0;
 
     /**
     * Get a pointer to a new program.
@@ -110,35 +107,25 @@ namespace hk
     * @return Program.
     */
     virtual IProgram*
-    getProgram();
+    createProgram() = 0;
+
+    /**
+     * Get the pointer to the window.
+     */
+    virtual IWindow*
+    getWindow() = 0;
 
     /**
     * Shutdown the graphic component and release its resources.
     */
     virtual void
-    destroy();
+    destroy() = 0;
 
     /**
     * Get the id that indicates the graphic API been used by this 
     * GraphicComponent.
     */
     virtual eGRAPHIC_INTERFACE
-    getGraphicInterfaceId();
-
-    /**
-     * Called when the window's size has changed.
-     *
-     * @param window Reference to the window which size has changed.
-     */
-    virtual void
-    onWindowSizeChanged(Window& window) const override;
-
-  protected:
-
-    /**
-    * Indicates the graphic API been used by this GraphicComponent.
-    */
-    eGRAPHIC_INTERFACE
-    _m_graphicInterfaceId;
+    getGraphicInterfaceId() = 0;
   };
 }

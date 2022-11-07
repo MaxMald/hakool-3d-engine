@@ -96,11 +96,12 @@
     <ClCompile>
       <WarningLevel>Level4</WarningLevel>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>HK_GRAPHICS_OPENGL_EXPORTS;WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>HK_GRAPHICS_OPENGL_EXPORTS;GLFW_EXPOSE_NATIVE_WIN32;GLFW_EXPOSE_NATIVE_WGL;GLFW_NATIVE_INCLUDE_NONE;WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <AdditionalIncludeDirectories>$(SolutionDir)include\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <LanguageStandard>stdcpp14</LanguageStandard>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <DisableSpecificWarnings>4100</DisableSpecificWarnings>
     </ClCompile>
     <Link>
       <SubSystem>NotSet</SubSystem>
@@ -116,11 +117,12 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>HK_GRAPHICS_OPENGL_EXPORTS;WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>HK_GRAPHICS_OPENGL_EXPORTS;GLFW_EXPOSE_NATIVE_WIN32;GLFW_EXPOSE_NATIVE_WGL;GLFW_NATIVE_INCLUDE_NONE;WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <AdditionalIncludeDirectories>$(SolutionDir)include\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <LanguageStandard>stdcpp14</LanguageStandard>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <DisableSpecificWarnings>4100</DisableSpecificWarnings>
     </ClCompile>
     <Link>
       <SubSystem>NotSet</SubSystem>
@@ -136,17 +138,18 @@
     <ClCompile>
       <WarningLevel>Level4</WarningLevel>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>HK_GRAPHICS_OPENGL_EXPORTS;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>HK_GRAPHICS_OPENGL_EXPORTS;GLFW_EXPOSE_NATIVE_WIN32;GLFW_EXPOSE_NATIVE_WGL;GLFW_NATIVE_INCLUDE_NONE;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(SolutionDir)include\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)include\;$(SolutionDir)dependencies\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <LanguageStandard>stdcpp14</LanguageStandard>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <DisableSpecificWarnings>4100</DisableSpecificWarnings>
     </ClCompile>
     <Link>
       <SubSystem>NotSet</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalLibraryDirectories>$(SolutionDir)lib\$(Configuration)\$(PlatformTarget)\;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>hkUtilities_d.lib;hkCore_d.lib;%(AdditionalDependencies);opengl32.lib</AdditionalDependencies>
+      <AdditionalDependencies>hkUtilities_d.lib;hkCore_d.lib;glfw3dll.lib;glfw3.lib;glew32.lib;opengl32.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <ImportLibrary>$(SolutionDir)lib\$(Configuration)\$(PlatformTarget)\$(TargetName).lib</ImportLibrary>
     </Link>
   </ItemDefinitionGroup>
@@ -156,11 +159,12 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>HK_GRAPHICS_OPENGL_EXPORTS;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>HK_GRAPHICS_OPENGL_EXPORTS;GLFW_EXPOSE_NATIVE_WIN32;GLFW_EXPOSE_NATIVE_WGL;GLFW_NATIVE_INCLUDE_NONE;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <AdditionalIncludeDirectories>$(SolutionDir)include\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <LanguageStandard>stdcpp14</LanguageStandard>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <DisableSpecificWarnings>4100</DisableSpecificWarnings>
     </ClCompile>
     <Link>
       <SubSystem>NotSet</SubSystem>
@@ -179,10 +183,10 @@
     <ClCompile Include="src\hkMeshOpenGL.cpp" />
     <ClCompile Include="src\hkProgramOpenGL.cpp" />
     <ClCompile Include="src\hkShaderOpenGL.cpp" />
+    <ClCompile Include="src\hkWindowOpenGL.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\include\Hakool\GraphicsOpenGL\hkConfigGraphicsOpenGL.h" />
-    <ClInclude Include="..\include\Hakool\GraphicsOpenGL\gl_lite.h" />
     <ClInclude Include="..\include\Hakool\GraphicsOpenGL\hkContextOpenGL.h" />
     <ClInclude Include="..\include\Hakool\GraphicsOpenGL\hkGraphicComponentOpenGL.h" />
     <ClInclude Include="..\include\Hakool\GraphicsOpenGL\hkGraphicsOpenGLPlugin.h" />
@@ -190,6 +194,7 @@
     <ClInclude Include="..\include\Hakool\GraphicsOpenGL\hkMeshOpenGL.h" />
     <ClInclude Include="..\include\Hakool\GraphicsOpenGL\hkProgramOpenGL.h" />
     <ClInclude Include="..\include\Hakool\GraphicsOpenGL\hkShaderOpenGL.h" />
+    <ClInclude Include="..\include\Hakool\GraphicsOpenGL\hkWindowOpenGL.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

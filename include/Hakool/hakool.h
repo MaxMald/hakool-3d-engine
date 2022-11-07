@@ -10,7 +10,7 @@
 namespace hk
 {
   class Logger;
-  class Window;
+  class IWindow;
   class GraphicComponent;
   class SceneManager;
   class Scene;
@@ -56,8 +56,7 @@ namespace hk
     eRESULT
     init(
       HakoolConfiguration& _config, 
-      Logger* _pLogger,
-      IWindowFactory& _windowFactory);
+      Logger* _pLogger);
 
     /**
      * @brief TODO
@@ -82,6 +81,14 @@ namespace hk
     */
     void
     clean();
+
+    /**
+     * Indicates if the window is open.
+     * 
+     * @returns True if the window is open.
+     */
+    bool
+    isWindowOpen();
 
     /**
     * Get the reference to the resource manager.
@@ -155,12 +162,6 @@ namespace hk
     */
     GraphicComponent* 
     _m_pGraphicComponent;
-
-    /**
-    * Pointer to the window.
-    */
-    Window*
-    _m_pWindow;
 
     /**
     * Pointer to the message logger.

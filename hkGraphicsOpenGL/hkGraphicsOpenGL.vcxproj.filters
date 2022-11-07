@@ -36,6 +36,9 @@
     <ClCompile Include="src\hkMeshOpenGL.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="src\hkWindowOpenGL.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\include\Hakool\GraphicsOpenGL\hkGraphicComponentOpenGL.h">
@@ -50,9 +53,6 @@
     <ClInclude Include="..\include\Hakool\GraphicsOpenGL\hkGraphicsOpenGLPlugin.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\include\Hakool\GraphicsOpenGL\gl_lite.h">
-      <Filter>Header Files\config</Filter>
-    </ClInclude>
     <ClInclude Include="..\include\Hakool\GraphicsOpenGL\hkContextOpenGL.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -63,6 +63,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="..\include\Hakool\GraphicsOpenGL\hkMeshOpenGL.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\include\Hakool\GraphicsOpenGL\hkWindowOpenGL.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
