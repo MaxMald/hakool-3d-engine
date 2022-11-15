@@ -20,6 +20,8 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\Hakool\Utils\guid.hpp" />
+    <ClInclude Include="include\Hakool\Utils\hkClock.h" />
+    <ClInclude Include="include\Hakool\Utils\hkClockWin.h" />
     <ClInclude Include="include\Hakool\Utils\hkColor.h" />
     <ClInclude Include="include\Hakool\Utils\hkConfigPlatform.h" />
     <ClInclude Include="include\Hakool\Utils\hkConfigTypes.h" />
@@ -32,6 +34,7 @@
     <ClInclude Include="include\Hakool\Utils\hkMatrix4.h" />
     <ClInclude Include="include\Hakool\Utils\hkModule.h" />
     <ClInclude Include="include\Hakool\Utils\hkSharedPointer.h" />
+    <ClInclude Include="include\Hakool\Utils\hkTime.h" />
     <ClInclude Include="include\Hakool\Utils\hkUtilitiesUtilities.h" />
     <ClInclude Include="include\Hakool\Utils\hkUtilsPrerequisites.h" />
     <ClInclude Include="include\Hakool\Utils\hkVector2.h" />
@@ -52,6 +55,8 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\guid.cpp" />
+    <ClCompile Include="src\hkClock.cpp" />
+    <ClCompile Include="src\hkClockWin.cpp" />
     <ClCompile Include="src\hkColor.cpp" />
     <ClCompile Include="src\hkLogger.cpp" />
     <ClCompile Include="src\hkLoggerConsole.cpp" />
@@ -60,6 +65,7 @@
     <ClCompile Include="src\hkMatrix4.cpp" />
     <ClCompile Include="src\hkPluginManager.cpp" />
     <ClCompile Include="src\hkPluginSlotWin.cpp" />
+    <ClCompile Include="src\hkTime.cpp" />
     <ClCompile Include="src\hkWindowFactoryWin32.cpp" />
     <ClCompile Include="src\hkWindowWin32.cpp" />
   </ItemGroup>
@@ -146,6 +152,7 @@
       <LanguageStandard>stdcpp14</LanguageStandard>
       <AdditionalIncludeDirectories>$(ProjectDir)include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <DisableSpecificWarnings>4100</DisableSpecificWarnings>
     </ClCompile>
     <Link>
       <SubSystem>NotSet</SubSystem>
@@ -165,6 +172,7 @@
       <LanguageStandard>stdcpp14</LanguageStandard>
       <AdditionalIncludeDirectories>$(ProjectDir)include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <DisableSpecificWarnings>4100</DisableSpecificWarnings>
     </ClCompile>
     <Link>
       <SubSystem>NotSet</SubSystem>
@@ -184,6 +192,7 @@
       <LanguageStandard>stdcpp14</LanguageStandard>
       <AdditionalIncludeDirectories>$(ProjectDir)include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <DisableSpecificWarnings>4100</DisableSpecificWarnings>
     </ClCompile>
     <Link>
       <SubSystem>NotSet</SubSystem>
@@ -203,6 +212,7 @@
       <LanguageStandard>stdcpp14</LanguageStandard>
       <AdditionalIncludeDirectories>$(ProjectDir)include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <DisableSpecificWarnings>4100</DisableSpecificWarnings>
     </ClCompile>
     <Link>
       <SubSystem>NotSet</SubSystem>

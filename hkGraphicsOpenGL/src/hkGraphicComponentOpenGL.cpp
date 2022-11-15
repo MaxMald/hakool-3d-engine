@@ -5,11 +5,9 @@
 
 #include <Hakool\Utils\hkLogger.h>
 #include <Hakool\Utils\hkIWindow.h>
-
 #include <Hakool\Core\hakool.h>
 #include <Hakool\Core\hkResourceManager.h>
 #include <Hakool\Core\hkScene.h>
-
 #include <Hakool\GraphicsOpenGL\hkContextOpenGL.h>
 #include <Hakool\GraphicsOpenGL\hkShaderOpenGL.h>
 #include <Hakool\GraphicsOpenGL\hkProgramOpenGL.h>
@@ -19,8 +17,11 @@
 namespace hk
 {
   GraphicComponentOpenGL::GraphicComponentOpenGL() :
+    _m_clearColor(0.0f, 0.0f, 0.0f, 1.0f),
+    _m_aVAO(),
+    _m_pProgramOpenGL(nullptr),
     _m_pResourceManager(nullptr),
-    _m_perspectiveMat(),
+    _m_projViewMatrix(),
     _m_modelViewMat(),
     _m_pWindow(nullptr),
     _m_pContextOpenGL(nullptr),
@@ -77,11 +78,11 @@ namespace hk
     const char* pVertexSource =
       "#version 430 \n"
       "layout (location=0) in vec3 position;\n"
-      "uniform mat4 mv_matrix;\n"
-      "uniform mat4 proj_matrix;\n"
+      "uniform mat4 proj_view_matrix;\n"
+      "uniform mat4 model_matrix;\n"
       "void main(void) \n"
       "{\n"
-      " gl_Position = proj_matrix * mv_matrix * vec4(position,1.0);\n"
+      " gl_Position = proj_view_matrix * model_matrix * vec4(position,1.0);\n"
       "}";
 
     eRESULT result(eRESULT::kFail);
@@ -116,8 +117,8 @@ namespace hk
     const char* pFragmentSource =
       "#version 430 \n"
       "out vec4 color; \n"
-      "uniform mat4 mv_matrix;\n"
-      "uniform mat4 proj_matrix;\n"
+      "uniform mat4 proj_view_matrix;\n"
+      "uniform mat4 model_matrix;\n"
       "void main(void) \n"
       "{ color = vec4(1.0, 0.0, 0.0, 1.0); }";    
 
@@ -201,31 +202,15 @@ namespace hk
   void 
   GraphicComponentOpenGL::prepareToDraw()
   {
-    uint32 programId = *(reinterpret_cast<uint32*>(_m_pProgramOpenGL->getProgramPtr()));
-    glUseProgram(static_cast<GLuint>(programId));
+    _m_activeProgramId = *(reinterpret_cast<uint32*>(_m_pProgramOpenGL->getProgramPtr()));
+    glUseProgram(static_cast<GLuint>(_m_activeProgramId));
 
-    GLuint mvLoc = glGetUniformLocation(programId, "mv_matrix");
-    GLuint projLoc = glGetUniformLocation(programId, "proj_matrix");
-
+    GLuint projViewMatLoc = glGetUniformLocation(_m_activeProgramId, "proj_view_matrix");
     float aspect = (float)_m_pWindow->getWidth() / (float)_m_pWindow->getHeight();
+    _m_projViewMatrix = (Matrix4::GetPerspective(1.0472f, aspect, 0.1f, 1000.f)
+      * Matrix4::GetTranslation(0.0f, 0.0f, -8.0f)).transpose();
     
-    /*
-    _m_perspectiveMat = Matrix4::GetPerspective(1.0472f, aspect, 0.1f, 1000.f).transpose();
-    Matrix4 view = Matrix4::GetTranslation(0.0f, 0.0f, 8.0f).transpose();
-    Matrix4 model = Matrix4::GetTranslation(0.0f, 0.0f, 0.0f).transpose();
-    _m_modelViewMat = view * model;    
-    */
-
-    
-    _m_pers = glm::perspective(1.0472f, aspect, 0.1f, 1000.0f);
-    _m_model = glm::translate(glm::mat4(1.0f), glm::vec3(0.0f, 0.0f, -8.0f)) * glm::translate(glm::mat4(1.0f), glm::vec3(0.0f, -2.0f, 0.0f));
-
-    //glUniformMatrix4fv(mvLoc, 1, GL_FALSE, &_m_modelViewMat.a[0]);
-    //glUniformMatrix4fv(projLoc, 1, GL_FALSE, &_m_perspectiveMat.a[0]);
-
-    glUniformMatrix4fv(mvLoc, 1, GL_FALSE, glm::value_ptr(_m_model));
-    glUniformMatrix4fv(projLoc, 1, GL_FALSE, glm::value_ptr(_m_pers));
-    return;
+    glUniformMatrix4fv(projViewMatLoc, 1, GL_FALSE, &_m_projViewMatrix.a[0]);
   }
 
   void 
@@ -238,6 +223,13 @@ namespace hk
   GraphicComponentOpenGL::createMesh()
   {
     return new MeshOpenGL();
+  }
+
+  void 
+  GraphicComponentOpenGL::setModelMatrix(const Matrix4& modelMatrix)
+  {
+    GLuint modelMatLoc = glGetUniformLocation(_m_activeProgramId, "model_matrix");
+    glUniformMatrix4fv(modelMatLoc, 1, GL_FALSE, &modelMatrix.a[0]);
   }
 
   IShader* 

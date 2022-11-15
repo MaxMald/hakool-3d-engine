@@ -1,6 +1,7 @@
 #include <Hakool\Utils\guid.hpp>
 
 #include <Hakool\Core\hkGameObject.h>
+#include <Hakool\Core\hkGraphicComponent.h>
 
 using std::pair;
 
@@ -16,6 +17,7 @@ namespace hk
     _m_localPosition(0.0f, 0.0f, 0.0f),
     _m_localRotation(0.0f, 0.0f, 0.0f),
     _m_localScale(1.0f, 1.0f, 1.0f),
+    _m_modelMatrix(Matrix4::GetIdentity()),
     _m_isDirty(true),
     _m_isInverseDirty(true)
   {
@@ -32,6 +34,7 @@ namespace hk
     _m_localPosition(0.0f, 0.0f, 0.0f),
     _m_localRotation(0.0f, 0.0f, 0.0f),
     _m_localScale(1.0f, 1.0f, 1.0f),
+    _m_modelMatrix(Matrix4::GetIdentity()),
     _m_isDirty(true),
     _m_isInverseDirty(true)
   {
@@ -75,18 +78,20 @@ namespace hk
   }
 
   void
-    GameObject::draw(GraphicComponent* pGraphicComponet)
+  GameObject::draw(GraphicComponent* pGraphicComponent)
   {
+    _m_modelMatrix = Matrix4::GetTranslation(_m_localPosition).transpose();
+    pGraphicComponent->setModelMatrix(_m_modelMatrix);
+
     for (pair<const eCOMPONENT, IGameObjectComponent*> item : _m_hComponents)
     {
-      item.second->draw(pGraphicComponet);
+      item.second->draw(pGraphicComponent);
     }
 
     for (pair <String, GameObject*> item : _m_hChildren)
     {
-      item.second->draw(pGraphicComponet);
+      item.second->draw(pGraphicComponent);
     }
-    return;
   }
 
   void
@@ -186,7 +191,17 @@ namespace hk
   {
     _m_localPosition = localPosition;
     _setDirty();
-    return;
+  }
+
+  void GameObject::setLocalPosition(
+    const float& x, 
+    const float& y, 
+    const float& z)
+  {
+    _m_localPosition.x = x;
+    _m_localPosition.y = y;
+    _m_localPosition.z = z;
+    _setDirty();
   }
 
   Matrix4 

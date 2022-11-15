@@ -148,6 +148,9 @@ namespace hk
     void
     setLocalPosition(const Vector3f&);
 
+    void
+    setLocalPosition(const float& x, const float& y, const float& z);
+
     Matrix4
     calculateLocalToParentMatrix();
 
@@ -185,6 +188,9 @@ namespace hk
 
     Matrix4
     _m_worldToLocal;
+
+    Matrix4
+    _m_modelMatrix;
 
     float
     _m_isDirty;

@@ -1,5 +1,6 @@
 #pragma once
 
+#include <Hakool\Utils\hkMatrix4.h>
 #include <Hakool\Utils\hkWindowObserver.h>
 #include <Hakool\Core\hkCorePrerequisites.h>
 #include <Hakool\Core\hkEngineComponent.h>
@@ -76,6 +77,15 @@ namespace hk
      */
     virtual void
     drawScene(Scene* pScene) = 0;
+
+    /*
+    * Set the model space matrix. Usually used before drawing the Meshes of the
+    * Model.
+    * 
+    * @param modelMatrix The model space matrix.
+    */
+    virtual void
+    setModelMatrix(const Matrix4& modelMatrix) = 0;
 
     /**
      * Create a Mesh.

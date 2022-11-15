@@ -42,12 +42,20 @@ int main(int argc, char* argv[])
   ModelComponent* cubeModel = new ModelComponent(pEngine->getResourceManager());
   cubeModel->setMesh(pEngine->getResourceManager().getMeshes().getCube());
   cube.addComponent(cubeModel);
-  cube.init();
+  cube.init();  
 
   sceneManager.setActive("Test Scene");
 
+  float time = 0;
   while (pEngine->isWindowOpen())
   {
+    float dt = pEngine->getDeltaTime().asSeconds();
+    time += dt;
+    float x = hk::Math::Sin(time) * 3.0f;
+    float y = hk::Math::Cos(time) * 3.0f;
+
+    cube.setLocalPosition(x, y, cube.getLocalPosition().z);
+
     pEngine->update();
     pEngine->draw();
   }

@@ -114,6 +114,15 @@
     <ClInclude Include="include\Hakool\Utils\hkPluginSlotWin.h">
       <Filter>Header Files\plug-in</Filter>
     </ClInclude>
+    <ClInclude Include="include\Hakool\Utils\hkTime.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Hakool\Utils\hkClock.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Hakool\Utils\hkClockWin.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="include\Hakool\Utils\hkModule.inl">
@@ -152,6 +161,15 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="src\guid.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\hkTime.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\hkClock.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\hkClockWin.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

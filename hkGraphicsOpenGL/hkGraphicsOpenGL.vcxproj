@@ -98,7 +98,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>HK_GRAPHICS_OPENGL_EXPORTS;GLFW_EXPOSE_NATIVE_WIN32;GLFW_EXPOSE_NATIVE_WGL;GLFW_NATIVE_INCLUDE_NONE;WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(SolutionDir)hkUtilities\include\;$(SolutionDir)hkCore\include\;$(SolutionDir)dependencies\gl\include\;$(SolutionDir)dependencies\glfw\include\;$(SolutionDir)include\;$(ProjectDir)include\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)hkUtilities\include\;$(SolutionDir)hkCore\include\;$(SolutionDir)dependencies\gl\include\;$(SolutionDir)dependencies\glfw\include\;$(SolutionDir)dependencies\glm\include\;$(ProjectDir)include\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <LanguageStandard>stdcpp14</LanguageStandard>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
       <DisableSpecificWarnings>4100</DisableSpecificWarnings>
@@ -119,7 +119,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>HK_GRAPHICS_OPENGL_EXPORTS;GLFW_EXPOSE_NATIVE_WIN32;GLFW_EXPOSE_NATIVE_WGL;GLFW_NATIVE_INCLUDE_NONE;WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(SolutionDir)hkUtilities\include\;$(SolutionDir)hkCore\include\;$(SolutionDir)dependencies\gl\include\;$(SolutionDir)dependencies\glfw\include\;$(SolutionDir)include\;$(ProjectDir)include\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)hkUtilities\include\;$(SolutionDir)hkCore\include\;$(SolutionDir)dependencies\gl\include\;$(SolutionDir)dependencies\glfw\include\;$(SolutionDir)dependencies\glm\include\;$(ProjectDir)include\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <LanguageStandard>stdcpp14</LanguageStandard>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
       <DisableSpecificWarnings>4100</DisableSpecificWarnings>
@@ -140,7 +140,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>HK_GRAPHICS_OPENGL_EXPORTS;GLFW_EXPOSE_NATIVE_WIN32;GLFW_EXPOSE_NATIVE_WGL;GLFW_NATIVE_INCLUDE_NONE;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(SolutionDir)hkUtilities\include\;$(SolutionDir)hkCore\include\;$(SolutionDir)dependencies\gl\include\;$(SolutionDir)dependencies\glfw\include\;$(SolutionDir)include\;$(ProjectDir)include\;$(SolutionDir)dependencies\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)hkUtilities\include\;$(SolutionDir)hkCore\include\;$(SolutionDir)dependencies\gl\include\;$(SolutionDir)dependencies\glfw\include\;$(SolutionDir)dependencies\glm\include\;$(ProjectDir)include\;$(SolutionDir)dependencies\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <LanguageStandard>stdcpp14</LanguageStandard>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
       <DisableSpecificWarnings>4100</DisableSpecificWarnings>
@@ -161,7 +161,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>HK_GRAPHICS_OPENGL_EXPORTS;GLFW_EXPOSE_NATIVE_WIN32;GLFW_EXPOSE_NATIVE_WGL;GLFW_NATIVE_INCLUDE_NONE;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(SolutionDir)hkUtilities\include\;$(SolutionDir)hkCore\include\;$(SolutionDir)dependencies\gl\include\;$(SolutionDir)dependencies\glfw\include\;$(SolutionDir)include\;$(ProjectDir)include\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)hkUtilities\include\;$(SolutionDir)hkCore\include\;$(SolutionDir)dependencies\gl\include\;$(SolutionDir)dependencies\glfw\include\;$(SolutionDir)dependencies\glm\include\;$(ProjectDir)include\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <LanguageStandard>stdcpp14</LanguageStandard>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
       <DisableSpecificWarnings>4100</DisableSpecificWarnings>

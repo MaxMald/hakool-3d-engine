@@ -2,16 +2,8 @@
 
 #include <Hakool\Utils\hkColor.h>
 #include <Hakool\Utils\hkMatrix4.h>
-
 #include <Hakool\GraphicsOpenGL\hkGraphicsOpenGLPrerequisites.h>
 #include <Hakool\Core\hkGraphicComponent.h>
-
-#include <glm/vec3.hpp>
-#include <glm/vec4.hpp>
-#include <glm/mat4x4.hpp>
-#include <glm/ext/matrix_transform.hpp>
-#include <glm/ext/matrix_clip_space.hpp>
-#include <glm/gtc/type_ptr.hpp>
 
 namespace hk
 {
@@ -55,10 +47,13 @@ namespace hk
     prepareToDraw() override;
 
     virtual void
-    drawScene(Scene* pScene);
+    drawScene(Scene* pScene) override;
 
     virtual IMesh*
     createMesh() override;
+
+    virtual void
+    setModelMatrix(const Matrix4& modelMatrix) override;
 
     virtual IShader*
     createVertexShader() override;
@@ -105,6 +100,12 @@ namespace hk
     _m_aVAO[1];
 
     /**
+     * The ID of the current program.
+     */
+    uint32
+    _m_activeProgramId;
+
+    /**
     * Pointer to the program.
     */
     ProgramOpenGL*
@@ -114,16 +115,10 @@ namespace hk
     _m_pResourceManager;
 
     Matrix4 
-    _m_perspectiveMat;
+    _m_projViewMatrix;
 
     Matrix4
     _m_modelViewMat;
-
-    glm::mat4x4
-    _m_pers;
-
-    glm::mat4x4
-    _m_model;
 
     WindowOpenGL*
     _m_pWindow;

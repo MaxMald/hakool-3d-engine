@@ -1,5 +1,6 @@
 #include <Hakool\Utils\hkMatrix4.h>
 #include <Hakool\Utils\hkUtilitiesUtilities.h>
+#include <assert.h>
 
 using std::swap;
 
@@ -187,7 +188,8 @@ namespace hk
     const float& _f
   )
   {
-    /*
+    assert(abs(_ratio - std::numeric_limits<float>::epsilon()) > static_cast<float>(0));
+
     float nminusf = 1.0f /(_n - _f);
     float q = 1.0f / Math::Tan(_fov * 0.5);
 
@@ -197,31 +199,6 @@ namespace hk
       0.0f,  q,   0.0f,   0.0f,
       0.0f,  0.0f, (_n+_f)*nminusf, 2*(_n*_f)*nminusf,
       0.0f,  0.0f, -1.0f, 0.0f
-    );*/
-
-    /*
-    float top = _n * Math::Tan(_fov * 0.5f);
-    float bottom = -top;
-    float right = top * _ratio;
-    float left = -right;
-
-    return Matrix4
-    (
-      2 * _n / (right-left), 0.0f, 0.0f, -_n*(right+left)/(right-left),
-      0.0f, 2 * _n / (top-bottom), 0.0f, -_n*(top+bottom)/(top-bottom),
-      0.0f, 0.0f, -(_f+_n)/(_f-_n), 2*_f*_n/(_n-_f),
-      0.0f, 0.0f, -1.0f, 0.0f
-     );*/
-
-    float frustumDepth = _f - _n;
-    float oneOverDepth = 1.0f / frustumDepth;
-
-    return Matrix4
-    (
-      1.0f / Math::Tan(_fov * 0.5f) / _ratio, 0.0f, 0.0f, 0.f,
-      0.0f, 1.0f / Math::Tan(_fov * 0.5f), 0.0f, 0.0f,
-      0.0f, 0.0f, _f * oneOverDepth, 1.0f,
-      0.0f, 0.0f, (-_f * _n) * oneOverDepth, 0.0f
     );
   }
 

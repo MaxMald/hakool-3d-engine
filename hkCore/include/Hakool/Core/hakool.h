@@ -3,6 +3,8 @@
 #include <Hakool\Utils\hkUtilitiesUtilities.h>
 #include <Hakool\Utils\hkPluginManager.h>
 #include <Hakool\Utils\hkIWindowFactory.h>
+#include <Hakool\Utils\hkClock.h>
+#include <Hakool\Utils\hkTime.h>
 #include <Hakool\Core\hkCorePrerequisites.h>
 #include <Hakool\Core\hkSceneManager.h>
 #include <Hakool\Core\hkResourceManager.h>
@@ -89,6 +91,12 @@ namespace hk
      */
     bool
     isWindowOpen();
+
+    /**
+     * 
+     */
+    const Time&
+    getDeltaTime();
 
     /**
     * Get the reference to the resource manager.
@@ -198,5 +206,14 @@ namespace hk
     */
     bool
     _m_isRunning;
+
+    Clock*
+    _m_pClock;
+
+    /**
+     * Duration of the last update.
+     */
+    Time
+    _m_deltaTime;
   };
 }

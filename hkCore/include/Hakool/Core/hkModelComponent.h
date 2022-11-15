@@ -13,7 +13,9 @@ namespace hk
   /**
   * TODO
   */
-  class HK_CORE_EXPORT ModelComponent : public IGameObjectComponent, public ModelObserver
+  class HK_CORE_EXPORT ModelComponent : 
+    public IGameObjectComponent, 
+    public ModelObserver
   {
   public:
 

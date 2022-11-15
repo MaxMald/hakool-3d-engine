@@ -124,6 +124,7 @@ namespace hk
   eRESULT 
   Hakool::update()
   { 
+    _m_deltaTime = _m_pClock->restart();
     _m_pGraphicComponent->getWindow()->update();
     _m_sceneManager.update();
     return eRESULT::kSuccess;
@@ -168,6 +169,12 @@ namespace hk
     return _m_pGraphicComponent->getWindow()->isOpen();
   }
 
+  const Time& 
+  Hakool::getDeltaTime()
+  {
+    return _m_deltaTime;
+  }
+
   ResourceManager& 
   Hakool::getResourceManager()
   {
@@ -186,7 +193,9 @@ namespace hk
     _m_pGraphicComponent(nullptr),
     _m_pLogger(nullptr),
     _m_sceneManager(),
-    _m_resourceManager()
+    _m_resourceManager(),
+    _m_pClock(Clock::Create()),
+    _m_deltaTime()
   {
     return;
   }
@@ -205,6 +214,9 @@ namespace hk
     _m_resourceManager.destroy();
     _m_pluginManager.destroy();
     _m_sceneManager.destroy();
+    
+    delete _m_pClock;
+    
     Logger::Shutdown();
   }
 
