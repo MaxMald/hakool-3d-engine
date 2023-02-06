@@ -23,7 +23,7 @@ int main(int argc, char* argv[])
 
   HakoolConfiguration engineConfig;
   engineConfig.graphicsConfiguration.graphicInterface = hk::eGRAPHIC_INTERFACE::kOpenGL;
-  engineConfig.graphicsConfiguration.backgroundColor = hk::Color::BLUE;
+  engineConfig.graphicsConfiguration.backgroundColor = hk::Color::BLACK;
   engineConfig.windowConfiguration.width = 800;
   engineConfig.windowConfiguration.height = 800;
   engineConfig.windowConfiguration.title = "Hakool Editor";

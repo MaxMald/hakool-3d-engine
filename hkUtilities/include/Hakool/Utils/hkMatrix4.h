@@ -513,6 +513,9 @@ namespace hk
     float
     determinant() const;
 
+    float*
+    getMatrixPtr();
+
     union
     {
       float a[16];

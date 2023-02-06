@@ -78,6 +78,15 @@
     <ClCompile Include="src\hkModelObserver.cpp">
       <Filter>Source Files\graphics</Filter>
     </ClCompile>
+    <ClCompile Include="src\hkGameObjectBuilder.cpp">
+      <Filter>Source Files\scene</Filter>
+    </ClCompile>
+    <ClCompile Include="src\hkCameraComponent.cpp">
+      <Filter>Source Files\components</Filter>
+    </ClCompile>
+    <ClCompile Include="src\hkCameraManager.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\Hakool\Core\hakool.h">
@@ -148,6 +157,18 @@
     </ClInclude>
     <ClInclude Include="include\Hakool\Core\hkIResource.h">
       <Filter>Header Files\resource</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Hakool\Core\hkGameObjectBuilder.h">
+      <Filter>Header Files\scene</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Hakool\Core\hkCameraComponent.h">
+      <Filter>Header Files\components</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Hakool\Core\hkICameraManager.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Hakool\Core\hkCameraManager.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

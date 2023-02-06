@@ -747,4 +747,10 @@ namespace hk
                         -this->m11 * (this->m20 * this->m32 - this->m30 * this->m22)
                         +this->m12 * (this->m20 * this->m31 - this->m30 * this->m21));
   }
+
+  float*
+  Matrix4::getMatrixPtr()
+  {
+    return &a[0];
+  }
 }

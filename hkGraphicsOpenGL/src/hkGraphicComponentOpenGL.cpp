@@ -80,9 +80,11 @@ namespace hk
       "layout (location=0) in vec3 position;\n"
       "uniform mat4 proj_view_matrix;\n"
       "uniform mat4 model_matrix;\n"
+      "out vec4 varyingColor;\n"
       "void main(void) \n"
       "{\n"
       " gl_Position = proj_view_matrix * model_matrix * vec4(position,1.0);\n"
+      " varyingColor = vec4(position, 1.0) * 0.5 + vec4(0.5, 0.5, 0.5, 0.5);\n"
       "}";
 
     eRESULT result(eRESULT::kFail);
@@ -116,11 +118,12 @@ namespace hk
     // Create default fragment shader
     const char* pFragmentSource =
       "#version 430 \n"
+      "in vec4 varyingColor;\n"
       "out vec4 color; \n"
       "uniform mat4 proj_view_matrix;\n"
       "uniform mat4 model_matrix;\n"
       "void main(void) \n"
-      "{ color = vec4(1.0, 0.0, 0.0, 1.0); }";    
+      "{ color = varyingColor; }";    
 
     ShaderOpenGL fragShader;
     result = fragShader.create(pFragmentSource, eSHADER_TYPE::kFragment);
@@ -210,7 +213,7 @@ namespace hk
     _m_projViewMatrix = (Matrix4::GetPerspective(1.0472f, aspect, 0.1f, 1000.f)
       * Matrix4::GetTranslation(0.0f, 0.0f, -8.0f)).transpose();
     
-    glUniformMatrix4fv(projViewMatLoc, 1, GL_FALSE, &_m_projViewMatrix.a[0]);
+    glUniformMatrix4fv(projViewMatLoc, 1, GL_FALSE, _m_projViewMatrix.getMatrixPtr());
   }
 
   void 

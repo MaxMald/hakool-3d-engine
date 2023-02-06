@@ -228,15 +228,18 @@ namespace hk
     _m_pParent(nullptr)
   {
     Node* pParentNode = static_cast<Node*>(&_parent);
+    if (pParentNode->hasChild(_name))
+    {
+      throw std::invalid_argument("The parent already has a node with the name: " + _name);
+    }
+    
     pParentNode->addChild(reinterpret_cast<T*>(this));
-    return;
   }
 
   template<typename T>
   inline Node<T>::~Node()
   {
     _m_pParent = nullptr;
-    return;
   }
 
   template<typename T>

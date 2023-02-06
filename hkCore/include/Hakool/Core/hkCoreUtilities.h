@@ -24,7 +24,7 @@ namespace hk
     kTesselation
   };
 
-  enum class HK_CORE_EXPORT eCAMERA_VIEW :
+  enum class HK_CORE_EXPORT ePROJECTION :
     uchar
   {
     kPerspective,
@@ -60,7 +60,8 @@ namespace hk
     uchar
   {
     kUndefined,
-    kModel
+    kModel,
+    kCamera
   };
 
   /***************************************************************************/

@@ -17,45 +17,12 @@ namespace hk
     /**
     * Create a camera with default values.
     */
-    Camera();
-
-    /**
-    * Create a copy from another camera.
-    */
-    Camera(const Camera& _camera);
+    Camera(const uint32& id);
 
     /**
     * Destructor.
     */
     ~Camera();
-
-    /**
-    *
-    */
-    void
-    init(const eCAMERA_VIEW& _view);
-
-    /**
-    * Safely destroys this camera.
-    */
-    void
-    destroy();
-
-    /**
-    * Get the view (look-at) matrix of this camera.
-    * 
-    * @return Reference to the view matrix.
-    */
-    Matrix4&
-    getViewMatrix();
-
-    /**
-    * Get the perspective matrix of this camera.
-    * 
-    * @return Reference to the perspective matrix.
-    */
-    Matrix4&
-    getPerspectiveMatrix();
 
     /**
     * Set the camera's near value.
@@ -65,6 +32,9 @@ namespace hk
     void
     setNear(const float& _near);
 
+    const float&
+    getNear() const;
+
     /**
     * Set the camera's far value.
     * 
@@ -72,6 +42,9 @@ namespace hk
     */
     void
     setFar(const float& _far);
+    
+    const float&
+    getFar() const;
 
     /**
     * Set the field of view of this camera.
@@ -79,7 +52,10 @@ namespace hk
     * @param _fov Field of view.
     */
     void
-    setFOV(const float& _fov);
+    setFieldOfView(const float& _fov);
+    
+    const float&
+    getFieldOfView() const;
 
     /**
     * Set aspect ratio of this camera.
@@ -89,13 +65,16 @@ namespace hk
     void
     setAspectRatio(const float& _aspect);
 
+    const float&
+    getAspectRatio() const;
+
     /**
     * Set the target's position of this camera.
     * 
     * @param _target Target's position.
     */
     void
-    SetTarget(const Vector3f& _target);
+    setTarget(const Vector3f& _target);
 
     /**
     * Set the target's position of this camera.
@@ -106,6 +85,9 @@ namespace hk
     */
     void
     setTarget(const float& _x, const float& _y, const float& _z);
+
+    const Vector3f&
+    getTarget() const;
 
     /**
     * Set the camera's position.
@@ -125,75 +107,17 @@ namespace hk
     void
     setPosition(const float& _x, const float& _y, const float& _z);
 
-    /**
-    * Set this camera with perspective view.
-    * 
-    * @param _fov Field of view.
-    * @param _aspect Aspect ration.
-    * @param _near Near.
-    * @param _far Far.
-    */
-    void
-    setPerspective
-    (
-      const float& _fov, 
-      const float& _aspect, 
-      const float& _near, 
-      const float& _far
-    );
+    const Vector3f&
+    getPosition() const;
 
-    /**
-    * Set this camera with orthographic view.
-    * 
-    * @param _left Left.
-    * @param _top Top.
-    * @param _right Right.
-    * @param _bottom Bottom.
-    * @param _near Near.
-    * @param _far Far.
-    */
     void
-    setOrthographic
-    (
-      const float& _left,
-      const float& _top,
-      const float& _right,
-      const float& _bottom,
-      const float& _near,
-      const float& _far
-    );
-
-    /**
-    * Set the view matrix of this camera.
-    * 
-    * @param _position Camera's position.
-    * @param _target Camera's target.
-    * @param _up Camera's up.
-    */
-    void
-    setViewMatrix
-    (
+    setViewMatrix(
       const Vector3f& _position,
       const Vector3f& _target,
-      const Vector3f& _up
-    );
+      const Vector3f& _up);
 
-    /**
-    * Set the view matrix of this camera.
-    * 
-    * @param _posX Position X value.
-    * @param _posY Position Y value.
-    * @param _posZ Position Z value.
-    * @param _targetX Target's position X value.
-    * @param _targetY Target's position Y value.
-    * @param _targetZ Target's position Z value.
-    * @param _upX Up X value.
-    * @param _upY Up Y value.
-    * @param _upZ Up Z value.
-    */
     void
-    setViewMatrix
-    (
+    setViewMatrix(
       const float& _posX,
       const float& _posY,
       const float& _posZ,
@@ -202,98 +126,100 @@ namespace hk
       const float& _targetZ,
       const float& _upX,
       const float& _upY,
-      const float& _upZ
-    );
+      const float& _upZ);
 
-    /**
-    * Get the view type of this camera.
-    * 
-    * @returns Camera's view type.
-    */
-    eCAMERA_VIEW
-    getCameraViewType();
+    void
+    setProjection(const ePROJECTION& projection);
+    
+    const Matrix4&
+    getProjectionMatrix() const;
+
+    const Matrix4&
+    getViewMatrix() const;
+
+    const uint32&
+    getCameraId() const;
 
   private:
-  
-    /**
-    * Update camera's matrices.
-    */
-    void
-    _updateMatrices();
+    
+    Camera(const Camera& _camera) = delete;
+
+    Camera&
+    operator= (const Camera& copy) = delete;
+
+    uint32
+    _m_cameraId;
 
     /**
     * Field of view.
     */
-    float _m_fov;
+    float 
+    _m_fov;
 
     /**
     * Aspect ratio.
     */
-    float _m_aspect;
+    float 
+    _m_aspect;
 
     /**
     * Near.
     */
-    float _m_near;
+    float 
+    _m_near;
 
     /**
     * Far.
     */
-    float _m_far;
-
-    /**
-    * Left.
-    */
-    float _m_left;
-
-    /**
-    * Right.
-    */
-    float _m_right;
-
-    /**
-    * Top.
-    */
-    float _m_top;
-
-    /**
-    * Down.
-    */
-    float _m_bottom;
+    float 
+    _m_far;
 
     /**
     * Up vector.
     */
-    Vector3f _m_up;
+    Vector3f 
+    _m_up;
 
     /**
     * Camera's position.
     */
-    Vector3f _m_position;
+    Vector3f 
+    _m_position;
 
     /**
     * Camera's target
     */
-    Vector3f _m_target;
+    Vector3f 
+    _m_target;
 
     /**
     * Indicates the type of view of this camera.
     */
-    eCAMERA_VIEW _m_viewType;
+    ePROJECTION 
+    _m_projectionType;
 
     /**
     * View matrix.
     */
-    Matrix4 _m_view;
+    mutable Matrix4 
+    _m_view;
 
     /**
-    * Perspective matrix.
+    * Projection matrix.
     */
-    Matrix4 _m_perspective;
+    mutable Matrix4 
+    _m_projection;
 
     /**
-    * Indicates if the camera matrices need to be updated.
+    * Indicates if the Projection matrix requires a recalculation.
     */
-    bool _m_isDirty;
+    mutable bool 
+    _m_isDirtyProjection;
+
+    /**
+     * Indicates if the View matrix requires a recalculation.
+     */
+    mutable bool
+    _m_isDirtyView;
   };
 }

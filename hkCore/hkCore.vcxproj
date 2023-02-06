@@ -176,8 +176,11 @@
   <ItemGroup>
     <ClCompile Include="src\hakool.cpp" />
     <ClCompile Include="src\hkCamera.cpp" />
+    <ClCompile Include="src\hkCameraComponent.cpp" />
+    <ClCompile Include="src\hkCameraManager.cpp" />
     <ClCompile Include="src\hkEngineComponent.cpp" />
     <ClCompile Include="src\hkGameObject.cpp" />
+    <ClCompile Include="src\hkGameObjectBuilder.cpp" />
     <ClCompile Include="src\hkMeshResourceGroup.cpp" />
     <ClCompile Include="src\hkModel.cpp" />
     <ClCompile Include="src\hkModelComponent.cpp" />
@@ -187,7 +190,10 @@
     <ClCompile Include="src\hkSceneManager.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="include\Hakool\Core\hkCameraManager.h" />
     <ClInclude Include="include\Hakool\Core\hkCamera.h" />
+    <ClInclude Include="include\Hakool\Core\hkCameraComponent.h" />
+    <ClInclude Include="include\Hakool\Core\hkGameObjectBuilder.h" />
     <ClInclude Include="include\Hakool\Core\hkGraphicComponent.h" />
     <ClInclude Include="include\Hakool\Core\hkIContext.h" />
     <ClInclude Include="include\Hakool\Core\hkIProgram.h" />
@@ -210,6 +216,7 @@
     <ClInclude Include="include\Hakool\Core\hkScene.h" />
     <ClInclude Include="include\Hakool\Core\hkSceneManager.h" />
     <ClInclude Include="include\Hakool\Core\hakool.h" />
+    <ClInclude Include="include\Hakool\Core\hkICameraManager.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
