@@ -6,14 +6,21 @@ namespace hk
   CameraManager::CameraManager() :
     _m_cameras(),
     _m_defaultCamera(0),
-    _m_cameraCounter(0)
-  { }
+    _m_cameraCounter(0),
+    _m_pActiveCamera(nullptr)
+  { 
+    _m_pActiveCamera = &_m_defaultCamera;
+  }
 
   CameraManager::~CameraManager()
   { }
 
+  void 
+  CameraManager::init()
+  { }
+
   const uint32&
-    CameraManager::createCamera()
+  CameraManager::createCamera()
   {
     Camera* pNewCamera = new Camera(++_m_cameraCounter);
     _m_cameras.insert(
@@ -21,20 +28,28 @@ namespace hk
     return _m_cameraCounter;
   }
 
-  Camera&
-    CameraManager::getCamera(const uint32& id) const
+  const uint32& 
+  CameraManager::copyCamera(Camera& _toCopy)
+  {
+    Camera* pNewCamera = new Camera(_toCopy, ++_m_cameraCounter);
+    _m_cameras.insert(
+      Map<uint32, Camera*>::value_type(_m_cameraCounter, pNewCamera));
+    return _m_cameraCounter;
+  }
+
+  Camera*
+  CameraManager::getCamera(const uint32& id) const
   {
     auto item = _m_cameras.find(id);
     if (item == _m_cameras.end())
     {
       throw new std::invalid_argument("Camera not found");
     }
-
-    return *item->second;
+    return item->second;
   }
 
   void
-    CameraManager::setActiveCamera(const uint32& id)
+  CameraManager::setActiveCamera(const uint32& id)
   {
     auto item = _m_cameras.find(id);
     if (item == _m_cameras.end())
@@ -45,8 +60,8 @@ namespace hk
     _m_pActiveCamera = item->second;
   }
 
-  Camera const *
-    CameraManager::getActiveCamera() const
+  Camera *
+  CameraManager::getActiveCamera()
   {
     if (_m_pActiveCamera == nullptr)
     {
@@ -56,7 +71,7 @@ namespace hk
   }
 
   void
-    CameraManager::destroyCamera(const uint32& id)
+  CameraManager::destroyCamera(const uint32& id)
   {
     auto item = _m_cameras.find(id);
     if (item == _m_cameras.end())
@@ -74,7 +89,7 @@ namespace hk
   }
 
   void
-    CameraManager::clearCameras()
+  CameraManager::clearCameras()
   {
     for (auto item : _m_cameras)
     {
@@ -84,7 +99,7 @@ namespace hk
   }
 
   void
-    CameraManager::destroy()
+  CameraManager::destroy()
   {
     clearCameras();
   }

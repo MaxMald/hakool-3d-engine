@@ -44,7 +44,7 @@ namespace hk
     clear() override;
 
     virtual void
-    prepareToDraw() override;
+    prepareToDraw(Camera* pCamera) override;
 
     virtual void
     drawScene(Scene* pScene) override;

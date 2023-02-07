@@ -14,17 +14,23 @@ namespace hk
     virtual
     ~CameraManager();
 
+    virtual void
+    init() override;
+
     virtual const uint32&
     createCamera() override;
 
-    virtual Camera&
+    virtual const uint32&
+    copyCamera(Camera& camera) override;
+
+    virtual Camera*
     getCamera(const uint32& id) const override;
 
     virtual void
     setActiveCamera(const uint32& id) override;
 
-    virtual Camera const * // TODO const camera
-    getActiveCamera() const override;
+    virtual Camera *
+    getActiveCamera() override;
 
     virtual void
     destroyCamera(const uint32& id) override;

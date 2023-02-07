@@ -6,13 +6,16 @@
 
 namespace hk
 {
+  class CameraManager;
+  class Camera;
+
   class HK_CORE_EXPORT CameraComponent : public IGameObjectComponent
   {
   public:
 
-    CameraComponent();
+    CameraComponent(CameraManager& cameraManager);
 
-    CameraComponent(const CameraComponent& copy);
+    CameraComponent(const CameraComponent& copy, CameraManager& _cameraManager);
 
     CameraComponent&
     operator= (const CameraComponent& copy);
@@ -71,10 +74,28 @@ namespace hk
     void
     setProjection(const ePROJECTION& projection);
 
+    /**
+     * Sets the Camera of this CameraComponet as the active camera.
+     */
+    void
+    setAsActiveCamera();
+
     Matrix4&
     getProjectionMatrix();
 
+    /**
+     * Moves the Camera toward or away the target.
+     */
+    void 
+    dolly(int32 units);
+
   private:
+
+    uint32
+    _m_cameraId;
+
+    Camera*
+    _m_pCamera;
 
     ePROJECTION
     _m_projectionType;
@@ -102,5 +123,8 @@ namespace hk
 
     GameObject*
     _m_pGameObject;
+
+    CameraManager*
+    _m_pCameraManager;
   };
 }

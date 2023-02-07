@@ -1,8 +1,9 @@
 #include <Hakool/Core/hkCameraComponent.h>
+#include <Hakool/Core/hkCameraManager.h>
 
 namespace hk
 {
-  CameraComponent::CameraComponent() :
+  CameraComponent::CameraComponent(CameraManager& _cameraManager) :
     _m_projectionType(ePROJECTION::kPerspective),
     _m_projection(),
     _m_backgroundColor(Color::BLACK),
@@ -11,10 +12,14 @@ namespace hk
     _m_aspect(1.0f),
     _m_fov(1.0472f),
     _m_isDirtyProjection(true),
-    _m_pGameObject(nullptr)
-  { }
+    _m_pGameObject(nullptr),
+    _m_pCameraManager(&_cameraManager)
+  {
+    _m_cameraId = _cameraManager.createCamera();
+    _m_pCamera = _cameraManager.getCamera(_m_cameraId);
+  }
 
-  CameraComponent::CameraComponent(const CameraComponent& copy) :
+  CameraComponent::CameraComponent(const CameraComponent& copy, CameraManager& _cameraManager) :
     _m_projectionType(copy._m_projectionType),
     _m_projection(copy._m_projection),
     _m_backgroundColor(copy._m_backgroundColor),
@@ -23,8 +28,12 @@ namespace hk
     _m_aspect(copy._m_aspect),
     _m_fov(copy._m_fov),
     _m_isDirtyProjection(true),
-    _m_pGameObject(nullptr)
-  { }
+    _m_pGameObject(nullptr),
+    _m_pCameraManager(copy._m_pCameraManager)
+  {
+    _m_cameraId = _m_pCameraManager->copyCamera(*copy._m_pCamera);
+    _m_pCamera = _m_pCameraManager->getCamera(_m_cameraId);
+  }
 
   CameraComponent& 
   CameraComponent::operator=(const CameraComponent& copy)
@@ -53,7 +62,9 @@ namespace hk
 
   void 
   CameraComponent::destroy()
-  { }
+  {
+    _m_pCameraManager->destroyCamera(_m_cameraId);
+  }
 
   eCOMPONENT 
   CameraComponent::getID()
@@ -138,7 +149,13 @@ namespace hk
     _m_isDirtyProjection = true;
   }
 
-  Matrix4& 
+  void 
+  CameraComponent::setAsActiveCamera()
+  {
+    _m_pCameraManager->setActiveCamera(_m_cameraId);
+  }
+
+  Matrix4&
   CameraComponent::getProjectionMatrix()
   {
     if (_m_isDirtyProjection)
@@ -157,5 +174,15 @@ namespace hk
     }
 
     return _m_projection;
+  }
+  
+  void CameraComponent::dolly(int32 units)
+  {
+    Vector3f pos = _m_pCamera->getPosition();
+    _m_pCamera->setPosition(
+      pos.x,
+      pos.y,
+      pos.z + units
+    );
   }
 }

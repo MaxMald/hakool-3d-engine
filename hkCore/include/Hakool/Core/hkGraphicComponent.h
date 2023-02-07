@@ -16,6 +16,7 @@ namespace hk
   class Scene;
   class Color;
   class IMesh;
+  class Camera;
 
   struct WindowConfiguration;
 
@@ -50,7 +51,7 @@ namespace hk
     init(
       const GraphicsConfiguration& _graphicConfiguration,
       const WindowConfiguration& windowConfig,
-      ResourceManager& resourceManager) = 0;    
+      ResourceManager& resourceManager) = 0;
 
     /**
      * Sets the color to clear the graphic buffers.
@@ -70,7 +71,7 @@ namespace hk
      * Prepare the GraphicComponent to draw.
      */
     virtual void
-    prepareToDraw() = 0;
+    prepareToDraw(Camera* pCamera) = 0;
 
     /**
      * Draw the given scene in the screen.

@@ -15,9 +15,17 @@ namespace hk
   public:
 
     /**
-    * Create a camera with default values.
+    * Instantiates a camera with default values.
     */
     Camera(const uint32& id);
+
+    /**
+     * Instantiates a copy of a given camera.
+     * 
+     * @param _copy The camera that this camera will copy.
+     * @param _id The Id of this camera.
+     */
+    Camera(const Camera& _copy, const uint32 _id);
 
     /**
     * Destructor.

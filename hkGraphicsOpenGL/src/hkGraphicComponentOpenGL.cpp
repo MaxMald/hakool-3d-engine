@@ -203,16 +203,15 @@ namespace hk
   }
 
   void 
-  GraphicComponentOpenGL::prepareToDraw()
+  GraphicComponentOpenGL::prepareToDraw(Camera* _camera)
   {
     _m_activeProgramId = *(reinterpret_cast<uint32*>(_m_pProgramOpenGL->getProgramPtr()));
     glUseProgram(static_cast<GLuint>(_m_activeProgramId));
 
     GLuint projViewMatLoc = glGetUniformLocation(_m_activeProgramId, "proj_view_matrix");
-    float aspect = (float)_m_pWindow->getWidth() / (float)_m_pWindow->getHeight();
-    _m_projViewMatrix = (Matrix4::GetPerspective(1.0472f, aspect, 0.1f, 1000.f)
-      * Matrix4::GetTranslation(0.0f, 0.0f, -8.0f)).transpose();
-    
+    _camera->setAspectRatio((float)_m_pWindow->getWidth() / (float)_m_pWindow->getHeight());
+    _m_projViewMatrix = (_camera->getProjectionMatrix() * Matrix4::GetTranslation(_camera->getPosition())).transpose();
+
     glUniformMatrix4fv(projViewMatLoc, 1, GL_FALSE, _m_projViewMatrix.getMatrixPtr());
   }
 

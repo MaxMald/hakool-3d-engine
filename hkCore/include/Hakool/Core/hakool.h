@@ -8,6 +8,7 @@
 #include <Hakool\Core\hkCorePrerequisites.h>
 #include <Hakool\Core\hkSceneManager.h>
 #include <Hakool\Core\hkResourceManager.h>
+#include <Hakool\Core\hkCameraManager.h>
 
 namespace hk
 {
@@ -112,6 +113,14 @@ namespace hk
     SceneManager&
     getSceneManager();
 
+    /**
+     * Get the CameraManager.
+     * 
+     * @return CameraManager.
+     */
+    CameraManager&
+    getCameraManager();
+
   private:
 
     /**
@@ -188,6 +197,12 @@ namespace hk
     */
     SceneManager
     _m_sceneManager;
+
+    /**
+     * CameraManager.
+     */
+    CameraManager
+    _m_cameraManager;
 
     /**
     * Resource manager.

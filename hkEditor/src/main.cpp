@@ -2,6 +2,7 @@
 #include <Hakool/Utils/hkLoggerConsole.h>
 #include <Hakool/Core/hkScene.h>
 #include <Hakool/Core/hkModelComponent.h>
+#include <Hakool/Core/hkCameraComponent.h>
 
 using hk::Hakool;
 using hk::HakoolConfiguration;
@@ -12,6 +13,8 @@ using hk::SceneManager;
 using hk::Scene;
 using hk::GameObject;
 using hk::ModelComponent;
+using hk::CameraManager;
+using hk::CameraComponent;
 
 /**
  * 
@@ -24,7 +27,7 @@ int main(int argc, char* argv[])
   HakoolConfiguration engineConfig;
   engineConfig.graphicsConfiguration.graphicInterface = hk::eGRAPHIC_INTERFACE::kOpenGL;
   engineConfig.graphicsConfiguration.backgroundColor = hk::Color::BLACK;
-  engineConfig.windowConfiguration.width = 800;
+  engineConfig.windowConfiguration.width = 1200;
   engineConfig.windowConfiguration.height = 800;
   engineConfig.windowConfiguration.title = "Hakool Editor";
 
@@ -40,9 +43,12 @@ int main(int argc, char* argv[])
   Scene& scene = sceneManager.create("Test Scene");
   GameObject& cube = scene.createGameObject("cube");
   ModelComponent* cubeModel = new ModelComponent(pEngine->getResourceManager());
+  CameraComponent* pCamera = new CameraComponent(pEngine->getCameraManager());
+  pCamera->setAsActiveCamera();
+  pCamera->dolly(-8.0f);
   cubeModel->setMesh(pEngine->getResourceManager().getMeshes().getCube());
   cube.addComponent(cubeModel);
-  cube.init();  
+  cube.init();
 
   sceneManager.setActive("Test Scene");
 

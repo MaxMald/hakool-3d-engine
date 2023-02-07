@@ -115,6 +115,7 @@ namespace hk
 
     _m_resourceManager.init(_m_pGraphicComponent);
     _m_sceneManager.init(this);
+    _m_cameraManager.init();
 
     _m_isInitialized = !_m_isInitialized;
 
@@ -141,7 +142,7 @@ namespace hk
   Hakool::draw()
   {
     _m_pGraphicComponent->clear();
-    _m_pGraphicComponent->prepareToDraw();
+    _m_pGraphicComponent->prepareToDraw(_m_cameraManager.getActiveCamera());
     _m_sceneManager.draw(_m_pGraphicComponent);
     _m_pGraphicComponent->getWindow()->present();
     return eRESULT::kSuccess;
@@ -187,6 +188,12 @@ namespace hk
     return this->_m_sceneManager;
   }
 
+  CameraManager&
+  Hakool::getCameraManager()
+  {
+    return _m_cameraManager;
+  }
+
   Hakool::Hakool():
     _m_isInitialized(false),
     _m_isRunning(false),
@@ -194,6 +201,7 @@ namespace hk
     _m_pLogger(nullptr),
     _m_sceneManager(),
     _m_resourceManager(),
+    _m_cameraManager(),
     _m_pClock(Clock::Create()),
     _m_deltaTime()
   {
@@ -214,6 +222,7 @@ namespace hk
     _m_resourceManager.destroy();
     _m_pluginManager.destroy();
     _m_sceneManager.destroy();
+    _m_cameraManager.destroy();
     
     delete _m_pClock;
     

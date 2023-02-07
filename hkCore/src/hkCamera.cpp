@@ -18,6 +18,22 @@ namespace hk
     _m_isDirtyView(true)
   { }
 
+  Camera::Camera(const Camera& _copy, const uint32 _id) :
+    _m_cameraId(_id),
+    _m_fov(_copy._m_fov),
+    _m_aspect(_copy._m_aspect),
+    _m_near(_copy._m_near),
+    _m_far(_copy._m_far),
+    _m_up(_copy._m_up),
+    _m_position(_copy._m_position),
+    _m_target(_copy._m_target),
+    _m_projectionType(_copy._m_projectionType),
+    _m_view(_copy._m_view),
+    _m_projection(_copy._m_projection),
+    _m_isDirtyProjection(_copy._m_isDirtyProjection),
+    _m_isDirtyView(_copy._m_isDirtyView)
+  { }
+
   Camera::~Camera()
   { }
 
