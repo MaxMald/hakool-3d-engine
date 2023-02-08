@@ -73,6 +73,12 @@ namespace hk
     isOpen() = 0;
 
     /**
+     * 
+     */
+    virtual void
+    pollEvents() = 0;
+
+    /**
     * Called every frame.
     */
     virtual void

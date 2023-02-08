@@ -126,6 +126,7 @@ namespace hk
   Hakool::update()
   { 
     _m_deltaTime = _m_pClock->restart();
+    _m_pGraphicComponent->getWindow()->pollEvents();
     _m_pGraphicComponent->getWindow()->update();
     _m_sceneManager.update();
     return eRESULT::kSuccess;
@@ -174,6 +175,12 @@ namespace hk
   Hakool::getDeltaTime()
   {
     return _m_deltaTime;
+  }
+
+  GraphicComponent*
+  Hakool::getGraphicComponent()
+  {
+    return _m_pGraphicComponent;
   }
 
   ResourceManager& 

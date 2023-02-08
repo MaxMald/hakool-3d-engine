@@ -100,6 +100,12 @@ namespace hk
     getDeltaTime();
 
     /**
+     * 
+     */
+    GraphicComponent*
+    getGraphicComponent();
+
+    /**
     * Get the reference to the resource manager.
     * 
     * @return Resource manager.

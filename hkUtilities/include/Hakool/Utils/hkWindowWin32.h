@@ -31,6 +31,9 @@ namespace hk
     isOpen() override;
 
     virtual void
+    pollEvents() override;
+
+    virtual void
     update() override;
 
     virtual void

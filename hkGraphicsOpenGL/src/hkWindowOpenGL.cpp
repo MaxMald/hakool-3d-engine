@@ -1,9 +1,7 @@
 #include <Hakool/GraphicsOpenGL/hkWindowOpenGL.h>
-
+#include <Hakool/Utils/hkWindowObserver.h>
 #include <GLFW/glfw3.h>
 #include <GLFW/glfw3native.h>
-
-#include <Hakool/Utils/hkWindowObserver.h>
 
 namespace hk
 {
@@ -29,10 +27,10 @@ namespace hk
     glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 4);
     glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
     _m_pWindow = glfwCreateWindow(
-      _config.width, 
-      _config.height, 
-      _config.title.c_str(), 
-      NULL, 
+      _config.width,
+      _config.height,
+      _config.title.c_str(),
+      NULL,
       NULL);
     _m_title = _config.title;
 
@@ -104,14 +102,19 @@ namespace hk
   }
 
   void 
+  WindowOpenGL::pollEvents()
+  {
+    glfwPollEvents();
+  }
+
+  void 
   WindowOpenGL::update()
   {
   }
 
   void 
   WindowOpenGL::postUpdate()
-  {
-  }
+  { }
 
   void 
   WindowOpenGL::present()
@@ -119,7 +122,6 @@ namespace hk
     if (_m_pWindow != nullptr)
     {
       glfwSwapBuffers(_m_pWindow);
-      glfwPollEvents();
     }
   }
 
@@ -180,5 +182,11 @@ namespace hk
   WindowOpenGL::getTitle()
   {
     return _m_title;
+  }
+  
+  GLFWwindow*
+  WindowOpenGL::getGLFWindow()
+  {
+    return _m_pWindow;
   }
 }

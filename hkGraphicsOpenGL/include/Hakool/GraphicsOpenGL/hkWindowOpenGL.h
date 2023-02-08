@@ -32,6 +32,9 @@ namespace hk
     isOpen() override;
 
     virtual void
+    pollEvents() override;
+
+    virtual void
     update() override;
 
     virtual void
@@ -60,6 +63,9 @@ namespace hk
 
     virtual String
     getTitle() override;
+
+    GLFWwindow*
+    getGLFWindow();
 
   private:
 

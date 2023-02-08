@@ -91,6 +91,11 @@ namespace hk
     return _m_winHandler != NULL;
   }
 
+  void
+  WindowWin32::pollEvents()
+  {
+  }
+
   void 
   WindowWin32::update()
   {
