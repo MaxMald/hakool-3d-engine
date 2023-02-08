@@ -74,10 +74,22 @@ namespace hk
     postUpdate();
 
     /**
-     * @brief TODO
+     * Clears the viewport.
+     */
+    void
+    clear();
+
+    /**
+     * Draws the scene.
      */
     eRESULT
     draw();
+
+    /**
+     * Presents the drawed scene in the viewport.
+     */
+    void
+    present();
 
     /**
     * Safely free any resources and references.

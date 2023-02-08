@@ -123,7 +123,7 @@
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalLibraryDirectories>$(SolutionDir)lib\$(Configuration)\$(PlatformTarget)\;$(SolutionDir)dependencies\glfw\lib\$(PlatformTarget)\;$(SolutionDir)dependencies\gl\lib\$(PlatformTarget)\</AdditionalLibraryDirectories>
-      <AdditionalDependencies>hkUtilities_d.lib;hkCore_d.lib;glfw3dll.lib;glfw3.lib;glew32.lib;opengl32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>hkUtilities_d.lib;hkCore_d.lib;hkGraphicsOpenGL_d.lib;glfw3dll.lib;glfw3.lib;glew32.lib;opengl32.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -144,7 +144,7 @@
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalLibraryDirectories>$(SolutionDir)lib\$(Configuration)\$(PlatformTarget)\;$(SolutionDir)dependencies\glfw\lib\$(PlatformTarget)\;$(SolutionDir)dependencies\gl\lib\$(PlatformTarget)\</AdditionalLibraryDirectories>
-      <AdditionalDependencies>hkUtilities.lib;hkCore.lib;glfw3dll.lib;glfw3.lib;glew32.lib;opengl32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>hkUtilities.lib;hkCore.lib;hkGraphicsOpenGL.lib;glfw3dll.lib;glfw3.lib;glew32.lib;opengl32.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -162,7 +162,7 @@
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalLibraryDirectories>$(SolutionDir)lib\$(Configuration)\$(PlatformTarget)\;$(SolutionDir)dependencies\glfw\lib\$(PlatformTarget)\;$(SolutionDir)dependencies\gl\lib\$(PlatformTarget)\</AdditionalLibraryDirectories>
-      <AdditionalDependencies>hkUtilities_d.lib;hkCore_d.lib;glfw3dll.lib;glfw3.lib;glew32.lib;opengl32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>hkUtilities_d.lib;hkCore_d.lib;hkGraphicsOpenGL_d.lib;glfw3dll.lib;glfw3.lib;glew32.lib;opengl32.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -183,7 +183,7 @@
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalLibraryDirectories>$(SolutionDir)lib\$(Configuration)\$(PlatformTarget)\;$(SolutionDir)dependencies\glfw\lib\$(PlatformTarget)\;$(SolutionDir)dependencies\gl\lib\$(PlatformTarget)\</AdditionalLibraryDirectories>
-      <AdditionalDependencies>hkUtilities.lib;hkCore.lib;glfw3dll.lib;glfw3.lib;glew32.lib;opengl32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>hkUtilities.lib;hkCore.lib;hkGraphicsOpenGL.lib;glfw3dll.lib;glfw3.lib;glew32.lib;opengl32.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

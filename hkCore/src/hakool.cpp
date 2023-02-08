@@ -139,14 +139,23 @@ namespace hk
     return eRESULT::kSuccess;
   }
 
-  eRESULT 
-  Hakool::draw()
+  void Hakool::clear()
   {
     _m_pGraphicComponent->clear();
+  }
+
+  eRESULT 
+  Hakool::draw()
+  { 
     _m_pGraphicComponent->prepareToDraw(_m_cameraManager.getActiveCamera());
     _m_sceneManager.draw(_m_pGraphicComponent);
-    _m_pGraphicComponent->getWindow()->present();
     return eRESULT::kSuccess;
+  }
+
+  void 
+  Hakool::present()
+  {
+    _m_pGraphicComponent->getWindow()->present();
   }
 
   void 
