@@ -9,6 +9,7 @@
 #include <imgui_impl_opengl3.h>
 #include <imgui.h>
 #include <imgui_impl_glfw.h>
+#include <cameraComponentView.h>
 
 using hk::IWindow;
 using hk::Hakool;
@@ -24,6 +25,7 @@ using hk::CameraManager;
 using hk::CameraComponent;
 using hk::GraphicComponent;
 using hk::WindowOpenGL;
+using hk::editor::CameraComponentView;
 
 /**
  * 
@@ -58,6 +60,8 @@ int main(int argc, char* argv[])
   cubeModel->setMesh(pEngine->getResourceManager().getMeshes().getCube());
   cube.addComponent(cubeModel);
   cube.init();
+
+  CameraComponentView camView(pCamera);
 
   sceneManager.setActive("Test Scene");
 
@@ -94,7 +98,12 @@ int main(int argc, char* argv[])
 
     cube.setLocalPosition(x, y, cube.getLocalPosition().z);
 
+    camView.updateController();
+
     pEngine->update();
+
+    camView.draw();
+
     pEngine->draw();
 
     ImGui::Render();

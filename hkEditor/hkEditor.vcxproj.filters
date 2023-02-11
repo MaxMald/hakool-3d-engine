@@ -13,6 +13,12 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="Header Files\componentView">
+      <UniqueIdentifier>{982c96d9-3336-4c2f-a13d-bc676a5fdca0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\componentView">
+      <UniqueIdentifier>{8dd4feca-c47b-4529-b463-29fed85b5cd9}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\main.cpp">
@@ -35,6 +41,9 @@
     </ClCompile>
     <ClCompile Include="src\imgui_impl_opengl3.cpp">
       <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\cameraComponentView.cpp">
+      <Filter>Source Files\componentView</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -64,6 +73,9 @@
     </ClInclude>
     <ClInclude Include="include\imgui_impl_opengl3_loader.h">
       <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\cameraComponentView.h">
+      <Filter>Header Files\componentView</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

@@ -89,4 +89,16 @@ namespace hk
 
     return *this;
   }
+
+  Vector3f
+  Color::toVector3() const
+  {
+    return Vector3f(r, g, b);
+  }
+
+  Vector4f
+  Color::toVector4() const
+  {
+    return Vector4f(r, g, b, a);
+  }
 }

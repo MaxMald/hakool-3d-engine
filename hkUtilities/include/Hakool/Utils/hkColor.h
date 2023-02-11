@@ -1,6 +1,8 @@
 #pragma once
 
 #include <Hakool\Utils\hkUtilsPrerequisites.h>
+#include <Hakool\Utils\hkVector3.h>
+#include <Hakool\Utils\hkVector4.h>
 
 namespace hk
 {
@@ -92,6 +94,22 @@ namespace hk
     */
     Color&
     set(const float& _r, const float& _g, const float& _b, const float& _a);
+
+    /**
+     * Get this Color as a float Vector3 instance.
+     * 
+     * @return Float Vector3 instance.
+     */
+    Vector3f
+    toVector3() const;
+
+    /**
+    * Get this Color as a float Vector4 instance.
+    *
+    * @return Float Vector$ instance.
+    */
+    Vector4f
+    toVector4() const;
 
     /**
     * Red color.

@@ -79,67 +79,63 @@ namespace hk
   }
 
   const Color& 
-  CameraComponent::getBackgroundColor() const
+  CameraComponent::getClearColor() const
   {
-    return _m_backgroundColor;
+    return _m_pCamera->getClearColor();
   }
 
   void 
-  CameraComponent::setBackgroundColor(const Color& color)
+  CameraComponent::setClearColor(const Color& color)
   {
-    _m_backgroundColor = color;
+    _m_pCamera->setClearColor(color);
   }
 
   void 
   CameraComponent::setNear(const float& near)
   {
-    _m_near = near;
-    _m_isDirtyProjection = true;
+    _m_pCamera->setNear(near);
   }
 
   const float& 
   CameraComponent::getNear() const
   {
-    return _m_near;
+    return _m_pCamera->getNear();
   }
 
   void 
   CameraComponent::setFar(const float& far)
   {
-    _m_far = far;
-    _m_isDirtyProjection = true;
+    _m_pCamera->setFar(far);
   }
 
   const float& 
   CameraComponent::getFar() const
   {
-    return _m_far;
+    return _m_pCamera->getFar();
   }
 
   void 
   CameraComponent::setAspectRatio(const float& aspectRatio)
   {
-    _m_aspect = aspectRatio;
-    _m_isDirtyProjection = true;
+    _m_pCamera->setAspectRatio(aspectRatio);
   }
 
   const float& 
   CameraComponent::getAspectRatio() const
   {
-    return _m_aspect;
+    return _m_pCamera->getAspectRatio();
   }
 
   void 
   CameraComponent::setFieldOfView(const float& fov)
   {
-    _m_fov = fov;
-    _m_isDirtyProjection = true;
+    _m_pCamera->setFieldOfView(fov);
   }
 
   const float& 
   CameraComponent::getFieldOfView() const
   {
-    return _m_fov;
+    return _m_pCamera->getFieldOfView();
   }
 
   void 
@@ -147,6 +143,18 @@ namespace hk
   {
     _m_projectionType = projection;
     _m_isDirtyProjection = true;
+  }
+
+  const Vector3f &
+  CameraComponent::getPosition()
+  {
+    return _m_pCamera->getPosition();
+  }
+
+  const uint32&
+  CameraComponent::getCameraId()
+  {
+    return _m_cameraId;
   }
 
   void 

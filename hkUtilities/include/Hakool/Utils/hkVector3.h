@@ -11,7 +11,7 @@ namespace hk
   template <typename T>
   class Vector3
   {
-  public:    
+  public:
 
     Vector3();
 
@@ -70,20 +70,31 @@ namespace hk
     Vector3&
     setMagnitude(const T& _mag);
 
-    /**
-    * The x component of this vector.
-    */
-    T x;
+    union
+    {
+      /**
+       * Array of components
+       */
+      T a[3];
 
-    /**
-    * The y component of this vector.
-    */
-    T y;
+      struct
+      {
+        /**
+        * The x component of this vector.
+        */
+        T x;
 
-    /**
-    * The z component of this vector.
-    */
-    T z;    
+        /**
+        * The y component of this vector.
+        */
+        T y;
+
+        /**
+        * The z component of this vector.
+        */
+        T z;
+      };
+    };
   };
 
   /**

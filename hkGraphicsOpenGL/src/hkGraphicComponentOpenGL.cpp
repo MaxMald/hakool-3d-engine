@@ -17,7 +17,6 @@
 namespace hk
 {
   GraphicComponentOpenGL::GraphicComponentOpenGL() :
-    _m_clearColor(0.0f, 0.0f, 0.0f, 1.0f),
     _m_aVAO(),
     _m_pProgramOpenGL(nullptr),
     _m_pResourceManager(nullptr),
@@ -71,8 +70,6 @@ namespace hk
     }
 
     glfwSwapInterval(1);
-
-    _m_clearColor = _graphicConfiguration.backgroundColor;
 
     // Default vertex shader.
     const char* pVertexSource =
@@ -174,30 +171,20 @@ namespace hk
     glBindVertexArray(_m_aVAO[0]);
 
     _m_pWindow->addObserver(this);
-
-    setClearColor(_m_clearColor);
-
     _m_isReady = !_m_isReady;
     return eRESULT::kSuccess;
   }
 
-  void 
-  GraphicComponentOpenGL::setClearColor(const Color& color)
+  void
+  GraphicComponentOpenGL::clear(const Color& _clearColor)
   {
-    _m_clearColor = color;
     glClearColor
     (
-      _m_clearColor.r,
-      _m_clearColor.g,
-      _m_clearColor.b,
-      _m_clearColor.a
+      _clearColor.r,
+      _clearColor.g,
+      _clearColor.b,
+      _clearColor.a
     );
-    return;
-  }
-
-  void
-  GraphicComponentOpenGL::clear()
-  {
     glClear(GL_COLOR_BUFFER_BIT);
     glClear(GL_DEPTH_BUFFER_BIT);
   }

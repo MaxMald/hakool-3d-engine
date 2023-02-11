@@ -14,6 +14,7 @@ namespace hk
     _m_projectionType(ePROJECTION::kPerspective),
     _m_view(),
     _m_projection(),
+    _m_clearColor(Color::BLACK),
     _m_isDirtyProjection(true),
     _m_isDirtyView(true)
   { }
@@ -30,6 +31,7 @@ namespace hk
     _m_projectionType(_copy._m_projectionType),
     _m_view(_copy._m_view),
     _m_projection(_copy._m_projection),
+    _m_clearColor(_copy._m_clearColor),
     _m_isDirtyProjection(_copy._m_isDirtyProjection),
     _m_isDirtyView(_copy._m_isDirtyView)
   { }
@@ -171,6 +173,18 @@ namespace hk
     _m_up.y = _upY;
     _m_up.z = _upZ;
     _m_isDirtyView = true;
+  }
+
+  const Color&
+  Camera::getClearColor() const
+  {
+    return _m_clearColor;
+  }
+
+  void
+  Camera::setClearColor(const Color& color)
+  {
+    _m_clearColor = color;
   }
 
   const Matrix4&

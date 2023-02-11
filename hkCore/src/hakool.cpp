@@ -139,9 +139,14 @@ namespace hk
     return eRESULT::kSuccess;
   }
 
-  void Hakool::clear()
+  void
+  Hakool::clear()
   {
-    _m_pGraphicComponent->clear();
+    Camera* pCamera = _m_cameraManager.getActiveCamera();
+    _m_pGraphicComponent->clear
+    (
+      pCamera != nullptr ? pCamera->getClearColor() : Color::BLACK
+    );
   }
 
   eRESULT 

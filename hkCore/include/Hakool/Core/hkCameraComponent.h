@@ -42,10 +42,10 @@ namespace hk
     getGameObject() override;
 
     const Color&
-    getBackgroundColor() const;
+    getClearColor() const;
 
     void
-    setBackgroundColor(const Color& color);
+    setClearColor(const Color& color);
 
     void
     setNear(const float& near);
@@ -73,6 +73,12 @@ namespace hk
 
     void
     setProjection(const ePROJECTION& projection);
+
+    const Vector3f&
+    getPosition();
+
+    const uint32&
+    getCameraId();
 
     /**
      * Sets the Camera of this CameraComponet as the active camera.

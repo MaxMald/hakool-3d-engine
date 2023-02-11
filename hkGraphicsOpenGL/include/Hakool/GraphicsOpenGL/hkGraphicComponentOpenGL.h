@@ -38,10 +38,7 @@ namespace hk
       ResourceManager& resourceManager) override;
 
     virtual void
-    setClearColor(const Color& color) override;
-
-    virtual void
-    clear() override;
+    clear(const Color& _clearColor) override;
 
     virtual void
     prepareToDraw(Camera* pCamera) override;
@@ -86,12 +83,6 @@ namespace hk
     */
     void
     _releaseResources(ResourceManager& resourceManager);
-
-    /**
-    * Screen clear color.
-    */
-    Color
-    _m_clearColor;
 
     /**
     * Array of vertex array objects.

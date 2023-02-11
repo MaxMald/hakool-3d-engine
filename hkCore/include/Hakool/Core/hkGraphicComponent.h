@@ -54,18 +54,10 @@ namespace hk
       ResourceManager& resourceManager) = 0;
 
     /**
-     * Sets the color to clear the graphic buffers.
-     * 
-     * @param color Color.
-     */
-    virtual void
-    setClearColor(const Color& color) = 0;
-
-    /**
      * Clear the graphics buffers.
      */
     virtual void
-    clear() = 0;
+    clear(const Color& _clearColor) = 0;
 
     /**
      * Prepare the GraphicComponent to draw.

@@ -94,6 +94,9 @@ namespace hk
     void
     setTarget(const float& _x, const float& _y, const float& _z);
 
+    /**
+     * 
+     */
     const Vector3f&
     getTarget() const;
 
@@ -139,6 +142,12 @@ namespace hk
     void
     setProjection(const ePROJECTION& projection);
     
+    void
+    setClearColor(const Color& color);
+
+    const Color&
+    getClearColor() const;
+
     const Matrix4&
     getProjectionMatrix() const;
 
@@ -205,6 +214,12 @@ namespace hk
     */
     ePROJECTION 
     _m_projectionType;
+
+    /**
+     * The color used to clear the buffer.
+     */
+    Color
+    _m_clearColor;
 
     /**
     * View matrix.
