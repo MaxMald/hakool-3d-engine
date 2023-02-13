@@ -20,6 +20,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\Hakool\Utils\guid.hpp" />
+    <ClInclude Include="include\Hakool\Utils\hkAiMeshNode.h" />
     <ClInclude Include="include\Hakool\Utils\hkClock.h" />
     <ClInclude Include="include\Hakool\Utils\hkClockWin.h" />
     <ClInclude Include="include\Hakool\Utils\hkColor.h" />
@@ -27,12 +28,17 @@
     <ClInclude Include="include\Hakool\Utils\hkConfigTypes.h" />
     <ClInclude Include="include\Hakool\Utils\hkConfigUtilities.h" />
     <ClInclude Include="include\Hakool\Utils\hkConfigWindow.h" />
+    <ClInclude Include="include\Hakool\Utils\hkIMeshLoader.h" />
     <ClInclude Include="include\Hakool\Utils\hkLogger.h" />
     <ClInclude Include="include\Hakool\Utils\hkLoggerConsole.h" />
     <ClInclude Include="include\Hakool\Utils\hkMath.h" />
     <ClInclude Include="include\Hakool\Utils\hkMatrix3.h" />
     <ClInclude Include="include\Hakool\Utils\hkMatrix4.h" />
+    <ClInclude Include="include\Hakool\Utils\hkMeshLoaderAssimp.h" />
     <ClInclude Include="include\Hakool\Utils\hkModule.h" />
+    <ClInclude Include="include\Hakool\Utils\hkMultiMesh.h" />
+    <ClInclude Include="include\Hakool\Utils\hkMultiMeshMesh.h" />
+    <ClInclude Include="include\Hakool\Utils\hkMultiMeshNode.h" />
     <ClInclude Include="include\Hakool\Utils\hkSharedPointer.h" />
     <ClInclude Include="include\Hakool\Utils\hkTime.h" />
     <ClInclude Include="include\Hakool\Utils\hkUtilitiesUtilities.h" />
@@ -42,6 +48,7 @@
     <ClInclude Include="include\Hakool\Utils\hkVector4.h" />
     <ClInclude Include="include\Hakool\Utils\hkIWindow.h" />
     <ClInclude Include="include\Hakool\Utils\hkIWindowFactory.h" />
+    <ClInclude Include="include\Hakool\Utils\hkVertex.h" />
     <ClInclude Include="include\Hakool\Utils\hkWindowFactoryWin32.h" />
     <ClInclude Include="include\Hakool\Utils\hkWindowObserver.h" />
     <ClInclude Include="include\Hakool\Utils\hkWindowWin32.h" />
@@ -55,6 +62,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\guid.cpp" />
+    <ClCompile Include="src\hkAiMeshNode.cpp" />
     <ClCompile Include="src\hkClock.cpp" />
     <ClCompile Include="src\hkClockWin.cpp" />
     <ClCompile Include="src\hkColor.cpp" />
@@ -63,11 +71,16 @@
     <ClCompile Include="src\hkMath.cpp" />
     <ClCompile Include="src\hkMatrix3.cpp" />
     <ClCompile Include="src\hkMatrix4.cpp" />
+    <ClCompile Include="src\hkMultiMesh.cpp" />
+    <ClCompile Include="src\hkMultiMeshMesh.cpp" />
+    <ClCompile Include="src\hkMultiMeshNode.cpp" />
     <ClCompile Include="src\hkPluginManager.cpp" />
     <ClCompile Include="src\hkPluginSlotWin.cpp" />
     <ClCompile Include="src\hkTime.cpp" />
+    <ClCompile Include="src\hkVertex.cpp" />
     <ClCompile Include="src\hkWindowFactoryWin32.cpp" />
     <ClCompile Include="src\hkWindowWin32.cpp" />
+    <ClCompile Include="src\hkMeshLoaderAssimp.cpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
@@ -150,7 +163,7 @@
       <PreprocessorDefinitions>HK_UTILITY_EXPORTS;WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpp14</LanguageStandard>
-      <AdditionalIncludeDirectories>$(ProjectDir)include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)include;$(SolutionDir)dependencies\assimp\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
       <DisableSpecificWarnings>4100</DisableSpecificWarnings>
     </ClCompile>
@@ -158,7 +171,8 @@
       <SubSystem>NotSet</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <ImportLibrary>$(SolutionDir)lib\$(Configuration)\$(PlatformTarget)\$(TargetName).lib</ImportLibrary>
-      <AdditionalLibraryDirectories>$(SolutionDir)lib\$(Configuration)\$(PlatformTarget)\;D:\PROGRAMAS\Visual Leak Detector\lib\Win32;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>$(SolutionDir)dependencies\assimp\lib\$(Configuration)\;$(SolutionDir)lib\$(Configuration)\$(PlatformTarget)\;D:\PROGRAMAS\Visual Leak Detector\lib\Win32;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>assimp-vc143-mtd.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -170,7 +184,7 @@
       <PreprocessorDefinitions>HK_UTILITY_EXPORTS;WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpp14</LanguageStandard>
-      <AdditionalIncludeDirectories>$(ProjectDir)include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)include;$(SolutionDir)dependencies\assimp\include\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
       <DisableSpecificWarnings>4100</DisableSpecificWarnings>
     </ClCompile>
@@ -180,7 +194,8 @@
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <ImportLibrary>$(SolutionDir)lib\$(Configuration)\$(PlatformTarget)\$(TargetName).lib</ImportLibrary>
-      <AdditionalLibraryDirectories>$(SolutionDir)lib\$(Configuration)\$(PlatformTarget)\;D:\PROGRAMAS\Visual Leak Detector\lib\Win32;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>$(SolutionDir)dependencies\assimp\lib\$(Configuration)\;$(SolutionDir)lib\$(Configuration)\$(PlatformTarget)\;D:\PROGRAMAS\Visual Leak Detector\lib\Win32;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>assimp-vc143-mt.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -190,7 +205,7 @@
       <PreprocessorDefinitions>HK_UTILITY_EXPORTS;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpp14</LanguageStandard>
-      <AdditionalIncludeDirectories>$(ProjectDir)include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)include;$(SolutionDir)dependencies\assimp\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
       <DisableSpecificWarnings>4100</DisableSpecificWarnings>
     </ClCompile>
@@ -198,7 +213,8 @@
       <SubSystem>NotSet</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <ImportLibrary>$(SolutionDir)lib\$(Configuration)\$(PlatformTarget)\$(TargetName).lib</ImportLibrary>
-      <AdditionalLibraryDirectories>$(SolutionDir)lib\$(Configuration)\$(PlatformTarget)\;D:\PROGRAMAS\Visual Leak Detector\lib\Win64;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>$(SolutionDir)dependencies\assimp\lib\$(Configuration)\;$(SolutionDir)lib\$(Configuration)\$(PlatformTarget)\;D:\PROGRAMAS\Visual Leak Detector\lib\Win64;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>assimp-vc143-mtd.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -210,7 +226,7 @@
       <PreprocessorDefinitions>HK_UTILITY_EXPORTS;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpp14</LanguageStandard>
-      <AdditionalIncludeDirectories>$(ProjectDir)include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)include;$(SolutionDir)dependencies\assimp\include\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
       <DisableSpecificWarnings>4100</DisableSpecificWarnings>
     </ClCompile>
@@ -220,7 +236,8 @@
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <ImportLibrary>$(SolutionDir)lib\$(Configuration)\$(PlatformTarget)\$(TargetName).lib</ImportLibrary>
-      <AdditionalLibraryDirectories>$(SolutionDir)lib\$(Configuration)\$(PlatformTarget)\;D:\PROGRAMAS\Visual Leak Detector\lib\Win64;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>$(SolutionDir)dependencies\assimp\lib\$(Configuration)\;$(SolutionDir)lib\$(Configuration)\$(PlatformTarget)\;D:\PROGRAMAS\Visual Leak Detector\lib\Win64;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>assimp-vc143-mt.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

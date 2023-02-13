@@ -1,0 +1,7 @@
+namespace hk
+{
+  namespace editor
+  {
+    
+  }
+}

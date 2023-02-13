@@ -6,10 +6,12 @@
 #include <Hakool/Core/hkGraphicComponent.h>
 #include <Hakool/Utils/hkIWindow.h>
 #include <Hakool/GraphicsOpenGL/hkWindowOpenGL.h>
+#include <Hakool/Utils/hkMeshLoaderAssimp.h>
 #include <imgui_impl_opengl3.h>
 #include <imgui.h>
 #include <imgui_impl_glfw.h>
 #include <cameraComponentView.h>
+#include <gameObjectView.h>
 
 using hk::IWindow;
 using hk::Hakool;
@@ -25,7 +27,9 @@ using hk::CameraManager;
 using hk::CameraComponent;
 using hk::GraphicComponent;
 using hk::WindowOpenGL;
+using hk::MeshLoaderAssimp;
 using hk::editor::CameraComponentView;
+using hk::editor::GameObjectView;
 
 /**
  * 
@@ -50,6 +54,9 @@ int main(int argc, char* argv[])
     return 0;
   }
 
+  MeshLoaderAssimp meshLoader;
+  meshLoader.load("F:/3D Objects/zero-two/source/02_pose1.fbx");
+
   SceneManager& sceneManager = pEngine->getSceneManager();
   Scene& scene = sceneManager.create("Test Scene");
   GameObject& cube = scene.createGameObject("cube");
@@ -62,6 +69,8 @@ int main(int argc, char* argv[])
   cube.init();
 
   CameraComponentView camView(pCamera);
+  GameObjectView goView;
+  goView.setGameObject(&cube);
 
   sceneManager.setActive("Test Scene");
 
@@ -86,7 +95,7 @@ int main(int argc, char* argv[])
     ImGui_ImplGlfw_NewFrame();
     ImGui::NewFrame();
 
-    ImGui::Begin("Engine Status");    
+    ImGui::Begin("Engine Status");
     ImGui::Text("FPS %.1f", ImGui::GetIO().Framerate);
     ImGui::End();
     
@@ -99,10 +108,12 @@ int main(int argc, char* argv[])
     cube.setLocalPosition(x, y, cube.getLocalPosition().z);
 
     camView.updateController();
+    goView.update();
 
     pEngine->update();
 
     camView.draw();
+    goView.draw();
 
     pEngine->draw();
 

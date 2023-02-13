@@ -31,6 +31,12 @@
     <Filter Include="Source Files\window">
       <UniqueIdentifier>{b5058f1c-c6a3-428d-9f21-75e253617ebb}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\meshLoader">
+      <UniqueIdentifier>{623d0420-ce65-45a3-81dc-c37a75abac2c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\meshLoader">
+      <UniqueIdentifier>{90551bfe-f6fd-4295-b579-b884c05e59d4}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\Hakool\Utils\hkVector2.h">
@@ -123,6 +129,27 @@
     <ClInclude Include="include\Hakool\Utils\hkClockWin.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="include\Hakool\Utils\hkIMeshLoader.h">
+      <Filter>Header Files\meshLoader</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Hakool\Utils\hkMeshLoaderAssimp.h">
+      <Filter>Header Files\meshLoader</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Hakool\Utils\hkMultiMesh.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Hakool\Utils\hkVertex.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Hakool\Utils\hkMultiMeshMesh.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Hakool\Utils\hkMultiMeshNode.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Hakool\Utils\hkAiMeshNode.h">
+      <Filter>Header Files\meshLoader</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="include\Hakool\Utils\hkModule.inl">
@@ -171,6 +198,24 @@
     </ClCompile>
     <ClCompile Include="src\hkClockWin.cpp">
       <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\hkMeshLoaderAssimp.cpp">
+      <Filter>Source Files\meshLoader</Filter>
+    </ClCompile>
+    <ClCompile Include="src\hkVertex.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\hkMultiMeshMesh.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\hkMultiMeshNode.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\hkMultiMesh.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\hkAiMeshNode.cpp">
+      <Filter>Source Files\meshLoader</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

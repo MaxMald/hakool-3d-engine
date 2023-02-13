@@ -28,6 +28,10 @@ namespace hk
 
       Vector3f _m_clearColor;
 
+      float _m_near;
+
+      float _m_far;
+
       float _m_fov;
     };
   }

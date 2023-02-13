@@ -13,69 +13,99 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
-    <Filter Include="Header Files\componentView">
-      <UniqueIdentifier>{982c96d9-3336-4c2f-a13d-bc676a5fdca0}</UniqueIdentifier>
+    <Filter Include="Header Files\imgui">
+      <UniqueIdentifier>{ee103b3b-c23b-4785-85f7-05a996cc0cd3}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\componentView">
+    <Filter Include="Source Files\imgui">
+      <UniqueIdentifier>{29291823-9ebf-49f2-8237-2963845f43b0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\imguiView">
+      <UniqueIdentifier>{ab606606-4c48-4669-9b3f-e52b6ddf35af}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\imguiView\gameObjectView">
+      <UniqueIdentifier>{c316bddb-08b9-4b00-929f-2080e7116424}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\imguiView\componentView">
       <UniqueIdentifier>{8dd4feca-c47b-4529-b463-29fed85b5cd9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\imguiView">
+      <UniqueIdentifier>{968b4def-33dc-42fe-8a2e-e2b20a5e4aab}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\imguiView\gameObjectView">
+      <UniqueIdentifier>{fa28fae6-6a28-4735-b01b-3c1b459e39d5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\imguiView\componentView">
+      <UniqueIdentifier>{982c96d9-3336-4c2f-a13d-bc676a5fdca0}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="src\cameraComponentView.cpp">
+      <Filter>Source Files\imguiView\componentView</Filter>
+    </ClCompile>
+    <ClCompile Include="src\gameObjectView.cpp">
+      <Filter>Source Files\imguiView\gameObjectView</Filter>
+    </ClCompile>
     <ClCompile Include="src\imgui.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="src\imgui_impl_glfw.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="src\imgui_tables.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="src\imgui_widgets.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\imgui</Filter>
     </ClCompile>
     <ClCompile Include="src\imgui_draw.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="src\imgui_impl_glfw.cpp">
+      <Filter>Source Files\imgui</Filter>
     </ClCompile>
     <ClCompile Include="src\imgui_impl_opengl3.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Source Files\imgui</Filter>
     </ClCompile>
-    <ClCompile Include="src\cameraComponentView.cpp">
-      <Filter>Source Files\componentView</Filter>
+    <ClCompile Include="src\imgui_tables.cpp">
+      <Filter>Source Files\imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="src\imgui_widgets.cpp">
+      <Filter>Source Files\imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="src\imguiView.cpp">
+      <Filter>Source Files\imguiView</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="include\imgui.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="include\cameraComponentView.h">
+      <Filter>Header Files\imguiView\componentView</Filter>
     </ClInclude>
-    <ClInclude Include="include\imgui_impl_glfw.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="include\gameObjectView.h">
+      <Filter>Header Files\imguiView\gameObjectView</Filter>
     </ClInclude>
     <ClInclude Include="include\imconfig.h">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\imgui</Filter>
     </ClInclude>
-    <ClInclude Include="include\imstb_rectpack.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="include\imgui.h">
+      <Filter>Header Files\imgui</Filter>
     </ClInclude>
-    <ClInclude Include="include\imstb_textedit.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="include\imstb_truetype.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="include\imgui_internal.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="include\imgui_impl_glfw.h">
+      <Filter>Header Files\imgui</Filter>
     </ClInclude>
     <ClInclude Include="include\imgui_impl_opengl3.h">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\imgui</Filter>
     </ClInclude>
     <ClInclude Include="include\imgui_impl_opengl3_loader.h">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\imgui</Filter>
     </ClInclude>
-    <ClInclude Include="include\cameraComponentView.h">
-      <Filter>Header Files\componentView</Filter>
+    <ClInclude Include="include\imgui_internal.h">
+      <Filter>Header Files\imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="include\imstb_rectpack.h">
+      <Filter>Header Files\imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="include\imstb_textedit.h">
+      <Filter>Header Files\imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="include\imstb_truetype.h">
+      <Filter>Header Files\imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="include\imguiView.h">
+      <Filter>Header Files\imguiView</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
