@@ -36,7 +36,7 @@ namespace hk
       throw std::exception(importer.GetErrorString());
 
     if (!pAiScene->HasMeshes())
-      return;
+      return nullptr;
 
     Vector<AiMeshNode*> aiMeshNodes;
     getAiMeshNodes
